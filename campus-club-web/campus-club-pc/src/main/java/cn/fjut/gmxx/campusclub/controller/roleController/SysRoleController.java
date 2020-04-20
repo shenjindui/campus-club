@@ -121,7 +121,6 @@ public class SysRoleController extends BaseAppAction {
             return errorResponse(e.getMessage());
         }
     }
-
     @SysOperationLog("角色修改方法")
     @TokenCheck
     @Limiter(frequency = 10)
