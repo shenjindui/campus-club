@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.fjut.gmxx.campusclub.sysuser.mapper.UserMapper">
+
+    <resultMap id="sysUserMap" type="java.util.Map">
+        <result column="uuid" property="uuid" javaType="java.lang.String"/>
+        <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="CREATE_USER" property="createUser" javaType="java.lang.String"/>
+        <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP"/>
+        <result column="UPDATE_USER" property="updateUser" javaType="java.lang.String"/>
+        <result column="DEL_IND" property="delInd" javaType="java.lang.String"/>
+        <result column="VERSION" property="version" javaType="java.lang.Integer"/>
+
+        <result column="USER_CODE" property="userCode" javaType="java.lang.String"/>
+        <result column="REALNAME" property="realname" javaType="java.lang.String"/>
+        <result column="LOGIN_NAME" property="loginName" javaType="java.lang.String"/>
+        <result column="PASSWORD" property="password" javaType="java.lang.String"/>
+        <result column="SALT" property="salt" javaType="java.lang.String"/>
+        <result column="DEPART_CODE" property="departCode" javaType="java.lang.String"/>
+        <result column="STATUS_CD" property="statusCd" javaType="java.lang.String"/>
+        <result column="SEX_CD" property="sexCd" javaType="java.lang.String"/>
+        <result column="JOB_NUM" property="jobNum" javaType="java.lang.String"/>
+        <result column="QQ" property="qq" javaType="java.lang.String"/>
+        <result column="WECHAT" property="wechat" javaType="java.lang.String"/>
+        <result column="MOBILE" property="mobile" javaType="java.lang.String"/>
+        <result column="EMAIL" property="email" javaType="java.lang.String"/>
+        <result column="PASS_ERROR_COUNT" property="passErrorCount" javaType="java.lang.Integer"/>
+        <result column="LOGIN_SUCC_COUNT" property="loginSuccCount" javaType="java.lang.Integer"/>
+        <result column="LOCK_TIME" property="lockTime" jdbcType="TIMESTAMP"/>
+        <result column="REMARK" property="remark" javaType="java.lang.String"/>
+        <result column="ADDRESS" property="address" javaType="java.lang.String"/>
+        <result column="URL" property="url" javaType="java.lang.String"/>
+        <result column="LAST_LOGIN_TIME" property="lastLoginTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="column_list">
+        sys_user.uuid,
+        sys_user.url,
+        sys_user.REALNAME,
+        sys_user.LOGIN_NAME,
+        sys_user.PASSWORD,
+        sys_user.SALT,
+        sys_user.DEPART_CODE,
+        sys_user.STATUS_CD,
+        sys_user.SEX_CD,
+        sys_user.USER_CODE,
+        sys_user.JOB_NUM,
+        sys_user.QQ,
+        sys_user.WECHAT,
+        sys_user.MOBILE,
+        sys_user.EMAIL,
+        sys_user.PASS_ERROR_COUNT,
+        sys_user.LOGIN_SUCC_COUNT,
+        sys_user.LOCK_TIME,
+        sys_user.REMARK,
+        sys_user.ADDRESS,
+        DATE_FORMAT(sys_user.LAST_LOGIN_TIME,'%Y-%m-%d %H:%i:%S') as  LAST_LOGIN_TIME,
+        sys_user.CREATE_TIME,sys_user.CREATE_USER,sys_user.UPDATE_USER,
+        sys_user.UPDATE_TIME, sys_user.DEL_IND,sys_user.VERSION
+    </sql>
+
+    <sql id="where_filters">
+        <where>
+            <if test="uuid!=null and uuid!=''">AND sys_user.uuid = #{uuid}</if>
+            <if test="url!=null and url!=''">AND sys_user.url = #{url}</if>
+            <if test="delInd!=null and delInd!=''">AND sys_user.DEL_IND = #{delInd}</if>
+            <if test="version!=null and version!=''">AND sys_user.VERSION = #{version}</if>
+
+            <!--使用&gt;=(>=) &lt;=(<=)方式-->
+            <if test="startTime!=null and startTime!=''">AND sys_user.create_time &gt;= #{startTime}</if>
+            <if test="endTime!=null and endTime!=''">AND sys_user.create_time &lt;= #{endTime}</if>
+
+            <if test="userCode!=null and userCode!=''">AND sys_user.USER_CODE = #{userCode}</if>
+            <if test="realname!=null and realname!=''">AND sys_user.REALNAME = #{realname}</if>
+            <if test="loginName!=null and loginName!=''">AND sys_user.LOGIN_NAME = #{loginName}</if>
+            <if test="password!=null and password!=''">AND sys_user.PASSWORD = #{password}</if>
+            <if test="salt!=null and salt!=''">AND sys_user.SALT = #{salt}</if>
+            <if test="departCode!=null and departCode!=''">AND sys_user.DEPART_CODE = #{departCode}</if>
+            <if test="statusCd!=null and statusCd!=''">AND sys_user.STATUS_CD = #{statusCd}</if>
+            <if test="sexCd!=null and sexCd!=''">AND sys_user.SEX_CD = #{sexCd}</if>
+            <if test="jobNum!=null and jobNum!=''">AND sys_user.JOB_NUM = #{jobNum}</if>
+            <if test="qq!=null and qq!=''">AND sys_user.QQ = #{qq}</if>
+            <if test="wechat!=null and wechat!=''">AND sys_user.WECHAT = #{wechat}</if>
+            <if test="mobile!=null and mobile!=''">AND sys_user.MOBILE = #{mobile}</if>
+            <if test="email!=null and email!=''">AND sys_user.EMAIL = #{email}</if>
+            <if test="passErrorCount!=null and passErrorCount!=''">AND sys_user.PASS_ERROR_COUNT = #{passErrorCount}</if>
+            <if test="loginSuccCount!=null and loginSuccCount!=''">AND sys_user.LOGIN_SUCC_COUNT = #{loginSuccCount}</if>
+            <if test="lockTime!=null and lockTime!=''">AND sys_user.LOCK_TIME = #{lockTime}</if>
+            <if test="remark!=null and remark!=''">AND sys_user.REMARK = #{remark}</if>
+            <if test="address!=null and address!=''">AND sys_user.ADDRESS = #{address}</if>
+            <if test="lastLoginTime!=null and lastLoginTime!=''">AND sys_user.LAST_LOGIN_TIME = #{lastLoginTime}</if>
+        </where>
+    </sql>
+
+    <!--根据条件查询列表-->
+    <select id="findSysUserList" parameterType="map" resultMap="sysUserMap">
+        SELECT
+        <include refid="column_list"/>
+        FROM sys_user sys_user
+        <include refid="where_filters"/>
+        ORDER BY sys_user.CREATE_TIME DESC
+        LIMIT #{startIndex},#{pageSize}
+    </select>
+    <select id="findSysUserListAll" parameterType="map" resultMap="sysUserMap">
+        SELECT
+        <include refid="column_list"/>
+        FROM sys_user sys_user
+        <include refid="where_filters"/>
+        ORDER BY sys_user.CREATE_TIME DESC
+    </select>
+
+    <select id="selectByUserCode" parameterType="string" resultType="cn.fjut.gmxx.campusclub.sysuser.entity.SysUserEntity">
+        SELECT
+        <include refid="column_list"/>
+        FROM sys_user sys_user
+        <if test="userCode!=null and userCode!=''">AND sys_user.USER_CODE = #{userCode}</if>
+    </select>
+
+</mapper>

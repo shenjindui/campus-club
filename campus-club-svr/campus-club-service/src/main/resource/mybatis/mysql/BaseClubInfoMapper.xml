@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.fjut.gmxx.campusclub.baseclubinfo.mapper.IBaseClubInfoMapper">
+
+    <resultMap id="baseClubInfoMap" type="java.util.Map">
+        <result column="uuid" property="uuid" javaType="java.lang.String"/>
+        <result column="CREATE_TIME" property="createTime" javaType="java.util.Date"/>
+        <result column="CREATE_USER" property="createUser" javaType="java.lang.String"/>
+        <result column="UPDATE_TIME" property="updateTime" javaType="java.util.Date"/>
+        <result column="UPDATE_USER" property="updateUser" javaType="java.lang.String"/>
+        <result column="DEL_IND" property="delInd" javaType="java.lang.String"/>
+        <result column="VERSION" property="version" javaType="java.lang.Integer"/>
+
+        <result column="ST_CD" property="stCd" javaType="java.lang.String"/>
+        <result column="ST_NAME" property="stName" javaType="java.lang.String"/>
+        <result column="ST_CHARGE_NAME" property="stChargeName" javaType="java.lang.String"/>
+        <result column="ST_CHARGE_SNO" property="stChargeSno" javaType="java.lang.String"/>
+        <result column="ST_CHARGE_PHONE" property="stChargePhone" javaType="java.lang.String"/>
+        <result column="ST_FOUNDER" property="stFounder" javaType="java.lang.String"/>
+        <result column="ST_NATURE" property="stNature" javaType="java.lang.String"/>
+        <result column="ST_DESC" property="stDesc" javaType="java.lang.String"/>
+        <result column="REMARK" property="remark" javaType="java.lang.String"/>
+        <result column="SCHOOL_NO" property="schoolNo" javaType="java.lang.String"/>
+        <result column="COLLEGE_NO" property="collegeNo" javaType="java.lang.String"/>
+        <result column="STATUS_CD" property="statusCd" javaType="java.lang.Integer"/>
+        <result column="WORKFLOW_CD" property="workflowCd" javaType="java.lang.Integer"/>
+        <result column="CREATE_OPINION" property="createOpinion" javaType="java.lang.String"/>
+    </resultMap>
+
+    <sql id="column_list">
+        base_club_info.uuid,
+        base_club_info.ST_CD,
+        base_club_info.WORKFLOW_CD,
+        base_club_info.CREATE_OPINION,
+        base_club_info.ST_NAME,
+        base_club_info.ST_CHARGE_NAME,
+        base_club_info.ST_CHARGE_SNO,
+        base_club_info.ST_CHARGE_PHONE,
+        base_club_info.ST_FOUNDER,
+        base_club_info.ST_NATURE,
+        base_club_info.ST_DESC,
+        base_club_info.REMARK,
+        base_club_info.SCHOOL_NO,
+        base_club_info.COLLEGE_NO,
+        base_club_info.STATUS_CD,
+        base_club_info.CREATE_TIME,base_club_info.CREATE_USER,base_club_info.UPDATE_USER,
+        base_club_info.UPDATE_TIME, base_club_info.DEL_IND,
+        base_club_info.VERSION
+    </sql>
+
+    <sql id="where_filters">
+        <where>
+            <if test="uuid!=null and uuid!=''">AND base_club_info.uuid = #{uuid}</if>
+            <if test="delInd!=null and delInd!=''">AND base_club_info.DEL_IND = #{delInd}</if>
+            <if test="version!=null and version!=''">AND base_club_info.VERSION = #{version}</if>
+
+            <if test="createOpinion!=null and createOpinion!=''">AND base_club_info.CREATE_OPINION = #{createOpinion}</if>
+            <if test="workflowCd!=null and workflowCd!=''">AND base_club_info.WORKFLOW_CD = #{workflowCd}</if>
+            <if test="stCd!=null and stCd!=''">AND base_club_info.ST_CD = #{stCd}</if>
+            <if test="stName!=null and stName!=''">AND base_club_info.ST_NAME = #{stName}</if>
+            <if test="stChargeName!=null and stChargeName!=''">AND base_club_info.ST_CHARGE_NAME = #{stChargeName}</if>
+            <if test="stChargeSno!=null and stChargeSno!=''">AND base_club_info.ST_CHARGE_SNO = #{stChargeSno}</if>
+            <if test="stChargePhone!=null and stChargePhone!=''">AND base_club_info.ST_CHARGE_PHONE = #{stChargePhone}</if>
+            <if test="stFounder!=null and stFounder!=''">AND base_club_info.ST_FOUNDER = #{stFounder}</if>
+            <if test="stNature!=null and stNature!=''">AND base_club_info.ST_NATURE = #{stNature}</if>
+            <if test="stDesc!=null and stDesc!=''">AND base_club_info.ST_DESC = #{stDesc}</if>
+            <if test="remark!=null and remark!=''">AND base_club_info.REMARK = #{remark}</if>
+            <if test="schoolNo!=null and schoolNo!=''">AND base_club_info.SCHOOL_NO = #{schoolNo}</if>
+            <if test="collegeNo!=null and collegeNo!=''">AND base_club_info.COLLEGE_NO = #{collegeNo}</if>
+            <if test="statusCd!=null and statusCd!=''">AND base_club_info.STATUS_CD = #{statusCd}</if>
+            <if test="statusCds != null and statusCds.size() > 0">
+                AND base_club_info.STATUS_CD IN
+                <foreach collection="statusCds" open="(" separator="," close=")" item="statusCd">
+                    #{statusCd}
+                </foreach>
+            </if>
+        </where>
+    </sql>
+
+    <sql id="pagination">
+        <if test="startIndex != null and pageSize!= null ">
+            <![CDATA[
+                LIMIT #{startIndex},#{pageSize}
+            ]]>
+        </if>
+    </sql>
+
+    <!--根据条件查询列表-->
+    <select id="findBaseClubInfoList" parameterType="map" resultMap="baseClubInfoMap">
+        SELECT
+        <include refid="column_list"/>
+        FROM base_club_info base_club_info
+        <include refid="where_filters"/>
+        ORDER BY base_club_info.CREATE_TIME DESC
+        <include refid="pagination" />
+    </select>
+
+    <select id="findBaseClubInfo" parameterType="map" resultMap="baseClubInfoMap">
+        SELECT
+        <include refid="column_list"/>
+        FROM base_club_info base_club_info WHERE 1=1
+        <include refid="where_filters"/>
+        ORDER BY base_club_info.CREATE_TIME DESC
+    </select>
+
+</mapper>

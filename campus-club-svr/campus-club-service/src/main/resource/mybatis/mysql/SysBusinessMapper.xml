@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.fjut.gmxx.campusclub.sysbusiness.mapper.ISysBusinessMapper">
+
+    <resultMap id="sysBusinessMap" type="java.util.Map">
+        <result column="uuid" property="uuid" javaType="java.lang.String"/>
+
+        <result column="create_time" property="createTime" javaType="java.lang.String"/>
+        <result column="create_user" property="createUser" javaType="java.lang.String"/>
+        <result column="del_ind" property="delInd" javaType="java.lang.String"/>
+        <result column="remark" property="remark" javaType="java.lang.String"/>
+        <result column="status_cd" property="statusCd" javaType="java.lang.Integer"/>
+        <result column="update_time" property="updateTime" javaType="java.lang.String"/>
+        <result column="update_user" property="updateUser" javaType="java.lang.String"/>
+        <result column="version" property="version" javaType="java.lang.Integer"/>
+        <result column="approver_user_code" property="approverUserCode" javaType="java.lang.String"/>
+        <result column="business_association_code" property="businessAssociationCode" javaType="java.lang.String"/>
+        <result column="business_category" property="businessCategory" javaType="java.lang.String"/>
+        <result column="business_code" property="businessCode" javaType="java.lang.String"/>
+        <result column="business_desc" property="businessDesc" javaType="java.lang.String"/>
+        <result column="business_state" property="businessState" javaType="java.lang.String"/>
+    </resultMap>
+
+    <sql id="column_list">
+        sys_business.uuid,
+        sys_business.remark,
+        sys_business.status_cd,
+        sys_business.update_time,
+        sys_business.update_user,
+        sys_business.version,
+        sys_business.approver_user_code,
+        sys_business.business_association_code,
+        sys_business.business_category,
+        sys_business.business_code,
+        sys_business.business_desc,
+        sys_business.business_state,
+        sys_business.CREATE_TIME,sys_business.CREATE_USER,sys_business.UPDATE_USER,
+        sys_business.UPDATE_TIME, sys_business.DEL_IND,
+        sys_business.VERSION
+    </sql>
+
+    <sql id="where_filters">
+        <where>
+            <if test="delInd!=null and delInd!=''">AND sys_business.DEL_IND = #{delInd}</if>
+            <if test="version!=null and version!=''">AND sys_business.VERSION = #{version}</if>
+
+            <if test="uuid!=null and uuid!=''">AND sys_business.uuid = #{uuid}</if>
+            <if test="createTime!=null and createTime!=''">AND sys_business.create_time = #{createTime}</if>
+            <if test="createUser!=null and createUser!=''">AND sys_business.create_user = #{createUser}</if>
+            <if test="delInd!=null and delInd!=''">AND sys_business.del_ind = #{delInd}</if>
+            <if test="remark!=null and remark!=''">AND sys_business.remark = #{remark}</if>
+            <if test="statusCd!=null and statusCd!=''">AND sys_business.status_cd = #{statusCd}</if>
+            <if test="updateTime!=null and updateTime!=''">AND sys_business.update_time = #{updateTime}</if>
+            <if test="updateUser!=null and updateUser!=''">AND sys_business.update_user = #{updateUser}</if>
+            <if test="version!=null and version!=''">AND sys_business.version = #{version}</if>
+            <if test="businessAssociationCode!=null and businessAssociationCode!=''">AND sys_business.business_association_code = #{businessAssociationCode}</if>
+            <if test="approverUserCode!=null and approverUserCode!=''">AND sys_business.approver_user_code = #{approverUserCode}</if>
+            <if test="businessCategory!=null and businessCategory!=''">AND sys_business.business_category = #{businessCategory}</if>
+            <if test="businessCode!=null and businessCode!=''">AND sys_business.business_code = #{businessCode}</if>
+            <if test="businessDesc!=null and businessDesc!=''">AND sys_business.business_desc = #{businessDesc}</if>
+            <if test="businessState!=null and businessState!=''">AND sys_business.business_state = #{businessState}</if>
+        </where>
+    </sql>
+
+    <!--根据条件查询列表-->
+    <select id="findSysBusinessList" parameterType="map" resultMap="sysBusinessMap">
+        SELECT
+        <include refid="column_list"/>
+        FROM sys_business sys_business
+        <include refid="where_filters"/>
+        ORDER BY sys_business.CREATE_TIME DESC
+    </select>
+
+</mapper>

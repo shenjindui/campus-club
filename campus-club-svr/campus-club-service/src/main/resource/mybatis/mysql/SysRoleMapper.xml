@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.fjut.gmxx.campusclub.sysrole.mapper.RoleMapper">
+    <resultMap id="sysRoleMap" type="java.util.Map">
+        <result column="uuid" property="uuid" javaType="java.lang.String"/>
+        <result column="CREATE_TIME" property="createTime" javaType="java.util.Date"/>
+        <result column="CREATE_USER" property="createUser" javaType="java.lang.String"/>
+        <result column="UPDATE_TIME" property="updateTime" javaType="java.util.Date"/>
+        <result column="UPDATE_USER" property="updateUser" javaType="java.lang.String"/>
+        <result column="DEL_IND" property="delInd" javaType="java.lang.String"/>
+        <result column="VERSION" property="version" javaType="java.lang.Integer"/>
+        <result column="remark" property="remark" javaType="java.lang.String"/>
+        <result column="status_cd" property="statusCd" javaType="java.lang.String"/>
+        <result column="role_code" property="roleCode" javaType="java.lang.String"/>
+        <result column="role_name" property="roleName" javaType="java.lang.String"/>
+    </resultMap>
+
+    <sql id="column_list">
+        sys_role.uuid,
+        sys_role.remark,
+        sys_role.status_cd,
+        sys_role.role_code,
+        sys_role.role_name,
+        sys_role.create_time,
+        sys_role.create_user,
+        sys_role.update_user,
+        sys_role.update_time,
+        sys_role.del_ind,
+        sys_role.version
+    </sql>
+
+    <sql id="where_filters">
+        <where>
+            <if test="uuid!=null and uuid!=''">AND sys_role.uuid = #{uuid}</if>
+            <if test="createTime!=null and createTime!=''">AND sys_role.create_time = #{createTime}</if>
+            <if test="createUser!=null and createUser!=''">AND sys_role.create_user = #{createUser}</if>
+            <if test="delInd!=null and delInd!=''">AND sys_role.del_ind = #{delInd}</if>
+            <if test="remark!=null and remark!=''">AND sys_role.remark = #{remark}</if>
+            <if test="statusCd!=null and statusCd!=''">AND sys_role.status_cd = #{statusCd}</if>
+            <if test="updateTime!=null and updateTime!=''">AND sys_role.update_time = #{updateTime}</if>
+            <if test="updateUser!=null and updateUser!=''">AND sys_role.update_user = #{updateUser}</if>
+            <if test="version!=null and version!=''">AND sys_role.version = #{version}</if>
+            <if test="roleCode!=null and roleCode!=''">AND sys_role.role_code = #{roleCode}</if>
+            <!--角色名称允许模糊搜索-->
+            <if test="roleName!=null and roleName!=''">AND sys_role.role_name like concat("%",#{roleName},"%")</if>
+            <!--使用&gt;=(>=) &lt;=(<=)方式-->
+            <!--时间控件参数范围查询 create_time-->
+            <if test="startTime!=null and startTime!=''">AND sys_role.create_time &gt;= #{startTime}</if>
+            <if test="endTime!=null and endTime!=''">AND sys_role.create_time &lt;= #{endTime}</if>
+        </where>
+    </sql>
+    <!--分页参数-->
+    <sql id="pagination">
+        <if test="startIndex != null and pageSize!= null ">
+            <![CDATA[
+                LIMIT #{startIndex},#{pageSize}
+            ]]>
+        </if>
+    </sql>
+    <!--根据条件查询列表 分页-->
+    <select id="findSysRoleList" parameterType="map" resultMap="sysRoleMap">
+        SELECT
+        <include refid="column_list"/>
+        FROM sys_role sys_role
+        <include refid="where_filters"/>
+        ORDER BY sys_role.CREATE_TIME DESC
+        <include refid="pagination" />
+    </select>
+    <!--根据条件查询列表 无分页-->
+    <select id="findSysRoleListAll" parameterType="map" resultMap="sysRoleMap">
+        SELECT
+        <include refid="column_list"/>
+        FROM sys_role sys_role
+        <include refid="where_filters"/>
+        ORDER BY sys_role.CREATE_TIME DESC
+    </select>
+
+    <!-- 根据uuid删除用户 -->
+    <delete id="deleteSysRoleByUuid" parameterType="String">
+        delete from sys_role where uuid = #{uuid}
+    </delete>
+
+    <update id="updateSysRoleByUuid" parameterType="String">
+        update sys_role
+        set role_name = #{roleName},
+        update_time = #{updateTime, jdbcType=TIMESTAMP}
+        where uuid = #{uuid}
+    </update>
+
+</mapper>

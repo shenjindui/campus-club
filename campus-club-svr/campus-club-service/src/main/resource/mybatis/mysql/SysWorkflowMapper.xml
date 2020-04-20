@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.fjut.gmxx.campusclub.workflow.mapper.ISysWorkflowMapper">
+
+    <resultMap id="sysWorkflowMap" type="java.util.Map">
+        <result column="uuid" property="uuid" javaType="java.lang.String"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="create_user" property="createUser" javaType="java.lang.String"/>
+        <result column="del_ind" property="delInd" javaType="java.lang.String"/>
+        <result column="remark" property="remark" javaType="java.lang.String"/>
+        <result column="status_cd" property="statusCd" javaType="java.lang.Integer"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+        <result column="update_user" property="updateUser" javaType="java.lang.String"/>
+        <result column="version" property="version" javaType="java.lang.Integer"/>
+        <result column="work_flow_code" property="workFlowCode" javaType="java.lang.String"/>
+        <result column="work_flow_name" property="workFlowName" javaType="java.lang.String"/>
+        <result column="work_flow_desc" property="workFlowDesc" javaType="java.lang.String"/>
+    </resultMap>
+
+    <sql id="column_list">
+        sys_workflow.uuid,
+        sys_workflow.remark,
+        sys_workflow.status_cd,
+        sys_workflow.version,
+        sys_workflow.work_flow_code,
+        sys_workflow.work_flow_name,
+        sys_workflow.work_flow_desc,
+        sys_workflow.CREATE_TIME,sys_workflow.CREATE_USER,sys_workflow.UPDATE_USER,
+        sys_workflow.UPDATE_TIME,sys_workflow.DEL_IND,
+        sys_workflow.VERSION
+    </sql>
+
+    <sql id="where_filters">
+        <where>
+            <if test="uuid!=null and uuid!=''">AND sys_workflow.uuid = #{uuid}</if>
+            <if test="createTime!=null and createTime!=''">AND sys_workflow.create_time = #{createTime}</if>
+            <if test="createUser!=null and createUser!=''">AND sys_workflow.create_user = #{createUser}</if>
+            <if test="delInd!=null and delInd!=''">AND sys_workflow.del_ind = #{delInd}</if>
+            <if test="remark!=null and remark!=''">AND sys_workflow.remark = #{remark}</if>
+            <if test="statusCd!=null and statusCd!=''">AND sys_workflow.status_cd = #{statusCd}</if>
+            <if test="updateTime!=null and updateTime!=''">AND sys_workflow.update_time = #{updateTime}</if>
+            <if test="updateUser!=null and updateUser!=''">AND sys_workflow.update_user = #{updateUser}</if>
+            <if test="version!=null and version!=''">AND sys_workflow.version = #{version}</if>
+            <if test="workFlowCode!=null and workFlowCode!=''">AND sys_workflow.work_flow_code = #{workFlowCode}</if>
+            <if test="workFlowName!=null and workFlowName!=''">AND sys_workflow.work_flow_name like concat("%",#{workFlowName},"%")</if>
+           <!-- <if test="workFlowName!=null and workFlowName!=''">AND sys_workflow.work_flow_name = #{workFlowName}</if>-->
+            <if test="workFlowDesc!=null and workFlowDesc!=''">AND sys_workflow.work_flow_desc = #{workFlowDesc}</if>
+            <if test="startsTime!=null and startsTime!=''">AND sys_workflow.create_time <![CDATA[>=]]> #{startsTime}</if>
+            <if test="endsTime!=null and endsTime!=''">AND sys_workflow.create_time <![CDATA[<=]]> #{endsTime}</if>
+        </where>
+    </sql>
+
+    <sql id="pagination">
+        <if test="startIndex != null and pageSize!= null ">
+            <![CDATA[
+                LIMIT #{startIndex},#{pageSize}
+            ]]>
+        </if>
+    </sql>
+    <!--根据条件查询列表-->
+    <select id="findSysWorkflowList" parameterType="map" resultMap="sysWorkflowMap">
+        SELECT
+        <include refid="column_list"/>
+        FROM sys_workflow sys_workflow
+        <include refid="where_filters"/>
+        ORDER BY sys_workflow.CREATE_TIME DESC
+        <include refid="pagination" />
+    </select>
+
+    <select id="findSysWorkflowAll" parameterType="map" resultMap="sysWorkflowMap">
+        SELECT
+        <include refid="column_list"/>
+        FROM sys_workflow sys_workflow
+        <include refid="where_filters"/>
+        ORDER BY sys_workflow.CREATE_TIME DESC
+    </select>
+
+</mapper>

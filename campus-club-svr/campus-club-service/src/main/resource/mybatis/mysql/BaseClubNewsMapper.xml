@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.fjut.gmxx.campusclub.baseclubnews.mapper.IBaseClubNewsMapper">
+
+    <resultMap id="baseClubNewsMap" type="java.util.Map">
+        <result column="UUID" property="uuid" javaType="java.lang.String"/>
+        <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="CREATE_USER" property="createUser" javaType="java.lang.String"/>
+        <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP"/>
+        <result column="UPDATE_USER" property="updateUser" javaType="java.lang.String"/>
+        <result column="DEL_IND" property="delInd" javaType="java.lang.String"/>
+        <result column="VERSION" property="version" javaType="java.lang.Integer"/>
+
+        <result column="NEWS_CD" property="newsCd" javaType="java.lang.String"/>
+        <result column="NEWS_TITLE" property="newsTitle" javaType="java.lang.String"/>
+        <result column="NEWS_DESC" property="newsDesc" javaType="java.lang.String"/>
+        <result column="PUBLISHER" property="publisher" javaType="java.lang.String"/>
+        <result column="PUBLISH_TIME" property="publishTime" jdbcType="TIMESTAMP"/>
+        <result column="NEWS_STATUS" property="newsStatus" javaType="java.lang.String"/>
+        <result column="TRAFFIC_VOLUME" property="trafficVolume" javaType="java.lang.String"/>
+        <result column="NEWS_ST_CD" property="newsStCd" javaType="java.lang.String"/>
+        <result column="REMARK" property="remark" javaType="java.lang.String"/>
+    </resultMap>
+
+    <sql id="column_list">
+        base_club_news.UUID,
+        base_club_news.NEWS_CD,
+        base_club_news.NEWS_TITLE,
+        base_club_news.NEWS_DESC,
+        base_club_news.PUBLISHER,
+        base_club_news.PUBLISH_TIME,
+        base_club_news.NEWS_STATUS,
+        base_club_news.TRAFFIC_VOLUME,
+        base_club_news.NEWS_ST_CD,
+        base_club_news.REMARK,
+        base_club_news.CREATE_TIME,base_club_news.CREATE_USER,base_club_news.UPDATE_USER,
+        base_club_news.UPDATE_TIME, base_club_news.DEL_IND,
+        base_club_news.VERSION
+    </sql>
+
+    <sql id="where_filters">
+        <where>
+            <if test="uuid!=null and uuid!=''">AND base_club_news.uuid = #{uuid}</if>
+            <if test="delInd!=null and delInd!=''">AND base_club_news.DEL_IND = #{delInd}</if>
+            <if test="version!=null and version!=''">AND base_club_news.VERSION = #{version}</if>
+
+            <if test="newsCd!=null and newsCd!=''">AND base_club_news.NEWS_CD = #{newsCd}</if>
+            <if test="newsTitle!=null and newsTitle!=''">AND base_club_news.NEWS_TITLE = #{newsTitle}</if>
+            <if test="newsDesc!=null and newsDesc!=''">AND base_club_news.NEWS_DESC = #{newsDesc}</if>
+            <if test="publisher!=null and publisher!=''">AND base_club_news.PUBLISHER = #{publisher}</if>
+            <if test="publishTime!=null and publishTime!=''">AND base_club_news.PUBLISH_TIME = #{publishTime}</if>
+            <if test="newsStatus!=null and newsStatus!=''">AND base_club_news.NEWS_STATUS = #{newsStatus}</if>
+            <if test="trafficVolume!=null and trafficVolume!=''">AND base_club_news.TRAFFIC_VOLUME = #{trafficVolume}</if>
+            <if test="newsStCd!=null and newsStCd!=''">AND base_club_news.NEWS_ST_CD = #{newsStCd}</if>
+            <if test="remark!=null and remark!=''">AND base_club_news.REMARK = #{remark}</if>
+        </where>
+    </sql>
+
+    <sql id="pagination">
+        <if test="startIndex != null and pageSize!= null ">
+            <![CDATA[
+                LIMIT #{startIndex},#{pageSize}
+            ]]>
+        </if>
+    </sql>
+    <!--根据条件查询列表-->
+    <select id="findBaseClubNewsList" parameterType="map" resultMap="baseClubNewsMap">
+        SELECT
+        <include refid="column_list"/>
+        FROM base_club_news base_club_news
+        <include refid="where_filters"/>
+        ORDER BY base_club_news.CREATE_TIME DESC
+        <include refid="pagination" />
+    </select>
+
+    <select id="findBaseClubNewsAll" parameterType="map" resultMap="baseClubNewsMap">
+        SELECT
+        <include refid="column_list"/>
+        FROM base_club_news base_club_news
+        <include refid="where_filters"/>
+        ORDER BY base_club_news.CREATE_TIME DESC
+    </select>
+
+</mapper>

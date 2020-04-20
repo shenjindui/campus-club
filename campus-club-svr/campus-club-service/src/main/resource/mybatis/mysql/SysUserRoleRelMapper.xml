@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.fjut.gmxx.campusclub.sysuserrolerel.mapper.ISysUserRoleRelMapper">
+
+    <resultMap id="sysUserRoleRelMap" type="java.util.Map">
+        <result column="uuid" property="uuid" javaType="java.lang.String"/>
+        <result column="CREATE_TIME" property="createTime" javaType="java.util.Date"/>
+        <result column="CREATE_USER" property="createUser" javaType="java.lang.String"/>
+        <result column="UPDATE_TIME" property="updateTime" javaType="java.util.Date"/>
+        <result column="UPDATE_USER" property="updateUser" javaType="java.lang.String"/>
+        <result column="DEL_IND" property="delInd" javaType="java.lang.String"/>
+        <result column="VERSION" property="version" javaType="java.lang.Integer"/>
+
+        <result column="remark" property="remark" javaType="java.lang.String"/>
+        <result column="status_cd" property="statusCd" javaType="java.lang.String"/>
+        <result column="default_role" property="defaultRole" javaType="java.lang.String"/>
+        <result column="role_code" property="roleCode" javaType="java.lang.String"/>
+        <result column="user_code" property="userCode" javaType="java.lang.String"/>
+    </resultMap>
+
+    <sql id="column_list">
+        sys_user_role_rel.uuid,
+        sys_user_role_rel.remark,
+        sys_user_role_rel.status_cd,
+        sys_user_role_rel.default_role,
+        sys_user_role_rel.role_code,
+        sys_user_role_rel.user_code,
+        sys_user_role_rel.CREATE_TIME,sys_user_role_rel.CREATE_USER,sys_user_role_rel.UPDATE_USER,
+        sys_user_role_rel.UPDATE_TIME,sys_user_role_rel.DEL_IND,
+        sys_user_role_rel.VERSION
+    </sql>
+
+    <sql id="where_filters">
+        <where>
+
+            <if test="uuid!=null and uuid!=''">AND sys_user_role_rel.uuid = #{uuid}</if>
+            <if test="createTime!=null and createTime!=''">AND sys_user_role_rel.create_time = #{createTime}</if>
+            <if test="createUser!=null and createUser!=''">AND sys_user_role_rel.create_user = #{createUser}</if>
+            <if test="delInd!=null and delInd!=''">AND sys_user_role_rel.del_ind = #{delInd}</if>
+            <if test="remark!=null and remark!=''">AND sys_user_role_rel.remark = #{remark}</if>
+            <if test="statusCd!=null and statusCd!=''">AND sys_user_role_rel.status_cd = #{statusCd}</if>
+            <if test="updateTime!=null and updateTime!=''">AND sys_user_role_rel.update_time = #{updateTime}</if>
+            <if test="updateUser!=null and updateUser!=''">AND sys_user_role_rel.update_user = #{updateUser}</if>
+            <if test="version!=null and version!=''">AND sys_user_role_rel.version = #{version}</if>
+            <if test="defaultRole!=null and defaultRole!=''">AND sys_user_role_rel.default_role = #{defaultRole}</if>
+            <if test="roleCode!=null and roleCode!=''">AND sys_user_role_rel.role_code = #{roleCode}</if>
+            <if test="userCode!=null and userCode!=''">AND sys_user_role_rel.user_code = #{userCode}</if>
+        </where>
+    </sql>
+
+    <!--根据条件查询列表-->
+    <select id="findSysUserRoleRelList" parameterType="map" resultMap="sysUserRoleRelMap">
+        SELECT
+        <include refid="column_list"/>
+        FROM sys_user_role_rel sys_user_role_rel
+        <include refid="where_filters"/>
+        ORDER BY sys_user_role_rel.CREATE_TIME DESC
+        LIMIT #{startIndex},#{pageSize}
+    </select>
+
+</mapper>

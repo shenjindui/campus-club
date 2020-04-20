@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.fjut.gmxx.campusclub.basefilersc.mapper.IBaseFileRscMapper">
+
+    <resultMap id="baseFileRscMap" type="java.util.Map">
+        <result column="uuid" property="uuid" javaType="java.lang.String"/>
+        <result column="CREATE_TIME" property="createTime" javaType="java.util.Date"/>
+        <result column="CREATE_USER" property="createUser" javaType="java.lang.String"/>
+        <result column="UPDATE_TIME" property="updateTime" javaType="java.util.Date"/>
+        <result column="UPDATE_USER" property="updateUser" javaType="java.lang.String"/>
+        <result column="DEL_IND" property="delInd" javaType="java.lang.String"/>
+        <result column="VERSION" property="version" javaType="java.lang.Integer"/>
+
+        <result column="ST_CD" property="stCd" javaType="java.lang.String"/>
+        <result column="FILE_ID" property="fileId" javaType="java.lang.String"/>
+        <result column="FILE_NM" property="fileNm" javaType="java.lang.String"/>
+        <result column="FILE_EXPD_NM" property="fileExpdNm" javaType="java.lang.String"/>
+        <result column="FILE_SIZE" property="fileSize" javaType="java.math.BigDecimal"/>
+        <result column="FILE_RTE" property="fileRte" javaType="java.lang.String"/>
+        <result column="FILE_TP_CD" property="fileTpCd" javaType="java.lang.String"/>
+        <result column="FILE_PURPOSE" property="filePurpose" javaType="java.lang.String"/>
+        <result column="CREATE_USER_ID" property="createUserId" javaType="java.lang.String"/>
+    </resultMap>
+
+    <sql id="column_list">
+        base_file_rsc.uuid,
+        base_file_rsc.FILE_ID,
+        base_file_rsc.FILE_NM,
+        base_file_rsc.FILE_EXPD_NM,
+        base_file_rsc.FILE_SIZE,
+        base_file_rsc.FILE_RTE,
+        base_file_rsc.FILE_TP_CD,
+        base_file_rsc.ST_CD,
+        base_file_rsc.FILE_PURPOSE,
+        base_file_rsc.CREATE_USER_ID,
+        base_file_rsc.CREATE_TIME,base_file_rsc.CREATE_USER,base_file_rsc.UPDATE_USER,
+        base_file_rsc.UPDATE_TIME, base_file_rsc.DEL_IND,
+        base_file_rsc.VERSION
+    </sql>
+
+    <sql id="where_filters">
+        <where>
+            <if test="uuid!=null and uuid!=''">AND base_file_rsc.uuid = #{uuid}</if>
+            <if test="delInd!=null and delInd!=''">AND base_file_rsc.DEL_IND = #{delInd}</if>
+            <if test="version!=null and version!=''">AND base_file_rsc.VERSION = #{version}</if>
+
+            <if test="stCd!=null and stCd!=''">AND base_file_rsc.ST_CD = #{stCd}</if>
+            <if test="fileId!=null and fileId!=''">AND base_file_rsc.FILE_ID = #{fileId}</if>
+            <if test="fileNm!=null and fileNm!=''">AND base_file_rsc.FILE_NM = #{fileNm}</if>
+            <if test="fileExpdNm!=null and fileExpdNm!=''">AND base_file_rsc.FILE_EXPD_NM = #{fileExpdNm}</if>
+            <if test="fileSize!=null and fileSize!=''">AND base_file_rsc.FILE_SIZE = #{fileSize}</if>
+            <if test="fileRte!=null and fileRte!=''">AND base_file_rsc.FILE_RTE = #{fileRte}</if>
+            <if test="fileTpCd!=null and fileTpCd!=''">AND base_file_rsc.FILE_TP_CD = #{fileTpCd}</if>
+            <if test="filePurpose!=null and filePurpose!=''">AND base_file_rsc.FILE_PURPOSE = #{filePurpose}</if>
+            <if test="createUserId!=null and createUserId!=''">AND base_file_rsc.CREATE_USER_ID = #{createUserId}</if>
+        </where>
+    </sql>
+
+    <!--根据条件查询列表-->
+    <select id="findBaseFileRscList" parameterType="map" resultMap="baseFileRscMap">
+        SELECT
+        <include refid="column_list"/>
+        FROM base_file_rsc base_file_rsc
+        <include refid="where_filters"/>
+        ORDER BY base_file_rsc.CREATE_TIME DESC
+        LIMIT #{startIndex},#{pageSize}
+    </select>
+
+</mapper>

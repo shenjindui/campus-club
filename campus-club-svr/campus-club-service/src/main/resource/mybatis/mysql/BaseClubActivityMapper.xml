@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.fjut.gmxx.campusclub.baseclubactivity.mapper.IBaseClubActivityMapper">
+
+    <resultMap id="baseClubActivityMap" type="java.util.Map">
+        <result column="uuid" property="uuid" javaType="java.lang.String"/>
+        <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="CREATE_USER" property="createUser" javaType="java.lang.String"/>
+        <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP"/>
+        <result column="UPDATE_USER" property="updateUser" javaType="java.lang.String"/>
+        <result column="DEL_IND" property="delInd" javaType="java.lang.String"/>
+        <result column="VERSION" property="version" javaType="java.lang.Integer"/>
+
+        <result column="ACTIVITY_ID" property="activityId" javaType="java.lang.String"/>
+        <result column="ACTIVITY_NAME" property="activityName" javaType="java.lang.String"/>
+        <result column="HOST_ST_CD" property="hostStCd" javaType="java.lang.String"/>
+        <result column="START_TIME" property="startTime" jdbcType="TIMESTAMP"/>
+        <result column="END_TIME" property="endTime" jdbcType="TIMESTAMP"/>
+        <result column="ACTIVITY_SPACE" property="activitySpace" javaType="java.lang.String"/>
+        <result column="FOUNDS_NUM" property="foundsNum" javaType="java.lang.String"/>
+        <result column="PROPOSA_AGREE" property="proposaAgree" javaType="java.lang.String"/>
+        <result column="ASSOCIATION_AGREE" property="associationAgree" javaType="java.lang.String"/>
+        <result column="YOUTH_LEAGUE_AGREE" property="youthLeagueAgree" javaType="java.lang.String"/>
+        <result column="ACTIVITY_ASSESSOR" property="activityAssessor" javaType="java.lang.String"/>
+        <result column="ACTIVITY_SCORE" property="activityScore" javaType="java.lang.String"/>
+        <result column="ACTIVITY_TYPE" property="activityType" javaType="java.lang.String"/>
+        <result column="ACTIVITY_DSC" property="activityDsc" javaType="java.lang.String"/>
+        <result column="ACTIVITY_FILE" property="activityFile" javaType="java.lang.String"/>
+        <result column="REMARK" property="remark" javaType="java.lang.String"/>
+        <result column="STATUS_CD" property="statusCd" javaType="java.lang.String"/>
+    </resultMap>
+
+    <sql id="column_list">
+        base_club_activity.uuid,
+        base_club_activity.ACTIVITY_ID,
+        base_club_activity.ACTIVITY_NAME,
+        base_club_activity.HOST_ST_CD,
+        DATE_FORMAT(START_TIME,'%Y-%m-%d %H:%i:%S') as  start_time,
+        DATE_FORMAT(END_TIME,'%Y-%m-%d %H:%i:%S') as  end_time,
+        base_club_activity.ACTIVITY_SPACE,
+        base_club_activity.FOUNDS_NUM,
+        base_club_activity.PROPOSA_AGREE,
+        base_club_activity.ASSOCIATION_AGREE,
+        base_club_activity.YOUTH_LEAGUE_AGREE,
+        base_club_activity.ACTIVITY_ASSESSOR,
+        base_club_activity.ACTIVITY_SCORE,
+        base_club_activity.ACTIVITY_TYPE,
+        base_club_activity.ACTIVITY_DSC,
+        base_club_activity.ACTIVITY_FILE,
+        base_club_activity.REMARK,
+        base_club_activity.STATUS_CD,
+        base_club_activity.CREATE_TIME,base_club_activity.CREATE_USER,base_club_activity.UPDATE_USER,
+        base_club_activity.UPDATE_TIME, base_club_activity.DEL_IND,
+        base_club_activity.VERSION
+    </sql>
+
+    <sql id="where_filters">
+        <where>
+            <if test="uuid!=null and uuid!=''">AND base_club_activity.uuid = #{uuid}</if>
+            <if test="delInd!=null and delInd!=''">AND base_club_activity.DEL_IND = #{delInd}</if>
+            <if test="version!=null and version!=''">AND base_club_activity.VERSION = #{version}</if>
+
+            <if test="activityId!=null and activityId!=''">AND base_club_activity.ACTIVITY_ID = #{activityId}</if>
+
+            <if test="activityName!=null and activityName!=''">AND base_club_activity.ACTIVITY_NAME like concat("%",#{activityName},"%")</if>
+            <!--<if test="activityName!=null and activityName!=''">AND base_club_activity.ACTIVITY_NAME = #{activityName}</if>-->
+
+            <if test="hostStCd!=null and hostStCd!=''">AND base_club_activity.HOST_ST_CD = #{hostStCd}</if>
+
+            <if test="startsTime!=null and startsTime!=''">AND base_club_activity.START_TIME <![CDATA[>=]]> #{startsTime}</if>
+            <if test="endsTime!=null and endsTime!=''">AND base_club_activity.END_TIME <![CDATA[<=]]> #{endsTime}</if>
+            <if test="startTime!=null and startTime!=''">AND base_club_activity.START_TIME = #{startTime}</if>
+            <if test="endTime!=null and endTime!=''">AND base_club_activity.END_TIME = #{endTime}</if>
+            <if test="activitySpace!=null and activitySpace!=''">AND base_club_activity.ACTIVITY_SPACE = #{activitySpace}</if>
+            <if test="foundsNum!=null and foundsNum!=''">AND base_club_activity.FOUNDS_NUM = #{foundsNum}</if>
+            <if test="proposaAgree!=null and proposaAgree!=''">AND base_club_activity.PROPOSA_AGREE = #{proposaAgree}</if>
+            <if test="associationAgree!=null and associationAgree!=''">AND base_club_activity.ASSOCIATION_AGREE = #{associationAgree}</if>
+            <if test="youthLeagueAgree!=null and youthLeagueAgree!=''">AND base_club_activity.YOUTH_LEAGUE_AGREE = #{youthLeagueAgree}</if>
+            <if test="activityAssessor!=null and activityAssessor!=''">AND base_club_activity.ACTIVITY_ASSESSOR = #{activityAssessor}</if>
+            <if test="activityScore!=null and activityScore!=''">AND base_club_activity.ACTIVITY_SCORE = #{activityScore}</if>
+            <if test="activityType!=null and activityType!=''">AND base_club_activity.ACTIVITY_TYPE = #{activityType}</if>
+            <if test="activityDsc!=null and activityDsc!=''">AND base_club_activity.ACTIVITY_DSC = #{activityDsc}</if>
+            <if test="activityFile!=null and activityFile!=''">AND base_club_activity.ACTIVITY_FILE = #{activityFile}</if>
+            <if test="remark!=null and remark!=''">AND base_club_activity.REMARK = #{remark}</if>
+        </where>
+    </sql>
+    <sql id="pagination">
+        <if test="startIndex != null and pageSize!= null ">
+            <![CDATA[
+                LIMIT #{startIndex},#{pageSize}
+            ]]>
+        </if>
+    </sql>
+    <!--根据条件查询列表-->
+    <select id="findBaseClubActivityList" parameterType="map" resultMap="baseClubActivityMap">
+        SELECT
+        <include refid="column_list"/>
+        FROM base_club_activity base_club_activity
+        <include refid="where_filters"/>
+        ORDER BY base_club_activity.CREATE_TIME DESC
+        <include refid="pagination" />
+    </select>
+
+    <select id="findBaseClubActivityAll" parameterType="map" resultMap="baseClubActivityMap">
+        SELECT
+        <include refid="column_list"/>
+        FROM base_club_activity base_club_activity
+        <include refid="where_filters"/>
+        ORDER BY base_club_activity.CREATE_TIME DESC
+    </select>
+
+
+</mapper>

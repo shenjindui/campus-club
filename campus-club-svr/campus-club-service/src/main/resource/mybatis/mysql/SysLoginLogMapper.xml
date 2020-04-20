@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.fjut.gmxx.campusclub.sysloginlog.mapper.ISysLoginLogMapper">
+
+    <resultMap id="sysLoginLogMap" type="java.util.Map">
+        <result column="UUID" property="uuid" javaType="java.lang.String"/>
+        <result column="CREATE_TIME" property="createTime" javaType="java.util.Date"/>
+        <result column="CREATE_USER" property="createUser" javaType="java.lang.String"/>
+        <result column="UPDATE_TIME" property="updateTime" javaType="java.util.Date"/>
+        <result column="UPDATE_USER" property="updateUser" javaType="java.lang.String"/>
+        <result column="DEL_IND" property="delInd" javaType="java.lang.String"/>
+        <result column="VERSION" property="version" javaType="java.lang.Integer"/>
+
+        <result column="USER_NUM" property="userNum" javaType="java.lang.String"/>
+        <result column="REALNAME" property="realname" javaType="java.lang.String"/>
+        <result column="LOGIN_NAME" property="loginName" javaType="java.lang.String"/>
+        <result column="MOBILE" property="mobile" javaType="java.lang.String"/>
+        <result column="EMAIL" property="email" javaType="java.lang.String"/>
+        <result column="LOGIN_IP" property="loginIp" javaType="java.lang.String"/>
+        <result column="MAC" property="mac" javaType="java.lang.String"/>
+        <result column="BROWSER_NAME" property="browserName" javaType="java.lang.String"/>
+        <result column="BROWSER_VERSION" property="browserVersion" javaType="java.lang.String"/>
+        <result column="OS_NAME" property="osName" javaType="java.lang.String"/>
+        <result column="OS_VERSION" property="osVersion" javaType="java.lang.String"/>
+    </resultMap>
+
+    <sql id="column_list">
+        sys_login_log.UUID,
+        sys_login_log.USER_NUM,
+        sys_login_log.REALNAME,
+        sys_login_log.LOGIN_NAME,
+        sys_login_log.MOBILE,
+        sys_login_log.EMAIL,
+        sys_login_log.LOGIN_IP,
+        sys_login_log.MAC,
+        sys_login_log.BROWSER_NAME,
+        sys_login_log.BROWSER_VERSION,
+        sys_login_log.OS_NAME,
+        sys_login_log.OS_VERSION,
+        sys_login_log.CREATE_TIME,sys_login_log.CREATE_USER,sys_login_log.UPDATE_USER,
+        sys_login_log.UPDATE_TIME,sys_login_log.DEL_IND,
+        sys_login_log.VERSION
+    </sql>
+
+    <sql id="where_filters">
+        <where>
+            <if test="uuid!=null and uuid!=''">AND sys_login_log.UUID = #{uuid}</if>
+            <if test="delInd!=null and delInd!=''">AND sys_login_log.DEL_IND = #{delInd}</if>
+            <if test="version!=null and version!=''">AND sys_login_log.VERSION = #{version}</if>
+
+            <if test="userNum!=null and userNum!=''">AND sys_login_log.USER_NUM = #{userNum}</if>
+            <if test="realname!=null and realname!=''">AND sys_login_log.REALNAME = #{realname}</if>
+            <if test="loginName!=null and loginName!=''">AND sys_login_log.LOGIN_NAME = #{loginName}</if>
+            <if test="mobile!=null and mobile!=''">AND sys_login_log.MOBILE = #{mobile}</if>
+            <if test="email!=null and email!=''">AND sys_login_log.EMAIL = #{email}</if>
+            <if test="loginIp!=null and loginIp!=''">AND sys_login_log.LOGIN_IP = #{loginIp}</if>
+            <if test="mac!=null and mac!=''">AND sys_login_log.MAC = #{mac}</if>
+            <if test="browserName!=null and browserName!=''">AND sys_login_log.BROWSER_NAME = #{browserName}</if>
+            <if test="browserVersion!=null and browserVersion!=''">AND sys_login_log.BROWSER_VERSION = #{browserVersion}</if>
+            <if test="osName!=null and osName!=''">AND sys_login_log.OS_NAME = #{osName}</if>
+            <if test="osVersion!=null and osVersion!=''">AND sys_login_log.OS_VERSION = #{osVersion}</if>
+            <if test="loginTime!=null and loginTime!=''">AND sys_login_log.LOGIN_TIME = #{loginTime}</if>
+        </where>
+    </sql>
+    <sql id="pagination">
+        <if test="startIndex != null and pageSize!= null ">
+            <![CDATA[
+                LIMIT #{startIndex},#{pageSize}
+            ]]>
+        </if>
+    </sql>
+    <!--根据条件查询列表-->
+    <select id="findSysLoginLogList" parameterType="map" resultMap="sysLoginLogMap">
+        SELECT
+        <include refid="column_list"/>
+        FROM sys_login_log sys_login_log
+        <include refid="where_filters"/>
+        ORDER BY sys_login_log.CREATE_TIME DESC
+        <include refid="pagination" />
+    </select>
+
+</mapper>

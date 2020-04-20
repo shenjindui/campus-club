@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.fjut.gmxx.campusclub.baseclubmessage.mapper.IBaseClubMessageMapper">
+
+    <resultMap id="baseClubMessageMap" type="java.util.Map">
+        <result column="uuid" property="uuid" javaType="java.lang.String"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="create_user" property="createUser" javaType="java.lang.String"/>
+        <result column="del_ind" property="delInd" javaType="java.lang.String"/>
+        <result column="remark" property="remark" javaType="java.lang.String"/>
+        <result column="status_cd" property="statusCd" javaType="java.lang.Integer"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+        <result column="update_user" property="updateUser" javaType="java.lang.String"/>
+        <result column="version" property="version" javaType="java.lang.Integer"/>
+        <result column="message_sno" property="messageSno" javaType="java.lang.String"/>
+        <result column="message_cd" property="messageCd" javaType="java.lang.String"/>
+        <result column="message_desc" property="messageDesc" javaType="java.lang.String"/>
+        <result column="message_name" property="messageName" javaType="java.lang.String"/>
+        <result column="message_psc_code" property="messagePscCode" javaType="java.lang.String"/>
+        <result column="message_psc_name" property="messagePscName" javaType="java.lang.String"/>
+        <result column="message_psc_opin" property="messagePscOpin" javaType="java.lang.String"/>
+        <result column="message_psccd" property="messagePsccd" javaType="java.lang.String"/>
+        <result column="message_st_cd" property="messageStCd" javaType="java.lang.String"/>
+    </resultMap>
+
+    <sql id="column_list">
+        base_club_message.uuid,
+        base_club_message.remark,
+        base_club_message.status_cd,
+        base_club_message.message_sno,
+        base_club_message.message_cd,
+        base_club_message.message_desc,
+        base_club_message.message_name,
+        base_club_message.message_psc_code,
+        base_club_message.message_psc_name,
+        base_club_message.message_psc_opin,
+        base_club_message.message_psccd,
+        base_club_message.message_st_cd,
+        base_club_message.CREATE_TIME,base_club_message.CREATE_USER,base_club_message.UPDATE_USER,
+        base_club_message.UPDATE_TIME, base_club_message.DEL_IND,
+        base_club_message.VERSION
+    </sql>
+
+    <sql id="where_filters">
+        <where>
+            <if test="uuid!=null and uuid!=''">AND base_club_message.uuid = #{uuid}</if>
+            <if test="createTime!=null and createTime!=''">AND base_club_message.create_time = #{createTime}</if>
+            <if test="createUser!=null and createUser!=''">AND base_club_message.create_user = #{createUser}</if>
+            <if test="delInd!=null and delInd!=''">AND base_club_message.del_ind = #{delInd}</if>
+            <if test="remark!=null and remark!=''">AND base_club_message.remark = #{remark}</if>
+            <if test="statusCd!=null and statusCd!=''">AND base_club_message.status_cd = #{statusCd}</if>
+            <if test="updateTime!=null and updateTime!=''">AND base_club_message.update_time = #{updateTime}</if>
+            <if test="updateUser!=null and updateUser!=''">AND base_club_message.update_user = #{updateUser}</if>
+            <if test="version!=null and version!=''">AND base_club_message.version = #{version}</if>
+            <if test="messageSno!=null and messageSno!=''">AND base_club_message.message_sno = #{messageSno}</if>
+            <if test="messageCd!=null and messageCd!=''">AND base_club_message.message_cd = #{messageCd}</if>
+            <if test="messageDesc!=null and messageDesc!=''">AND base_club_message.message_desc = #{messageDesc}</if>
+            <if test="messageName!=null and messageName!=''">AND base_club_message.message_name = #{messageName}</if>
+            <if test="messagePscCode!=null and messagePscCode!=''">AND base_club_message.message_psc_code = #{messagePscCode}</if>
+            <if test="messagePscName!=null and messagePscName!=''">AND base_club_message.message_psc_name = #{messagePscName}</if>
+            <if test="messagePscOpin!=null and messagePscOpin!=''">AND base_club_message.message_psc_opin = #{messagePscOpin}</if>
+            <if test="messagePsccd!=null and messagePsccd!=''">AND base_club_message.message_psccd = #{messagePsccd}</if>
+            <if test="messageStCd!=null and messageStCd!=''">AND base_club_message.message_st_cd = #{messageStCd}</if>
+        </where>
+    </sql>
+    <sql id="pagination">
+        <if test="startIndex != null and pageSize!= null ">
+            <![CDATA[
+                LIMIT #{startIndex},#{pageSize}
+            ]]>
+        </if>
+    </sql>
+    <!--根据条件查询列表-->
+    <select id="findBaseClubMessageList" parameterType="map" resultMap="baseClubMessageMap">
+        SELECT
+        <include refid="column_list"/>
+        FROM base_club_message base_club_message
+        <include refid="where_filters"/>
+        ORDER BY base_club_message.CREATE_TIME DESC
+        <include refid="pagination" />
+    </select>
+
+    <select id="findBaseClubMessageAll" parameterType="map" resultMap="baseClubMessageMap">
+        SELECT
+        <include refid="column_list"/>
+        FROM base_club_message base_club_message
+        <include refid="where_filters"/>
+        ORDER BY base_club_message.CREATE_TIME DESC
+    </select>
+
+</mapper>

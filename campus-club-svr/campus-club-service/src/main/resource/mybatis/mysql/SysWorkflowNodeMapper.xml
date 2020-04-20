@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.fjut.gmxx.campusclub.workflow.mapper.ISysWorkflowNodeMapper">
+
+    <resultMap id="sysWorkflowNodeMap" type="java.util.Map">
+        <result column="uuid" property="uuid" javaType="java.lang.String"/>
+        <result column="create_time" property="createTime" javaType="java.util.Date"/>
+        <result column="create_user" property="createUser" javaType="java.lang.String"/>
+        <result column="del_ind" property="delInd" javaType="java.lang.String"/>
+        <result column="remark" property="remark" javaType="java.lang.String"/>
+        <result column="status_cd" property="statusCd" javaType="java.lang.Integer"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+        <result column="update_user" property="updateUser" javaType="java.lang.String"/>
+        <result column="version" property="version" javaType="java.lang.Integer"/>
+        <result column="work_flow_code" property="workFlowCode" javaType="java.lang.String"/>
+        <result column="work_flow_node_code" property="workFlowNodeCode" javaType="java.lang.String"/>
+        <result column="work_flow_node_name" property="workFlowNodeName" javaType="java.lang.String"/>
+        <result column="work_flow_node_type" property="workFlowNodeType" javaType="java.lang.String"/>
+    </resultMap>
+
+    <sql id="column_list">
+        sys_workflow_node.uuid,
+        sys_workflow_node.remark,
+        sys_workflow_node.status_cd,
+        sys_workflow_node.version,
+        sys_workflow_node.work_flow_code,
+        sys_workflow_node.work_flow_node_code,
+        sys_workflow_node.work_flow_node_name,
+        sys_workflow_node.CREATE_TIME,sys_workflow_node.CREATE_USER,sys_workflow_node.UPDATE_USER,
+        sys_workflow_node.UPDATE_TIME, sys_workflow_node.DEL_IND,
+        sys_workflow_node.VERSION, sys_workflow_node.work_flow_node_type
+    </sql>
+
+    <sql id="where_filters">
+        <where>
+            <if test="workFlowNodeType!=null and workFlowNodeType!=''">AND sys_workflow_node.work_flow_node_type = #{workFlowNodeType}</if>
+            <if test="uuid!=null and uuid!=''">AND sys_workflow_node.uuid = #{uuid}</if>
+            <if test="createTime!=null and createTime!=''">AND sys_workflow_node.create_time = #{createTime}</if>
+            <if test="createUser!=null and createUser!=''">AND sys_workflow_node.create_user = #{createUser}</if>
+            <if test="delInd!=null and delInd!=''">AND sys_workflow_node.del_ind = #{delInd}</if>
+            <if test="remark!=null and remark!=''">AND sys_workflow_node.remark = #{remark}</if>
+            <if test="statusCd!=null and statusCd!=''">AND sys_workflow_node.status_cd = #{statusCd}</if>
+            <if test="updateTime!=null and updateTime!=''">AND sys_workflow_node.update_time = #{updateTime}</if>
+            <if test="updateUser!=null and updateUser!=''">AND sys_workflow_node.update_user = #{updateUser}</if>
+            <if test="version!=null and version!=''">AND sys_workflow_node.version = #{version}</if>
+            <if test="workFlowCode!=null and workFlowCode!=''">AND sys_workflow_node.work_flow_code = #{workFlowCode}</if>
+            <if test="workFlowNodeCode!=null and workFlowNodeCode!=''">AND sys_workflow_node.work_flow_node_code = #{workFlowNodeCode}</if>
+            <if test="workFlowNodeName!=null and workFlowNodeName!=''">AND sys_workflow_node.work_flow_node_name = #{workFlowNodeName}</if>
+            <if test="startsTime!=null and startsTime!=''">AND sys_workflow_node.create_time <![CDATA[>=]]> #{startsTime}</if>
+            <if test="endsTime!=null and endsTime!=''">AND sys_workflow_node.create_time <![CDATA[<=]]> #{endsTime}</if>
+        </where>
+    </sql>
+
+    <sql id="pagination">
+        <if test="startIndex != null and pageSize!= null ">
+            <![CDATA[
+                LIMIT #{startIndex},#{pageSize}
+            ]]>
+        </if>
+    </sql>
+    <!--根据条件查询列表-->
+    <select id="findSysWorkflowNodeList" parameterType="map" resultMap="sysWorkflowNodeMap">
+        SELECT
+        <include refid="column_list"/>
+        FROM sys_workflow_node sys_workflow_node
+        <include refid="where_filters"/>
+        ORDER BY sys_workflow_node.CREATE_TIME DESC
+        <include refid="pagination" />
+    </select>
+
+    <select id="findSysWorkflowNodeAll" parameterType="map" resultMap="sysWorkflowNodeMap">
+        SELECT
+        <include refid="column_list"/>
+        FROM sys_workflow_node sys_workflow_node
+        <include refid="where_filters"/>
+        ORDER BY sys_workflow_node.CREATE_TIME DESC
+    </select>
+
+</mapper>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.fjut.gmxx.campusclub.workflow.mapper.ISysWorkflowLinkMapper">
+
+    <resultMap id="sysWorkflowLinkMap" type="java.util.Map">
+        <result column="uuid" property="uuid" javaType="java.lang.String"/>
+        <result column="create_time" property="createTime" javaType="java.lang.String"/>
+        <result column="create_user" property="createUser" javaType="java.lang.String"/>
+        <result column="del_ind" property="delInd" javaType="java.lang.String"/>
+        <result column="remark" property="remark" javaType="java.lang.String"/>
+        <result column="status_cd" property="statusCd" javaType="java.lang.Integer"/>
+        <result column="update_time" property="updateTime" javaType="java.lang.String"/>
+        <result column="update_user" property="updateUser" javaType="java.lang.String"/>
+        <result column="version" property="version" javaType="java.lang.Integer"/>
+        <result column="work_flow_code" property="workFlowCode" javaType="java.lang.String"/>
+        <result column="work_flow_link_code" property="workFlowLinkCode" javaType="java.lang.String"/>
+        <result column="work_flow_link_name" property="workFlowLinkName" javaType="java.lang.String"/>
+        <result column="workflow_link_next_node" property="workflowLinkNextNode" javaType="java.lang.String"/>
+        <result column="workflow_link_pre_node" property="workflowLinkPreNode" javaType="java.lang.String"/>
+    </resultMap>
+
+    <sql id="column_list">
+        sys_workflow_link.uuid,
+        sys_workflow_link.remark,
+        sys_workflow_link.status_cd,
+        sys_workflow_link.update_time,
+        sys_workflow_link.update_user,
+        sys_workflow_link.version,
+        sys_workflow_link.work_flow_code,
+        sys_workflow_link.work_flow_link_code,
+        sys_workflow_link.work_flow_link_name,
+        sys_workflow_link.workflow_link_next_node,
+        sys_workflow_link.workflow_link_pre_node,
+        sys_workflow_link.CREATE_TIME,sys_workflow_link.CREATE_USER,sys_workflow_link.UPDATE_USER,
+        sys_workflow_link.UPDATE_TIME, sys_workflow_link.DEL_IND
+        sys_workflow_link.VERSION,
+    </sql>
+
+    <sql id="where_filters">
+        <where>
+            <if test="uuid!=null and uuid!=''">AND sys_workflow_link.uuid = #{uuid}</if>
+            <if test="createTime!=null and createTime!=''">AND sys_workflow_link.create_time = #{createTime}</if>
+            <if test="createUser!=null and createUser!=''">AND sys_workflow_link.create_user = #{createUser}</if>
+            <if test="delInd!=null and delInd!=''">AND sys_workflow_link.del_ind = #{delInd}</if>
+            <if test="remark!=null and remark!=''">AND sys_workflow_link.remark = #{remark}</if>
+            <if test="statusCd!=null and statusCd!=''">AND sys_workflow_link.status_cd = #{statusCd}</if>
+            <if test="updateTime!=null and updateTime!=''">AND sys_workflow_link.update_time = #{updateTime}</if>
+            <if test="updateUser!=null and updateUser!=''">AND sys_workflow_link.update_user = #{updateUser}</if>
+            <if test="version!=null and version!=''">AND sys_workflow_link.version = #{version}</if>
+            <if test="workFlowCode!=null and workFlowCode!=''">AND sys_workflow_link.work_flow_code = #{workFlowCode}</if>
+            <if test="workFlowLinkCode!=null and workFlowLinkCode!=''">AND sys_workflow_link.work_flow_link_code = #{workFlowLinkCode}</if>
+            <if test="workFlowLinkName!=null and workFlowLinkName!=''">AND sys_workflow_link.work_flow_link_name = #{workFlowLinkName}</if>
+            <if test="workflowLinkNextNode!=null and workflowLinkNextNode!=''">AND sys_workflow_link.workflow_link_next_node = #{workflowLinkNextNode}</if>
+            <if test="workflowLinkPreNode!=null and workflowLinkPreNode!=''">AND sys_workflow_link.workflow_link_pre_node = #{workflowLinkPreNode}</if>
+        </where>
+    </sql>
+
+    <!--根据条件查询列表-->
+    <select id="findSysWorkflowLinkList" parameterType="map" resultMap="sysWorkflowLinkMap">
+        SELECT
+        <include refid="column_list"/>
+        FROM sys_workflow_link sys_workflow_link
+        <include refid="where_filters"/>
+        ORDER BY sys_workflow_link.CREATE_TIME DESC
+    </select>
+
+</mapper>

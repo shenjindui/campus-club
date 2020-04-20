@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.fjut.gmxx.campusclub.baseclubscore.mapper.IBaseClubScoreMapper">
+
+    <resultMap id="baseClubScoreMap" type="java.util.Map">
+        <result column="uuid" property="uuid" javaType="java.lang.String"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="create_user" property="createUser" javaType="java.lang.String"/>
+        <result column="del_ind" property="delInd" javaType="java.lang.String"/>
+        <result column="remark" property="remark" javaType="java.lang.String"/>
+        <result column="status_cd" property="statusCd" javaType="java.lang.Integer"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+        <result column="update_user" property="updateUser" javaType="java.lang.String"/>
+        <result column="version" property="version" javaType="java.lang.Integer"/>
+        <result column="semesters" property="semesters" javaType="java.lang.String"/>
+        <result column="raters_association_code" property="ratersAssociationCode" javaType="java.lang.String"/>
+        <result column="raters_association_name" property="ratersAssociationName" javaType="java.lang.String"/>
+        <result column="raters_code" property="ratersCode" javaType="java.lang.String"/>
+        <result column="raters_name" property="ratersName" javaType="java.lang.String"/>
+        <result column="raters_opin" property="ratersOpin" javaType="java.lang.String"/>
+        <result column="raters_psccd" property="ratersPsccd" javaType="java.lang.String"/>
+        <result column="raters_type" property="ratersType" javaType="java.lang.String"/>
+        <result column="school_year" property="schoolYear" javaType="java.lang.String"/>
+        <result column="score" property="score" javaType="java.lang.String"/>
+        <result column="st_cd" property="stCd" javaType="java.lang.String"/>
+    </resultMap>
+
+    <sql id="column_list">
+        base_club_score.uuid,
+        base_club_score.remark,
+        base_club_score.status_cd,
+        base_club_score.semesters,
+        base_club_score.raters_association_code,
+        base_club_score.raters_association_name,
+        base_club_score.raters_code,
+        base_club_score.raters_name,
+        base_club_score.raters_opin,
+        base_club_score.raters_psccd,
+        base_club_score.raters_type,
+        base_club_score.school_year,
+        base_club_score.score,
+        base_club_score.st_cd,
+        base_club_score.CREATE_TIME,base_club_score.CREATE_USER,base_club_score.UPDATE_USER,
+        base_club_score.UPDATE_TIME,base_club_score.DEL_IND,
+        base_club_score.VERSION
+    </sql>
+
+    <sql id="where_filters">
+        <where>
+            <if test="uuid!=null and uuid!=''">AND base_club_score.uuid = #{uuid}</if>
+            <if test="createTime!=null and createTime!=''">AND base_club_score.create_time = #{createTime}</if>
+            <if test="createUser!=null and createUser!=''">AND base_club_score.create_user = #{createUser}</if>
+            <if test="delInd!=null and delInd!=''">AND base_club_score.del_ind = #{delInd}</if>
+            <if test="remark!=null and remark!=''">AND base_club_score.remark = #{remark}</if>
+            <if test="statusCd!=null and statusCd!=''">AND base_club_score.status_cd = #{statusCd}</if>
+            <if test="updateTime!=null and updateTime!=''">AND base_club_score.update_time = #{updateTime}</if>
+            <if test="updateUser!=null and updateUser!=''">AND base_club_score.update_user = #{updateUser}</if>
+            <if test="version!=null and version!=''">AND base_club_score.version = #{version}</if>
+            <if test="semesters!=null and semesters!=''">AND base_club_score.semesters = #{semesters}</if>
+            <if test="ratersAssociationCode!=null and ratersAssociationCode!=''">AND base_club_score.raters_association_code = #{ratersAssociationCode}</if>
+            <if test="ratersAssociationName!=null and ratersAssociationName!=''">AND base_club_score.raters_association_name = #{ratersAssociationName}</if>
+            <if test="ratersCode!=null and ratersCode!=''">AND base_club_score.raters_code = #{ratersCode}</if>
+            <if test="ratersName!=null and ratersName!=''">AND base_club_score.raters_name = #{ratersName}</if>
+            <if test="ratersOpin!=null and ratersOpin!=''">AND base_club_score.raters_opin = #{ratersOpin}</if>
+            <if test="ratersPsccd!=null and ratersPsccd!=''">AND base_club_score.raters_psccd = #{ratersPsccd}</if>
+            <if test="ratersType!=null and ratersType!=''">AND base_club_score.raters_type = #{ratersType}</if>
+            <if test="schoolYear!=null and schoolYear!=''">AND base_club_score.school_year = #{schoolYear}</if>
+            <if test="score!=null and score!=''">AND base_club_score.score = #{score}</if>
+            <if test="stCd!=null and stCd!=''">AND base_club_score.st_cd = #{stCd}</if>
+            <if test="ratersTypes!=null and ratersTypes!=''">AND base_club_score.raters_type in
+            <foreach item="ratersType" index="index" collection="ratersTypes"   open="(" separator="," close=")">
+                #{ratersType}
+            </foreach>
+            </if>
+        </where>
+    </sql>
+    <sql id="pagination">
+        <if test="startIndex != null and pageSize!= null ">
+            <![CDATA[
+                LIMIT #{startIndex},#{pageSize}
+            ]]>
+        </if>
+    </sql>
+    <!--根据条件查询列表-->
+    <select id="findBaseClubScoreList" parameterType="map" resultMap="baseClubScoreMap">
+        SELECT
+        <include refid="column_list"/>
+        FROM base_club_score base_club_score
+        <include refid="where_filters"/>
+        ORDER BY base_club_score.CREATE_TIME DESC
+        <include refid="pagination" />
+    </select>
+
+    <select id="findBaseClubScoreAll" parameterType="map" resultMap="baseClubScoreMap">
+        SELECT
+        <include refid="column_list"/>
+        FROM base_club_score base_club_score
+        <include refid="where_filters"/>
+        ORDER BY base_club_score.CREATE_TIME DESC
+    </select>
+
+</mapper>

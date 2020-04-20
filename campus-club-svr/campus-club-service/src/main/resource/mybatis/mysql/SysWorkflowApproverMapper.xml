@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.fjut.gmxx.campusclub.workflow.mapper.ISysWorkflowApproverMapper">
+
+    <resultMap id="sysWorkflowApproverMap" type="java.util.Map">
+        <result column="CREATE_TIME" property="createTime" javaType="java.util.Date"/>
+        <result column="CREATE_USER" property="createUser" javaType="java.lang.String"/>
+        <result column="UPDATE_TIME" property="updateTime" javaType="java.util.Date"/>
+        <result column="UPDATE_USER" property="updateUser" javaType="java.lang.String"/>
+        <result column="DEL_IND" property="delInd" javaType="java.lang.String"/>
+        <result column="VERSION" property="version" javaType="java.lang.Integer"/>
+
+        <result column="uuid" property="uuid" javaType="java.lang.String"/>
+        <result column="remark" property="remark" javaType="java.lang.String"/>
+        <result column="status_cd" property="statusCd" javaType="java.lang.Integer"/>
+        <result column="version" property="version" javaType="java.lang.Integer"/>
+        <result column="user_code" property="userCode" javaType="java.lang.String"/>
+        <result column="work_flow_approver_code" property="workFlowApproverCode" javaType="java.lang.String"/>
+        <result column="work_flow_code" property="workFlowCode" javaType="java.lang.String"/>
+        <result column="work_flow_node_code" property="workFlowNodeCode" javaType="java.lang.String"/>
+        <result column="approver_type" property="approverType" javaType="java.lang.String"/>
+
+    </resultMap>
+
+    <sql id="column_list">
+        sys_workflow_approver.uuid,
+        sys_workflow_approver.remark,
+        sys_workflow_approver.status_cd,
+        sys_workflow_approver.update_time,
+        sys_workflow_approver.update_user,
+        sys_workflow_approver.version,
+        sys_workflow_approver.user_code,
+        sys_workflow_approver.work_flow_approver_code,
+        sys_workflow_approver.work_flow_code,
+        sys_workflow_approver.work_flow_node_code,
+        sys_workflow_approver.approver_type,
+        sys_workflow_approver.CREATE_TIME,sys_workflow_approver.CREATE_USER,sys_workflow_approver.UPDATE_USER,
+        sys_workflow_approver.UPDATE_TIME, sys_workflow_approver.DEL_IND,
+        sys_workflow_approver.VERSION
+    </sql>
+
+    <sql id="where_filters">
+        <where>
+
+            <if test="approverType!=null and approverType!=''">AND sys_workflow_approver.approver_type = #{approverType}</if>
+            <if test="uuid!=null and uuid!=''">AND sys_workflow_approver.uuid = #{uuid}</if>
+            <if test="createTime!=null and createTime!=''">AND sys_workflow_approver.create_time = #{createTime}</if>
+            <if test="createUser!=null and createUser!=''">AND sys_workflow_approver.create_user = #{createUser}</if>
+            <if test="delInd!=null and delInd!=''">AND sys_workflow_approver.del_ind = #{delInd}</if>
+            <if test="remark!=null and remark!=''">AND sys_workflow_approver.remark = #{remark}</if>
+            <if test="statusCd!=null and statusCd!=''">AND sys_workflow_approver.status_cd = #{statusCd}</if>
+            <if test="updateTime!=null and updateTime!=''">AND sys_workflow_approver.update_time = #{updateTime}</if>
+            <if test="updateUser!=null and updateUser!=''">AND sys_workflow_approver.update_user = #{updateUser}</if>
+            <if test="version!=null and version!=''">AND sys_workflow_approver.version = #{version}</if>
+            <if test="userCode!=null and userCode!=''">AND sys_workflow_approver.user_code = #{userCode}</if>
+            <if test="workFlowApproverCode!=null and workFlowApproverCode!=''">AND sys_workflow_approver.work_flow_approver_code = #{workFlowApproverCode}</if>
+            <if test="workFlowCode!=null and workFlowCode!=''">AND sys_workflow_approver.work_flow_code = #{workFlowCode}</if>
+            <if test="workFlowNodeCode!=null and workFlowNodeCode!=''">AND sys_workflow_approver.work_flow_node_code = #{workFlowNodeCode}</if>
+        </where>
+    </sql>
+    <sql id="pagination">
+        <if test="startIndex != null and pageSize!= null ">
+            <![CDATA[
+                LIMIT #{startIndex},#{pageSize}
+            ]]>
+        </if>
+    </sql>
+
+    <!--根据条件查询列表-->
+    <select id="findSysWorkflowApproverList" parameterType="map" resultMap="sysWorkflowApproverMap">
+        SELECT
+        <include refid="column_list"/>
+        FROM sys_workflow_approver sys_workflow_approver
+        <include refid="where_filters"/>
+        ORDER BY sys_workflow_approver.CREATE_TIME DESC
+        <include refid="pagination" />
+    </select>
+
+</mapper>

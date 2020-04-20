@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.fjut.gmxx.campusclub.baseclubmember.mapper.IBaseClubMemberMapper">
+
+    <resultMap id="baseClubMemberMap" type="java.util.Map">
+        <result column="UUID" property="uuid" javaType="java.lang.String"/>
+        <result column="CREATE_TIME" property="createTime" javaType="java.util.Date"/>
+        <result column="CREATE_USER" property="createUser" javaType="java.lang.String"/>
+        <result column="UPDATE_TIME" property="updateTime" javaType="java.util.Date"/>
+        <result column="UPDATE_USER" property="updateUser" javaType="java.lang.String"/>
+        <result column="DEL_IND" property="delInd" javaType="java.lang.String"/>
+        <result column="VERSION" property="version" javaType="java.lang.Integer"/>
+
+        <result column="MEMBER_CD" property="memberCd" javaType="java.lang.String"/>
+        <result column="MEMBER_NAME" property="memberName" javaType="java.lang.String"/>
+        <result column="MEMBER_SNO" property="memberSno" javaType="java.lang.Integer"/>
+        <result column="ST_CD" property="stCd" javaType="java.lang.String"/>
+        <result column="ST_DEPART_CD" property="stDepartCd" javaType="java.lang.String"/>
+        <result column="POSITION_CD" property="positionCd" javaType="java.lang.String"/>
+        <result column="SEX" property="sex" javaType="java.lang.String"/>
+        <result column="CLASS" property="class" javaType="java.lang.String"/>
+        <result column="MAJOR" property="major" javaType="java.lang.String"/>
+        <result column="PHONE" property="phone" javaType="java.lang.String"/>
+        <result column="REMARK" property="remark" javaType="java.lang.String"/>
+        <result column="STATUS_CD" property="statusCd" javaType="java.lang.String"/>
+    </resultMap>
+
+    <sql id="column_list">
+        base_club_member.UUID,
+        base_club_member.MEMBER_CD,
+        base_club_member.MEMBER_NAME,
+        base_club_member.MEMBER_SNO,
+        base_club_member.ST_CD,
+        base_club_member.ST_DEPART_CD,
+        base_club_member.POSITION_CD,
+        base_club_member.SEX,
+        base_club_member.CLASS,
+        base_club_member.MAJOR,
+        base_club_member.PHONE,
+        base_club_member.REMARK,
+        base_club_member.STATUS_CD,
+        base_club_member.CREATE_TIME,base_club_member.CREATE_USER,base_club_member.UPDATE_USER,
+        base_club_member.UPDATE_TIME, base_club_member.DEL_IND,
+        base_club_member.VERSION
+    </sql>
+
+    <sql id="where_filters">
+        <where>
+            <if test="uuid!=null and uuid!=''">AND base_club_member.UUID = #{uuid}</if>
+            <if test="delInd!=null and delInd!=''">AND base_club_member.DEL_IND = #{delInd}</if>
+            <if test="version!=null and version!=''">AND base_club_member.VERSION = #{version}</if>
+
+            <if test="memberCd!=null and memberCd!=''">AND base_club_member.MEMBER_CD = #{memberCd}</if>
+            <if test="memberName!=null and memberName!=''">AND base_club_member.MEMBER_NAME = #{memberName}</if>
+            <if test="memberSno!=null and memberSno!=''">AND base_club_member.MEMBER_SNO = #{memberSno}</if>
+            <if test="stCd!=null and stCd!=''">AND base_club_member.ST_CD = #{stCd}</if>
+            <if test="stDepartCd!=null and stDepartCd!=''">AND base_club_member.ST_DEPART_CD = #{stDepartCd}</if>
+            <if test="positionCd!=null and positionCd!=''">AND base_club_member.POSITION_CD = #{positionCd}</if>
+            <if test="sex!=null and sex!=''">AND base_club_member.SEX = #{sex}</if>
+            <if test="class!=null and class!=''">AND base_club_member.CLASS = #{class}</if>
+            <if test="major!=null and major!=''">AND base_club_member.MAJOR = #{major}</if>
+            <if test="phone!=null and phone!=''">AND base_club_member.PHONE = #{phone}</if>
+            <if test="remark!=null and remark!=''">AND base_club_member.REMARK = #{remark}</if>
+            <if test="statusCd!=null and statusCd!=''">AND base_club_member.STATUS_CD = #{statusCd}</if>
+        </where>
+    </sql>
+
+    <sql id="pagination">
+        <if test="startIndex != null and pageSize!= null ">
+            <![CDATA[
+                LIMIT #{startIndex},#{pageSize}
+            ]]>
+        </if>
+    </sql>
+
+    <!--根据条件查询列表-->
+    <select id="findBaseClubMemberList" parameterType="map" resultMap="baseClubMemberMap">
+        SELECT
+        <include refid="column_list"/>
+        FROM base_club_member base_club_member
+        <include refid="where_filters"/>
+        ORDER BY base_club_member.CREATE_TIME DESC
+        <include refid="pagination" />
+    </select>
+
+    <select id="findBaseClubMemberListAll" parameterType="map" resultMap="baseClubMemberMap">
+        SELECT
+        <include refid="column_list"/>
+        FROM base_club_member base_club_member
+        <include refid="where_filters"/>
+        ORDER BY base_club_member.CREATE_TIME DESC
+    </select>
+
+</mapper>

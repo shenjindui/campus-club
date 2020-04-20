@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.fjut.gmxx.campusclub.baseclubnotice.mapper.IBaseClubNoticeMapper">
+
+    <resultMap id="baseClubNoticeMap" type="java.util.Map">
+        <result column="UUID" property="uuid" javaType="java.lang.String"/>
+        <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="CREATE_USER" property="createUser" javaType="java.lang.String"/>
+        <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP"/>
+        <result column="UPDATE_USER" property="updateUser" javaType="java.lang.String"/>
+        <result column="DEL_IND" property="delInd" javaType="java.lang.String"/>
+        <result column="VERSION" property="version" javaType="java.lang.Integer"/>
+
+        <result column="NOTICE_CD" property="noticeCd" javaType="java.lang.String"/>
+        <result column="NOTICE_DESC" property="noticeDesc" javaType="java.lang.String"/>
+        <result column="NOTICE_ST_CD" property="noticeStCd" javaType="java.lang.String"/>
+        <result column="PUBLISHER" property="publisher" javaType="java.lang.String"/>
+        <result column="RELEASE_TIME" property="releaseTime" jdbcType="TIMESTAMP"/>
+        <result column="NOTICE_STATUS" property="noticeStatus" javaType="java.lang.String"/>
+        <result column="TRAFFIC_VOLUME" property="trafficVolume" javaType="java.lang.String"/>
+        <result column="REMARK" property="remark" javaType="java.lang.String"/>
+    </resultMap>
+
+    <sql id="column_list">
+        base_club_notice.UUID,
+        base_club_notice.NOTICE_CD,
+        base_club_notice.NOTICE_DESC,
+        base_club_notice.NOTICE_ST_CD,
+        base_club_notice.PUBLISHER,
+        base_club_notice.RELEASE_TIME,
+        base_club_notice.NOTICE_STATUS,
+        base_club_notice.TRAFFIC_VOLUME,
+        base_club_notice.REMARK,
+        base_club_notice.CREATE_TIME,base_club_notice.CREATE_USER,base_club_notice.UPDATE_USER,
+        base_club_notice.UPDATE_TIME, base_club_notice.DEL_IND,
+        base_club_notice.VERSION
+    </sql>
+
+    <sql id="where_filters">
+        <where>
+            <if test="uuid!=null and uuid!=''">AND base_club_notice.uuid = #{uuid}</if>
+            <if test="expdId!=null and expdId!=''">AND base_club_notice.EXPD_ID = #{expdId}</if>
+            <if test="delInd!=null and delInd!=''">AND base_club_notice.DEL_IND = #{delInd}</if>
+            <if test="version!=null and version!=''">AND base_club_notice.VERSION = #{version}</if>
+            <if test="tenantId!=null and tenantId!=''">AND base_club_notice.TENANT_ID = #{tenantId}</if>
+
+            <if test="noticeCd!=null and noticeCd!=''">AND base_club_notice.NOTICE_CD = #{noticeCd}</if>
+            <if test="noticeDesc!=null and noticeDesc!=''">AND base_club_notice.NOTICE_DESC = #{noticeDesc}</if>
+            <if test="noticeStCd!=null and noticeStCd!=''">AND base_club_notice.NOTICE_ST_CD = #{noticeStCd}</if>
+            <if test="publisher!=null and publisher!=''">AND base_club_notice.PUBLISHER = #{publisher}</if>
+            <if test="releaseTime!=null and releaseTime!=''">AND base_club_notice.RELEASE_TIME = #{releaseTime}</if>
+            <if test="noticeStatus!=null and noticeStatus!=''">AND base_club_notice.NOTICE_STATUS = #{noticeStatus}</if>
+            <if test="trafficVolume!=null and trafficVolume!=''">AND base_club_notice.TRAFFIC_VOLUME = #{trafficVolume}</if>
+            <if test="remark!=null and remark!=''">AND base_club_notice.REMARK = #{remark}</if>
+        </where>
+    </sql>
+
+    <sql id="pagination">
+        <if test="startIndex != null and pageSize!= null ">
+            <![CDATA[
+                LIMIT #{startIndex},#{pageSize}
+            ]]>
+        </if>
+    </sql>
+    <!--根据条件查询列表-->
+    <select id="findBaseClubNoticeList" parameterType="map" resultMap="baseClubNoticeMap">
+        SELECT
+        <include refid="column_list"/>
+        FROM base_club_notice base_club_notice
+        <include refid="where_filters"/>
+        ORDER BY base_club_notice.CREATE_TIME DESC
+        <include refid="pagination" />
+    </select>
+
+    <select id="findBaseClubNoticeListAll" parameterType="map" resultMap="baseClubNoticeMap">
+        SELECT
+        <include refid="column_list"/>
+        FROM base_club_notice base_club_notice
+        <include refid="where_filters"/>
+        ORDER BY base_club_notice.CREATE_TIME DESC
+    </select>
+
+</mapper>

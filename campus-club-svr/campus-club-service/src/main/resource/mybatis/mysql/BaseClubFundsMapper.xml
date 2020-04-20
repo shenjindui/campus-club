@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.fjut.gmxx.campusclub.baseclubfunds.mapper.IBaseClubFundsMapper">
+
+    <resultMap id="baseClubFundsMap" type="java.util.Map">
+        <result column="CREATE_TIME" property="createTime" javaType="java.util.Date"/>
+        <result column="CREATE_USER" property="createUser" javaType="java.lang.String"/>
+        <result column="UPDATE_TIME" property="updateTime" javaType="java.util.Date"/>
+        <result column="UPDATE_USER" property="updateUser" javaType="java.lang.String"/>
+        <result column="DEL_IND" property="delInd" javaType="java.lang.String"/>
+        <result column="VERSION" property="version" javaType="java.lang.Integer"/>
+
+        <result column="uuid" property="uuid" javaType="java.lang.String"/>
+        <result column="remark" property="remark" javaType="java.lang.String"/>
+        <result column="status_cd" property="statusCd" javaType="java.lang.Integer"/>
+        <result column="amount" property="amount" javaType="java.lang.String"/>
+        <result column="amount_type" property="amountType" javaType="java.lang.String"/>
+        <result column="funds_cd" property="fundsCd" javaType="java.lang.String"/>
+        <result column="st_cd" property="stCd" javaType="java.lang.String"/>
+        <result column="type" property="type" javaType="java.lang.String"/>
+        <result column="funds_association_code" property="fundsAssociationCode" javaType="java.lang.String"/>
+        <result column="FUNDS_ASSOCIATION_FUNDSCODE" property="fundsAssociationFundscode" javaType="java.lang.String"/>
+        <result column="FUNDS_PSCCD" property="fundsPsccd" javaType="java.lang.String"/>
+        <result column="ORDER_ID" property="orderId" javaType="java.lang.String"/>
+        <result column="THIRD_ORDER_ID" property="thirdOrderId" javaType="java.lang.String"/>
+    </resultMap>
+
+    <sql id="column_list">
+        base_club_funds.ORDER_ID,
+         base_club_funds.THIRD_ORDER_ID,
+        base_club_funds.uuid,
+        base_club_funds.remark,
+        base_club_funds.FUNDS_ASSOCIATION_FUNDSCODE,
+        base_club_funds.FUNDS_PSCCD,
+        base_club_funds.status_cd,
+        base_club_funds.amount,
+        base_club_funds.amount_type,
+        base_club_funds.funds_cd,
+        base_club_funds.st_cd,
+        base_club_funds.type,
+        base_club_funds.funds_association_code,
+        base_club_funds.CREATE_TIME,base_club_funds.CREATE_USER,base_club_funds.UPDATE_USER,
+        base_club_funds.UPDATE_TIME, base_club_funds.DEL_IND,
+        base_club_funds.VERSION
+    </sql>
+
+    <sql id="where_filters">
+        <where>
+            <if test="orderId!=null and orderId!=''">AND base_club_funds.ORDER_ID = #{orderId}</if>
+            <if test="thirdOrderId!=null and thirdOrderId!=''">AND base_club_funds.THIRD_ORDER_ID = #{thirdOrderId}</if>
+            <if test="fundsPsccd!=null and fundsPsccd!=''">AND base_club_funds.FUNDS_PSCCD = #{fundsPsccd}</if>
+            <if test="fundsAssociationFundscode!=null and fundsAssociationFundscode!=''">AND base_club_funds.FUNDS_ASSOCIATION_FUNDSCODE = #{fundsAssociationFundscode}</if>
+            <if test="uuid!=null and uuid!=''">AND base_club_funds.uuid = #{uuid}</if>
+            <if test="createTime!=null and createTime!=''">AND base_club_funds.create_time = #{createTime}</if>
+            <if test="createUser!=null and createUser!=''">AND base_club_funds.create_user = #{createUser}</if>
+            <if test="delInd!=null and delInd!=''">AND base_club_funds.del_ind = #{delInd}</if>
+            <if test="remark!=null and remark!=''">AND base_club_funds.remark = #{remark}</if>
+            <if test="statusCd!=null and statusCd!=''">AND base_club_funds.status_cd = #{statusCd}</if>
+            <if test="updateTime!=null and updateTime!=''">AND base_club_funds.update_time = #{updateTime}</if>
+            <if test="updateUser!=null and updateUser!=''">AND base_club_funds.update_user = #{updateUser}</if>
+            <if test="version!=null and version!=''">AND base_club_funds.version = #{version}</if>
+            <if test="amount!=null and amount!=''">AND base_club_funds.amount = #{amount}</if>
+            <if test="amountType!=null and amountType!=''">AND base_club_funds.amount_type = #{amountType}</if>
+            <if test="fundsCd!=null and fundsCd!=''">AND base_club_funds.funds_cd = #{fundsCd}</if>
+            <if test="stCd!=null and stCd!=''">AND base_club_funds.st_cd = #{stCd}</if>
+            <if test="type!=null and type!=''">AND base_club_funds.type = #{type}</if>
+            <if test="fundsAssociationCode!=null and fundsAssociationCode!=''">AND base_club_funds.funds_association_code = #{fundsAssociationCode}</if>
+        </where>
+    </sql>
+    <sql id="pagination">
+        <if test="startIndex != null and pageSize!= null ">
+            <![CDATA[
+                LIMIT #{startIndex},#{pageSize}
+            ]]>
+        </if>
+    </sql>
+    <!--根据条件查询列表-->
+    <select id="findBaseClubFundsList" parameterType="map" resultMap="baseClubFundsMap">
+        SELECT
+        <include refid="column_list"/>
+        FROM base_club_funds base_club_funds
+        <include refid="where_filters"/>
+        ORDER BY base_club_funds.CREATE_TIME DESC
+        <include refid="pagination" />
+    </select>
+
+    <select id="findBaseClubFunds" parameterType="map" resultMap="baseClubFundsMap">
+        SELECT
+        <include refid="column_list"/>
+        FROM base_club_funds base_club_funds
+        <include refid="where_filters"/>
+        ORDER BY base_club_funds.CREATE_TIME DESC
+    </select>
+
+
+</mapper>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.fjut.gmxx.campusclub.workflow.mapper.ISysWorkflowBusinessMapper">
+
+    <resultMap id="sysWorkflowBusinessMap" type="java.util.Map">
+        <result column="uuid" property="uuid" javaType="java.lang.String"/>
+        <result column="create_time" property="createTime" javaType="java.lang.String"/>
+        <result column="create_user" property="createUser" javaType="java.lang.String"/>
+        <result column="del_ind" property="delInd" javaType="java.lang.String"/>
+        <result column="remark" property="remark" javaType="java.lang.String"/>
+        <result column="status_cd" property="statusCd" javaType="java.lang.Integer"/>
+        <result column="update_time" property="updateTime" javaType="java.lang.String"/>
+        <result column="update_user" property="updateUser" javaType="java.lang.String"/>
+        <result column="version" property="version" javaType="java.lang.Integer"/>
+        <result column="user_code" property="userCode" javaType="java.lang.String"/>
+        <result column="work_flow_code" property="workFlowCode" javaType="java.lang.String"/>
+        <result column="work_flow_node_code" property="workFlowNodeCode" javaType="java.lang.String"/>
+        <result column="business_code" property="businessCode" javaType="java.lang.String"/>
+        <result column="work_flow_business_code" property="workFlowBusinessCode" javaType="java.lang.String"/>
+        <result column="approver_code" property="approverCode" javaType="java.lang.String"/>
+        <result column="suggestion" property="suggestion" javaType="java.lang.String"/>
+        <result column="pcs_st_code" property="pcsStCode" javaType="java.lang.String"/>
+    </resultMap>
+
+    <sql id="column_list">
+        sys_workflow_business.uuid,
+        sys_workflow_business.remark,
+        sys_workflow_business.status_cd,
+        sys_workflow_business.user_code,
+        sys_workflow_business.work_flow_code,
+        sys_workflow_business.work_flow_node_code,
+        sys_workflow_business.work_flow_business_code,
+        sys_workflow_business.business_code,
+        sys_workflow_business.approver_code,
+        sys_workflow_business.suggestion,
+        sys_workflow_business.pcs_st_code,
+        sys_workflow_business.CREATE_TIME,sys_workflow_business.CREATE_USER,sys_workflow_business.UPDATE_USER,
+        sys_workflow_business.UPDATE_TIME,sys_workflow_business.DEL_IND,
+        sys_workflow_business.VERSION
+    </sql>
+
+    <sql id="where_filters">
+        <where>
+            <if test="uuid!=null and uuid!=''">AND sys_workflow_business.uuid = #{uuid}</if>
+            <if test="createTime!=null and createTime!=''">AND sys_workflow_business.create_time = #{createTime}</if>
+            <if test="createUser!=null and createUser!=''">AND sys_workflow_business.create_user = #{createUser}</if>
+            <if test="delInd!=null and delInd!=''">AND sys_workflow_business.del_ind = #{delInd}</if>
+            <if test="remark!=null and remark!=''">AND sys_workflow_business.remark = #{remark}</if>
+            <if test="statusCd!=null and statusCd!=''">AND sys_workflow_business.status_cd = #{statusCd}</if>
+            <if test="updateTime!=null and updateTime!=''">AND sys_workflow_business.update_time = #{updateTime}</if>
+            <if test="updateUser!=null and updateUser!=''">AND sys_workflow_business.update_user = #{updateUser}</if>
+            <if test="version!=null and version!=''">AND sys_workflow_business.version = #{version}</if>
+            <if test="userCode!=null and userCode!=''">AND sys_workflow_business.user_code = #{userCode}</if>
+            <if test="workFlowCode!=null and workFlowCode!=''">AND sys_workflow_business.work_flow_code = #{workFlowCode}</if>
+            <if test="workFlowNodeCode!=null and workFlowNodeCode!=''">AND sys_workflow_business.work_flow_node_code = #{workFlowNodeCode}</if>
+            <if test="workFlowBusinessCode!=null and workFlowBusinessCode!=''">AND sys_workflow_business.work_flow_business_code = #{workFlowBusinessCode}</if>
+            <if test="businessCode!=null and businessCode!=''">AND sys_workflow_business.business_code = #{businessCode}</if>
+            <if test="approverCode!=null and approverCode!=''">AND sys_workflow_business.approver_code = #{approverCode}</if>
+            <if test="suggestion!=null and suggestion!=''">AND sys_workflow_business.suggestion = #{suggestion}</if>
+            <if test="pcsStCode!=null and pcsStCode!=''">AND sys_workflow_business.pcs_st_code = #{pcsStCode}</if>
+            <if test="pcsStFlag!=null and pcsStFlag!=''">AND sys_workflow_business.pcs_st_code in (2,3)</if>
+        </where>
+    </sql>
+    <sql id="pagination">
+        <if test="startIndex != null and pageSize!= null and startIndex != '' and pageSize!= ''">
+            <![CDATA[
+                LIMIT #{startIndex},#{pageSize}
+            ]]>
+        </if>
+    </sql>
+
+    <!--根据条件查询列表-->
+    <select id="findSysWorkflowBusinessList" parameterType="map" resultMap="sysWorkflowBusinessMap">
+        SELECT
+        <include refid="column_list"/>
+        FROM sys_workflow_business sys_workflow_business
+        <include refid="where_filters"/>
+        ORDER BY sys_workflow_business.CREATE_TIME DESC
+        <include refid="pagination" />
+    </select>
+
+</mapper>
