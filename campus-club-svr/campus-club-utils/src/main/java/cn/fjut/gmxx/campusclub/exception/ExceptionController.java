@@ -1,20 +1,13 @@
-/*
-package cn.fjut.gmxx.campusclub.exception;*/
-/**
- * Created by admin on 2020/1/3.
- *//*
-
-
+package cn.fjut.gmxx.campusclub.exception;
 import cn.fjut.gmxx.campusclub.common.ResponseVO;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-*/
-/**
+/*
+*
  * @author : shenjindui
  * @date : 2020-01-03 15:43
- **//*
+ **/
 
 @ControllerAdvice
 @ResponseBody
@@ -57,4 +50,4 @@ public class ExceptionController {
         ex.printStackTrace();
         return new ResponseVO(code, ex.getMessage());
     }
-}*/
+}

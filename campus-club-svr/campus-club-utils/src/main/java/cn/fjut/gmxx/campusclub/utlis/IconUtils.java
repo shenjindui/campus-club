@@ -1,12 +1,9 @@
-package cn.fjut.gmxx.campusclub.utlis;/**
- * Created by admin on 2020/1/19.
- */
-
+package cn.fjut.gmxx.campusclub.utlis;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-/**
+/** 菜单图标类
  * @author : shenjindui
  * @date : 2020-01-19 15:32
  **/

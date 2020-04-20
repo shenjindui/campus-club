@@ -1,7 +1,4 @@
-package cn.fjut.gmxx.campusclub.exception;/**
- * Created by admin on 2020/1/10.
- */
-
+package cn.fjut.gmxx.campusclub.exception;
 /**
  * @author : shenjindui
  * @date : 2020-01-10 13:43

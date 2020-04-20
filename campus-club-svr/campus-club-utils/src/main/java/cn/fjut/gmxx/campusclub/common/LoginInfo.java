@@ -1,10 +1,9 @@
 package cn.fjut.gmxx.campusclub.common;
-
 import java.io.Serializable;
 import java.util.Set;
 
 /**
- * Created by WJ on 2019/3/29 0029
+ * Created by shenjindui on 2020/3/29
  */
 public class LoginInfo implements Serializable {
     private Integer uuid;

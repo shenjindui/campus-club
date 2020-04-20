@@ -1,7 +1,4 @@
-package cn.fjut.gmxx.campusclub.pagehelper;/**
- * Created by admin on 2020/1/12.
- */
-
+package cn.fjut.gmxx.campusclub.pagehelper;
 /**
  * @author : shenjindui
  * @date : 2020-01-12 14:14
@@ -26,8 +23,6 @@ public class PageInfo<T> implements Serializable {
 
     //结果集
     private List<T> list;
-
-
 
     public PageInfo() {
     }
@@ -67,8 +62,6 @@ public class PageInfo<T> implements Serializable {
         this.size = size;
     }
 
-
-
     public long getTotal() {
         return total;
     }
@@ -92,7 +85,6 @@ public class PageInfo<T> implements Serializable {
     public void setList(List<T> list) {
         this.list = list;
     }
-
 
     @Override
     public String toString() {

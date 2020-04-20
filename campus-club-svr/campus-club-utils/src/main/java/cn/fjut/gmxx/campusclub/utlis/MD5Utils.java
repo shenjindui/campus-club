@@ -1,10 +1,7 @@
-package cn.fjut.gmxx.campusclub.utlis;/**
- * Created by admin on 2020/1/13.
- */
-
+package cn.fjut.gmxx.campusclub.utlis;
 import java.security.MessageDigest;
 
-/**
+/** MD5
  * @author : shenjindui
  * @date : 2020-01-13 15:00
  **/

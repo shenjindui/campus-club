@@ -1,6 +1,4 @@
-package cn.fjut.gmxx.campusclub.utlis;/**
- * Created by admin on 2020/2/25.
- */
+package cn.fjut.gmxx.campusclub.utlis;
 
 import org.apache.commons.collections.MapUtils;
 

@@ -1,12 +1,8 @@
-package cn.fjut.gmxx.campusclub.common;/**
- * Created by admin on 2020/1/1.
- */
-
+package cn.fjut.gmxx.campusclub.common;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-
 /**
  * @author : shenjindui
  * @date : 2020-01-01 11:32

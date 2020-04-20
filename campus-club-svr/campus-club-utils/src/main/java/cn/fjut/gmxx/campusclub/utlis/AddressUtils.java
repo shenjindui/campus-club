@@ -1,7 +1,4 @@
-package cn.fjut.gmxx.campusclub.utlis;/**
- * Created by admin on 2020/2/21.
- */
-
+package cn.fjut.gmxx.campusclub.utlis;
 
 import net.sf.json.JSONObject;
 import org.apache.commons.lang3.StringUtils;
@@ -363,10 +360,8 @@ public class AddressUtils {
 
     public static void main(String[] args) {
         /*192.168.1.40;*/
-               String max= AddressUtils.getMacInWindows("192.168.1.40");
-               System.out.print(max);
+        String max= AddressUtils.getMacInWindows("192.168.1.40");
+        System.out.print(max);
 
     }
-
-
 }

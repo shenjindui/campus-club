@@ -1,7 +1,4 @@
-package cn.fjut.gmxx.campusclub.utlis;/**
- * Created by admin on 2020/3/24.
- */
-
+package cn.fjut.gmxx.campusclub.utlis;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;

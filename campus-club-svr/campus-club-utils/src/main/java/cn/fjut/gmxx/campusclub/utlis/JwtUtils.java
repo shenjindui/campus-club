@@ -1,7 +1,4 @@
-package cn.fjut.gmxx.campusclub.utlis;/**
- * Created by admin on 2020/1/13.
- */
-
+package cn.fjut.gmxx.campusclub.utlis;
 import cn.fjut.gmxx.campusclub.exception.ExceptionFactory;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
@@ -26,8 +23,6 @@ public class JwtUtils {
     public static final String SECRET = "xiaoyuanshetuanguanlibysjd;o160225";
     //token过期时间:秒  30分钟
     public static final int EXPIRE = 30*60*60;
-
-
 
     /**
      * 生成Token

@@ -1,7 +1,4 @@
-package cn.fjut.gmxx.campusclub.data;/**
- * Created by admin on 2020/3/27.
- */
-
+package cn.fjut.gmxx.campusclub.data;
 import cn.fjut.gmxx.campusclub.common.Exclude;
 import cn.fjut.gmxx.campusclub.common.PrimaryKey;
 import cn.fjut.gmxx.campusclub.exception.ExceptionFactory;

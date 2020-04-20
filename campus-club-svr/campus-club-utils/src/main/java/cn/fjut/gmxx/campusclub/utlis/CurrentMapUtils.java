@@ -1,8 +1,4 @@
-package cn.fjut.gmxx.campusclub.utlis;/**
- * Created by admin on 2020/3/20.
- */
-
-import org.springframework.beans.factory.annotation.Autowired;
+package cn.fjut.gmxx.campusclub.utlis;
 import org.springframework.stereotype.Component;
 
 /**
@@ -11,7 +7,5 @@ import org.springframework.stereotype.Component;
  **/
 @Component
 public class CurrentMapUtils {
-
-
 
 }

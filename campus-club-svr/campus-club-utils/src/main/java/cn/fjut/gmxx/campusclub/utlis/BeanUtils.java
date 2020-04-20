@@ -1,7 +1,4 @@
-package cn.fjut.gmxx.campusclub.utlis;/**
- * Created by admin on 2020/3/22.
- */
-
+package cn.fjut.gmxx.campusclub.utlis;
 /**
  * @author : shenjindui
  * @date : 2020-03-22 14:59
@@ -13,7 +10,6 @@ import java.util.*;
 import java.util.Map.Entry;
 
 public class BeanUtils {
-
     /**
      * 方法说明：将List<Map>转换为List<Bean>
      *
@@ -70,7 +66,6 @@ public class BeanUtils {
             if (method == null) {
                 continue;
             }
-
             String fieldType = field.getType().getSimpleName();
             if ("String".equals(fieldType)) {
                 method.invoke(obj, value.toString());
@@ -343,7 +338,6 @@ public class BeanUtils {
      * @param fieldName
      */
     public static Object getBeanFieldValue(Class<?> cls, Object obj, String fieldName) throws Exception {
-
         // 判断字段是否存在
         Field field = getBeanField(cls, fieldName);
         // 判断字段的set方法是否存在

@@ -1,7 +1,4 @@
-package cn.fjut.gmxx.campusclub.pagehelper;/**
- * Created by admin on 2020/1/12.
- */
-
+package cn.fjut.gmxx.campusclub.pagehelper;
 import org.apache.commons.collections.MapUtils;
 
 import java.util.Map;

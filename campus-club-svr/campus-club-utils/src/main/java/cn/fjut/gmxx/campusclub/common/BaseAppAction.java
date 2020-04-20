@@ -1,16 +1,8 @@
-package cn.fjut.gmxx.campusclub.common;/**
- * Created by admin on 2019/12/30.
- */
-
+package cn.fjut.gmxx.campusclub.common;
 /**
  * @author : shenjindui
  * @date : 2019-12-30 20:34
  **/
-//
-// Source code recreated from a .class file by IntelliJ IDEA
-// (powered by Fernflower decompiler)
-//
-
 import cn.fjut.gmxx.campusclub.exception.ExceptionFactory;
 import cn.fjut.gmxx.campusclub.pagehelper.PageInfo;
 import cn.hutool.core.util.ObjectUtil;

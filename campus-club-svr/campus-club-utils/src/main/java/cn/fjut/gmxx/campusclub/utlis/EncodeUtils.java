@@ -1,7 +1,4 @@
-package cn.fjut.gmxx.campusclub.utlis;/**
- * Created by admin on 2020/1/10.
- */
-
+package cn.fjut.gmxx.campusclub.utlis;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**

@@ -1,7 +1,6 @@
 package cn.fjut.gmxx.campusclub.common;
-
 /**
- * Created by WJ on 2019/3/26 0026
+ * Created by shenjindui on 2019/3/26 0026
  */
 public enum ResultCode {
     /**

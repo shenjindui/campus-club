@@ -1,7 +1,4 @@
-package cn.fjut.gmxx.campusclub.utlis;/**
- * Created by admin on 2020/3/22.
- */
-
+package cn.fjut.gmxx.campusclub.utlis;
 /**
  * @author : shenjindui
  * @date : 2020-03-22 15:00

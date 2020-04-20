@@ -1,7 +1,4 @@
-package cn.fjut.gmxx.campusclub.utlis;/**
- * Created by admin on 2020/1/26.
- */
-
+package cn.fjut.gmxx.campusclub.utlis;
 import cn.fjut.gmxx.campusclub.common.BaseAppAction;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

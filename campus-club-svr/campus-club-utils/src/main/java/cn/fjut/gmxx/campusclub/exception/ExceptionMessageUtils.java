@@ -1,10 +1,6 @@
-package cn.fjut.gmxx.campusclub.exception;/**
- * Created by admin on 2020/1/10.
- */
-
+package cn.fjut.gmxx.campusclub.exception;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 /**
  * @author : shenjindui
  * @date : 2020-01-10 13:42

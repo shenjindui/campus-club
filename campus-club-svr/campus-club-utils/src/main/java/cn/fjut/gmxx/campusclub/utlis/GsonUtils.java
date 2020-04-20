@@ -1,7 +1,4 @@
-package cn.fjut.gmxx.campusclub.utlis;/**
- * Created by admin on 2020/1/29.
- */
-
+package cn.fjut.gmxx.campusclub.utlis;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -10,7 +7,7 @@ import com.google.gson.reflect.TypeToken;
 
 import java.util.*;
 
-/**
+/** gson操作类
  * @author : shenjindui
  * @date : 2020-01-29 13:29
  **/

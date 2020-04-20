@@ -1,10 +1,7 @@
 package cn.fjut.gmxx.campusclub.common;
-
-
 import java.util.Map;
-
 /**
- * Created by WJ on 2019/3/26 0026
+ * Created by shenjindui on 2019/3/26 0026
  */
 public class ResultFactory {
 
@@ -15,7 +12,6 @@ public class ResultFactory {
     public static ResponseVO buildSuccessResult(String message,Map<String, Object> data) {
         return new ResponseVO(300,message,data);
     }
-
 
     public static ResponseVO buildFailResult(String message) {
         return buidResult(ResultCode.FAIL, message, null);

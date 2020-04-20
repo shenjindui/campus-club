@@ -1,7 +1,4 @@
-package cn.fjut.gmxx.campusclub.utlis;/**
- * Created by admin on 2020/1/12.
- */
-
+package cn.fjut.gmxx.campusclub.utlis;
 import cn.fjut.gmxx.campusclub.exception.ExceptionFactory;
 import org.apache.commons.lang3.time.DateFormatUtils;
 

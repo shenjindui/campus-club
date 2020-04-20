@@ -1,7 +1,4 @@
-package cn.fjut.gmxx.campusclub.data;/**
- * Created by admin on 2020/3/28.
- */
-
+package cn.fjut.gmxx.campusclub.data;
 import org.apache.ibatis.annotations.*;
 
 /**

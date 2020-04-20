@@ -1,7 +1,4 @@
-package cn.fjut.gmxx.campusclub.utlis;/**
- * Created by admin on 2020/2/25.
- */
-
+package cn.fjut.gmxx.campusclub.utlis;
 import cn.fjut.gmxx.campusclub.exception.ExceptionFactory;
 
 import java.util.List;
@@ -23,5 +20,4 @@ public static <T> List<T> getListIndex(List<T> list,int index) {
     }
     return newList;//返回新的list
   }
-
 }

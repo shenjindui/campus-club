@@ -1,6 +1,4 @@
-package cn.fjut.gmxx.campusclub.utlis;/**
- * Created by admin on 2020/3/27.
- */
+package cn.fjut.gmxx.campusclub.utlis;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 /**

@@ -1,7 +1,4 @@
-package cn.fjut.gmxx.campusclub.common;/**
- * Created by admin on 2020/3/27.
- */
-
+package cn.fjut.gmxx.campusclub.common;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

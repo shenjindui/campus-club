@@ -1,7 +1,4 @@
-package cn.fjut.gmxx.campusclub.common;/**
- * Created by admin on 2019/12/30.
- */
-
+package cn.fjut.gmxx.campusclub.common;
 /**
  * @author : shenjindui
  * @date : 2019-12-30 20:37

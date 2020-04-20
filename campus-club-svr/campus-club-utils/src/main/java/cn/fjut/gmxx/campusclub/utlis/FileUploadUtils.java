@@ -1,7 +1,4 @@
-package cn.fjut.gmxx.campusclub.utlis;/**
- * Created by admin on 2020/1/19.
- */
-
+package cn.fjut.gmxx.campusclub.utlis;
 import cn.fjut.gmxx.campusclub.exception.ExceptionFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -11,7 +8,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-/**
+/** 文件上传类
  * @author : shenjindui
  * @date : 2020-01-19 17:49
  **/
