@@ -1,13 +1,14 @@
 package cn.fjut.gmxx.campusclub.sysmenu.api.impl;
 
-import cn.fjut.gmxx.campusclub.exception.ExceptionFactory;
+import cn.fjut.gmxx.campusclub.manager.AbstractCampusClubApi;
 import cn.fjut.gmxx.campusclub.pagehelper.PageInfo;
 import cn.fjut.gmxx.campusclub.sysmenu.api.ISysMenuApi;
 import cn.fjut.gmxx.campusclub.sysmenu.api.SysMenuApiConstants;
 import cn.fjut.gmxx.campusclub.sysmenu.entity.SysMenuEntity;
 import cn.fjut.gmxx.campusclub.sysmenu.service.ISysMenuService;
-import cn.fjut.gmxx.campusclub.utlis.DateUtils;
+import cn.fjut.gmxx.campusclub.utlis.QueryTimeParseUtils;
 import cn.fjut.gmxx.campusclub.utlis.RedisUtils;
+import org.apache.commons.collections4.MapUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +16,7 @@ import java.util.List;
 import java.util.Map;
 
 @Service("sysMenuApi")
-public class SysMenuApiImpl implements ISysMenuApi {
+public class SysMenuApiImpl extends AbstractCampusClubApi implements ISysMenuApi  {
 
 	@Autowired
 	private ISysMenuService sysMenuService;
@@ -24,31 +25,28 @@ public class SysMenuApiImpl implements ISysMenuApi {
 
 	@Override
 	public PageInfo<Map<String, Object>> findSysMenuPage(Map<String, Object> params) {
-	    if(params.get("paramsTime")!=null){ //如果时间控件的值不为空
-            List<String> paramsTimeList=(List<String>)params.get("paramsTime");
-            String startTime= DateUtils.dealDateFormats(paramsTimeList.get(0));
-            String endTime=DateUtils.dealDateFormats(paramsTimeList.get(1));
-            params.put("startTime",startTime);
-            params.put("endTime",endTime);
-        }
+		QueryTimeParseUtils.parseQueryTime(params);
 		PageInfo<Map<String, Object>> page = sysMenuService.findSysMenuPage(params);
 		page.setTotal(sysMenuService.findSysMenuNoPage(params).size());
 		return page;
+	}
 
+	@Override
+	public List<Map<String, Object>> findSysMenuAll(Map<String, Object> params) {
+		return sysMenuService.findSysMenuNoPage(params);
 	}
 
 	@Override
 	public Map<String, Object> getSysMenuMap(Map<String, Object> params) {
-		if(params==null){
-			throw ExceptionFactory.getBizException("请求错误");
-		}
+	    super.validateNull(params);
 		Map<String, Object> sysMenuMap = sysMenuService.getSysMenuMap(params);
 		return sysMenuMap;
 	}
 
 	@Override
 	public Map<String, Object> saveSysMenuTrans(Map<String, Object> params) {
-		Object  uuid = params.get(SysMenuApiConstants.uuid);
+        super.validateNull(params);
+        String uuid = MapUtils.getString(params,SysMenuApiConstants.uuid);
 		//新增
 		if (null == uuid) {
 			return sysMenuService.saveSysMenu(params);
@@ -56,7 +54,6 @@ public class SysMenuApiImpl implements ISysMenuApi {
 			//修改
             return sysMenuService.updateSysMenu(params);
 		}
-
 	}
 
 	@Override

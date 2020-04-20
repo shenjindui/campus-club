@@ -24,6 +24,7 @@ import java.util.Map;
 @RequestMapping(value = "/api")
 public class SysMenuController extends BaseAppAction {
     protected final static Logger logger = LoggerFactory.getLogger(BaseAppAction.class);
+
     @Autowired
     ISysMenuApi sysMenuApi;
 
@@ -52,7 +53,7 @@ public class SysMenuController extends BaseAppAction {
      * @return
      * @throws Exception
      */
-    @NoRepeatSubmit  //表单重复添加校验
+    //@NoRepeatSubmit  //表单重复添加校验
     @SysOperationLog("系统菜单添加")
     @TokenCheck
     @ApiOperation(value = "菜单添加方法", notes = "菜单添加方法", httpMethod = "POST")

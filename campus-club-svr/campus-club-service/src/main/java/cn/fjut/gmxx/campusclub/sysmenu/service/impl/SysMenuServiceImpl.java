@@ -2,6 +2,7 @@ package cn.fjut.gmxx.campusclub.sysmenu.service.impl;
 
 import cn.fjut.gmxx.campusclub.baseddct.repository.BaseDdctRepository;
 import cn.fjut.gmxx.campusclub.exception.ExceptionFactory;
+import cn.fjut.gmxx.campusclub.manager.AbstractCampusClubServer;
 import cn.fjut.gmxx.campusclub.pagehelper.PageHelp;
 import cn.fjut.gmxx.campusclub.pagehelper.PageInfo;
 import cn.fjut.gmxx.campusclub.sysmenu.api.SysMenuApiConstants;
@@ -28,9 +29,9 @@ import java.util.*;
 /**
 * @类名称 ISysMenuService
 * @类描述 <pre>请填写</pre>
-* @作者 shenjindui 2
+* @作者 shenjindui
 * @创建时间 2020-01-11
-* @版本 vV1.0
+* @版本 V1.0
 * @修改记录
 *
 * 版本 修改人 修改时间 修改内容描述
@@ -42,7 +43,7 @@ import java.util.*;
 @Service("sysMenuService")
 //声明式事务
 @Transactional(readOnly = true,rollbackFor = RuntimeException.class)
-public class SysMenuServiceImpl implements ISysMenuService {
+public class SysMenuServiceImpl extends AbstractCampusClubServer implements ISysMenuService {
 	
 	@Autowired
 	private ISysMenuMapper sysMenuMapper;
@@ -58,39 +59,30 @@ public class SysMenuServiceImpl implements ISysMenuService {
 
 	@Override
 	public PageInfo<Map<String, Object>> findSysMenuPage(Map<String, Object> params) {
-		// 判断当前参数params是否为空，则为默认查询
 		if (null == params) {
 			params = new HashMap<String, Object>();
 		}
-       //进行分页参数设置
         Map<String, Object> queryParams=new HashMap<>();
         MapTrunPojo.mapCopy(params,queryParams);
         if(MapUtils.getString(params,"init")==null){
             queryParams= PageHelp.setPageParms(params);
         }
-
-
 		//查询总数
 		SysMenuEntity entity=new SysMenuEntity();
 		entity.setDelInd("0");
-		//查询匹配器
 		ExampleMatcher matcher=ExampleMatcher.matching().withIgnorePaths("statusCd").withIgnorePaths("version");
 		Example<SysMenuEntity> example = Example.of(entity,matcher);
 		queryParams.put("total",menuRepository.count(example));
 		queryParams.put(SysMenuApiConstants.DEL_IND, SysMenuApiConstants.DEL_IND_0);
         List<Map<String, Object>> list=sysMenuMapper.findSysMenuList(queryParams);
-       // queryParams.put("total",list.size());
 		return new PageInfo<>(list,queryParams);
 	}
 	
 	@Override
 	public Map<String, Object> getSysMenuMap(Map<String, Object> params) {
-		//默认调用分页查询方法。
 		PageInfo<Map<String, Object>> sysMenuPage = this.findSysMenuPage(params);
-		//判断是否存在数据
 		long total = sysMenuPage.getTotal();
 		if (0 < total) {
-			//获取查询结果列表
 			List<Map<String, Object>> list = sysMenuPage.getList();
 			if (CollectionUtils.isNotEmpty(list)) {
 				return list.get(0);
@@ -102,9 +94,7 @@ public class SysMenuServiceImpl implements ISysMenuService {
     @Transactional(readOnly = false,rollbackFor = RuntimeException.class)
 	@Override
 	public Map<String, Object> saveSysMenu(Map<String, Object> params) {
-		if (params == null || params.isEmpty()) {
-			throw ExceptionFactory.getBizException("参数错误!");
-		}
+        super.validateNull(params);
         //查找当前操作用户
 		SysUserEntity currentUser=userRepository.findByUserCode(MapUtils.getString(params,"userCode"));
 		SysMenuEntity entity = (SysMenuEntity) MapTrunPojo.map2Object(params,SysMenuEntity.class);
@@ -137,11 +127,8 @@ public class SysMenuServiceImpl implements ISysMenuService {
     @Transactional(readOnly = false,rollbackFor = RuntimeException.class)
 	@Override
 	public Map<String,Object> updateSysMenu(Map<String, Object> params) {
-		String uuid = params.get(SysMenuApiConstants.uuid).toString();
-		if (uuid == null) {
-			throw ExceptionFactory.getBizException("参数【"+uuid+"】为空!");
-		}
-
+        String uuid = MapUtils.getString(params,SysMenuApiConstants.uuid);
+        super.validateNull(uuid);
 		SysMenuEntity entity = menuRepository.findByUuid(uuid);
 		if (entity == null) {
 			throw ExceptionFactory.getBizException("系统异常");
@@ -196,7 +183,6 @@ public class SysMenuServiceImpl implements ISysMenuService {
 		params.put("result","操作成功");
 		return params;
 	}
-
 	@Override
 	public long findSysMenuCount(Map<String, Object> params) {
 		SysMenuEntity entity = new SysMenuEntity();
@@ -207,7 +193,6 @@ public class SysMenuServiceImpl implements ISysMenuService {
 		Example<SysMenuEntity> example = Example.of(entity,matcher);
 		return menuRepository.count(example);
 	}
-
 	@Override
 	public List<Map<String, Object>> findSysMenuNoPage(Map<String, Object> params) {
 		return sysMenuMapper.findSysMenuListAll(params);

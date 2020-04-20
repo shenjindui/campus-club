@@ -24,22 +24,53 @@ import java.util.Map;
 */
 public interface ISysMenuService {
 
+	/**
+	 * 分页查询菜单列表
+	 * @param params
+	 * @return
+	 */
 	PageInfo<Map<String, Object>> findSysMenuPage(Map<String, Object> params);
-
-	//查看时
+	/**
+	 * 条件查询数据
+	 * @param params
+	 * @return
+	 */
 	Map<String, Object> getSysMenuMap(Map<String, Object> params);
-
+	/**
+	 * 保存菜单
+	 * @param params
+	 * @return
+	 */
 	Map<String,Object> saveSysMenu(Map<String, Object> params);
-
+	/**
+	 * 修改菜单
+	 * @param params
+	 * @return
+	 */
 	Map<String,Object> updateSysMenu(Map<String, Object> params);
-
+	/**
+	 * 删除菜单
+	 * @param params
+	 * @return
+	 */
 	SysMenuEntity deleteSysMenu(Map<String, Object> params);
-
-
+	/**
+	 * 菜单分配角色
+	 * @param params
+	 * @return
+	 */
 	Map<String,Object> SysMenuToRole(Map<String, Object> params);
-
+	/**
+	 * 查询总数量
+	 * @param params
+	 * @return
+	 */
 	long findSysMenuCount(Map<String, Object> params);
-
+	/**
+	 * 查询菜单列表,无分页
+	 * @param params
+	 * @return
+	 */
     List<Map<String, Object>> findSysMenuNoPage(Map<String, Object> params);
 
 }
