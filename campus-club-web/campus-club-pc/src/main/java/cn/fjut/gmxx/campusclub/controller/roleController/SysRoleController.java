@@ -142,7 +142,6 @@ public class SysRoleController extends BaseAppAction {
             return errorResponse(e.getMessage());
         }
     }
-
     @SysOperationLog("角色删除(失效)方法")
     @TokenCheck
     @Limiter(frequency = 10)
