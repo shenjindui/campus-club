@@ -42,4 +42,9 @@ public interface Constant{
 
     String SYSTEM_PARAMS_ERROR = "请求异常【参数对象不能为空】";
 
+    /**
+     * 请求头参数
+     */
+    public static final String REQUEST_HEADERS_TOKEN = "Token";
+
 }

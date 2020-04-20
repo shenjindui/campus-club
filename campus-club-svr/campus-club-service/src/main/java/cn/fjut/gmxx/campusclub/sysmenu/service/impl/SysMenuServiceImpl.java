@@ -102,15 +102,11 @@ public class SysMenuServiceImpl implements ISysMenuService {
     @Transactional(readOnly = false,rollbackFor = RuntimeException.class)
 	@Override
 	public Map<String, Object> saveSysMenu(Map<String, Object> params) {
-		// 组装方法要判空
 		if (params == null || params.isEmpty()) {
-			throw ExceptionFactory.getBizException("campus_club-00003", "params");
+			throw ExceptionFactory.getBizException("参数错误!");
 		}
-
         //查找当前操作用户
 		SysUserEntity currentUser=userRepository.findByUserCode(MapUtils.getString(params,"userCode"));
-
-		//组装保存的entity
 		SysMenuEntity entity = (SysMenuEntity) MapTrunPojo.map2Object(params,SysMenuEntity.class);
 		entity.setCreateTime(new Date());//设置时间
 		entity.setCreateUser(currentUser.getLoginName());
@@ -128,11 +124,7 @@ public class SysMenuServiceImpl implements ISysMenuService {
 		}else{
 			nowMenuCode= EncodeUtils.getConteactNo("menu-",Integer.parseInt(maxMenuCode.split("-")[1]));
 		}
-		//获取当前菜单的最大编码
-       // String maxMenuCode=menuRepository.findSysMenuMaxMenuCode();
-        //String nowMenuCode=EncodeUtils.getConteactNo("menu-",Integer.parseInt(maxMenuCode.split("-")[1]));
         entity.setMenuCode(nowMenuCode);
-
 		//查找是否已经存在此名称的菜单
 		SysMenuEntity sysMenuEntity=menuRepository.findByMenuName(params.get("menuName").toString());
         if(sysMenuEntity!=null){
@@ -140,30 +132,24 @@ public class SysMenuServiceImpl implements ISysMenuService {
 		}
 		SysMenuEntity result = menuRepository.save(entity);
 		params.put(SysMenuApiConstants.uuid, result.getUuid());
-
 		return params;
 	}
     @Transactional(readOnly = false,rollbackFor = RuntimeException.class)
 	@Override
 	public Map<String,Object> updateSysMenu(Map<String, Object> params) {
-		//update要先根据ID获取BO对象，然后在拷贝map里面的值
 		String uuid = params.get(SysMenuApiConstants.uuid).toString();
 		if (uuid == null) {
-			throw ExceptionFactory.getBizException("campus_club-00002");
+			throw ExceptionFactory.getBizException("参数【"+uuid+"】为空!");
 		}
 
 		SysMenuEntity entity = menuRepository.findByUuid(uuid);
 		if (entity == null) {
-			throw ExceptionFactory.getBizException("campus_club-00003", "findOne");
+			throw ExceptionFactory.getBizException("系统异常");
 		}
         entity.mapCoverToEntity(params);
-        //查找当前操作用户
         SysUserEntity currentUser=userRepository.findByUserCode(MapUtils.getString(params,"userCode"));
-
-        //组装保存的entity
         entity.setUpdateTime(new Date());
         entity.setUpdateUser(currentUser.getLoginName());
-        //查找是否已经存在此名称的菜单
         SysMenuEntity sysMenuEntity=menuRepository.findByMenuName(params.get("menuName").toString());
         if(sysMenuEntity!=null&&!(sysMenuEntity.getMenuCode().equals(params.get("menuCode").toString()))){
             throw ExceptionFactory.getBizException(params.get("menuName")+"此菜单名称已存在");
@@ -186,6 +172,7 @@ public class SysMenuServiceImpl implements ISysMenuService {
 		entity.setDelInd(SysMenuApiConstants.DEL_IND_1); // 逻辑删除标识
         return menuRepository.save(entity);
 	}
+
     @Transactional(readOnly = false,rollbackFor = RuntimeException.class)
 	@Override
 	public Map<String, Object> SysMenuToRole(Map<String, Object> params) {

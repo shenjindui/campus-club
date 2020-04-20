@@ -4,6 +4,7 @@ package cn.fjut.gmxx.campusclub.utlis;/**
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
@@ -18,6 +19,17 @@ import java.util.concurrent.TimeUnit;
  **/
 @Component
 public class RedisUtils {
+    @Autowired
+    private StringRedisTemplate redisTemplates;
+
+    public void setRedisTemplates(StringRedisTemplate redisTemplates) {
+        this.redisTemplates = redisTemplates;
+    }
+
+    public StringRedisTemplate getRedisTemplates() {
+        return redisTemplates;
+    }
+
     @Autowired
     private RedisTemplate<String, Object> redisTemplate;
 
@@ -511,5 +523,15 @@ public class RedisUtils {
             e.printStackTrace();
             return 0;
         }
+    }
+
+    /**
+     * 获取指定 key 的值
+     *
+     * @param key
+     * @return
+     */
+    public String getValue(String key) {
+        return redisTemplates.opsForValue().get(key);
     }
 }

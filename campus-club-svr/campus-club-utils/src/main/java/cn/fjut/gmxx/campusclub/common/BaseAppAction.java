@@ -11,8 +11,9 @@ package cn.fjut.gmxx.campusclub.common;/**
 // (powered by Fernflower decompiler)
 //
 
+import cn.fjut.gmxx.campusclub.exception.ExceptionFactory;
 import cn.fjut.gmxx.campusclub.pagehelper.PageInfo;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import cn.hutool.core.util.ObjectUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.util.StringUtils;
@@ -186,10 +187,28 @@ public class BaseAppAction {
         return returnMap;
     }
 
-    /*public <T> T getSessionAttr(String attr) {
-        Object sessionAttr = this.getRequest().getSession().getAttribute(attr);
-        return null == sessionAttr?null:sessionAttr;
-    }*/
+    /**
+     * @功能描述 <pre>校验对象是否为空</pre>
+     * @param vali 验证对象
+     * @return
+     */
+    protected void validateNull(Object vali) {
+        if(!ObjectUtil.isNotNull(vali)){
+            throw ExceptionFactory.getBizException("对象为空");
+        }
+    }
+    /**
+     * @功能描述 <pre>校验对象是否为空</pre>
+     * @param vali 验证对象数组
+     * @return
+     */
+    protected void validateNull(Object[] vali) {
+        for(int i = 0; i < vali.length; i ++){
+            if(!ObjectUtil.isNotNull(vali[i])){
+                throw ExceptionFactory.getBizException("对象为空");
+            }
+        }
+    }
 
     protected String getIp() {
         String ipAddress = null;

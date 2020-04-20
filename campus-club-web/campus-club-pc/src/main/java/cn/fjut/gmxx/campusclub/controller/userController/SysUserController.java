@@ -55,12 +55,6 @@ public class SysUserController extends BaseAppAction {
             params.put("request",request);
             Map<String, Object> resultMaps=sysUserApi.getSysUserMap(params);
             if(!resultMaps.isEmpty()){
-                //设置Redis B
-               /* boolean redisResult=redisUtils.set(((SysUserEntity)resultMaps.get("userInfo")).getUserCode(),resultMaps.get("token"));
-                if(redisResult==false){
-                    throw ExceptionFactory.getBizException("Redis设置异常，请联系管理员");
-                }*/
-                //E
                 return successResponse(resultMaps,Constant.LOGIN_SUCCESS);
             }else{
                 return errorResponse(Constant.LOGIN_ERROR);
