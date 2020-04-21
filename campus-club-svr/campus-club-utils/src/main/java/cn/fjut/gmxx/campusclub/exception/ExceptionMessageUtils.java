@@ -1,6 +1,8 @@
 package cn.fjut.gmxx.campusclub.exception;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+
 /**
  * @author : shenjindui
  * @date : 2020-01-10 13:42
@@ -10,7 +12,8 @@ public class ExceptionMessageUtils {
    // private static volatile Properties prop = null;
     //private Map<String, IBizExceptionWarnSpi> bizExceptionWarnSpiMap;
    // private static final String[] errorFiles = new String[]{"classpath*:sys_message/*.properties","classpath:sys_message-*/*.properties"};
-
+   @Autowired
+   private ExcetionMsg excetionMsg;
     public ExceptionMessageUtils() {
     }
 /*
@@ -58,8 +61,6 @@ public class ExceptionMessageUtils {
                 throw new RuntimeException(var4.getMessage(), var4);
             }
         }*/
-
-       //message
         String valueForPlace = errorCode;
         if(errorCode != null && !"".equals(errorCode) && valueForPlace != null && !"".equals(valueForPlace) && args != null && args.length > 0) {
             for(int i = 0; i < args.length; ++i) {

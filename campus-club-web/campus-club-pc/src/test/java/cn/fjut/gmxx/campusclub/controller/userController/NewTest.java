@@ -11,12 +11,13 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.HashMap;
 import java.util.Map;
-
 */
-/**
+/*
+*
  * @author : shenjindui
  * @date : 2020-01-06 10:23
  **//*
+
 
 
 @RunWith(SpringRunner.class)
@@ -26,6 +27,7 @@ public class NewTest {
     RedisUtils redisUtils;
     @Autowired
     ISysUserApi iSysUserApi;
+
     @Test
     public void test(){
         redisUtils.set("sjd","牛哥");
@@ -35,6 +37,8 @@ public class NewTest {
     public void test1(){
         Map<String,Object> maps=new HashMap<>();
         Map<String,Object> result=iSysUserApi.getSysUserByOneMap(maps);
+        String msg = excetionUtils.getExcetionString("sys-00001");
+        System.out.println(msg);
     }
 }
 */

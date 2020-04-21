@@ -39,7 +39,8 @@ public class NoRepeatSubmitAop {
      * @param noRepeatSubmit:自定义的注解对象
      * @return: java.lang.Object
      */
-    @Around("execution(* cn.fjut.gmxx.campusclub.controller.*(..)) && @annotation(noRepeatSubmit)")
+    //@Around("execution(* com.xxx.xxx.service..*.*(..))")
+    @Around("execution(* cn.fjut.gmxx.campusclub.controller..*.*(..)) && @annotation(noRepeatSubmit)")
     public void doAround(ProceedingJoinPoint pjp, NoRepeatSubmit noRepeatSubmit) {
         try {
             HttpServletRequest request = ((ServletRequestAttributes) Objects.requireNonNull(RequestContextHolder.getRequestAttributes())).getRequest();

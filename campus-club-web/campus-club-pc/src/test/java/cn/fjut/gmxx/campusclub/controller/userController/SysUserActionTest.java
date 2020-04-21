@@ -15,22 +15,16 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.net.URL;
 
-*/
-/**
- * Created by admin on 2020/1/3.
- *//*
+
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = CampusClubPcApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class SysUserActionTest {
 
-    */
-/**
-     * @LocalServerPort 提供了 @Value("${local.server.port}") 的代替
-     *//*
-
     @LocalServerPort
     private int port;
+
+
 
     private URL base;
 
@@ -46,13 +40,6 @@ public class SysUserActionTest {
         System.out.println(String.format("port is : [%d]", port));
         this.base = new URL(url);
     }
-    */
-/**
-     * 向"/test"地址发送请求，并打印返回结果
-     *
-     * @throws Exception
-     *//*
-
     @Test
     public void test1() throws Exception {
 
@@ -63,6 +50,9 @@ public class SysUserActionTest {
 
     @Test
     public void test2(){
-        redisUtils.set("sjd","沈金堆25");
+       // redisUtils.set("sjd","沈金堆25");
+        String msg = excetionUtils.getExcetionString("sys-00001");
+        System.out.println(msg);
     }
-}*/
+}
+*/

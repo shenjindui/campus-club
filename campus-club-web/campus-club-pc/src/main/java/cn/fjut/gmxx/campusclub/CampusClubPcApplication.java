@@ -19,8 +19,11 @@ public class CampusClubPcApplication {
 	public static void main(String[] args) {
         ConfigurableApplicationContext configurableApplicationContext =
                 SpringApplication.run(CampusClubPcApplication.class, args);
+        //SpringApplication application = new SpringApplication(CampusClubPcApplication.class);
         //解决WebSocket不能注入的问题
         WebSocketServer.setApplicationContext(configurableApplicationContext);
+        // 使用注册监听器的加载配置文件
+        //application.addListeners(new PropertiesListener("default-error-code.properties"));
 
     }
 }

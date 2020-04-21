@@ -13,6 +13,7 @@ import cn.fjut.gmxx.campusclub.basefilersc.service.IBaseFileRscService;
 import cn.fjut.gmxx.campusclub.common.ExcetionType;
 import cn.fjut.gmxx.campusclub.common.SysResultConstants;
 import cn.fjut.gmxx.campusclub.exception.ExceptionFactory;
+import cn.fjut.gmxx.campusclub.exception.ExcetionMsg;
 import cn.fjut.gmxx.campusclub.pagehelper.PageInfo;
 import cn.fjut.gmxx.campusclub.sysbusiness.entity.SysBusinessEntity;
 import cn.fjut.gmxx.campusclub.sysbusiness.service.ISysBusinessService;
@@ -102,6 +103,9 @@ public class SysUserApiImpl implements ISysUserApi {
     @Autowired
     private IBaseClubMessageApi baseClubMessageApi;
 
+    @Autowired
+    private ExcetionMsg excetionMsg;
+
 
     @Override
 	public PageInfo<Map<String, Object>> findSysUserPage(Map<String, Object> params) {
@@ -152,6 +156,8 @@ public class SysUserApiImpl implements ISysUserApi {
 	 */
 	@Override
 	public Map<String, Object> getSysUserMap(Map<String, Object> params) {
+		//String msg = excetionMsg.getProperty("sys-00002","3168907225");
+
         String value=dctUtils.getValue("statusCd","statusCd1");
         HttpServletRequest httpServletRequest=(HttpServletRequest)params.get("request");
 		Map<String, Object> resultMap=new HashMap<>();
@@ -256,6 +262,7 @@ public class SysUserApiImpl implements ISysUserApi {
 		}else{ //失败时
 			sysUserService.updateSysUserLoginSuccessOrFailCount(params.get("loginName").toString(),0,LastLoginTime);
 		}
+        //throw  ExceptionFactory.getBizException(msg);
 		//throw ExceptionFactory.getBizException(ExcetionType.SYS00002.getErrorMessage(), "params");
 		return resultMap;
 	}
