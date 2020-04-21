@@ -5,7 +5,6 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.format.annotation.DateTimeFormat;
-
 import javax.persistence.Column;
 import javax.persistence.EntityListeners;
 import javax.persistence.MappedSuperclass;
@@ -25,13 +24,11 @@ public class BaseEntity  implements Serializable {
     )
     protected int statusCd;
 
-
     @Column(
             name = "remark",
             columnDefinition = "varchar(400) COMMENT '备注'"
     )
     protected String remark;
-
 
     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")//页面写入数据库时格式化
     @JSONField(format="yyyy-MM-dd HH:mm:ss")//数据库导出页面时json格式化
@@ -51,25 +48,21 @@ public class BaseEntity  implements Serializable {
     /*@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")*/
     protected Date updateTime;
 
-
     @Column(
             name = "CREATE_USER",columnDefinition="varchar(32) COMMENT '创建者'"
     )
     protected String createUser;
-
 
     @Column(
             name = "UPDATE_USER",columnDefinition="varchar(32) COMMENT '更新者'"
     )
     protected String updateUser;
 
-
     @Column(
             name = "DEL_IND",
             columnDefinition = "varchar(1) default '0' COMMENT '是否删除'"
     )
     protected String delInd;
-
 
     @Version
     @Column(
@@ -78,10 +71,8 @@ public class BaseEntity  implements Serializable {
     )
     protected int version;
 
-
     public BaseEntity() {
     }
-
 
     public int getStatusCd() {
         return statusCd;

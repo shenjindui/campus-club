@@ -123,7 +123,6 @@ public class BaseSqlProvider<T> {
             sql.WHERE(" 1= 2");
             throw ExceptionFactory.getBizException("对象中未包含PrimaryKey属性");
         }
-        //System.out.println("updateSql:" + sql.toString());
         return sql.toString();
     }
 

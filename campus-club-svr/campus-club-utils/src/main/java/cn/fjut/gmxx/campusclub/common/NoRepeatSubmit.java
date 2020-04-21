@@ -5,6 +5,9 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+/**
+ * Created by shenjindui on 2020/3/27.
+ */
 // 作用到方法上
 @Target(ElementType.METHOD)
 // 运行时有效

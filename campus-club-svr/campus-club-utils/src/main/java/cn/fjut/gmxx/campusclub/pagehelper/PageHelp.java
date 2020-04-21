@@ -19,7 +19,8 @@ public class PageHelp {
             params.put("pageSize", pageSize);
         }
         if(params.get("currentPage")!=null){
-            params.put("startIndex",(MapUtils.getInteger(params,"currentPage")-1)*MapUtils.getInteger(params,"pageSize"));
+            params.put("startIndex",(MapUtils.getInteger(params,"currentPage")-1)*
+                    MapUtils.getInteger(params,"pageSize"));
         }else{
             params.put("startIndex",(currentPage-1)*MapUtils.getInteger(params,"pageSize"));
             params.put("currentPage",currentPage);

@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * @author : shenjindui
  * @date : 2020-01-03 15:43
  **/
-
 @ControllerAdvice
 @ResponseBody
 public class ExceptionController {

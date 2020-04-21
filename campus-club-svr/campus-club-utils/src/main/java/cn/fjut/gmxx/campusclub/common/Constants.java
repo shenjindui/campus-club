@@ -1,11 +1,10 @@
 package cn.fjut.gmxx.campusclub.common;
-
 /**
  * <p> 全局常用变量 </p>
  *
- * @author : zhengqing
+ * @author : shenjindui
  * @description :
- * @date : 2019/11/7 9:51
+ * @date : 2020/1/7 9:51
  */
 public class Constants {
 

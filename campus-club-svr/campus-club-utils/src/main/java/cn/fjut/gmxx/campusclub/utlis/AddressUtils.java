@@ -11,7 +11,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 /**
  * @author : shenjindui
  * @date : 2020-02-21 20:12
@@ -275,7 +274,6 @@ public class AddressUtils {
         }
         catch (IOException e)
         {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         return jsonStr;
@@ -357,11 +355,11 @@ public class AddressUtils {
         }
         return result;
     }
-
+/*
     public static void main(String[] args) {
-        /*192.168.1.40;*/
+        *//*192.168.1.40;*//*
         String max= AddressUtils.getMacInWindows("192.168.1.40");
         System.out.print(max);
 
-    }
+    }*/
 }

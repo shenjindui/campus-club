@@ -3,7 +3,6 @@ package cn.fjut.gmxx.campusclub.common;
  * @author : shenjindui
  * @date : 2019-12-30 20:37
  **/
-
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

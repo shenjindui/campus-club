@@ -1,7 +1,6 @@
 package cn.fjut.gmxx.campusclub.common;
 import java.io.Serializable;
 import java.util.Set;
-
 /**
  * Created by shenjindui on 2020/3/29
  */

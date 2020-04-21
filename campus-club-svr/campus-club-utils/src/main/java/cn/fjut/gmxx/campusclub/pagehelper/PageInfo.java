@@ -1,14 +1,12 @@
 package cn.fjut.gmxx.campusclub.pagehelper;
-/**
- * @author : shenjindui
- * @date : 2020-01-12 14:14
- **/
-
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
-
+/**
+ * @author : shenjindui
+ * @date : 2020-01-12 14:14
+ **/
 public class PageInfo<T> implements Serializable {
     private static final long serialVersionUID = 1L;
     //当前页
@@ -17,21 +15,17 @@ public class PageInfo<T> implements Serializable {
     private int pageSize;
     //当前页的数量
     private int size;
-
     //总记录数
     private long total;
-
     //结果集
     private List<T> list;
 
     public PageInfo() {
     }
-
-
     /**
      * 包装Page对象
      *
-     * @param list          page结果
+     * @param list page结果
      */
     public PageInfo(List<T> list, Map<String,Object> parmas) {
         if (list instanceof Collection) {

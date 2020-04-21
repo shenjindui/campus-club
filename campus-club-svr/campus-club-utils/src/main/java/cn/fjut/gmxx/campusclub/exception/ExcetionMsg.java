@@ -1,13 +1,9 @@
-package cn.fjut.gmxx.campusclub.exception;/**
- * Created by admin on 2020/4/21.
- */
-
+package cn.fjut.gmxx.campusclub.exception;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
-
 /**
  * @author : shenjindui
  * @date : 2020-04-21 16:14

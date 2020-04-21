@@ -5,9 +5,8 @@ import org.springframework.context.ApplicationContext;
 
 import java.util.ArrayList;
 import java.util.List;
-
 /**
- * @author : shenjindui
+ * @author : shenjindui 应用上下文环境获取
  * @date : 2020-03-20 19:47
  **/
 @Slf4j
