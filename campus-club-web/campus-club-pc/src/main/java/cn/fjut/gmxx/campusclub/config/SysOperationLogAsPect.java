@@ -1,7 +1,4 @@
-package cn.fjut.gmxx.campusclub.config;/**
- * Created by admin on 2020/3/15.
- */
-
+package cn.fjut.gmxx.campusclub.config;
 import cn.fjut.gmxx.campusclub.sysoperationlog.api.ISysOperationLogApi;
 import cn.fjut.gmxx.campusclub.utlis.JwtUtils;
 import com.auth0.jwt.interfaces.Claim;
@@ -21,11 +18,10 @@ import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
 
-
 /**
  * @author : shenjindui
  * @date : 2020-03-15 09:43
- * @description 切面日志配置
+ * @description 系统操作日志切面日志配置
  **/
 @Aspect
 @Component
@@ -34,10 +30,9 @@ public class SysOperationLogAsPect {
     private final static Logger log = org.slf4j.LoggerFactory.getLogger(SysOperationLogAsPect.class);
     @Autowired
     private ISysOperationLogApi sysOperationLogApi;
+
     @Autowired
     private JwtUtils jwtUtils;
-
-
 
     //表示匹配带有自定义注解的方法
     @Pointcut("@annotation(cn.fjut.gmxx.campusclub.config.SysOperationLog)")

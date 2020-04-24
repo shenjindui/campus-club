@@ -23,6 +23,7 @@ import static springfox.documentation.builders.PathSelectors.regex;
 /**
  * @author : shenjindui
  * @date : 2019-11-01 19:52
+ * 拦截器问题解决方案
  **/
 @Configuration
 public class WebMvcConfig extends WebMvcConfigurerAdapter {
@@ -59,7 +60,6 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
         registry.addResourceHandler("doc.html").addResourceLocations("classpath:/META-INF/resources/");
         registry.addResourceHandler("/webjars/**").addResourceLocations("classpath:/META-INF/resources/webjars/");
     }
-
     /**
      * 跨域支持
      * @author shenjindui
@@ -73,7 +73,6 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
                 .allowedMethods("GET", "POST", "DELETE", "PUT", "PATCH")
                 .maxAge(3600);
     }
-
     //解决swaggerui的token问题
     @Bean
     public Docket platformApi() {

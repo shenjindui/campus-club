@@ -1,7 +1,4 @@
-package cn.fjut.gmxx.campusclub.config;/**
- * Created by admin on 2020/1/21.
- */
-
+package cn.fjut.gmxx.campusclub.config;
 import org.springframework.boot.web.servlet.MultipartConfigFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

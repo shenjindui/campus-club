@@ -5,11 +5,10 @@ import com.alipay.api.DefaultAlipayClient;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
 /**
  * 支付宝支付设置
- * @author jitwxs
- * @since 2018/6/4 19:04
+ * @author shenjindui
+ * @since 2020/1/4 19:04
  */
 @Configuration
 public class AliPayConfig {

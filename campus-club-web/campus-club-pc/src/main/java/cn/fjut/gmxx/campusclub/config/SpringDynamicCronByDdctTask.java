@@ -1,7 +1,4 @@
-package cn.fjut.gmxx.campusclub.config;/**
- * Created by admin on 2020/3/22.
- */
-
+package cn.fjut.gmxx.campusclub.config;
 import cn.fjut.gmxx.campusclub.baseddct.repository.DictCacheRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,6 +16,7 @@ import java.util.Date;
 
 /**
  * @author : shenjindui
+ * 任务触发
  * @date : 2020-03-22 22:13
  **/
     @Lazy(false)
@@ -32,7 +30,6 @@ import java.util.Date;
 
     public SpringDynamicCronByDdctTask() {
         cron = "0/5 * * * * ?";
-
         // 开启新线程模拟外部更改了任务执行周期
         new Thread(new Runnable() {
             @Override
@@ -44,7 +41,7 @@ import java.util.Date;
                 }
 
                 cron = "0/10 * * * * ?";
-                System.err.println("cron change to: " + cron);
+               // System.err.println("cron change to: " + cron);
             }
         }).start();
     }
@@ -55,7 +52,6 @@ import java.util.Date;
             @Override
             public void run() {
                 // 任务逻辑
-                //logger.debug("dynamicCronTask is running...");
                 dictCacheRepository.refreshDictAll();
             }
         }, new Trigger() {

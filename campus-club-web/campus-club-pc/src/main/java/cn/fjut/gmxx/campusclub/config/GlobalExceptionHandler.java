@@ -1,9 +1,7 @@
-package cn.fjut.gmxx.campusclub.config;/**
- * Created by admin on 2020/1/15.
- */
-
+package cn.fjut.gmxx.campusclub.config;
 /**
  * @author : shenjindui
+ * 统一异常处理
  * @date : 2020-01-15 17:53
  **/
 
@@ -13,9 +11,6 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import javax.servlet.http.HttpServletRequest;
 
-/**
- * 统一异常处理
- */
 @RestControllerAdvice
 public class GlobalExceptionHandler {
     @ExceptionHandler(value = RuntimeException.class)

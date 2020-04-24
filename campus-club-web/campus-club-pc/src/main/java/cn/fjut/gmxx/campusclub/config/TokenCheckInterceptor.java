@@ -1,6 +1,4 @@
-package cn.fjut.gmxx.campusclub.config;/**
- * Created by admin on 2020/1/14.
- */
+package cn.fjut.gmxx.campusclub.config;
 
 import cn.fjut.gmxx.campusclub.common.TokenCheck;
 import cn.fjut.gmxx.campusclub.exception.ExceptionFactory;
@@ -21,7 +19,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 /**
  * @author : shenjindui
  * @date : 2020-01-14 10:19
@@ -31,6 +28,7 @@ public class TokenCheckInterceptor extends HandlerInterceptorAdapter {
 
     @Autowired
     JwtUtils jwtUtils;
+
     @Autowired
     RedisUtils redisUtils;
 
@@ -63,7 +61,6 @@ public class TokenCheckInterceptor extends HandlerInterceptorAdapter {
 
         // 用户完善基本信息时,不要进行检验
          ignoreList.add("/api/userPerfect");
-
 
         //token 校验
         TokenCheck tokenCheck;

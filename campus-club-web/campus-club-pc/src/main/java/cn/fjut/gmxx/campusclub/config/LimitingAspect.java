@@ -1,7 +1,4 @@
-package cn.fjut.gmxx.campusclub.config;/**
- * Created by admin on 2020/3/20.
- */
-
+package cn.fjut.gmxx.campusclub.config;
 import cn.fjut.gmxx.campusclub.common.Limiter;
 import cn.fjut.gmxx.campusclub.exception.ExceptionFactory;
 import cn.fjut.gmxx.campusclub.utlis.AddressUtils;
@@ -20,6 +17,7 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * @author : shenjindui
+ * 接口防刷
  * @date : 2020-03-20 09:02
  **/
 @Aspect
@@ -74,7 +72,6 @@ public class LimitingAspect {
                 //否则抛出访问频繁异常
                 throw ExceptionFactory.getBizException(limiter.message());
             }
-
         }
     }
 }

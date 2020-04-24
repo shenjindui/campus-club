@@ -1,12 +1,8 @@
-package cn.fjut.gmxx.campusclub.config;/**
- * Created by admin on 2020/3/24.
- */
-
+package cn.fjut.gmxx.campusclub.config;
 /**
  * @author : shenjindui
  * @date : 2020-03-24 17:28
  **/
-
 import cn.fjut.gmxx.campusclub.baseclubfunds.api.IBaseClubFundsApi;
 import cn.fjut.gmxx.campusclub.baseclubmember.api.IBaseClubMemberApi;
 import cn.fjut.gmxx.campusclub.sysuser.service.ISysUserService;
@@ -28,7 +24,8 @@ import java.util.concurrent.CopyOnWriteArraySet;
 @Component
 @ServerEndpoint(value = "/push/websocket/{userCode}")
 public class WebSocketServer {
-    //此处是解决无法注入的关键
+    /*此处是解决无法注入的关键 由于spring底层的实现时线程安全在使用WebSocket时
+     无法使用@Autowired来注入，因此可以使用ApplicationContext应用程序上下文来注入对象*/
     private static ApplicationContext applicationContext;
     //注入的service
     private ISysUserService sysUserService;
@@ -38,17 +35,14 @@ public class WebSocketServer {
     public static void setApplicationContext(ApplicationContext applicationContext) {
         WebSocketServer.applicationContext = applicationContext;
     }
-
     //静态变量，用来记录当前在线连接数。应该把它设计成线程安全的。
     private static int onlineCount = 0;
     //concurrent包的线程安全Set，用来存放每个客户端对应的MyWebSocket对象。
     private static CopyOnWriteArraySet<WebSocketServer> webSocketSet = new CopyOnWriteArraySet<WebSocketServer>();
     //与某个客户端的连接会话，需要通过它来给客户端发送数据
     private Session session;
-
     //接收sid
     private String sid="";
-
     /**
      * 连接建立成功调用的方法*/
     @OnOpen
@@ -94,7 +88,6 @@ public class WebSocketServer {
             //log.error("websocket IO异常");
         }
     }
-
     /**
      * 连接关闭调用的方法
      */
@@ -104,7 +97,6 @@ public class WebSocketServer {
         subOnlineCount();           //在线数减1
        // log.info("有一连接关闭！当前在线人数为" + getOnlineCount());
     }
-
     /**
      * 收到客户端消息后调用的方法
      *
@@ -120,7 +112,6 @@ public class WebSocketServer {
             }
         }
     }
-
     /**
      *
      * @param session

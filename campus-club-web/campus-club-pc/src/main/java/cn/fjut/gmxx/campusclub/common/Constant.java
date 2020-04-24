@@ -1,14 +1,12 @@
-package cn.fjut.gmxx.campusclub.common;/**
- * Created by admin on 2020/1/3.
- */
-
+package cn.fjut.gmxx.campusclub.common;
 /**
  * @author : shenjindui
+ * 控制层Controller常量的使用,由于后面配置了default-error-code.properties
+ * 可以改为读取配置文件
  * @date : 2020-01-03 14:49
  **/
 public interface Constant{
     //api 说明
-    //
     String API= "/api";
 
     String AJAXLOGIN ="ajaxLogin";

@@ -1,6 +1,4 @@
-package cn.fjut.gmxx.campusclub.config;/**
- * Created by admin on 2020/2/25.
- */
+package cn.fjut.gmxx.campusclub.config;
 
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -11,6 +9,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 /**
  * @author : shenjindui
  * @date : 2020-02-25 16:38
+ * 文件上传配置类
  **/
 @Configuration
 public class WebAppConfig extends WebMvcConfigurerAdapter {
@@ -33,8 +32,7 @@ public class WebAppConfig extends WebMvcConfigurerAdapter {
         }
         LoggerFactory.getLogger(WebAppConfig.class).info("imagesPath="+mImagesPath);
         registry.addResourceHandler("/images/**").addResourceLocations(mImagesPath);
-        // TODO Auto-generated method stub
-        System.out.print("2.上传配置类mImagesPath=="+mImagesPath+"\n");
+        //System.out.print("2.上传配置类mImagesPath=="+mImagesPath+"\n");
         super.addResourceHandlers(registry);
     }
 }

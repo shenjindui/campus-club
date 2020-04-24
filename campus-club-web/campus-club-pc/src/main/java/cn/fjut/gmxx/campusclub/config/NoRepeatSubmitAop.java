@@ -1,6 +1,4 @@
-package cn.fjut.gmxx.campusclub.config;/**
- * Created by admin on 2020/4/20.
- */
+package cn.fjut.gmxx.campusclub.config;
 
 import cn.fjut.gmxx.campusclub.common.Constant;
 import cn.fjut.gmxx.campusclub.common.NoRepeatSubmit;

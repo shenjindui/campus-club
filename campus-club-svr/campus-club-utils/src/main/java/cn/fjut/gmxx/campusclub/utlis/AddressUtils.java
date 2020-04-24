@@ -355,11 +355,30 @@ public class AddressUtils {
         }
         return result;
     }
-/*
     public static void main(String[] args) {
-        *//*192.168.1.40;*//*
-        String max= AddressUtils.getMacInWindows("192.168.1.40");
-        System.out.print(max);
+        String ip="211.138.144.18";
+        String resout=null;
+        try{
+            while (true){
+                String str = getJsonContent("http://ip.taobao.com/service/getIpInfo.php?ip="+ip);
+                if(str==null||"".equals(str)){
+                    continue;
+                }else{
+                    JSONObject obj = JSONObject.fromObject(str);
+                    JSONObject obj2 =  (JSONObject) obj.get("data");
+                    Integer code = (Integer) obj.get("code");
+                    if(code==0){
+                         resout =  obj2.get("country")+"--" +obj2.get("area")+"--" +obj2.get("city")+"--" +obj2.get("isp");
+                    }else{
+                        resout =  "IP地址有误";
+                    }
+                    break;
+                }
 
-    }*/
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
+    }
 }
