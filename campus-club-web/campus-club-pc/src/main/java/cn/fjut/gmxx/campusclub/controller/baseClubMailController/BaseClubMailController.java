@@ -6,7 +6,6 @@ import cn.fjut.gmxx.campusclub.baseclubMail.api.BaseclubMailApi;
 import cn.fjut.gmxx.campusclub.common.BaseAppAction;
 import cn.fjut.gmxx.campusclub.common.Constant;
 import cn.fjut.gmxx.campusclub.common.ResponseVO;
-import cn.fjut.gmxx.campusclub.config.SysOperationLog;
 import cn.fjut.gmxx.campusclub.utlis.RandomUtils;
 import cn.fjut.gmxx.campusclub.utlis.RedisUtils;
 import io.swagger.annotations.Api;
@@ -38,7 +37,7 @@ public class BaseClubMailController extends BaseAppAction {
     @Autowired
     RedisUtils redisUtils;
 
-    @SysOperationLog("忘记密码发送邮件方法")
+    //@SysOperationLog("忘记密码发送邮件方法")
     @ApiOperation(value = "忘记密码发送邮件方法", notes = "忘记密码发送邮件方法", httpMethod = "POST")
     @RequestMapping(value = "/forgetSendMail", method = RequestMethod.POST, produces = "application/json; charset=UTF-8")
     @ResponseBody
@@ -61,7 +60,7 @@ public class BaseClubMailController extends BaseAppAction {
         }
     }
 
-    @SysOperationLog("redis验证验证码是否过期")
+    //@SysOperationLog("redis验证验证码是否过期")
     @ApiOperation(value = "redis验证验证码是否过期", notes = "redis验证验证码是否过期", httpMethod = "POST")
     @RequestMapping(value = "/checkCode", method = RequestMethod.POST, produces = "application/json; charset=UTF-8")
     @ResponseBody

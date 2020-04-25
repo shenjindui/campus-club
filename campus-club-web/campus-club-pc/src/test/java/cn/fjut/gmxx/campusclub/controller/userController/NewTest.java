@@ -3,17 +3,12 @@ package cn.fjut.gmxx.campusclub.controller.userController;
 import cn.fjut.gmxx.campusclub.CampusClubPcApplication;
 import cn.fjut.gmxx.campusclub.baseclubMail.api.BaseclubMailApi;
 import cn.fjut.gmxx.campusclub.sysuser.api.ISysUserApi;
-import cn.fjut.gmxx.campusclub.utlis.RandomUtils;
 import cn.fjut.gmxx.campusclub.utlis.RedisUtils;
-import org.apache.commons.collections.MapUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * @author : shenjindui
@@ -43,7 +38,7 @@ public class NewTest {
     /**
      * 邮件发送验证
      */
-    @Test
+    /*@Test
     public void test1(){
         Map<String,Object> parms=new HashMap<>();
         parms.put("loginName","stsy");
@@ -54,5 +49,5 @@ public class NewTest {
         parms.put("content",context);
         redisUtils.set(MapUtils.getString(parms,"loginName"),code,60);
         baseclubMailApi.sendHtmlMail(parms);
-    }
+    }*/
 }

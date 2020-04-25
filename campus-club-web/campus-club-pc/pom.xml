@@ -82,7 +82,15 @@
 					<fork>true</fork> <!--开启热部署-->
 				</configuration>
 			</plugin>
-		</plugins>
+            <!--maven去掉Test测试用例的检查-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
+            </plugin>
+        </plugins>
 		<resources>
 			<resource>
 				<directory>src/main/java</directory>
