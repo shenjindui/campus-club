@@ -58,9 +58,13 @@ public class TokenCheckInterceptor extends HandlerInterceptorAdapter {
 
         ignoreList.add("/api/download");
         ignoreList.add("/api/downloadStInfo");
+        //邮件发送
+        ignoreList.add("/api/forgetSendMail");
+        ignoreList.add("/api/checkCode");
 
         // 用户完善基本信息时,不要进行检验
          ignoreList.add("/api/userPerfect");
+        ignoreList.add("/api/resetPass");
 
         //token 校验
         TokenCheck tokenCheck;

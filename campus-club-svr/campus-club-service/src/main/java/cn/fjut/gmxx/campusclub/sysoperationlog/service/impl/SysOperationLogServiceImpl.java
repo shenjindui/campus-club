@@ -30,7 +30,7 @@ import java.util.Map;
 * @类描述 <pre>请填写</pre>
 * @作者 shenjindui V1.0
 * @创建时间 2020-03-15
-* @版本 vV1.0
+* @版本 V1.0
 * @修改记录
 *
 * 版本 修改人 修改时间 修改内容描述
@@ -49,7 +49,6 @@ public class SysOperationLogServiceImpl implements ISysOperationLogService {
 
 	@Override
 	public PageInfo<Map<String, Object>> findSysOperationLogPage(Map<String, Object> params) {
-		// 判断当前参数params是否为空，则为默认查询
 		if (null == params) {
 			params = new HashMap<String, Object>();
 		}
@@ -71,12 +70,9 @@ public class SysOperationLogServiceImpl implements ISysOperationLogService {
 	
 	@Override
 	public Map<String, Object> getSysOperationLogMap(Map<String, Object> params) {
-		//默认调用分页查询方法。
 		PageInfo<Map<String, Object>> sysOperationLogPage = this.findSysOperationLogPage(params);
-		//判断是否存在数据
 		long total = sysOperationLogPage.getTotal();
 		if (0 < total) {
-			//获取查询结果列表
 			List<Map<String, Object>> list = sysOperationLogPage.getList();
 			if (CollectionUtils.isNotEmpty(list)) {
 				return list.get(0);
@@ -87,7 +83,6 @@ public class SysOperationLogServiceImpl implements ISysOperationLogService {
 	
 	@Override
 	public Map<String, Object> saveSysOperationLog(Map<String, Object> params) {
-		// 组装方法要判空
 		if (params == null || params.isEmpty()) {
 			throw ExceptionFactory.getBizException("campus-club-00003", "params");
 		}
@@ -101,7 +96,6 @@ public class SysOperationLogServiceImpl implements ISysOperationLogService {
 		entity.setVersion(1);
         String maxCode=sysOperationLogRepository.findSysOperationLogMaxCode();
         String nowCode=null;
-        //如果暂时不存在文件，则设置为默认的file-00001
         if(maxCode==null){
             nowCode="OperationLog-00001";
         }else{
@@ -132,19 +126,16 @@ public class SysOperationLogServiceImpl implements ISysOperationLogService {
 
     @Override
 	public void updateSysOperationLog(Map<String, Object> params) {
-		//update要先根据ID获取BO对象，然后在拷贝map里面的值
-		String id = MapUtils.getString(params, SysOperationLogApiConstants.UUID);
-		if (id == null) {
+		String uuid = MapUtils.getString(params, SysOperationLogApiConstants.UUID);
+		if (uuid == null) {
 			throw ExceptionFactory.getBizException("campus-club-00002");
 		}
 		SysOperationLogEntity entity = new SysOperationLogEntity();
-		entity.setUuid(id);
+		entity.setUuid(uuid);
 		entity=	sysOperationLogMapper.selectById(entity);
 		if (entity == null) {
 			throw ExceptionFactory.getBizException("campus-club-00003", "findOne");
 		}
-		//MapToEntityUtils.map2Entity(params, entity);
-
 		sysOperationLogRepository.save(entity);
 	}
 	
