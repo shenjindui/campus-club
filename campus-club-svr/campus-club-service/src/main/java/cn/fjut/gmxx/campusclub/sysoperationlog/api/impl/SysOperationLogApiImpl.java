@@ -5,6 +5,7 @@ import cn.fjut.gmxx.campusclub.sysoperationlog.api.ISysOperationLogApi;
 import cn.fjut.gmxx.campusclub.sysoperationlog.api.SysOperationLogApiConstants;
 import cn.fjut.gmxx.campusclub.sysoperationlog.entity.SysOperationLogEntity;
 import cn.fjut.gmxx.campusclub.sysoperationlog.service.ISysOperationLogService;
+import cn.fjut.gmxx.campusclub.utlis.QueryTimeParseUtils;
 import org.apache.commons.collections.MapUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,6 +21,7 @@ public class SysOperationLogApiImpl implements ISysOperationLogApi {
 
 	@Override
 	public PageInfo<Map<String, Object>> findSysOperationLogPage(Map<String, Object> params) {
+		QueryTimeParseUtils.parseQueryTime(params);
 		PageInfo<Map<String, Object>> page = sysOperationLogService.findSysOperationLogPage(params);
 		return page;
 	}

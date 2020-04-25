@@ -18,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -114,6 +115,7 @@ public class SysOperationLogServiceImpl implements ISysOperationLogService {
 		return params;
 	}
 
+	@Transactional()
     @Override
     public SysOperationLogEntity deleteSysOperation(Map<String, Object> params) {
         String uuid = params.get(SysMenuApiConstants.uuid).toString();
@@ -124,7 +126,7 @@ public class SysOperationLogServiceImpl implements ISysOperationLogService {
         if (entity == null) {
             throw ExceptionFactory.getBizException("campus_club-00003", "findOne");
         }
-        entity.setDelInd(SysOperationLogApiConstants.DEL_IND_1); // 逻辑删除标识
+        entity.setDelInd(SysOperationLogApiConstants.DEL_IND_1);
         return sysOperationLogRepository.save(entity);
     }
 

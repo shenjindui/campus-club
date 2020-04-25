@@ -15,8 +15,8 @@ public class QueryTimeParseUtils {
             List<String> paramsTimeList=(List<String>)params.get("paramsTime");
             String startTime= DateUtils.dealDateFormats(paramsTimeList.get(0));
             String endTime=DateUtils.dealDateFormats(paramsTimeList.get(1));
-            params.put("startsTime",startTime);
-            params.put("endsTime",endTime);
+            params.put("startTime",startTime);
+            params.put("endTime",endTime);
         }
         return params;
     }

@@ -13,14 +13,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.validation.Valid;
 import java.util.Map;
 
 @Api(tags = "系统操作服务接口")
@@ -30,18 +27,14 @@ public class SysOperationLogController extends BaseAppAction {
     protected final static Logger logger = LoggerFactory.getLogger(BaseAppAction.class);
     @Autowired
     private ISysOperationLogApi sysOperationLogApi;
+
     @SysOperationLog("日志列表")
-    @TokenCheck  //此注解使用开启token验证，对于访问后台数据的方法，请打开此注解
+    @TokenCheck
     @ApiOperation(value = "日志列表", notes = "日志列表方法", httpMethod = "POST")
     @RequestMapping(value = "/operationLoglist", method = RequestMethod.POST, produces = "application/json; charset=UTF-8")
     @ResponseBody
-    public ResponseVO loginLoglist(@RequestBody @Valid Map<String, Object> params, BindingResult result)throws Exception {
-        //参数校验
-        if (result.hasErrors()) {
-            for (ObjectError error : result.getAllErrors()) {
-                return errorResponse(error);
-            }
-        }
+    public ResponseVO loginLoglist(@RequestBody  Map<String, Object> params){
+        super.validateNull(params);
         try {
             PageInfo<Map<String, Object>> resultMaps=sysOperationLogApi.findSysOperationLogPage(params);
             if(resultMaps!=null){
@@ -55,17 +48,12 @@ public class SysOperationLogController extends BaseAppAction {
     }
 
     @SysOperationLog("日志详情方法")
-    @TokenCheck  //此注解使用开启token验证，对于访问后台数据的方法，请打开此注解
+    @TokenCheck
     @ApiOperation(value = "日志详情方法", notes = "日志详情法", httpMethod = "POST")
     @RequestMapping(value = "/operationLogDetail", method = RequestMethod.POST, produces = "application/json; charset=UTF-8")
     @ResponseBody
-    public ResponseVO loginLogDetail(@RequestBody @Valid Map<String, Object> params, BindingResult result)throws Exception {
-        //参数校验
-        if (result.hasErrors()) {
-            for (ObjectError error : result.getAllErrors()) {
-                return errorResponse(error);
-            }
-        }
+    public ResponseVO loginLogDetail(@RequestBody  Map<String, Object> params) {
+        super.validateNull(params);
         try {
             Map<String, Object> resultMaps=sysOperationLogApi.getSysOperationLogMap(params);
             if(resultMaps!=null){
@@ -78,17 +66,12 @@ public class SysOperationLogController extends BaseAppAction {
         }
     }
     @SysOperationLog("日志删除方法")
-    @TokenCheck  //此注解使用开启token验证，对于访问后台数据的方法，请打开此注解
+    @TokenCheck
     @ApiOperation(value = "日志删除方法", notes = "日志删除方法", httpMethod = "POST")
     @RequestMapping(value = "/operationLogdelete", method = RequestMethod.POST, produces = "application/json; charset=UTF-8")
     @ResponseBody
-    public ResponseVO sysLoginLogdelete(@RequestBody @Valid Map<String, Object> params, BindingResult result)throws Exception {
-        //参数校验
-        if (result.hasErrors()) {
-            for (ObjectError error : result.getAllErrors()) {
-                return errorResponse(error);
-            }
-        }
+    public ResponseVO sysLoginLogdelete(@RequestBody  Map<String, Object> params){
+        super.validateNull(params);
         try {
             Map<String, Object> resultMaps=sysOperationLogApi.deleteOperationLogTrans(params);
             if(resultMaps!=null){
@@ -100,5 +83,4 @@ public class SysOperationLogController extends BaseAppAction {
             return errorResponse(e.getMessage());
         }
     }
-
 }
