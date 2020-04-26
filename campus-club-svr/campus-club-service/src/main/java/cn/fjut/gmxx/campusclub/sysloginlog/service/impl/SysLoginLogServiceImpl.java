@@ -1,6 +1,4 @@
 package cn.fjut.gmxx.campusclub.sysloginlog.service.impl;
-
-
 import cn.fjut.gmxx.campusclub.exception.ExceptionFactory;
 import cn.fjut.gmxx.campusclub.pagehelper.PageHelp;
 import cn.fjut.gmxx.campusclub.pagehelper.PageInfo;
@@ -50,21 +48,16 @@ public class SysLoginLogServiceImpl implements ISysLoginLogService {
 	@Autowired
 	private SysLoginLogRepository sysLoginLogRepository;
 
-
 	@Override
 	public PageInfo<Map<String, Object>> findSysLoginLogPage(Map<String, Object> params) {
-        // 判断当前参数params是否为空，则为默认查询
         if (null == params) {
             params = new HashMap<String, Object>();
         }
-        //进行分页参数设置
         Map<String, Object> queryParams=new HashMap<>();
         MapTrunPojo.mapCopy(params,queryParams);
         queryParams= PageHelp.setPageParms(params);
-        //查询总数
         SysLoginLogEntity entity=new SysLoginLogEntity();
         entity.setDelInd("0");
-        //查询匹配器
         ExampleMatcher matcher=ExampleMatcher.matching().withIgnorePaths("statusCd").withIgnorePaths("version");
         Example<SysLoginLogEntity> example = Example.of(entity,matcher);
         queryParams.put("total",sysLoginLogRepository.count(example));
@@ -75,12 +68,9 @@ public class SysLoginLogServiceImpl implements ISysLoginLogService {
 	
 	@Override
 	public Map<String, Object> getSysLoginLogMap(Map<String, Object> params) {
-		//默认调用分页查询方法。
 		PageInfo<Map<String, Object>> sysLoginLogPage = this.findSysLoginLogPage(params);
-		//判断是否存在数据
 		long total = sysLoginLogPage.getTotal();
 		if (0 < total) {
-			//获取查询结果列表
 			List<Map<String, Object>> list = sysLoginLogPage.getList();
 			if (CollectionUtils.isNotEmpty(list)) {
 				return list.get(0);
@@ -91,7 +81,6 @@ public class SysLoginLogServiceImpl implements ISysLoginLogService {
 	
 	@Override
 	public Map<String, Object> saveSysLoginLog(Map<String, Object> params) {
-		// 组装方法要判空
 		if (params == null || params.isEmpty()) {
 			throw ExceptionFactory.getBizException("campus-club-00003", "params");
 		}
@@ -119,11 +108,8 @@ public class SysLoginLogServiceImpl implements ISysLoginLogService {
         entity.setStatusCd(1);//设置为生效
         entity.setVersion(1);
         entity.mapCoverToEntity(params);
-		//MapToEntityUtils.map2Entity(params, entity);
-
 		SysLoginLogEntity result = sysLoginLogRepository.save(entity);
 		params.put(SysLoginLogApiConstants.UUID, result.getUuid());
-
 		return params;
 	}
 
@@ -137,12 +123,12 @@ public class SysLoginLogServiceImpl implements ISysLoginLogService {
         if (entity == null) {
             throw ExceptionFactory.getBizException("campus_club-00003", "findOne");
         }
-        entity.setDelInd(SysMenuApiConstants.DEL_IND_1); // 逻辑删除标识
+        entity.setDelInd(SysMenuApiConstants.DEL_IND_1);
         return sysLoginLogRepository.save(entity);
     }
 
     @Override
-	public void updateSysLoginLog(Map<String, Object> params) {
+	public Map<String,Object> updateSysLoginLog(Map<String, Object> params) {
 		String uuid = MapUtils.getString(params, SysLoginLogApiConstants.UUID);
 		if (uuid == null) {
 			throw ExceptionFactory.getBizException("campus-club-00002");
@@ -153,29 +139,9 @@ public class SysLoginLogServiceImpl implements ISysLoginLogService {
 		if (entity == null) {
 			throw ExceptionFactory.getBizException("campus-club-00003", "findOne");
 		}
-		//MapToEntityUtils.map2Entity(params, entity);
-
 		sysLoginLogRepository.save(entity);
+		return params;
 	}
-	
-	@Override
-	public void deleteSysLoginLog(Map<String, Object> params) {
-		String uuid = MapUtils.getString(params, SysLoginLogApiConstants.UUID);
-		if (uuid == null) {
-			throw ExceptionFactory.getBizException("campus-club-00002");
-		}
-        SysLoginLogEntity entity = new SysLoginLogEntity();
-        entity.setUuid(uuid);
-        entity=	sysLoginLogMapper.selectById(entity);
-		if (entity == null) {
-			throw ExceptionFactory.getBizException("campus-club-00003", "findOne");
-		}
-		entity.setDelInd(SysLoginLogApiConstants.DEL_IND_1); // 逻辑删除标识
-		sysLoginLogRepository.save(entity);
-	}
-	
-	
-	
 }
 
 

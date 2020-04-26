@@ -6,15 +6,12 @@ import cn.fjut.gmxx.campusclub.sysloginlog.api.ISysLoginLogApi;
 import cn.fjut.gmxx.campusclub.sysloginlog.api.SysLoginLogApiConstants;
 import cn.fjut.gmxx.campusclub.sysloginlog.entity.SysLoginLogEntity;
 import cn.fjut.gmxx.campusclub.sysloginlog.service.ISysLoginLogService;
-import cn.fjut.gmxx.campusclub.utlis.DateUtils;
+import cn.fjut.gmxx.campusclub.utlis.QueryTimeParseUtils;
 import org.apache.commons.collections.MapUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Map;
-
-
 @Service("sysLoginLogApi")
 public class SysLoginLogApiImpl implements ISysLoginLogApi {
 
@@ -23,13 +20,7 @@ public class SysLoginLogApiImpl implements ISysLoginLogApi {
 
 	@Override
 	public PageInfo<Map<String, Object>> findSysLoginLogPage(Map<String, Object> params) {
-		if(params!=null &&params.get("paramsTime")!=null){ //如果时间控件的值不为空
-			List<String> paramsTimeList=(List<String>)params.get("paramsTime");
-			String startTime= DateUtils.dealDateFormats(paramsTimeList.get(0));
-			String endTime=DateUtils.dealDateFormats(paramsTimeList.get(1));
-			params.put("startTime",startTime);
-			params.put("endTime",endTime);
-		}
+		QueryTimeParseUtils.parseQueryTime(params);
 		PageInfo<Map<String, Object>> page = sysLoginLogService.findSysLoginLogPage(params);
 		return page;
 	}
@@ -46,15 +37,13 @@ public class SysLoginLogApiImpl implements ISysLoginLogApi {
 	@Override
 	public Map<String, Object> saveSysLoginLogTrans(Map<String, Object> params) {
 		String uuid  = MapUtils.getString(params, SysLoginLogApiConstants.UUID);
-
 		//新增
 		if (null == uuid) {
 			return sysLoginLogService.saveSysLoginLog(params);
 		} else {
 			//修改
-			sysLoginLogService.updateSysLoginLog(params);
+			return sysLoginLogService.updateSysLoginLog(params);
 		}
-		return null;
 	}
 
     @Override
@@ -64,11 +53,6 @@ public class SysLoginLogApiImpl implements ISysLoginLogApi {
         params.put("result",sysMenuEntity);
         return params;
     }
-
-    @Override
-	public void deleteSysLoginLogTrans(Map<String, Object> params) {
-		sysLoginLogService.deleteSysLoginLog(params);
-	}
 
 }
 
