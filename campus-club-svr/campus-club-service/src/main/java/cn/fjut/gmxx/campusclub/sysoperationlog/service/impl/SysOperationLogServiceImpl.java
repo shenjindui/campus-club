@@ -1,7 +1,7 @@
 package cn.fjut.gmxx.campusclub.sysoperationlog.service.impl;
 
-
 import cn.fjut.gmxx.campusclub.exception.ExceptionFactory;
+import cn.fjut.gmxx.campusclub.exception.ExcetionMsg;
 import cn.fjut.gmxx.campusclub.pagehelper.PageHelp;
 import cn.fjut.gmxx.campusclub.pagehelper.PageInfo;
 import cn.fjut.gmxx.campusclub.sysmenu.api.SysMenuApiConstants;
@@ -46,20 +46,20 @@ public class SysOperationLogServiceImpl implements ISysOperationLogService {
 	private ISysOperationLogMapper sysOperationLogMapper;
     @Autowired
     private SysOperationLogRepository sysOperationLogRepository;
+    @Autowired
+    private ExcetionMsg excetionMsg;
+
 
 	@Override
 	public PageInfo<Map<String, Object>> findSysOperationLogPage(Map<String, Object> params) {
 		if (null == params) {
 			params = new HashMap<String, Object>();
 		}
-        //进行分页参数设置
         Map<String, Object> queryParams=new HashMap<>();
         MapTrunPojo.mapCopy(params,queryParams);
         queryParams= PageHelp.setPageParms(params);
-        //查询总数
         SysOperationLogEntity entity=new SysOperationLogEntity();
         entity.setDelInd("0");
-        //查询匹配器
         ExampleMatcher matcher=ExampleMatcher.matching().withIgnorePaths("statusCd").withIgnorePaths("version");
         Example<SysOperationLogEntity> example = Example.of(entity,matcher);
         queryParams.put("total",sysOperationLogRepository.count(example));
@@ -84,7 +84,8 @@ public class SysOperationLogServiceImpl implements ISysOperationLogService {
 	@Override
 	public Map<String, Object> saveSysOperationLog(Map<String, Object> params) {
 		if (params == null || params.isEmpty()) {
-			throw ExceptionFactory.getBizException("campus-club-00003", "params");
+            String msg = excetionMsg.getProperty("campus-club-00003","params");
+			throw ExceptionFactory.getBizException(msg);
 		}
 		SysOperationLogEntity entity = new SysOperationLogEntity();
 		entity.setCreateTime(new Date());//设置时间
@@ -105,7 +106,6 @@ public class SysOperationLogServiceImpl implements ISysOperationLogService {
 		entity.mapCoverToEntity(params);
 		SysOperationLogEntity result = sysOperationLogRepository.save(entity);
 		params.put(SysOperationLogApiConstants.UUID, result.getUuid());
-
 		return params;
 	}
 
@@ -114,49 +114,36 @@ public class SysOperationLogServiceImpl implements ISysOperationLogService {
     public SysOperationLogEntity deleteSysOperation(Map<String, Object> params) {
         String uuid = params.get(SysMenuApiConstants.uuid).toString();
         if (uuid == null) {
-            throw ExceptionFactory.getBizException("campus_club-00002");
+            String msg = excetionMsg.getProperty("campus-club-00004","uuid");
+            throw ExceptionFactory.getBizException(msg);
         }
         SysOperationLogEntity entity = sysOperationLogRepository.findByUuid(uuid);
         if (entity == null) {
-            throw ExceptionFactory.getBizException("campus_club-00003", "findOne");
+            String msg = excetionMsg.getProperty("campus-club-00003","entity");
+            throw ExceptionFactory.getBizException(msg);
         }
         entity.setDelInd(SysOperationLogApiConstants.DEL_IND_1);
         return sysOperationLogRepository.save(entity);
     }
 
+    @Transactional()
     @Override
-	public void updateSysOperationLog(Map<String, Object> params) {
+	public Map<String,Object> updateSysOperationLog(Map<String, Object> params) {
 		String uuid = MapUtils.getString(params, SysOperationLogApiConstants.UUID);
 		if (uuid == null) {
-			throw ExceptionFactory.getBizException("campus-club-00002");
+            String msg = excetionMsg.getProperty("campus-club-00004","uuid");
+			throw ExceptionFactory.getBizException(msg);
 		}
 		SysOperationLogEntity entity = new SysOperationLogEntity();
 		entity.setUuid(uuid);
 		entity=	sysOperationLogMapper.selectById(entity);
 		if (entity == null) {
-			throw ExceptionFactory.getBizException("campus-club-00003", "findOne");
+            String msg = excetionMsg.getProperty("campus-club-00003","entity");
+			throw ExceptionFactory.getBizException(msg);
 		}
 		sysOperationLogRepository.save(entity);
+		return params;
 	}
-	
-	@Override
-	public void deleteSysOperationLog(Map<String, Object> params) {
-		String id = MapUtils.getString(params, SysOperationLogApiConstants.UUID);
-		if (id == null) {
-			throw ExceptionFactory.getBizException("campus-club-00002");
-		}
-		SysOperationLogEntity entity = new SysOperationLogEntity();
-		entity.setUuid(id);
-		entity=	sysOperationLogMapper.selectById(entity);
-		if (entity == null) {
-			throw ExceptionFactory.getBizException("campus-club-00003", "findOne");
-		}
-		entity.setDelInd(SysOperationLogApiConstants.DEL_IND_1); // 逻辑删除标识
-		sysOperationLogRepository.save(entity);
-	}
-	
-	
-	
 }
 
 

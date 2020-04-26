@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.Map;
 
-
 @Service("sysOperationLogApi")
 public class SysOperationLogApiImpl implements ISysOperationLogApi {
 
@@ -40,9 +39,8 @@ public class SysOperationLogApiImpl implements ISysOperationLogApi {
 			return sysOperationLogService.saveSysOperationLog(params);
 		} else {
 			//修改
-			sysOperationLogService.updateSysOperationLog(params);
+			return sysOperationLogService.updateSysOperationLog(params);
 		}
-		return null;
 	}
 
 	@Override
@@ -51,11 +49,6 @@ public class SysOperationLogApiImpl implements ISysOperationLogApi {
 		params.clear();
 		params.put("result",sysOperationLogEntity);
 		return params;
-	}
-
-	@Override
-	public void deleteSysOperationLogTrans(Map<String, Object> params) {
-		sysOperationLogService.deleteSysOperationLog(params);
 	}
 
 }

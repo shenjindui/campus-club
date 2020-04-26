@@ -1,12 +1,9 @@
 package cn.fjut.gmxx.campusclub.sysoperationlog.service;
 
-
 import cn.fjut.gmxx.campusclub.pagehelper.PageInfo;
 import cn.fjut.gmxx.campusclub.sysoperationlog.entity.SysOperationLogEntity;
 
 import java.util.Map;
-
-
 
 /**
 * @类名称 ISysOperationLogService
@@ -24,17 +21,39 @@ import java.util.Map;
 */
 public interface ISysOperationLogService {
 
+    /**
+     * 分页查询系统操作日志
+     * @param params
+     * @return
+     */
 	PageInfo<Map<String, Object>> findSysOperationLogPage(Map<String, Object> params);
 
+    /**
+     * 根据Map参数获取系统操作详情
+     * @param params
+     * @return
+     */
 	Map<String, Object> getSysOperationLogMap(Map<String, Object> params);
 
+    /**
+     * 保存系统操作日志详情
+     * @param params
+     * @return
+     */
 	Map<String,Object> saveSysOperationLog(Map<String, Object> params);
 
+    /**
+     * 删除系统操作日志
+     * @param params
+     * @return
+     */
 	SysOperationLogEntity deleteSysOperation(Map<String, Object> params);
 
-	void updateSysOperationLog(Map<String, Object> params);
-
-	void deleteSysOperationLog(Map<String, Object> params);
-
+    /**
+     * 更新系统操作日志
+     * @param params
+     * @return
+     */
+	Map<String,Object> updateSysOperationLog(Map<String, Object> params);
 }
 

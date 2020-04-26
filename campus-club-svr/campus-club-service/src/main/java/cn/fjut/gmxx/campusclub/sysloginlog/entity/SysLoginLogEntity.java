@@ -60,7 +60,7 @@ public class SysLoginLogEntity extends BaseEntity implements Serializable{
     * 用户登录名
     */
     @Column(name = "LOGIN_NAME",columnDefinition = "varchar(32) COMMENT '用户登录名'")
-    private Integer loginName;
+    private String loginName;
 
     /**
     * 手机号
@@ -126,11 +126,11 @@ public class SysLoginLogEntity extends BaseEntity implements Serializable{
         this.realname = realname;
     }
 
-    public Integer getLoginName() {
+    public String getLoginName() {
         return loginName;
     }
 
-    public void setLoginName(Integer loginName) {
+    public void setLoginName(String loginName) {
         this.loginName = loginName;
     }
 
@@ -201,46 +201,46 @@ public class SysLoginLogEntity extends BaseEntity implements Serializable{
     public void mapCoverToEntity(Map<String, Object> entityMap) {
         if (entityMap != null && !entityMap.isEmpty()) {
             if (entityMap.containsKey("browserName")) {
-                this.browserName = MapUtils.getString(entityMap, "browserName");
+                this.browserName = MapUtils.getString(entityMap, "browserName").trim();
             }
             if (entityMap.containsKey("browserVersion")) {
-                this.browserVersion = MapUtils.getString(entityMap, "browserVersion");
+                this.browserVersion = MapUtils.getString(entityMap, "browserVersion").trim();
             }
             if (entityMap.containsKey("osName")) {
-                this.osName = MapUtils.getString(entityMap, "osName");
+                this.osName = MapUtils.getString(entityMap, "osName").trim();
             }
             if (entityMap.containsKey("osVersion")) {
-                this.osVersion = MapUtils.getString(entityMap, "osVersion");
+                this.osVersion = MapUtils.getString(entityMap, "osVersion").trim();
             }
             if (entityMap.containsKey("loginIp")) {
-                this.loginIp = MapUtils.getString(entityMap, "loginIp");
+                this.loginIp = MapUtils.getString(entityMap, "loginIp").trim();
             }
             if (entityMap.containsKey("mac")) {
-                this.mac = MapUtils.getString(entityMap, "mac");
+                this.mac = MapUtils.getString(entityMap, "mac").trim();
             }
             if (entityMap.containsKey("uuid")) {
-                this.uuid = MapUtils.getString(entityMap, "uuid");
+                this.uuid = MapUtils.getString(entityMap, "uuid").trim();
             }
             if (entityMap.containsKey("userNum")) {
-                this.userNum = MapUtils.getString(entityMap, "userNum");
+                this.userNum = MapUtils.getString(entityMap, "userNum").trim();
             }
             if (entityMap.containsKey("realname")) {
-                this.realname = MapUtils.getString(entityMap, "realname");
+                this.realname = MapUtils.getString(entityMap, "realname").trim();
             }
             if (entityMap.containsKey("loginName")) {
-                this.loginName = MapUtils.getInteger(entityMap, "loginName");
+                this.loginName = MapUtils.getString(entityMap, "loginName").trim();
             }
             if (entityMap.containsKey("mobile")) {
-                this.mobile = MapUtils.getString(entityMap, "mobile");
+                this.mobile = MapUtils.getString(entityMap, "mobile").trim();
             }
             if (entityMap.containsKey("email")) {
-                this.email = MapUtils.getString(entityMap, "email");
+                this.email = MapUtils.getString(entityMap, "email").trim();
             }
             if (entityMap.containsKey("statusCd")) {
                 this.statusCd = MapUtils.getInteger(entityMap, "statusCd");
             }
             if (entityMap.containsKey("remark")) {
-                this.remark = MapUtils.getString(entityMap, "remark");
+                this.remark = MapUtils.getString(entityMap, "remark").trim();
             }
             if (entityMap.containsKey("createTime")) {
                 this.createTime = new Date(MapUtils.getString(entityMap, "createTime"));
@@ -249,13 +249,13 @@ public class SysLoginLogEntity extends BaseEntity implements Serializable{
                 this.updateTime = new Date(MapUtils.getString(entityMap, "updateTime"));
             }
             if (entityMap.containsKey("createUser")) {
-                this.createUser = MapUtils.getString(entityMap, "createUser");
+                this.createUser = MapUtils.getString(entityMap, "createUser").trim();
             }
             if (entityMap.containsKey("updateUser")) {
-                this.updateUser = MapUtils.getString(entityMap, "updateUser");
+                this.updateUser = MapUtils.getString(entityMap, "updateUser").trim();
             }
             if (entityMap.containsKey("delInd")) {
-                this.delInd = MapUtils.getString(entityMap, "delInd");
+                this.delInd = MapUtils.getString(entityMap, "delInd").trim();
             }
             if (entityMap.containsKey("version")) {
                 this.version = MapUtils.getInteger(entityMap, "version");
