@@ -201,46 +201,46 @@ public class SysLoginLogEntity extends BaseEntity implements Serializable{
     public void mapCoverToEntity(Map<String, Object> entityMap) {
         if (entityMap != null && !entityMap.isEmpty()) {
             if (entityMap.containsKey("browserName")) {
-                this.browserName = MapUtils.getString(entityMap, "browserName").trim();
+                this.browserName = MapUtils.getString(entityMap, "browserName");
             }
             if (entityMap.containsKey("browserVersion")) {
-                this.browserVersion = MapUtils.getString(entityMap, "browserVersion").trim();
+                this.browserVersion = MapUtils.getString(entityMap, "browserVersion");
             }
             if (entityMap.containsKey("osName")) {
-                this.osName = MapUtils.getString(entityMap, "osName").trim();
+                this.osName = MapUtils.getString(entityMap, "osName");
             }
             if (entityMap.containsKey("osVersion")) {
-                this.osVersion = MapUtils.getString(entityMap, "osVersion").trim();
+                this.osVersion = MapUtils.getString(entityMap, "osVersion");
             }
             if (entityMap.containsKey("loginIp")) {
-                this.loginIp = MapUtils.getString(entityMap, "loginIp").trim();
+                this.loginIp = MapUtils.getString(entityMap, "loginIp");
             }
             if (entityMap.containsKey("mac")) {
-                this.mac = MapUtils.getString(entityMap, "mac").trim();
+                this.mac = MapUtils.getString(entityMap, "mac");
             }
             if (entityMap.containsKey("uuid")) {
-                this.uuid = MapUtils.getString(entityMap, "uuid").trim();
+                this.uuid = MapUtils.getString(entityMap, "uuid");
             }
             if (entityMap.containsKey("userNum")) {
-                this.userNum = MapUtils.getString(entityMap, "userNum").trim();
+                this.userNum = MapUtils.getString(entityMap, "userNum");
             }
             if (entityMap.containsKey("realname")) {
-                this.realname = MapUtils.getString(entityMap, "realname").trim();
+                this.realname = MapUtils.getString(entityMap, "realname");
             }
             if (entityMap.containsKey("loginName")) {
-                this.loginName = MapUtils.getString(entityMap, "loginName").trim();
+                this.loginName = MapUtils.getString(entityMap, "loginName");
             }
             if (entityMap.containsKey("mobile")) {
-                this.mobile = MapUtils.getString(entityMap, "mobile").trim();
+                this.mobile = MapUtils.getString(entityMap, "mobile");
             }
             if (entityMap.containsKey("email")) {
-                this.email = MapUtils.getString(entityMap, "email").trim();
+                this.email = MapUtils.getString(entityMap, "email");
             }
             if (entityMap.containsKey("statusCd")) {
                 this.statusCd = MapUtils.getInteger(entityMap, "statusCd");
             }
             if (entityMap.containsKey("remark")) {
-                this.remark = MapUtils.getString(entityMap, "remark").trim();
+                this.remark = MapUtils.getString(entityMap, "remark");
             }
             if (entityMap.containsKey("createTime")) {
                 this.createTime = new Date(MapUtils.getString(entityMap, "createTime"));
@@ -249,13 +249,13 @@ public class SysLoginLogEntity extends BaseEntity implements Serializable{
                 this.updateTime = new Date(MapUtils.getString(entityMap, "updateTime"));
             }
             if (entityMap.containsKey("createUser")) {
-                this.createUser = MapUtils.getString(entityMap, "createUser").trim();
+                this.createUser = MapUtils.getString(entityMap, "createUser");
             }
             if (entityMap.containsKey("updateUser")) {
-                this.updateUser = MapUtils.getString(entityMap, "updateUser").trim();
+                this.updateUser = MapUtils.getString(entityMap, "updateUser");
             }
             if (entityMap.containsKey("delInd")) {
-                this.delInd = MapUtils.getString(entityMap, "delInd").trim();
+                this.delInd = MapUtils.getString(entityMap, "delInd");
             }
             if (entityMap.containsKey("version")) {
                 this.version = MapUtils.getInteger(entityMap, "version");
