@@ -34,12 +34,15 @@ public class BaseClubMemberApiImpl implements IBaseClubMemberApi {
 	public PageInfo<Map<String, Object>> findBaseClubMemberPage(Map<String, Object> params) {
 		//根据社团负责人 学号获取社团编号
 		PageInfo<Map<String, Object>> page=null;
+		//查询社团列表
 		PageInfo<Map<String, Object>> pageList=baseClubInfoService.findBaseClubInfoPage(params);
 		if(pageList==null||pageList.getList().size()<1){
 			return page;
 		}
-		Map<String,Object> resultMap=baseClubInfoService.findBaseClubInfoPage(params).getList().get(0);
-		params.put("stCd",MapUtils.getString(resultMap,"stCd"));
+		//查询社团成员 如果是社长的话取第一个可以，若是superadmin则是全部
+		Map<String,Object> resultMap=pageList.getList().get(0);
+		params.put("stCd",MapUtils.getString(params,"stChargeSno")!=null?
+                MapUtils.getString(resultMap,"stCd"):null);
 		params.remove("pageSize");
 		params.remove("currentPage");
 		page = baseClubMemberService.findBaseClubMemberPage(params);

@@ -163,9 +163,19 @@ public class BaseClubNewsServiceImpl implements IBaseClubNewsService{
 		entity.setDelInd(BaseClubNewsApiConstants.DEL_IND_1); // 逻辑删除标识
         return baseClubNewsRepository.save(entity);
 	}
-	
-	
-	
+
+	@Override
+	public long findBaseClubNewsCount(Map<String, Object> params) {
+		BaseClubNewsEntity entity = new BaseClubNewsEntity();
+		if(MapUtils.getString(params,"newsStCd")!=null){
+			entity.setNewsStCd(MapUtils.getString(params,"newsStCd"));
+		}
+		ExampleMatcher matcher=ExampleMatcher.matching().withMatcher("newsStCd",
+				ExampleMatcher.GenericPropertyMatchers.contains())
+				.withIgnorePaths("statusCd").withIgnorePaths("version");
+		Example<BaseClubNewsEntity> example = Example.of(entity,matcher);
+		return baseClubNewsRepository.count(example);
+	}
 }
 
 

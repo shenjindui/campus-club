@@ -178,6 +178,20 @@ public class BaseClubNoticeServiceImpl implements IBaseClubNoticeService{
         return baseClubNoticeRepository.save(entity);
     }
 
+	@Override
+	public long findBaseClubNoticeCount(Map<String, Object> params) {
+		BaseClubNoticeEntity entity = new BaseClubNoticeEntity();
+		if(MapUtils.getString(params,"noticeStCd")!=null){
+			entity.setNoticeStCd(MapUtils.getString(params,"noticeStCd"));
+		}
+		entity.setDelInd("0");
+		ExampleMatcher matcher=ExampleMatcher.matching().withMatcher("noticeStCd",
+				ExampleMatcher.GenericPropertyMatchers.contains())
+				.withIgnorePaths("statusCd").withIgnorePaths("version");
+		Example<BaseClubNoticeEntity> example = Example.of(entity,matcher);
+		return baseClubNoticeRepository.count(example);
+	}
+
 }
 
 

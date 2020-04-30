@@ -163,9 +163,19 @@ public class BaseClubMessageServiceImpl implements IBaseClubMessageService {
 		entity.setDelInd(BaseClubMessageApiConstants.DEL_IND_1); // 逻辑删除标识
         return baseClubMessageRepository.save(entity);
 	}
-	
-	
-	
+
+    @Override
+    public long findBaseClubMessageCount(Map<String, Object> params) {
+        BaseClubMessageEntity entity = new BaseClubMessageEntity();
+        if(MapUtils.getString(params,"messageStCd")!=null){
+            entity.setMessageStCd(MapUtils.getString(params,"messageStCd"));
+        }
+        ExampleMatcher matcher=ExampleMatcher.matching().withMatcher("messageStCd",
+                ExampleMatcher.GenericPropertyMatchers.contains())
+                .withIgnorePaths("statusCd").withIgnorePaths("version");
+        Example<BaseClubMessageEntity> example = Example.of(entity,matcher);
+        return baseClubMessageRepository.count(example);
+    }
 }
 
 

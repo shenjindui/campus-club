@@ -37,5 +37,7 @@ public interface IBaseClubNoticeService {
 
 	BaseClubNoticeEntity deleteBaseClubNotice(Map<String, Object> params);
 
+	long findBaseClubNoticeCount(Map<String, Object> params);
+
 }
 

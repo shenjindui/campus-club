@@ -8,7 +8,7 @@ import cn.fjut.gmxx.campusclub.baseclubinfo.api.IBaseClubInfoApi;
 import cn.fjut.gmxx.campusclub.baseddct.api.IBaseDdctApi;
 import cn.fjut.gmxx.campusclub.baseddct.common.DdctUtils;
 import cn.fjut.gmxx.campusclub.pagehelper.PageInfo;
-import cn.fjut.gmxx.campusclub.utlis.DateUtils;
+import cn.fjut.gmxx.campusclub.utlis.QueryTimeParseUtils;
 import org.apache.commons.collections.MapUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,13 +31,7 @@ public class BaseClubFundsApiImpl implements IBaseClubFundsApi {
 	private DdctUtils dctUtils;
 	@Override
 	public PageInfo<Map<String, Object>> findBaseClubFundsPage(Map<String, Object> params) {
-		if(params!=null && params.get("paramsTime")!=null){ //如果时间控件的值不为空
-			List<String> paramsTimeList=(List<String>)params.get("paramsTime");
-			String startTime= DateUtils.dealDateFormats(paramsTimeList.get(0));
-			String endTime=DateUtils.dealDateFormats(paramsTimeList.get(1));
-			params.put("startTime",startTime);
-			params.put("endTime",endTime);
-		}
+		QueryTimeParseUtils.parseQueryTime(params);
 		PageInfo<Map<String, Object>> page = baseClubFundsService.findBaseClubFundsPage(params);
 		page.setTotal(baseClubFundsService.findBaseClubCount(params));
 		return page;

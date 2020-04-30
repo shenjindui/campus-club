@@ -35,4 +35,6 @@ public interface IBaseClubInfoApi {
 	Map<String, Object> joinBaseClubInfoMap(Map<String, Object> params);
 
 	List<Map<String, Object>> findBaseClubInfo(Map<String, Object> params);
+
+	List<Map<String, Object>> getBaseClubInfoByStsy(Map<String, Object> params);
 }

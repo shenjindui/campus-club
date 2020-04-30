@@ -49,7 +49,7 @@ public class ClubInfoController extends BaseAppAction {
 
 
     @SysOperationLog("社团列表")
-    @TokenCheck  //此注解使用开启token验证，对于访问后台数据的方法，请打开此注解
+    @TokenCheck
     @ApiOperation(value = "社团列表", notes = "社团列表方法", httpMethod = "POST")
     @RequestMapping(value = "/clublist", method = RequestMethod.POST, produces = "application/json; charset=UTF-8")
     @ResponseBody
@@ -320,5 +320,23 @@ public class ClubInfoController extends BaseAppAction {
         List<Map<String, Object>> users = baseClubMemberApi.findBaseClubMemberAll(queryParams);
         dataMap.put("userList", users);
         return dataMap;
+    }
+
+    @SysOperationLog("社团列表社团社员")
+    @TokenCheck
+    @ApiOperation(value = "社团列表社团社员", notes = "社团列表社团社员方法", httpMethod = "POST")
+    @RequestMapping(value = "/clublistByStsy", method = RequestMethod.POST, produces = "application/json; charset=UTF-8")
+    @ResponseBody
+    public ResponseVO clublistByStsy(@RequestBody  Map<String, Object> params) {
+        try {
+            List<Map<String, Object>> resultMaps=baseClubInfoApi.getBaseClubInfoByStsy(params);
+            if(resultMaps!=null){
+                return successResponse(resultMaps, Constant.SUCCESS);
+            }else{
+                return errorResponse(Constant.FAIL);
+            }
+        } catch (Exception e) {
+            return errorResponse(e.getMessage());
+        }
     }
 }

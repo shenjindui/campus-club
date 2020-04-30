@@ -60,25 +60,19 @@ public class BaseClubInfoServiceImpl implements IBaseClubInfoService {
 
 	@Override
 	public PageInfo<Map<String, Object>> findBaseClubInfoPage(Map<String, Object> params) {
-		// 判断当前参数params是否为空，则为默认查询
 		if (null == params) {
 			params = new HashMap<String, Object>();
 		}
-		//进行分页参数设置
-		//进行分页参数设置
 		Map<String, Object> queryParams=new HashMap<>();
 		MapTrunPojo.mapCopy(params,queryParams);
 		queryParams= PageHelp.setPageParms(params);
-        //查询总数
-		//查询总数
 		BaseClubInfoEntity entity=new BaseClubInfoEntity();
 		entity.setDelInd("0");
-		//查询匹配器
 		ExampleMatcher matcher=ExampleMatcher.matching().withIgnorePaths("statusCd").withIgnorePaths("version");
 		Example<BaseClubInfoEntity> example = Example.of(entity,matcher);
 		queryParams.put("total",baseClubInfRepository.count(example));
 		queryParams.put(BaseClubInfoApiConstants.DEL_IND, BaseClubInfoApiConstants.DEL_IND_0);
-		return new PageInfo<>(baseClubInfoMapper.findBaseClubInfoList(params),queryParams);
+		return new PageInfo<>(baseClubInfoMapper.findBaseClubInfoList(queryParams),queryParams);
 	}
 	
 	@Override

@@ -1,15 +1,18 @@
 package cn.fjut.gmxx.campusclub.baseclubnotice.api.impl;
 
+import cn.fjut.gmxx.campusclub.baseclubinfo.api.IBaseClubInfoApi;
 import cn.fjut.gmxx.campusclub.baseclubnotice.api.BaseClubNoticeApiConstants;
 import cn.fjut.gmxx.campusclub.baseclubnotice.api.IBaseClubNoticeApi;
 import cn.fjut.gmxx.campusclub.baseclubnotice.entity.BaseClubNoticeEntity;
 import cn.fjut.gmxx.campusclub.baseclubnotice.service.IBaseClubNoticeService;
 import cn.fjut.gmxx.campusclub.pagehelper.PageInfo;
 import cn.fjut.gmxx.campusclub.utlis.DateUtils;
+import cn.fjut.gmxx.campusclub.utlis.QueryTimeParseUtils;
 import org.apache.commons.collections.MapUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -18,17 +21,19 @@ public class BaseClubNoticeApiImpl implements IBaseClubNoticeApi {
 
 	@Autowired
 	private IBaseClubNoticeService baseClubNoticeService;
-
+    @Autowired
+    IBaseClubInfoApi baseClubInfoApi;
 	@Override
 	public PageInfo<Map<String, Object>> findBaseClubNoticePage(Map<String, Object> params) {
-		if(params!=null && params.get("paramsTime")!=null){
-			List<String> paramsTimeList=(List<String>)params.get("paramsTime");
-			String startTime= DateUtils.dealDateFormats(paramsTimeList.get(0));
-			String endTime=DateUtils.dealDateFormats(paramsTimeList.get(1));
-			params.put("startTime",startTime);
-			params.put("endTime",endTime);
+		QueryTimeParseUtils.parseQueryTime(params);
+		if(MapUtils.getString(params,"stChargeSno")!=null){
+			Map<String, Object> queryParams = new HashMap<>();
+			queryParams.put("stChargeSno",MapUtils.getString(params,"stChargeSno"));
+			Map<String, Object> resultMap  = baseClubInfoApi.getBaseClubInfoMap(queryParams);
+			params.put("noticeStCd",MapUtils.getString(resultMap,"stCd"));
 		}
 		PageInfo<Map<String, Object>> page = baseClubNoticeService.findBaseClubNoticePage(params);
+        page.setTotal(baseClubNoticeService.findBaseClubNoticeCount(params));
 		return page;
 	}
 

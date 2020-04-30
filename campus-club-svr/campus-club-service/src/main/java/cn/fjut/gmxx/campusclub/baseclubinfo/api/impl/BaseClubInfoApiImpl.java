@@ -18,10 +18,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service("baseClubInfoApi")
 public class BaseClubInfoApiImpl implements IBaseClubInfoApi {
@@ -177,6 +174,22 @@ public class BaseClubInfoApiImpl implements IBaseClubInfoApi {
             params = new HashMap<String, Object>();
         }
         return baseClubInfoService.findBaseClubInfo(params);
+    }
+
+    @Override
+    public List<Map<String, Object>> getBaseClubInfoByStsy(Map<String, Object> params) {
+        List<Map<String, Object>> lists = new ArrayList<>();
+        Map<String, Object> resultMap = baseClubMemberService.getBaseClubMemberMap(params);
+        Map<String, Object> queryMap = new HashMap<>();
+        queryMap.put("stCd",MapUtils.getString(resultMap,"stCd"));
+        Map<String, Object> resultMaps  = baseClubInfoService.getBaseClubInfoMap(queryMap);
+        Map<String, Object> queryMaps=new HashMap<>();
+        queryMap.put("filePurpose",6);
+        Map<String, Object> reqsultMap=baseFileRscService.getBaseFileRscMap(queryMaps);
+        //前端文件格式转换
+        resultMaps.put("fileRte", UrlUtils.getTrueUrlByString(MapUtils.getString(reqsultMap,"fileRte")));
+        lists.add(resultMaps);
+        return lists;
     }
 
 }
