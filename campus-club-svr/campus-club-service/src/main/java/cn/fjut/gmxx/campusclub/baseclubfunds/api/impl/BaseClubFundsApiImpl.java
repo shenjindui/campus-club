@@ -29,10 +29,23 @@ public class BaseClubFundsApiImpl implements IBaseClubFundsApi {
 	private IBaseClubInfoApi baseClubInfoApi;
     @Autowired
 	private DdctUtils dctUtils;
+
 	@Override
 	public PageInfo<Map<String, Object>> findBaseClubFundsPage(Map<String, Object> params) {
 		QueryTimeParseUtils.parseQueryTime(params);
+		if(MapUtils.getString(params,"stChargeSno")!=null){
+			Map<String, Object> queryParams = new HashMap<>();
+			queryParams.put("stChargeSno",MapUtils.getString(params,"stChargeSno"));
+			Map<String, Object> resultMap  = baseClubInfoApi.getBaseClubInfoMap(queryParams);
+			params.put("stCd",MapUtils.getString(resultMap,"stCd"));
+		}
 		PageInfo<Map<String, Object>> page = baseClubFundsService.findBaseClubFundsPage(params);
+		if(page!=null && page.getList().size()>1){
+            for(Map<String, Object> map:page.getList()){
+                map.put("typeDdct", dctUtils.getDdctEntity("fundstype", "fundstype"+
+                        MapUtils.getString(map,"type")).getDctTpNm());
+            }
+        }
 		page.setTotal(baseClubFundsService.findBaseClubCount(params));
 		return page;
 	}

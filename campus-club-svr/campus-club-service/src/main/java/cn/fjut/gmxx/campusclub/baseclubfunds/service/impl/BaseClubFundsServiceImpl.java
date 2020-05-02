@@ -228,6 +228,9 @@ public class BaseClubFundsServiceImpl implements IBaseClubFundsService {
 	public long findBaseClubCount(Map<String, Object> params) {
 		//查询匹配器
 		BaseClubFundsEntity entity = new BaseClubFundsEntity();
+		if(MapUtils.getString(params,"stCd")!=null){
+			entity.setStCd(MapUtils.getString(params,"stCd"));
+		}
 		String fundsAssociationCode= MapUtils.getString(params,"fundsAssociationCode");
 		entity.setFundsAssociationCode(fundsAssociationCode);
 		ExampleMatcher matcher=ExampleMatcher.matching().withMatcher("ratersPsccd",

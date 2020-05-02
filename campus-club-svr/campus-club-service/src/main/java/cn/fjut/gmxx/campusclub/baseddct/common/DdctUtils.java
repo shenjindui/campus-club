@@ -2,6 +2,7 @@ package cn.fjut.gmxx.campusclub.baseddct.common;/**
  * Created by admin on 2020/3/22.
  */
 
+import cn.fjut.gmxx.campusclub.baseddct.entity.BaseDdctEntity;
 import cn.fjut.gmxx.campusclub.baseddct.service.IBaseDdctService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -15,5 +16,8 @@ public class DdctUtils {
     @Autowired IBaseDdctService baseDdctService;
     public  String getValue(String ddctKey,String dctTpCd){
         return baseDdctService.getBaseDetail(ddctKey,dctTpCd).getDctVal();
+    }
+    public BaseDdctEntity getDdctEntity(String ddctKey, String dctTpCd){
+        return baseDdctService.getBaseDetail(ddctKey,dctTpCd);
     }
 }
