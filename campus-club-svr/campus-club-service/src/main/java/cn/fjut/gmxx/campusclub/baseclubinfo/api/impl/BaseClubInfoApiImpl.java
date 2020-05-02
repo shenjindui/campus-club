@@ -180,15 +180,17 @@ public class BaseClubInfoApiImpl implements IBaseClubInfoApi {
     public List<Map<String, Object>> getBaseClubInfoByStsy(Map<String, Object> params) {
         List<Map<String, Object>> lists = new ArrayList<>();
         Map<String, Object> resultMap = baseClubMemberService.getBaseClubMemberMap(params);
-        Map<String, Object> queryMap = new HashMap<>();
-        queryMap.put("stCd",MapUtils.getString(resultMap,"stCd"));
-        Map<String, Object> resultMaps  = baseClubInfoService.getBaseClubInfoMap(queryMap);
-        Map<String, Object> queryMaps=new HashMap<>();
-        queryMap.put("filePurpose",6);
-        Map<String, Object> reqsultMap=baseFileRscService.getBaseFileRscMap(queryMaps);
-        //前端文件格式转换
-        resultMaps.put("fileRte", UrlUtils.getTrueUrlByString(MapUtils.getString(reqsultMap,"fileRte")));
-        lists.add(resultMaps);
+        if(resultMap!=null){
+            Map<String, Object> queryMap = new HashMap<>();
+            queryMap.put("stCd",MapUtils.getString(resultMap,"stCd"));
+            Map<String, Object> resultMaps  = baseClubInfoService.getBaseClubInfoMap(queryMap);
+            Map<String, Object> queryMaps=new HashMap<>();
+            queryMap.put("filePurpose",6);
+            Map<String, Object> reqsultMap=baseFileRscService.getBaseFileRscMap(queryMaps);
+            //前端文件格式转换
+            resultMaps.put("fileRte", UrlUtils.getTrueUrlByString(MapUtils.getString(reqsultMap,"fileRte")));
+            lists.add(resultMaps);
+        }
         return lists;
     }
 

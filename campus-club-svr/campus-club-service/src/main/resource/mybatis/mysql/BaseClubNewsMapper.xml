@@ -52,7 +52,15 @@
             <if test="newsStatus!=null and newsStatus!=''">AND base_club_news.NEWS_STATUS = #{newsStatus}</if>
             <if test="trafficVolume!=null and trafficVolume!=''">AND base_club_news.TRAFFIC_VOLUME = #{trafficVolume}</if>
             <if test="newsStCd!=null and newsStCd!=''">AND base_club_news.NEWS_ST_CD = #{newsStCd}</if>
+            <if test="newsStCds != null and newsStCds.size() > 0">
+                AND base_club_news.NEWS_ST_CD IN
+                <foreach collection="newsStCds" open="(" separator="," close=")" item="newsStCd">
+                    #{newsStCd}
+                </foreach>
+            </if>
             <if test="remark!=null and remark!=''">AND base_club_news.REMARK = #{remark}</if>
+            <if test="startTime!=null and startTime!=''">AND base_club_news.create_time &gt;= #{startTime}</if>
+            <if test="endTime!=null and endTime!=''">AND base_club_news.create_time &lt;= #{endTime}</if>
         </where>
     </sql>
 

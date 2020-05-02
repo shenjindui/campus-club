@@ -71,12 +71,12 @@ public class BaseClubMemberEntity extends BaseEntity implements Serializable{
     * 社员学号
     */
     @Column(name = "MEMBER_SNO")
-    private Integer memberSno;
+    private String memberSno;
 
-    public Integer getMemberSno() {
+    public String getMemberSno() {
     	return memberSno;
     }
-    public void setMemberSno(Integer memberSno) {
+    public void setMemberSno(String memberSno) {
     	this.memberSno = memberSno;
     }
     /**
@@ -175,7 +175,7 @@ public class BaseClubMemberEntity extends BaseEntity implements Serializable{
                 this.memberName = MapUtils.getString(entityMap, "memberName");
             }
             if (entityMap.containsKey("memberSno")) {
-                this.memberSno = MapUtils.getInteger(entityMap, "memberSno");
+                this.memberSno = MapUtils.getString(entityMap, "memberSno");
             }
             if (entityMap.containsKey("stCd")) {
                 this.stCd = MapUtils.getString(entityMap, "stCd");

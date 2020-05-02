@@ -145,4 +145,26 @@ public class BaseClubNewsAction extends BaseAppAction {
             return errorResponse(e.getMessage());
         }
     }
+    @ApiOperation(value = "新闻列表后台", notes = "新闻列表后台", httpMethod = "POST")
+    @RequestMapping(value = "/clubNewsLists", method = RequestMethod.POST, produces = "application/json; charset=UTF-8")
+    @TokenCheck
+    @ResponseBody
+    public ResponseVO listBaseClubNew(@RequestBody @Valid Map<String, Object> params, BindingResult result)throws Exception {
+        //参数校验
+        if (result.hasErrors()) {
+            for (ObjectError error : result.getAllErrors()) {
+                return errorResponse(error);
+            }
+        }
+        try {
+            PageInfo<Map<String, Object>> resultMaps=baseClubNewsApi.findBaseClubNewsPage(params);
+            if(resultMaps!=null){
+                return successResponse(resultMaps, Constant.SUCCESS);
+            }else{
+                return errorResponse(Constant.FAIL);
+            }
+        } catch (Exception e) {
+            return errorResponse(e.getMessage());
+        }
+    }
 }

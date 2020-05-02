@@ -13,7 +13,7 @@
 
         <result column="MEMBER_CD" property="memberCd" javaType="java.lang.String"/>
         <result column="MEMBER_NAME" property="memberName" javaType="java.lang.String"/>
-        <result column="MEMBER_SNO" property="memberSno" javaType="java.lang.Integer"/>
+        <result column="MEMBER_SNO" property="memberSno" javaType="java.lang.String"/>
         <result column="ST_CD" property="stCd" javaType="java.lang.String"/>
         <result column="ST_DEPART_CD" property="stDepartCd" javaType="java.lang.String"/>
         <result column="POSITION_CD" property="positionCd" javaType="java.lang.String"/>

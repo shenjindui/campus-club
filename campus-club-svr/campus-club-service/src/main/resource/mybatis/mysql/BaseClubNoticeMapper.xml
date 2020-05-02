@@ -52,6 +52,12 @@
             <if test="noticeStatus!=null and noticeStatus!=''">AND base_club_notice.NOTICE_STATUS = #{noticeStatus}</if>
             <if test="trafficVolume!=null and trafficVolume!=''">AND base_club_notice.TRAFFIC_VOLUME = #{trafficVolume}</if>
             <if test="remark!=null and remark!=''">AND base_club_notice.REMARK = #{remark}</if>
+            <if test="noticeStCds != null and noticeStCds.size() > 0">
+                AND base_club_notice.NOTICE_ST_CD IN
+                <foreach collection="noticeStCds" open="(" separator="," close=")" item="noticeStCd">
+                    #{noticeStCd}
+                </foreach>
+            </if>
         </where>
     </sql>
 

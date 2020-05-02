@@ -20,6 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -126,7 +127,8 @@ public class BaseClubNewsServiceImpl implements IBaseClubNewsService{
 		params.put(BaseClubNewsApiConstants.UUID, result.getUuid());
 		return params;
 	}
-	
+
+	@Transactional
 	@Override
 	public Map<String, Object> updateBaseClubNews(Map<String, Object> params) {
 		//update要先根据ID获取BO对象，然后在拷贝map里面的值
@@ -170,6 +172,9 @@ public class BaseClubNewsServiceImpl implements IBaseClubNewsService{
 		if(MapUtils.getString(params,"newsStCd")!=null){
 			entity.setNewsStCd(MapUtils.getString(params,"newsStCd"));
 		}
+        if(MapUtils.getString(params,"newsStatus")!=null){
+            entity.setNewsStatus(MapUtils.getString(params,"newsStatus"));
+        }
 		ExampleMatcher matcher=ExampleMatcher.matching().withMatcher("newsStCd",
 				ExampleMatcher.GenericPropertyMatchers.contains())
 				.withIgnorePaths("statusCd").withIgnorePaths("version");

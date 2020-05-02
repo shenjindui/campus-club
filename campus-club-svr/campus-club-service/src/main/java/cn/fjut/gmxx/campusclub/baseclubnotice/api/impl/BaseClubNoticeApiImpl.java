@@ -1,6 +1,7 @@
 package cn.fjut.gmxx.campusclub.baseclubnotice.api.impl;
 
 import cn.fjut.gmxx.campusclub.baseclubinfo.api.IBaseClubInfoApi;
+import cn.fjut.gmxx.campusclub.baseclubmember.service.IBaseClubMemberService;
 import cn.fjut.gmxx.campusclub.baseclubnotice.api.BaseClubNoticeApiConstants;
 import cn.fjut.gmxx.campusclub.baseclubnotice.api.IBaseClubNoticeApi;
 import cn.fjut.gmxx.campusclub.baseclubnotice.entity.BaseClubNoticeEntity;
@@ -12,6 +13,7 @@ import org.apache.commons.collections.MapUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,6 +23,8 @@ public class BaseClubNoticeApiImpl implements IBaseClubNoticeApi {
 
 	@Autowired
 	private IBaseClubNoticeService baseClubNoticeService;
+	@Autowired
+    IBaseClubMemberService   baseClubMemberService;
     @Autowired
     IBaseClubInfoApi baseClubInfoApi;
 	@Override
@@ -32,6 +36,17 @@ public class BaseClubNoticeApiImpl implements IBaseClubNoticeApi {
 			Map<String, Object> resultMap  = baseClubInfoApi.getBaseClubInfoMap(queryParams);
 			params.put("noticeStCd",MapUtils.getString(resultMap,"stCd"));
 		}
+		//如果是社员查看获取它的社团编号
+        if(MapUtils.getString(params,"stSySno")!=null){
+            List<Map<String, Object>> results = baseClubMemberService.findBaseClubMemberAll(params);
+            List<String> lists = new ArrayList<>();
+            for (Map<String, Object> map:results) {
+                lists.add(MapUtils.getString(map,"stCd"));
+                params.put("noticeStCds", lists);
+            }
+            params.put("noticeStCd",MapUtils.getString(results.get(0),"stCd"));
+        }
+
 		PageInfo<Map<String, Object>> page = baseClubNoticeService.findBaseClubNoticePage(params);
         page.setTotal(baseClubNoticeService.findBaseClubNoticeCount(params));
 		return page;

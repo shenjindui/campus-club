@@ -170,6 +170,9 @@ public class BaseClubMessageServiceImpl implements IBaseClubMessageService {
         if(MapUtils.getString(params,"messageStCd")!=null){
             entity.setMessageStCd(MapUtils.getString(params,"messageStCd"));
         }
+        if(MapUtils.getString(params,"messageSno")!=null){
+            entity.setMessagSno(MapUtils.getString(params,"messageSno"));
+        }
         ExampleMatcher matcher=ExampleMatcher.matching().withMatcher("messageStCd",
                 ExampleMatcher.GenericPropertyMatchers.contains())
                 .withIgnorePaths("statusCd").withIgnorePaths("version");

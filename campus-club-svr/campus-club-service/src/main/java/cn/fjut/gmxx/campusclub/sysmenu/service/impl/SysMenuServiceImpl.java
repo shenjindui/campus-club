@@ -69,6 +69,7 @@ public class SysMenuServiceImpl extends AbstractCampusClubServer implements ISys
         }
 		//查询总数
 		SysMenuEntity entity=new SysMenuEntity();
+		entity.mapCoverToEntity(params);
 		entity.setDelInd("0");
 		ExampleMatcher matcher=ExampleMatcher.matching().withIgnorePaths("statusCd").withIgnorePaths("version");
 		Example<SysMenuEntity> example = Example.of(entity,matcher);
