@@ -39,12 +39,11 @@ public class BaseClubActivityApiImpl implements IBaseClubActivityApi {
 		List<Map<String, Object>> list=page.getList();
 		for (Map<String, Object> map:list) {
 			List<String> fileList=GsonUtils.gsonToList(MapUtils.getString(map,"activityFile"),String.class);
-			//for(int i=0;i<fileList.size();i++){
-			//暂时获取到第一个文件的路径作为返回值
-			BaseFileRscEntity baseFileRscEntity=baseFileRscService.findBaseFileRscEntityByFileId(fileList.get(0));
-			map.put("fileRte",baseFileRscEntity.getFileRte());
-            map.put("fileNm",baseFileRscEntity.getFileNm());
-			//}
+			if(fileList!=null&&fileList.size()>1){
+				BaseFileRscEntity baseFileRscEntity=baseFileRscService.findBaseFileRscEntityByFileId(fileList.get(0));
+				map.put("fileRte",baseFileRscEntity.getFileRte());
+				map.put("fileNm",baseFileRscEntity.getFileNm());
+			}
 		}
 		String isLimit=MapUtils.getString(params,"limit");
 		if(isLimit!=null){
@@ -52,7 +51,7 @@ public class BaseClubActivityApiImpl implements IBaseClubActivityApi {
             UrlUtils.getTrueUrl(resultList);
         }else {
             //前端文件格式转换
-            UrlUtils.getTrueUrl(page.getList());
+           // UrlUtils.getTrueUrl(page.getList());
         }
 		return page;
 	}
@@ -70,16 +69,12 @@ public class BaseClubActivityApiImpl implements IBaseClubActivityApi {
 
 	@Override
 	public Map<String, Object> saveBaseClubActivityTrans(Map<String, Object> params) {
-		Integer id = MapUtils.getInteger(params, BaseClubActivityApiConstants.uuid);
-
-		//新增
-		if (null == id) {
+		String uuid = MapUtils.getString(params, BaseClubActivityApiConstants.uuid);
+		if (null == uuid) {
 			return baseClubActivityService.saveBaseClubActivity(params);
 		} else {
-			//修改
-			baseClubActivityService.updateBaseClubActivity(params);
+			return baseClubActivityService.updateBaseClubActivity(params);
 		}
-		return null;
 	}
 
 	@Override

@@ -1,6 +1,7 @@
 package cn.fjut.gmxx.campusclub.baseclubactivity.service;
 
 
+import cn.fjut.gmxx.campusclub.baseclubactivity.entity.BaseClubActivityEntity;
 import cn.fjut.gmxx.campusclub.pagehelper.PageInfo;
 
 import java.util.List;
@@ -32,9 +33,9 @@ public interface IBaseClubActivityService {
 
 	Map<String,Object> saveBaseClubActivity(Map<String, Object> params);
 
-	void updateBaseClubActivity(Map<String, Object> params);
+	Map<String,Object> updateBaseClubActivity(Map<String, Object> params);
 
-	void deleteBaseClubActivity(Map<String, Object> params);
+	BaseClubActivityEntity deleteBaseClubActivity(Map<String, Object> params);
 
 }
 

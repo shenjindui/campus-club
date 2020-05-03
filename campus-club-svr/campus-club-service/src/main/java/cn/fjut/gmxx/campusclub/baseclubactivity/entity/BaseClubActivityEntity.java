@@ -1,6 +1,7 @@
 package cn.fjut.gmxx.campusclub.baseclubactivity.entity;
 
 import cn.fjut.gmxx.campusclub.data.BaseEntity;
+import cn.fjut.gmxx.campusclub.utlis.DateUtils;
 import com.alibaba.fastjson.annotation.JSONField;
 import lombok.*;
 import org.apache.commons.collections.MapUtils;
@@ -10,6 +11,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 
@@ -309,6 +311,13 @@ public class BaseClubActivityEntity extends BaseEntity implements Serializable{
             }
             if (entityMap.containsKey("activityFile")) {
                 this.activityFile = MapUtils.getString(entityMap, "activityFile");
+            }
+            if(entityMap.containsKey("activityTime")){
+                List<String> paramsTimeList=(List<String>)entityMap.get("activityTime");
+                String startTime= DateUtils.dealDateFormats(paramsTimeList.get(0));
+                String endTime=DateUtils.dealDateFormats(paramsTimeList.get(1));
+                this.startTime=DateUtils.strToDate(startTime);
+                this.endTime=DateUtils.strToDate(endTime);
             }
         }
     }

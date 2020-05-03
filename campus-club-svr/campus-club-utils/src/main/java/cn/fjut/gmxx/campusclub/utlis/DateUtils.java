@@ -183,7 +183,7 @@ public class DateUtils extends org.apache.commons.lang3.time.DateUtils  {
     }
 
     public static Date strToDate(String value){
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         try {
             Date date = simpleDateFormat.parse(value);
             return date;
