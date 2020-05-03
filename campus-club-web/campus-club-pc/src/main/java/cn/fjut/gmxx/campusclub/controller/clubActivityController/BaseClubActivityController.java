@@ -191,6 +191,28 @@ public class BaseClubActivityController extends BaseAppAction {
             return errorResponse(e.getMessage());
         }
     }
-
+    @SysOperationLog("申请理由保存方法")
+    @TokenCheck
+    @ApiOperation(value = "申请理由保存方法", notes = "申请理由法", httpMethod = "POST")
+    @RequestMapping(value = "/clubActivitySetOpinion", method = RequestMethod.POST, produces = "application/json; charset=UTF-8")
+    @ResponseBody
+    public ResponseVO clubSetOpinion(@RequestBody @Valid Map<String, Object> params, BindingResult result)throws Exception {
+        //参数校验
+        if (result.hasErrors()) {
+            for (ObjectError error : result.getAllErrors()) {
+                return errorResponse(error);
+            }
+        }
+        try {
+            Map<String, Object> resultMaps=baseClubActivityApi.saveBaseClubActivityTrans(params);
+            if(resultMaps!=null){
+                return successResponse(resultMaps,Constant.SUCCESS);
+            }else{
+                return errorResponse(Constant.FAIL);
+            }
+        } catch (Exception e) {
+            return errorResponse(e.getMessage());
+        }
+    }
 
 }

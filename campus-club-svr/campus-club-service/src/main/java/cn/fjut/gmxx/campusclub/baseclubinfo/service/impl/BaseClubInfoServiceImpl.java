@@ -137,7 +137,7 @@ public class BaseClubInfoServiceImpl implements IBaseClubInfoService {
 			if(maxBusinessCode==null){
 				nowBusinessCode="sysBusiness-00001";
 			}else{
-				nowBusinessCode= EncodeUtils.getConteactNo("sysBusiness-",Integer.parseInt(maxStCd.split("-")[1]));
+				nowBusinessCode= EncodeUtils.getConteactNo("sysBusiness-",Integer.parseInt(maxBusinessCode.split("-")[1]));
 			}
 			//设置业务关联编号
 			sysBusinessEntity.setBusinessAssociationCode(nowStCd);

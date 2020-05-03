@@ -10,6 +10,8 @@ import cn.fjut.gmxx.campusclub.baseclubinfo.service.IBaseClubInfoService;
 import cn.fjut.gmxx.campusclub.exception.ExceptionFactory;
 import cn.fjut.gmxx.campusclub.pagehelper.PageHelp;
 import cn.fjut.gmxx.campusclub.pagehelper.PageInfo;
+import cn.fjut.gmxx.campusclub.sysbusiness.entity.SysBusinessEntity;
+import cn.fjut.gmxx.campusclub.sysbusiness.repository.SysBusinessRepository;
 import cn.fjut.gmxx.campusclub.sysmenu.api.SysMenuApiConstants;
 import cn.fjut.gmxx.campusclub.sysuser.entity.SysUserEntity;
 import cn.fjut.gmxx.campusclub.sysuser.repository.UserRepository;
@@ -56,6 +58,10 @@ public class BaseClubActivityServiceImpl implements IBaseClubActivityService {
 
     @Autowired
     IBaseClubInfoService baseClubInfoService;
+
+    //系统业务表
+    @Autowired
+    SysBusinessRepository sysBusinessRepository;
 
 	@Override
 	public PageInfo<Map<String, Object>> findBaseClubActivityPage(Map<String, Object> params) {
@@ -138,6 +144,33 @@ public class BaseClubActivityServiceImpl implements IBaseClubActivityService {
         //社团活动考核人
         entity.setActivityAssessor("社联评审考核");
 		BaseClubActivityEntity result = baseClubActivityMapperRepository.save(entity);
+		//如果保存后不为空，则进行系统业务表插入
+		if(result!=null){
+            SysBusinessEntity sysBusinessEntity=new SysBusinessEntity();
+            sysBusinessEntity.mapCoverToEntity(params);
+            String maxBusinessCode=sysBusinessRepository.findMaxBusinessCode();
+            String nowBusinessCode=null;
+            if(maxBusinessCode==null){
+                nowBusinessCode="sysBusiness-00001";
+            }else{
+                nowBusinessCode= EncodeUtils.getConteactNo("sysBusiness-",Integer.parseInt(maxBusinessCode.split("-")[1]));
+            }
+            //设置业务关联编号
+            sysBusinessEntity.setBusinessAssociationCode(result.getHostStCd());
+            //设置业务描述
+            sysBusinessEntity.setBusinessDesc(result.getActivityId()+"社团活动创建申请");
+            //设置业务编号
+            sysBusinessEntity.setBusinessCode(nowBusinessCode);
+            //设置业务创建人编号
+            sysBusinessEntity.setApproverUserCode(MapUtils.getString(params,"userCode"));
+            //设置业务状态 默认初始为 0 未完成
+            sysBusinessEntity.setBusinessState("0");
+            //设置业务类别 暂未实现默认为 1
+            sysBusinessEntity.setBusinessCategory("1");
+            SysBusinessEntity resultsyBusinessEntity=sysBusinessRepository.save(sysBusinessEntity);
+            //参数返回系统业务业务编号
+            params.put("sysBusinessCode",resultsyBusinessEntity.getBusinessCode());
+        }
 		params.put(BaseClubActivityApiConstants.uuid, result.getUuid());
 		return params;
 	}
