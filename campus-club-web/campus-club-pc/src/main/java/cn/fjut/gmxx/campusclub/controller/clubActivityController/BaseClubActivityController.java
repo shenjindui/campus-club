@@ -169,4 +169,28 @@ public class BaseClubActivityController extends BaseAppAction {
         }
     }
 
+    @ApiOperation(value = "后管社团活动详情", notes = "后管社团活动详情", httpMethod = "POST")
+    @TokenCheck
+    @RequestMapping(value = "/clubActivityDetail", method = RequestMethod.POST, produces = "application/json; charset=UTF-8")
+    @ResponseBody
+    public ResponseVO clubActivityDetail(@RequestBody @Valid Map<String, Object> params, BindingResult result)throws Exception {
+        //参数校验
+        if (result.hasErrors()) {
+            for (ObjectError error : result.getAllErrors()) {
+                return errorResponse(error);
+            }
+        }
+        try {
+            Map<String, Object> resultMaps=baseClubActivityApi.getBaseClubActivityMap(params);
+            if(resultMaps!=null){
+                return successResponse(resultMaps, Constant.SUCCESS);
+            }else{
+                return errorResponse(Constant.FAIL);
+            }
+        } catch (Exception e) {
+            return errorResponse(e.getMessage());
+        }
+    }
+
+
 }

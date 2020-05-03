@@ -117,7 +117,10 @@ public class BaseClubActivityServiceImpl implements IBaseClubActivityService {
         entity.setDelInd("0");
         entity.setStatusCd(0);
         entity.setVersion(1);
-        entity.setActivityScore(null);
+        entity.setActivityScore(null);//添加的时候默认为 默认暂无
+        entity.setAssociationAgree("0");//社联是否审批通过 默认否
+        entity.setYouthLeagueAgree("0");//团委是否审批通过 默认否
+        entity.setProposaAgree("0");//活动策划是否通过  默认否
         entity.mapCoverToEntity(params);
         String maxActivityCode=baseClubActivityMapperRepository.findMaxActivityId();
         String nowActivityCode=null;

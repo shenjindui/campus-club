@@ -314,8 +314,10 @@ public class BaseClubActivityEntity extends BaseEntity implements Serializable{
             }
             if(entityMap.containsKey("activityTime")){
                 List<String> paramsTimeList=(List<String>)entityMap.get("activityTime");
-                String startTime= DateUtils.dealDateFormats(paramsTimeList.get(0));
-                String endTime=DateUtils.dealDateFormats(paramsTimeList.get(1));
+                String startTime= paramsTimeList.get(0).indexOf('z')==-1?paramsTimeList.get(0):
+                        DateUtils.dealDateFormats(paramsTimeList.get(0));
+                String endTime=paramsTimeList.get(1).indexOf('z')==-1?paramsTimeList.get(1):
+                        DateUtils.dealDateFormats(paramsTimeList.get(1));
                 this.startTime=DateUtils.strToDate(startTime);
                 this.endTime=DateUtils.strToDate(endTime);
             }

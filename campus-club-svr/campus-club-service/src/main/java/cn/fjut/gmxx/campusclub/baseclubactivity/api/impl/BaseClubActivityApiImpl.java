@@ -6,14 +6,12 @@ import cn.fjut.gmxx.campusclub.baseclubactivity.service.IBaseClubActivityService
 import cn.fjut.gmxx.campusclub.basefilersc.entity.BaseFileRscEntity;
 import cn.fjut.gmxx.campusclub.basefilersc.service.IBaseFileRscService;
 import cn.fjut.gmxx.campusclub.pagehelper.PageInfo;
-import cn.fjut.gmxx.campusclub.utlis.DateUtils;
-import cn.fjut.gmxx.campusclub.utlis.GsonUtils;
-import cn.fjut.gmxx.campusclub.utlis.ListUtils;
-import cn.fjut.gmxx.campusclub.utlis.UrlUtils;
+import cn.fjut.gmxx.campusclub.utlis.*;
 import org.apache.commons.collections.MapUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -27,13 +25,7 @@ public class BaseClubActivityApiImpl implements IBaseClubActivityApi {
 
 	@Override
 	public PageInfo<Map<String, Object>> findBaseClubActivityPage(Map<String, Object> params) {
-		if(MapUtils.getString(params,"paramsTime")!=null){ //如果时间控件的值不为空
-			List<String> paramsTimeList=(List<String>)params.get("paramsTime");
-			String startTime= DateUtils.dealDateFormats(paramsTimeList.get(0));
-			String endTime=DateUtils.dealDateFormats(paramsTimeList.get(1));
-			params.put("startsTime",startTime);
-			params.put("endsTime",endTime);
-		}
+        QueryTimeParseUtils.parseQueryTime(params);
 		PageInfo<Map<String, Object>> page = baseClubActivityService.findBaseClubActivityPage(params);
 		//获取文件信息
 		List<Map<String, Object>> list=page.getList();
@@ -64,6 +56,10 @@ public class BaseClubActivityApiImpl implements IBaseClubActivityApi {
 	@Override
 	public Map<String, Object> getBaseClubActivityMap(Map<String, Object> params) {
 		Map<String, Object> baseClubActivityMap = baseClubActivityService.getBaseClubActivityMap(params);
+        List<String> paramsTimeList=new ArrayList<>();
+        paramsTimeList.add(MapUtils.getString(baseClubActivityMap,"startTime"));
+        paramsTimeList.add(MapUtils.getString(baseClubActivityMap,"endTime"));
+        baseClubActivityMap.put("activityTime",paramsTimeList);
 		return baseClubActivityMap;
 	}
 
