@@ -1,5 +1,7 @@
 package cn.fjut.gmxx.campusclub.workflow.api.impl;
 
+import cn.fjut.gmxx.campusclub.baseclubactivity.entity.BaseClubActivityEntity;
+import cn.fjut.gmxx.campusclub.baseclubactivity.service.IBaseClubActivityService;
 import cn.fjut.gmxx.campusclub.baseclubinfo.entity.BaseClubInfoEntity;
 import cn.fjut.gmxx.campusclub.baseclubinfo.service.IBaseClubInfoService;
 import cn.fjut.gmxx.campusclub.exception.ExceptionFactory;
@@ -20,6 +22,7 @@ import org.apache.commons.collections.MapUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -42,11 +45,16 @@ public class SysWorkflowBusinessApiImpl implements ISysWorkflowBusinessApi {
     @Autowired
     IBaseClubInfoService baseClubInfoService;
 
+    @Autowired
+    IBaseClubActivityService baseClubActivityService;
+
 	@Override
 	public PageInfo<Map<String, Object>> findSysWorkflowBusinessPage(Map<String, Object> params) {
 		PageInfo<Map<String, Object>> page = sysWorkflowBusinessService.findSysWorkflowBusinessPage(params);
 		List<Map<String,Object>> pageList=page.getList();
-		for (Map<String,Object> map:pageList){
+        List<Map<String,Object>> resultList = new ArrayList<>();//结果集
+        String queryType = MapUtils.getString(params,"queryType");
+        for (Map<String,Object> map:pageList){
 			WorkflowEntity workflowEntity=sysWorkflowService.findByWorkflowCode(MapUtils.getString(map,
 					SysWorkflowApiConstants.work_flow_code));
 			map.put(SysWorkflowApiConstants.work_flow_name,workflowEntity.getWorkFlowName());
@@ -61,7 +69,13 @@ public class SysWorkflowBusinessApiImpl implements ISysWorkflowBusinessApi {
                 map.put("isBaseInfo","yes");
             }
             map.put(SysBusinessApiConstants.business_association_code,sysBusinessEntity.getBusinessAssociationCode());
+            //如果是baseInfo
+            if(sysBusinessEntity.getBusinessAssociationCode().contains(queryType)){
+                resultList.add(map);
+            }
 		}
+        page.setTotal(resultList.size());
+		page.setList(resultList);
 
 		return page;
 	}
@@ -119,6 +133,20 @@ public class SysWorkflowBusinessApiImpl implements ISysWorkflowBusinessApi {
             parm.put("userCode",MapUtils.getString(params,"userCode"));
             parm.put("stCd",BaseClubInfoEntity.getStCd());
             resultMap= baseClubInfoService.updateBaseClubInfo(parm);
+        }
+        //activityInfo
+        if(MapUtils.getString(params,"activityInfo")!=null){
+            Map<String, Object> parm=new HashMap<>();
+            BaseClubActivityEntity entity=baseClubActivityService.findBaseClubActivityByActivityId(
+                    MapUtils.getString(resultMap,"businessAssociationCode"));
+            parm.put("userCode",MapUtils.getString(params,"userCode"));
+            parm.put("uuid",entity.getUuid());
+            parm.put("associationAgree","3");
+            parm.put("proposaAgree","3");
+            parm.put("isNextFlag","isNextFlag");//审核的标志
+            //parm.put("youthLeagueAgree","3");
+            parm.put("activityName",entity.getActivityName());
+            resultMap= baseClubActivityService.updateBaseClubActivity(parm);
         }
         return resultMap;
     }

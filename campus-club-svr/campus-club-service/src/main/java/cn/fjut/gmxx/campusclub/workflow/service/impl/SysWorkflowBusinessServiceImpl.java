@@ -1,5 +1,7 @@
 package cn.fjut.gmxx.campusclub.workflow.service.impl;
 
+import cn.fjut.gmxx.campusclub.baseclubactivity.entity.BaseClubActivityEntity;
+import cn.fjut.gmxx.campusclub.baseclubactivity.service.IBaseClubActivityService;
 import cn.fjut.gmxx.campusclub.baseclubinfo.entity.BaseClubInfoEntity;
 import cn.fjut.gmxx.campusclub.baseclubinfo.repository.BaseClubInfRepository;
 import cn.fjut.gmxx.campusclub.baseclubmember.service.IBaseClubMemberService;
@@ -63,6 +65,8 @@ public class SysWorkflowBusinessServiceImpl implements ISysWorkflowBusinessServi
     @Autowired
     IBaseClubMemberService baseClubMemberService;
 
+	@Autowired
+	IBaseClubActivityService baseClubActivityService;
 
 
 	@Override
@@ -198,7 +202,22 @@ public class SysWorkflowBusinessServiceImpl implements ISysWorkflowBusinessServi
 			baseClubInfoEntity.setWorkflowCd(2);//工作流审核通过
 			baseClubInfoEntity.setStatusCd(1);//社团生效
 			baseClubInfRepository.saveAndFlush(baseClubInfoEntity);
-		}else{
+		}else  if(MapUtils.getString(params,"activityInfo")!=null){
+			Map<String, Object> parm=new HashMap<>();
+			BaseClubActivityEntity entity=baseClubActivityService.findBaseClubActivityByActivityId(
+					sysBusinessEntity.getBusinessAssociationCode());
+			parm.put("userCode",MapUtils.getString(params,"userCode"));
+			parm.put("uuid",entity.getUuid());
+			parm.put("associationAgree","2");
+			parm.put("proposaAgree","2");
+			parm.put("youthLeagueAgree","2");
+            parm.put("youthLeagueAgree","2");
+            parm.put("statusCd","1");
+			parm.put("activityName",entity.getActivityName());
+			parm.put("isNextFlag","isNextFlag");
+			baseClubActivityService.updateBaseClubActivity(parm);
+		}
+		else{
             Map<String, Object> saveMaps=new HashMap<>();
             SysUserEntity sysUserEntity=userRepository.findByUserCode(MapUtils.getString(params,"userCode"));
             if(sysUserEntity!=null){

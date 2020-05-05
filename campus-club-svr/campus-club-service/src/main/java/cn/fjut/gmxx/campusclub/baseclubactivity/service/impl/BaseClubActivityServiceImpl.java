@@ -185,11 +185,16 @@ public class BaseClubActivityServiceImpl implements IBaseClubActivityService {
         BaseClubActivityEntity baseClubActivityEntity=baseClubActivityMapperRepository.findByActivityName(
                 params.get("activityName").toString());
         if(baseClubActivityEntity!=null&&!(baseClubActivityEntity.getUuid().equals(MapUtils.getString(params,"uuid")))){
-            throw ExceptionFactory.getBizException(params.get("menuName")+"此活动名称已存在");
+            throw ExceptionFactory.getBizException(params.get("activityName")+"此活动名称已存在");
         }
         BaseClubActivityEntity entity = baseClubActivityMapperRepository.findByUuid(uuid);
         if(entity==null){
             throw ExceptionFactory.getBizException("对象为空");
+        }
+        if(MapUtils.getString(params,"isNextFlag")==null){
+            params.put("associationAgree","0");
+            params.put("proposaAgree","0");
+            params.put("youthLeagueAgree","0");
         }
         entity.mapCoverToEntity(params);
         SysUserEntity currentUser=userRepository.findByUserCode(MapUtils.getString(params,"userCode"));
@@ -215,6 +220,11 @@ public class BaseClubActivityServiceImpl implements IBaseClubActivityService {
 		entity.setDelInd(BaseClubActivityApiConstants.DEL_IND_1);
         return baseClubActivityMapperRepository.save(entity);
 	}
+
+    @Override
+    public BaseClubActivityEntity findBaseClubActivityByActivityId(String activityId) {
+        return baseClubActivityMapperRepository.findByActivityId(activityId);
+    }
 }
 
 

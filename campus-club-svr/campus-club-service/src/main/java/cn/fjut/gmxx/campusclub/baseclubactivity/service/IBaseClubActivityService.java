@@ -37,5 +37,7 @@ public interface IBaseClubActivityService {
 
 	BaseClubActivityEntity deleteBaseClubActivity(Map<String, Object> params);
 
+	BaseClubActivityEntity findBaseClubActivityByActivityId(String activityId);
+
 }
 

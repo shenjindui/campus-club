@@ -19,5 +19,7 @@ public interface BaseClubActivityMapperRepository extends JpaRepository<BaseClub
     BaseClubActivityEntity findByActivityName(String activityName);
 
 
+    BaseClubActivityEntity findByActivityId(String activityId);
+
 
 }
