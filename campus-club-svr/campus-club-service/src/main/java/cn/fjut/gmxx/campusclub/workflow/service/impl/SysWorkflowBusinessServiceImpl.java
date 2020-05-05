@@ -115,7 +115,6 @@ public class SysWorkflowBusinessServiceImpl implements ISysWorkflowBusinessServi
 		if (params == null || params.isEmpty()) {
 			throw ExceptionFactory.getBizException("异常提示:[参数不能为空]");
 		}
-
 		WorkflowBusinessEntity entity = new WorkflowBusinessEntity();
 		entity.mapCoverToEntity(params);
         entity.setCreateTime(new Date());//设置时间
@@ -132,7 +131,7 @@ public class SysWorkflowBusinessServiceImpl implements ISysWorkflowBusinessServi
 				maxBusinessCode));
 		WorkflowBusinessEntity result = sysWorkflowBusinessRepository.save(entity);
 		if(result!=null&&MapUtils.getString(params,"businessCode")!=null&&
-				(MapUtils.getString(params,"isSt")==null || !MapUtils.getString(params,"isSt").equals("N"))){
+				(MapUtils.getString(params,"isSt")!=null && !MapUtils.getString(params,"isSt").equals("N"))){
 			SysBusinessEntity sysBusinessEntity=sysBusinessRepository.findByBusinessCode(MapUtils.getString(params,"businessCode"));
 			BaseClubInfoEntity caseClubInfoEntity=baseClubInfRepository.findByStCd(sysBusinessEntity.getBusinessAssociationCode());
 			caseClubInfoEntity.setWorkflowCd(1);

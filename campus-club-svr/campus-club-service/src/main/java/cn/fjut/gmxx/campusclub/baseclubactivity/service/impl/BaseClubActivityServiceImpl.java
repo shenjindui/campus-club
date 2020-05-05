@@ -156,7 +156,7 @@ public class BaseClubActivityServiceImpl implements IBaseClubActivityService {
                 nowBusinessCode= EncodeUtils.getConteactNo("sysBusiness-",Integer.parseInt(maxBusinessCode.split("-")[1]));
             }
             //设置业务关联编号
-            sysBusinessEntity.setBusinessAssociationCode(result.getHostStCd());
+            sysBusinessEntity.setBusinessAssociationCode(result.getActivityId());
             //设置业务描述
             sysBusinessEntity.setBusinessDesc(result.getActivityId()+"社团活动创建申请");
             //设置业务编号
@@ -188,10 +188,15 @@ public class BaseClubActivityServiceImpl implements IBaseClubActivityService {
             throw ExceptionFactory.getBizException(params.get("menuName")+"此活动名称已存在");
         }
         BaseClubActivityEntity entity = baseClubActivityMapperRepository.findByUuid(uuid);
+        if(entity==null){
+            throw ExceptionFactory.getBizException("对象为空");
+        }
         entity.mapCoverToEntity(params);
         SysUserEntity currentUser=userRepository.findByUserCode(MapUtils.getString(params,"userCode"));
         entity.setUpdateTime(new Date());
         entity.setUpdateUser(currentUser.getLoginName());
+        SysBusinessEntity sysBusinessEntity=sysBusinessRepository.findByBusinessAssociationCode(entity.getActivityId());
+        params.put("sysBusinessCode",sysBusinessEntity.getBusinessCode());
         BaseClubActivityEntity result = baseClubActivityMapperRepository.saveAndFlush(entity);
         params.put(SysMenuApiConstants.uuid, result.getUuid());
         return params;
