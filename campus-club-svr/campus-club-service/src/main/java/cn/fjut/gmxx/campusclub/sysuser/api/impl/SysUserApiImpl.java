@@ -429,6 +429,13 @@ public class SysUserApiImpl implements ISysUserApi {
         List<Map<String, Object>> stNoticeList = baseClubNoticeApi.countBaseClubNotice(noticeParams);
         resultMap.put("stNoticeList",stNoticeList);
         resultMap.put("stNoticeListLength",stNoticeList==null?0:stNoticeList.size());
+
+        //代办事项
+        Map<String, Object> sysBusinessParams = new HashMap<>();
+        sysBusinessParams.put("approverUserCode",MapUtils.getString(params,"userCode"));
+        List<Map<String, Object>> sysBusinessList = sysBusinessService.findSysBusinessNoPage(sysBusinessParams);
+        resultMap.put("sysBusinessList",sysBusinessList);
+        resultMap.put("sysBusinessListLength",sysBusinessList==null?0:sysBusinessList.size());
 		return resultMap;
 	}
 

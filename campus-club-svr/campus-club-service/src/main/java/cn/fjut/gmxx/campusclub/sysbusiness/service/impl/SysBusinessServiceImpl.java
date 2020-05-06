@@ -71,7 +71,12 @@ public class SysBusinessServiceImpl implements ISysBusinessService {
         queryParams.put(SysBusinessApiConstants.DEL_IND, SysBusinessApiConstants.DEL_IND_0);
 		return new PageInfo<>(sysBusinessMapper.findSysBusinessList(queryParams),queryParams);
 	}
-	
+
+	@Override
+	public List<Map<String, Object>> findSysBusinessNoPage(Map<String, Object> params) {
+		return sysBusinessMapper.findSysBusinessAll(params);
+	}
+
 	@Override
 	public Map<String, Object> getSysBusinessMap(Map<String, Object> params) {
 		//默认调用分页查询方法。

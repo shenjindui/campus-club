@@ -27,5 +27,7 @@ public interface ISysBusinessMapper extends BaseMapper<SysBusinessEntity> {
 
     List<Map<String, Object>> findSysBusinessList(Map<String, Object> params);
 
+    List<Map<String, Object>> findSysBusinessAll(Map<String, Object> params);
+
 }
 

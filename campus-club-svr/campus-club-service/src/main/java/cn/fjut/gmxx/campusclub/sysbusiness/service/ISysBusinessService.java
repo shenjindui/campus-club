@@ -4,6 +4,7 @@ package cn.fjut.gmxx.campusclub.sysbusiness.service;
 import cn.fjut.gmxx.campusclub.pagehelper.PageInfo;
 import cn.fjut.gmxx.campusclub.sysbusiness.entity.SysBusinessEntity;
 
+import java.util.List;
 import java.util.Map;
 
 
@@ -25,6 +26,8 @@ import java.util.Map;
 public interface ISysBusinessService {
 
 	PageInfo<Map<String, Object>> findSysBusinessPage(Map<String, Object> params);
+
+	List<Map<String, Object>> findSysBusinessNoPage(Map<String, Object> params);
 
 	Map<String, Object> getSysBusinessMap(Map<String, Object> params);
 
