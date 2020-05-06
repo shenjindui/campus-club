@@ -3,10 +3,15 @@ package cn.fjut.gmxx.campusclub.baseclubactivity.api.impl;
 import cn.fjut.gmxx.campusclub.baseclubactivity.api.BaseClubActivityApiConstants;
 import cn.fjut.gmxx.campusclub.baseclubactivity.api.IBaseClubActivityApi;
 import cn.fjut.gmxx.campusclub.baseclubactivity.service.IBaseClubActivityService;
+import cn.fjut.gmxx.campusclub.baseddct.entity.BaseDdctEntity;
+import cn.fjut.gmxx.campusclub.baseddct.service.IBaseDdctService;
 import cn.fjut.gmxx.campusclub.basefilersc.entity.BaseFileRscEntity;
 import cn.fjut.gmxx.campusclub.basefilersc.service.IBaseFileRscService;
 import cn.fjut.gmxx.campusclub.pagehelper.PageInfo;
-import cn.fjut.gmxx.campusclub.utlis.*;
+import cn.fjut.gmxx.campusclub.utlis.GsonUtils;
+import cn.fjut.gmxx.campusclub.utlis.ListUtils;
+import cn.fjut.gmxx.campusclub.utlis.QueryTimeParseUtils;
+import cn.fjut.gmxx.campusclub.utlis.UrlUtils;
 import org.apache.commons.collections.MapUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,6 +27,10 @@ public class BaseClubActivityApiImpl implements IBaseClubActivityApi {
 	private IBaseClubActivityService baseClubActivityService;
 	@Autowired
 	private IBaseFileRscService baseFileRscService;
+
+	@Autowired
+    IBaseDdctService baseDdctService;
+
 
 	@Override
 	public PageInfo<Map<String, Object>> findBaseClubActivityPage(Map<String, Object> params) {
@@ -76,6 +85,14 @@ public class BaseClubActivityApiImpl implements IBaseClubActivityApi {
 	@Override
 	public void deleteBaseClubActivityTrans(Map<String, Object> params) {
 		baseClubActivityService.deleteBaseClubActivity(params);
+	}
+
+	@Override
+	public Map<String, Object> saveBaseClubActivityInitTrans(Map<String, Object> params) {
+        List<BaseDdctEntity> list = baseDdctService.getBaseDctListByKey(params);
+        params.clear();
+        params.put("activityTypeList",list);
+		return params;
 	}
 
 }

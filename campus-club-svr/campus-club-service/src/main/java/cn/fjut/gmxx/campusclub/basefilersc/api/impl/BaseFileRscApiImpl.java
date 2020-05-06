@@ -5,7 +5,6 @@ import cn.fjut.gmxx.campusclub.basefilersc.api.IBaseFileRscApi;
 import cn.fjut.gmxx.campusclub.basefilersc.entity.BaseFileRscEntity;
 import cn.fjut.gmxx.campusclub.basefilersc.service.IBaseFileRscService;
 import cn.fjut.gmxx.campusclub.pagehelper.PageInfo;
-import cn.fjut.gmxx.campusclub.utlis.UrlUtils;
 import org.apache.commons.collections.MapUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,7 +22,7 @@ public class BaseFileRscApiImpl implements IBaseFileRscApi {
 	public PageInfo<Map<String, Object>> findBaseFileRscPage(Map<String, Object> params) {
 		PageInfo<Map<String, Object>> page = baseFileRscService.findBaseFileRscPage(params);
 		//前端文件格式转换
-		UrlUtils.getTrueUrl(page.getList());
+		//UrlUtils.getTrueUrl(page.getList());
 		return page;
 	}
 

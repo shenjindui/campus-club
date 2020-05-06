@@ -2,6 +2,7 @@ package cn.fjut.gmxx.campusclub.baseddct.api;
 
 import cn.fjut.gmxx.campusclub.pagehelper.PageInfo;
 
+import java.util.List;
 import java.util.Map;
 
 
@@ -22,6 +23,8 @@ import java.util.Map;
 public interface IBaseDdctApi {
 
 	PageInfo<Map<String, Object>> findBaseDdctPage(Map<String, Object> params);
+
+	List<Map<String, Object>> findBaseDdctNoPage(Map<String, Object> params);
 
 	Map<String, Object> getBaseDdctMap(Map<String, Object> params);
 

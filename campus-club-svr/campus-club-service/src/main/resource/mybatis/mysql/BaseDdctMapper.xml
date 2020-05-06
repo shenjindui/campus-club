@@ -55,6 +55,13 @@
         </where>
     </sql>
 
+    <sql id="pagination">
+        <if test="startIndex != null and pageSize!= null ">
+            <![CDATA[
+                LIMIT #{startIndex},#{pageSize}
+            ]]>
+        </if>
+    </sql>
     <!--根据条件查询列表-->
     <select id="findBaseDdctList" parameterType="map" resultMap="baseDdctMap">
         SELECT
@@ -62,8 +69,16 @@
         FROM base_ddct base_ddct
         <include refid="where_filters"/>
         ORDER BY base_ddct.CREATE_TIME DESC
-        LIMIT #{startIndex},#{pageSize}
+        <include refid="pagination" />
     </select>
 
+    <select id="findBaseDdctListAll" parameterType="map" resultMap="baseDdctMap">
+        SELECT
+        <include refid="column_list"/>
+        FROM base_ddct base_ddct
+        <include refid="where_filters"/>
+        ORDER BY base_ddct.CREATE_TIME DESC
+        <include refid="pagination" />
+    </select>
 
 </mapper>

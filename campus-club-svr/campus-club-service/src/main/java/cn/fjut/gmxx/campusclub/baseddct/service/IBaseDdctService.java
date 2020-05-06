@@ -27,6 +27,8 @@ public interface IBaseDdctService {
 
 	PageInfo<Map<String, Object>> findBaseDdctPage(Map<String, Object> params);
 
+	List<Map<String, Object>> findBaseDdctNoPage(Map<String, Object> params);
+
 	Map<String, Object> getBaseDdctMap(Map<String, Object> params);
 
 	Map<String,Object> saveBaseDdct(Map<String, Object> params);

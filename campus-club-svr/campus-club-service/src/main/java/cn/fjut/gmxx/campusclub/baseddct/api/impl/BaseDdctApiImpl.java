@@ -9,6 +9,7 @@ import org.apache.commons.collections.MapUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Map;
 
 @Service("baseDdctApi")
@@ -21,6 +22,11 @@ public class BaseDdctApiImpl implements IBaseDdctApi {
 	public PageInfo<Map<String, Object>> findBaseDdctPage(Map<String, Object> params) {
 		PageInfo<Map<String, Object>> page = baseDdctService.findBaseDdctPage(params);
 		return page;
+	}
+
+	@Override
+	public List<Map<String, Object>> findBaseDdctNoPage(Map<String, Object> params) {
+		return baseDdctService.findBaseDdctNoPage(params);
 	}
 
 	@Override

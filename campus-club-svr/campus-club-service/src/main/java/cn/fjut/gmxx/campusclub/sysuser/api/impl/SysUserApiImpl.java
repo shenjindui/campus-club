@@ -179,7 +179,8 @@ public class SysUserApiImpl implements ISysUserApi {
             queryMap.put("createUserId",oneUser.getUserCode());
             PageInfo<Map<String, Object>> fileMaps=baseFileRscService.findBaseFileRscPage(queryMap);
             //前端文件格式转换
-            resultMap.put("headPortrait",UrlUtils.getTrueUrl(fileMaps.getList()));
+            //resultMap.put("headPortrait",UrlUtils.getTrueUrl(fileMaps.getList()));
+			resultMap.put("headPortrait",fileMaps.getList());
 
 			//在Redis中设置Token值 key为userCode ,value
 			//根据用户编号和用户名生成Token值

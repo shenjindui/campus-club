@@ -31,4 +31,6 @@ public interface IBaseClubActivityApi {
 	Map<String, Object> saveBaseClubActivityTrans(Map<String, Object> params);
 
 	void deleteBaseClubActivityTrans(Map<String, Object> params);
+
+	Map<String, Object> saveBaseClubActivityInitTrans(Map<String, Object> params);
 }

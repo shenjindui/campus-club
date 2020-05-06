@@ -28,6 +28,6 @@ public interface IBaseDdctMapper extends BaseMapper<BaseDdctEntity> {
 
     List<Map<String, Object>> findBaseDdctList(Map<String, Object> params);
 
-
+    List<Map<String, Object>> findBaseDdctListAll(Map<String, Object> params);
 }
 

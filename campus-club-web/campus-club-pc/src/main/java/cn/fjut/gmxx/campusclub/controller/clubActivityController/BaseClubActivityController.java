@@ -34,17 +34,12 @@ public class BaseClubActivityController extends BaseAppAction {
     private IBaseClubActivityApi baseClubActivityApi;
 
     @SysOperationLog("社团活动列表")
-    @TokenCheck  //此注解使用开启token验证，对于访问后台数据的方法，请打开此注解
+    @TokenCheck
     @ApiOperation(value = "社团活动列表", notes = "社团活动列表方法", httpMethod = "POST")
     @RequestMapping(value = "/clubActivityList", method = RequestMethod.POST, produces = "application/json; charset=UTF-8")
     @ResponseBody
-    public ResponseVO listBaseClubActivity(@RequestBody @Valid Map<String, Object> params, BindingResult result)throws Exception {
-        //参数校验
-        if (result.hasErrors()) {
-            for (ObjectError error : result.getAllErrors()) {
-                return errorResponse(error);
-            }
-        }
+    public ResponseVO listBaseClubActivity(@RequestBody  Map<String, Object> params) {
+        super.validateNull(params);
         try {
             PageInfo<Map<String, Object>> resultMaps=baseClubActivityApi.findBaseClubActivityPage(params);
             if(resultMaps!=null){
@@ -214,5 +209,24 @@ public class BaseClubActivityController extends BaseAppAction {
             return errorResponse(e.getMessage());
         }
     }
+
+    @SysOperationLog("申请创建初始化")
+    @TokenCheck
+    @ApiOperation(value = "申请创建初始化", notes = "申请创建初始化", httpMethod = "POST")
+    @RequestMapping(value = "/clubActivityAddInit", method = RequestMethod.POST, produces = "application/json; charset=UTF-8")
+    @ResponseBody
+    public ResponseVO clubActivityAddInit(@RequestBody  Map<String, Object> params){
+        try {
+            Map<String, Object> resultMaps=baseClubActivityApi.saveBaseClubActivityInitTrans(params);
+            if(resultMaps!=null){
+                return successResponse(resultMaps,Constant.SUCCESS);
+            }else{
+                return errorResponse(Constant.FAIL);
+            }
+        } catch (Exception e) {
+            return errorResponse(e.getMessage());
+        }
+    }
+
 
 }

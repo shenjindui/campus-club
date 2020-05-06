@@ -69,7 +69,12 @@ public class BaseDdctServiceImpl implements IBaseDdctService{
 		queryParams.put(BaseDdctApiConstants.DEL_IND, BaseDdctApiConstants.DEL_IND_0);
 		return new PageInfo<>(baseDdctDao.findBaseDdctList(queryParams),queryParams);
 	}
-	
+
+	@Override
+	public List<Map<String, Object>> findBaseDdctNoPage(Map<String, Object> params) {
+		return baseDdctDao.findBaseDdctListAll(params);
+	}
+
 	@Override
 	public Map<String, Object> getBaseDdctMap(Map<String, Object> params) {
 		//默认调用分页查询方法。
