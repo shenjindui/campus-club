@@ -24,6 +24,8 @@ public interface IBaseClubInfoApi {
 
 	PageInfo<Map<String, Object>> findBaseClubInfoPage(Map<String, Object> params);
 
+	Map<String, Object> getBaseClubInfo(Map<String, Object> params);
+
 	Map<String, Object> getBaseClubInfoMap(Map<String, Object> params);
 
 	Map<String, Object> saveBaseClubInfoTrans(Map<String, Object> params);

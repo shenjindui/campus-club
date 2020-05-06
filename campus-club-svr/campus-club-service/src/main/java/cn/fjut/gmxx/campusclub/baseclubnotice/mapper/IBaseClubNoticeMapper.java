@@ -1,6 +1,7 @@
 package cn.fjut.gmxx.campusclub.baseclubnotice.mapper;
 
 import cn.fjut.gmxx.campusclub.baseclubnotice.entity.BaseClubNoticeEntity;
+import cn.fjut.gmxx.campusclub.baseclubnotice.entity.BaseClubNoticeVo;
 import cn.fjut.gmxx.campusclub.data.BaseMapper;
 import org.springframework.stereotype.Repository;
 
@@ -27,6 +28,8 @@ public interface IBaseClubNoticeMapper extends BaseMapper<BaseClubNoticeEntity> 
     List<Map<String, Object>> findBaseClubNoticeList(Map<String, Object> params);
 
     List<Map<String, Object>> findBaseClubNoticeListAll(Map<String, Object> params);
+
+    List<BaseClubNoticeVo> countBaseClubNotice(Map<String, Object> params);
 
 }
 

@@ -92,5 +92,9 @@
         ORDER BY base_club_funds.CREATE_TIME DESC
     </select>
 
-
+    <select id="countBaseClubFunds" parameterType="map" resultType="java.lang.Double">
+        SELECT sum(amount)
+        FROM base_club_funds base_club_funds
+        <include refid="where_filters"/>
+    </select>
 </mapper>

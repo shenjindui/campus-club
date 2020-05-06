@@ -5,9 +5,11 @@ import cn.fjut.gmxx.campusclub.baseclubmember.service.IBaseClubMemberService;
 import cn.fjut.gmxx.campusclub.baseclubnews.api.BaseClubNewsApiConstants;
 import cn.fjut.gmxx.campusclub.baseclubnews.api.IBaseClubNewsApi;
 import cn.fjut.gmxx.campusclub.baseclubnews.entity.BaseClubNewsEntity;
+import cn.fjut.gmxx.campusclub.baseclubnews.entity.BaseClubNewsVo;
 import cn.fjut.gmxx.campusclub.baseclubnews.service.IBaseClubNewsService;
 import cn.fjut.gmxx.campusclub.pagehelper.PageInfo;
 import cn.fjut.gmxx.campusclub.utlis.QueryTimeParseUtils;
+import cn.hutool.core.bean.BeanUtil;
 import org.apache.commons.collections.MapUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -87,6 +89,18 @@ public class BaseClubNewsApiImpl implements IBaseClubNewsApi {
 		params.clear();
 		params.put("result",entity);
 		return params;
+	}
+
+	@Override
+	public List<Map<String, Object>> countBaseClubNews(Map<String, Object> params) {
+		List<Map<String, Object>> resultList = new ArrayList<>();
+		List<BaseClubNewsVo> list = baseClubNewsService.countBaseClubNews(params);
+		for (BaseClubNewsVo vo:list) {
+			Map<String, Object> map = new HashMap<String, Object>();
+			BeanUtil.copyProperties(vo, map);
+			resultList.add(map);
+		}
+		return resultList;
 	}
 
 }

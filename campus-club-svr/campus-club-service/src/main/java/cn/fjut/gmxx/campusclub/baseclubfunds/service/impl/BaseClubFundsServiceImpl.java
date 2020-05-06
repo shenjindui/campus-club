@@ -243,6 +243,11 @@ public class BaseClubFundsServiceImpl implements IBaseClubFundsService {
 		return baseClubFundsRepository.count(example);
 	}
 
+	@Override
+	public Double countBaseClubCount(Map<String, Object> params) {
+		return baseClubFundsMapper.countBaseClubFunds(params);
+	}
+
 }
 
 

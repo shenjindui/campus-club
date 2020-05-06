@@ -31,4 +31,6 @@ public interface IBaseClubNoticeApi {
 	Map<String, Object> saveBaseClubNoticeTrans(Map<String, Object> params);
 
 	Map<String, Object> deleteBaseClubNoticeTrans(Map<String, Object> params);
+
+	List<Map<String, Object>> countBaseClubNotice(Map<String, Object> params);
 }

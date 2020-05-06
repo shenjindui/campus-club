@@ -4,6 +4,7 @@ package cn.fjut.gmxx.campusclub.baseclubnotice.service.impl;
 import cn.fjut.gmxx.campusclub.baseclubfunds.api.BaseClubFundsApiConstants;
 import cn.fjut.gmxx.campusclub.baseclubnotice.api.BaseClubNoticeApiConstants;
 import cn.fjut.gmxx.campusclub.baseclubnotice.entity.BaseClubNoticeEntity;
+import cn.fjut.gmxx.campusclub.baseclubnotice.entity.BaseClubNoticeVo;
 import cn.fjut.gmxx.campusclub.baseclubnotice.mapper.IBaseClubNoticeMapper;
 import cn.fjut.gmxx.campusclub.baseclubnotice.repository.BaseClubNoticeRepository;
 import cn.fjut.gmxx.campusclub.baseclubnotice.service.IBaseClubNoticeService;
@@ -81,6 +82,7 @@ public class BaseClubNoticeServiceImpl implements IBaseClubNoticeService{
             params = new HashMap<String, Object>();
         }
         Map<String, Object> queryParams=new HashMap<>();
+		MapTrunPojo.mapCopy(params,queryParams);
         BaseClubNoticeEntity entity=new BaseClubNoticeEntity();
         entity.setDelInd("0");
         ExampleMatcher matcher=ExampleMatcher.matching().withIgnorePaths("statusCd").withIgnorePaths("version");
@@ -190,6 +192,11 @@ public class BaseClubNoticeServiceImpl implements IBaseClubNoticeService{
 				.withIgnorePaths("statusCd").withIgnorePaths("version");
 		Example<BaseClubNoticeEntity> example = Example.of(entity,matcher);
 		return baseClubNoticeRepository.count(example);
+	}
+
+	@Override
+	public List<BaseClubNoticeVo> countBaseClubNotice(Map<String, Object> params) {
+		return baseClubNoticeMapper.countBaseClubNotice(params);
 	}
 
 }

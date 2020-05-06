@@ -36,4 +36,6 @@ public interface IBaseClubFundsApi {
 	List<Map<String, Object>> findBaseClubFunds(Map<String, Object> params);
 
 	Map<String, Object> saveBaseClubFundsByOrderId(Map<String, Object> params);
+
+	Double  countBaseClubFunds(Map<String, Object> params);
 }

@@ -3,6 +3,7 @@ package cn.fjut.gmxx.campusclub.baseclubnews.service.impl;
 
 import cn.fjut.gmxx.campusclub.baseclubnews.api.BaseClubNewsApiConstants;
 import cn.fjut.gmxx.campusclub.baseclubnews.entity.BaseClubNewsEntity;
+import cn.fjut.gmxx.campusclub.baseclubnews.entity.BaseClubNewsVo;
 import cn.fjut.gmxx.campusclub.baseclubnews.mapper.IBaseClubNewsMapper;
 import cn.fjut.gmxx.campusclub.baseclubnews.repository.BaseClubNewsRepository;
 import cn.fjut.gmxx.campusclub.baseclubnews.service.IBaseClubNewsService;
@@ -180,6 +181,11 @@ public class BaseClubNewsServiceImpl implements IBaseClubNewsService{
 				.withIgnorePaths("statusCd").withIgnorePaths("version");
 		Example<BaseClubNewsEntity> example = Example.of(entity,matcher);
 		return baseClubNewsRepository.count(example);
+	}
+
+	@Override
+	public List<BaseClubNewsVo> countBaseClubNews(Map<String, Object> params) {
+		return baseClubNewsMapper.countBaseClubNews(params);
 	}
 }
 

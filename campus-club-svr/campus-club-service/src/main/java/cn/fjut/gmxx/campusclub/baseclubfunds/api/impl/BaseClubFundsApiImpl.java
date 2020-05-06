@@ -113,5 +113,10 @@ public class BaseClubFundsApiImpl implements IBaseClubFundsApi {
 		return baseClubFundsService.saveBaseClubFundsByOrderId(params);
 	}
 
+	@Override
+	public Double countBaseClubFunds(Map<String, Object> params) {
+		return baseClubFundsService.countBaseClubCount(params);
+	}
+
 }
 

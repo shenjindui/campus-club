@@ -29,6 +29,6 @@ public interface IBaseClubFundsMapper extends BaseMapper<BaseClubFundsEntity> {
 
     List<Map<String, Object>> findBaseClubFunds(Map<String, Object> params);
 
-
+    Double countBaseClubFunds(Map<String, Object> params);
 }
 

@@ -5,10 +5,12 @@ import cn.fjut.gmxx.campusclub.baseclubmember.service.IBaseClubMemberService;
 import cn.fjut.gmxx.campusclub.baseclubnotice.api.BaseClubNoticeApiConstants;
 import cn.fjut.gmxx.campusclub.baseclubnotice.api.IBaseClubNoticeApi;
 import cn.fjut.gmxx.campusclub.baseclubnotice.entity.BaseClubNoticeEntity;
+import cn.fjut.gmxx.campusclub.baseclubnotice.entity.BaseClubNoticeVo;
 import cn.fjut.gmxx.campusclub.baseclubnotice.service.IBaseClubNoticeService;
 import cn.fjut.gmxx.campusclub.pagehelper.PageInfo;
 import cn.fjut.gmxx.campusclub.utlis.DateUtils;
 import cn.fjut.gmxx.campusclub.utlis.QueryTimeParseUtils;
+import cn.hutool.core.bean.BeanUtil;
 import org.apache.commons.collections.MapUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -91,6 +93,18 @@ public class BaseClubNoticeApiImpl implements IBaseClubNoticeApi {
 		params.put("result",baseClubNoticeEntity);
 		return params;
 
+	}
+
+	@Override
+	public List<Map<String, Object>> countBaseClubNotice(Map<String, Object> params) {
+		List<Map<String, Object>> resultList = new ArrayList<>();
+		List<BaseClubNoticeVo> list = baseClubNoticeService.countBaseClubNotice(params);
+		for (BaseClubNoticeVo vo:list) {
+			Map<String, Object> map = new HashMap<String, Object>();
+			BeanUtil.copyProperties(vo, map);
+			resultList.add(map);
+		}
+		return resultList;
 	}
 
 }

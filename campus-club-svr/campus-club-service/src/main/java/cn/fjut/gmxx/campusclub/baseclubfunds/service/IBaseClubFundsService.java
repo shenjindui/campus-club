@@ -40,5 +40,7 @@ public interface IBaseClubFundsService {
 	Map<String, Object> saveBaseClubFundsByOrderId(Map<String, Object> params);
 
 	long findBaseClubCount(Map<String, Object> params);
+
+    Double countBaseClubCount(Map<String, Object> params);
 }
 

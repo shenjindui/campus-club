@@ -2,6 +2,7 @@ package cn.fjut.gmxx.campusclub.baseclubnews.service;
 
 
 import cn.fjut.gmxx.campusclub.baseclubnews.entity.BaseClubNewsEntity;
+import cn.fjut.gmxx.campusclub.baseclubnews.entity.BaseClubNewsVo;
 import cn.fjut.gmxx.campusclub.pagehelper.PageInfo;
 
 import java.util.List;
@@ -38,6 +39,8 @@ public interface IBaseClubNewsService {
 	BaseClubNewsEntity deleteBaseClubNews(Map<String, Object> params);
 
 	long findBaseClubNewsCount(Map<String, Object> params);
+
+	List<BaseClubNewsVo> countBaseClubNews(Map<String, Object> params);
 
 }
 

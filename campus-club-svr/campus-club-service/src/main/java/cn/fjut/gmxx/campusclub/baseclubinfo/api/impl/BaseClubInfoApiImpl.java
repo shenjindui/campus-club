@@ -13,6 +13,7 @@ import cn.fjut.gmxx.campusclub.utlis.UrlUtils;
 import cn.fjut.gmxx.campusclub.workflow.entity.WorkflowBusinessEntity;
 import cn.fjut.gmxx.campusclub.workflow.service.ISysWorkflowApproverService;
 import cn.fjut.gmxx.campusclub.workflow.service.ISysWorkflowBusinessService;
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.MapUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -76,7 +77,20 @@ public class BaseClubInfoApiImpl implements IBaseClubInfoApi {
 		return page;
 	}
 
-	@Override
+    @Override
+    public Map<String, Object> getBaseClubInfo(Map<String, Object> params) {
+        PageInfo<Map<String, Object>> BaseClubInfoPage = this.findBaseClubInfoPage(params);
+        long total = BaseClubInfoPage.getTotal();
+        if (0 < total) {
+            List<Map<String, Object>> list = BaseClubInfoPage.getList();
+            if (CollectionUtils.isNotEmpty(list)) {
+                return list.get(0);
+            }
+        }
+        return null;
+    }
+
+    @Override
 	public Map<String, Object> getBaseClubInfoMap(Map<String, Object> params) {
 		String isMenhu=MapUtils.getString(params,"menhu");
 		if(isMenhu!=null){

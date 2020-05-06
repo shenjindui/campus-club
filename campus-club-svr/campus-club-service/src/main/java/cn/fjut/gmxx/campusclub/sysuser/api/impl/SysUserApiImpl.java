@@ -28,20 +28,14 @@ import cn.fjut.gmxx.campusclub.sysuser.entity.SysUserEntity;
 import cn.fjut.gmxx.campusclub.sysuser.service.ISysUserService;
 import cn.fjut.gmxx.campusclub.sysuserrolerel.api.SysUserRoleRelApiConstants;
 import cn.fjut.gmxx.campusclub.sysuserrolerel.service.ISysUserRoleRelService;
-import cn.fjut.gmxx.campusclub.utlis.DateUtils;
-import cn.fjut.gmxx.campusclub.utlis.JwtUtils;
-import cn.fjut.gmxx.campusclub.utlis.RedisUtils;
-import cn.fjut.gmxx.campusclub.utlis.UrlUtils;
+import cn.fjut.gmxx.campusclub.utlis.*;
 import org.apache.commons.collections.MapUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service("sysUserApiImpl")
 public class SysUserApiImpl implements ISysUserApi {
@@ -193,8 +187,8 @@ public class SysUserApiImpl implements ISysUserApi {
 			//设置Token值
 			resultMap.put("token",token);
 			//设置地址
-            //Map<String,Object> addressResult= AddressUtils.getAddressMap(params);
-            //resultMap.put("addressResult",addressResult);
+            Map<String,Object> addressResult= AddressUtils.getAddressMap(params);
+            resultMap.put("addressResult",addressResult);
 
             resultMap.put("userInfo",oneUser);
 
@@ -365,15 +359,20 @@ public class SysUserApiImpl implements ISysUserApi {
         resultMap.put("clubNewsListLength",clubNewsList==null?0:clubNewsList.size());
         // 社长 获取社团社员数量
         Map<String, Object> queryMap=new HashMap<>();
-        queryMap.put("stCd",MapUtils.getString(params,"stCd"));
+        params.put("stChargeSno",MapUtils.getString(params,"jobNum"));
+        Map<String, Object> result = baseClubInfoApi.getBaseClubInfo(params);
+        params.remove("stChargeSno");
+        queryMap.put("stCd",MapUtils.getString(result,"stCd"));
         List<Map<String,Object>> clubMemberList = baseClubMemberApi.findBaseClubMemberAll(queryMap);
         resultMap.put("clubMemberList",clubMemberList);
         resultMap.put("clubMemberListLength",clubMemberList==null?0:clubMemberList.size());
         //获取社团公告数量
+        queryMap.put("noticeStCd",MapUtils.getString(result,"stCd"));
         List<Map<String,Object>> clubNoticeListByStCd = baseClubNoticeApi.findBaseClubNoticeAll(queryMap);
         resultMap.put("clubNoticeListByStCd",clubNoticeListByStCd);
         resultMap.put("clubNoticeListByStCdLength",clubNoticeListByStCd==null?0:clubNoticeListByStCd.size());
         //获取社团新闻数量
+        queryMap.put("newsStCd",MapUtils.getString(result,"stCd"));
         List<Map<String,Object>> clubNewsListByStCd = baseClubNewsApi.findBaseClubNewsAll(queryMap);
         resultMap.put("clubNewsListByStCd",clubNewsListByStCd);
         resultMap.put("clubNewsListByStCdLength",clubNewsListByStCd==null?0:clubNewsListByStCd.size());
@@ -396,8 +395,47 @@ public class SysUserApiImpl implements ISysUserApi {
         List<Map<String,Object>> messageList = baseClubMessageApi.findBaseClubMessageAll(queryMap);
         resultMap.put("messageList",messageList);
         resultMap.put("messageListLength",messageList==null?0:messageList.size());
+
+        //获取社团收支详情
+        Map<String, Object> fundsParams = new HashMap<>();
+        fundsParams.put("stCd",MapUtils.getString(result,"stCd"));
+        Double total = baseClubFundsApi.countBaseClubFunds(fundsParams);
+        fundsParams.put("amountType","+");
+        Double inCome = baseClubFundsApi.countBaseClubFunds(fundsParams);
+        fundsParams.put("amountType","-");
+        Double results = baseClubFundsApi.countBaseClubFunds(fundsParams);
+        Double outlay = results==null?0:results;
+        Double inComePer = convert((inCome/total)*100);
+        Double outlayPer =convert((outlay/total)*100);
+        Double otherPer  = 100-inComePer-outlayPer;
+        List<Double> stClubFundsPer = new ArrayList<>();
+        stClubFundsPer.add(inComePer);
+        stClubFundsPer.add(outlayPer);
+        stClubFundsPer.add(otherPer);
+        resultMap.put("stClubFundsPer",stClubFundsPer);
+        resultMap.put("stClubFundsPerLength",stClubFundsPer==null?0:stClubFundsPer.size());
+
+        //获取社团新闻访问量
+        Map<String, Object> newsParams = new HashMap<>();
+        newsParams.put("newsStCd",MapUtils.getString(result,"stCd"));
+        newsParams.put("dateFlag","dateFlag");
+        List<Map<String, Object>> stNewsList = baseClubNewsApi.countBaseClubNews(newsParams);
+        resultMap.put("stNewsList",stNewsList);
+        resultMap.put("stNewsListLength",stNewsList==null?0:stNewsList.size());
+        //获取社团公告访问量
+        Map<String, Object> noticeParams = new HashMap<>();
+        noticeParams.put("noticeStCd",MapUtils.getString(result,"stCd"));
+        noticeParams.put("dateFlag","dateFlag");
+        List<Map<String, Object>> stNoticeList = baseClubNoticeApi.countBaseClubNotice(noticeParams);
+        resultMap.put("stNoticeList",stNoticeList);
+        resultMap.put("stNoticeListLength",stNoticeList==null?0:stNoticeList.size());
 		return resultMap;
 	}
 
+	private static double convert(double value){
+        long l1 = Math.round(value*100); //四舍五入
+        double ret = l1/100.0; //注意:使用 100.0 而不是 100
+        return ret;
+    }
 }
 

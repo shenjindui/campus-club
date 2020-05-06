@@ -58,6 +58,11 @@
                     #{noticeStCd}
                 </foreach>
             </if>
+            <if test="dateFlag!=null and dateFlag!=''"> AND
+                DATE_SUB(CURDATE(), INTERVAL 7 DAY) <![CDATA[<=]]> date(
+                base_club_notice.create_time
+                )
+            </if>
         </where>
     </sql>
 
@@ -84,6 +89,19 @@
         FROM base_club_notice base_club_notice
         <include refid="where_filters"/>
         ORDER BY base_club_notice.CREATE_TIME DESC
+    </select>
+
+    <select id="countBaseClubNotice"  parameterType="map" resultType="cn.fjut.gmxx.campusclub.baseclubnotice.entity.BaseClubNoticeVo">
+        SELECT
+        DATE_FORMAT( a.create_time, '%Y-%m-%d' ) name,
+        a.traffic_Volume value
+        FROM
+        (
+        SELECT * FROM base_club_notice
+        <include refid="where_filters"/>
+        ) as a
+        GROUP BY
+        name
     </select>
 
 </mapper>
