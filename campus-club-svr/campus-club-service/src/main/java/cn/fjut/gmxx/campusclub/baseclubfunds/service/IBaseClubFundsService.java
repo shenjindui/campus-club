@@ -1,13 +1,10 @@
 package cn.fjut.gmxx.campusclub.baseclubfunds.service;
 
-
 import cn.fjut.gmxx.campusclub.baseclubfunds.entity.BaseClubFundsEntity;
 import cn.fjut.gmxx.campusclub.pagehelper.PageInfo;
 
 import java.util.List;
 import java.util.Map;
-
-
 
 /**
 * @类名称 IBaseClubFundsService
@@ -25,22 +22,67 @@ import java.util.Map;
 */
 public interface IBaseClubFundsService {
 
+	/**
+	 * 分页查询社团财务信息
+	 * @param params
+	 * @return
+	 */
 	PageInfo<Map<String, Object>> findBaseClubFundsPage(Map<String, Object> params);
 
+	/**
+	 * 根据参数获取社团财务信息
+	 * @param params
+	 * @return
+	 */
 	Map<String, Object> getBaseClubFundsMap(Map<String, Object> params);
 
+	/**
+	 * 保存社团财务信息
+	 * @param params
+	 * @return
+	 */
 	Map<String,Object> saveBaseClubFunds(Map<String, Object> params);
 
+	/**
+	 * 更新社团财务信息
+	 * @param params
+	 * @return
+	 */
 	Map<String,Object> updateBaseClubFunds(Map<String, Object> params);
 
+	/**
+	 * 删除社团财务信息
+	 * @param params
+	 * @return
+	 */
 	BaseClubFundsEntity deleteBaseClubFunds(Map<String, Object> params);
 
+	/**
+	 * 查询社团财务列表
+	 * @param params
+	 * @return
+	 */
     List<Map<String, Object>> findBaseClubFunds(Map<String, Object> params);
 
+	/**
+	 * 根据orderId保存社团财务信息
+	 * @param params
+	 * @return
+	 */
 	Map<String, Object> saveBaseClubFundsByOrderId(Map<String, Object> params);
 
+	/**
+	 * 根据参数计算财务信息条数
+	 * @param params
+	 * @return
+	 */
 	long findBaseClubCount(Map<String, Object> params);
 
+	/**
+	 * 根据参数计算财务信息条数
+	 * @param params
+	 * @return
+	 */
     Double countBaseClubCount(Map<String, Object> params);
 }
 

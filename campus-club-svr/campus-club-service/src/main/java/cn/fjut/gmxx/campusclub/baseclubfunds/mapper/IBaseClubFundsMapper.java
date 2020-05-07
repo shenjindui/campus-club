@@ -7,7 +7,6 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Map;
 
-
 /**
 * @类名称 IBaseClubFundsMapper
 * @类描述 <pre>请填写</pre>
@@ -25,10 +24,25 @@ import java.util.Map;
 @Repository
 public interface IBaseClubFundsMapper extends BaseMapper<BaseClubFundsEntity> {
 
+    /**
+     * 根据参数获取社团财务信息
+     * @param params
+     * @return
+     */
     List<Map<String, Object>> findBaseClubFundsList(Map<String, Object> params);
 
+    /**
+     * 根据参数获取社团财务信息
+     * @param params
+     * @return
+     */
     List<Map<String, Object>> findBaseClubFunds(Map<String, Object> params);
 
+    /**
+     * 根据参数计算社团财务信息条数
+     * @param params
+     * @return
+     */
     Double countBaseClubFunds(Map<String, Object> params);
 }
 

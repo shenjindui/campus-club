@@ -23,10 +23,13 @@ public class BaseClubFundsApiImpl implements IBaseClubFundsApi {
 
 	@Autowired
 	private IBaseClubFundsService baseClubFundsService;
+
 	@Autowired
 	private IBaseDdctApi baseDdctApi;
+
     @Autowired
 	private IBaseClubInfoApi baseClubInfoApi;
+
     @Autowired
 	private DdctUtils dctUtils;
 
@@ -62,12 +65,9 @@ public class BaseClubFundsApiImpl implements IBaseClubFundsApi {
 	@Override
 	public Map<String, Object> saveBaseClubFundsTrans(Map<String, Object> params) {
 		String uuid = MapUtils.getString(params, BaseClubFundsApiConstants.uuid);
-
-		//新增
 		if (null == uuid) {
 			return baseClubFundsService.saveBaseClubFunds(params);
 		} else {
-			//修改
             return baseClubFundsService.updateBaseClubFunds(params);
 		}
 	}
@@ -117,6 +117,5 @@ public class BaseClubFundsApiImpl implements IBaseClubFundsApi {
 	public Double countBaseClubFunds(Map<String, Object> params) {
 		return baseClubFundsService.countBaseClubCount(params);
 	}
-
 }
 

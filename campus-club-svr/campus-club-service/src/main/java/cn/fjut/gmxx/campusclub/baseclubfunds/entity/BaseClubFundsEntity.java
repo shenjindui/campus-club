@@ -231,8 +231,6 @@ public class BaseClubFundsEntity extends BaseEntity implements Serializable {
             if (entityMap.containsKey("fundsAssociationCode")) {
                 this.fundsCd = MapUtils.getString(entityMap, "fundsAssociationCode");
             }
-
-
         }
     }
 }

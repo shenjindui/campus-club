@@ -35,7 +35,7 @@ import java.util.Map;
 * @类描述 <pre>请填写</pre>
 * @作者 shenjindui V1.0
 * @创建时间 2020-03-21
-* @版本 vV1.0
+* @版本 V1.0
 * @修改记录
 *
 * 版本 修改人 修改时间 修改内容描述
@@ -68,14 +68,11 @@ public class BaseClubFundsServiceImpl implements IBaseClubFundsService {
 		if (null == params) {
 			params = new HashMap<String, Object>();
 		}
-		//进行分页参数设置
 		Map<String, Object> queryParams=new HashMap<>();
 		MapTrunPojo.mapCopy(params,queryParams);
 		queryParams= PageHelp.setPageParms(params);
-		//查询总数
 		BaseClubFundsEntity entity=new BaseClubFundsEntity();
 		entity.setDelInd("0");
-		//查询匹配器
 		ExampleMatcher matcher=ExampleMatcher.matching().withIgnorePaths("statusCd").withIgnorePaths("version");
 		Example<BaseClubFundsEntity> example = Example.of(entity,matcher);
 		queryParams.put("total",baseClubFundsRepository.count(example));
@@ -85,12 +82,9 @@ public class BaseClubFundsServiceImpl implements IBaseClubFundsService {
 
 	@Override
 	public Map<String, Object> getBaseClubFundsMap(Map<String, Object> params) {
-		//默认调用分页查询方法。
 		PageInfo<Map<String, Object>> baseClubFundsPage = this.findBaseClubFundsPage(params);
-		//判断是否存在数据
 		long total = baseClubFundsPage.getTotal();
 		if (0 < total) {
-			//获取查询结果列表
 			List<Map<String, Object>> list = baseClubFundsPage.getList();
 			if (CollectionUtils.isNotEmpty(list)) {
 				return list.get(0);
@@ -101,11 +95,9 @@ public class BaseClubFundsServiceImpl implements IBaseClubFundsService {
 
 	@Override
 	public Map<String, Object> saveBaseClubFunds(Map<String, Object> params) {
-		// 组装方法要判空
 		if (params == null || params.isEmpty()) {
 			throw ExceptionFactory.getBizException("campus-club-00003", "params");
 		}
-        //查找当前操作用户
         SysUserEntity currentUser=userRepository.findByUserCode(MapUtils.getString(params,"userCode"));
         BaseClubFundsEntity entity = (BaseClubFundsEntity) MapTrunPojo.map2Object(params,BaseClubFundsEntity.class);
         entity.setCreateTime(new Date());//设置时间
@@ -201,7 +193,7 @@ public class BaseClubFundsServiceImpl implements IBaseClubFundsService {
 		if (entity == null) {
 			throw ExceptionFactory.getBizException("campus-club-00003", "findOne");
 		}
-		entity.setDelInd(BaseClubFundsApiConstants.DEL_IND_1); // 逻辑删除标识
+		entity.setDelInd(BaseClubFundsApiConstants.DEL_IND_1);
 		return baseClubFundsRepository.save(entity);
 	}
 
