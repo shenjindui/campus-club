@@ -31,14 +31,14 @@ import java.util.Map;
 /**
 * @类名称 IBaseClubInfoService
 * @类描述 <pre>请填写</pre>
-* @作者 v v
+* @作者 shenjindui
 * @创建时间 2020-01-18
 * @版本 vv
 * @修改记录
 *
 * 版本 修改人 修改时间 修改内容描述
 * ----------------------------------------------
-* v v 2020-01-18 新建
+* shenjindui 2020-01-18 新建
 * ----------------------------------------------
 *
 */
@@ -77,12 +77,9 @@ public class BaseClubInfoServiceImpl implements IBaseClubInfoService {
 	
 	@Override
 	public Map<String, Object> getBaseClubInfoMap(Map<String, Object> params) {
-		//默认调用分页查询方法。
 		PageInfo<Map<String, Object>> baseClubInfoPage = this.findBaseClubInfoPage(params);
-		//判断是否存在数据
 		long total = baseClubInfoPage.getTotal();
 		if (0 < total) {
-			//获取查询结果列表
 			List<Map<String, Object>> list = baseClubInfoPage.getList();
 			if (CollectionUtils.isNotEmpty(list)) {
 				return list.get(0);
@@ -93,12 +90,9 @@ public class BaseClubInfoServiceImpl implements IBaseClubInfoService {
 	
 	@Override
 	public Map<String, Object> saveBaseClubInfo(Map<String, Object> params) {
-		// 组装方法要判空
 		if (params == null || params.isEmpty()) {
 			throw ExceptionFactory.getBizException("campus-club-00003", "params");
 		}
-
-		//查找当前操作用户的基本信息
 		SysUserEntity currentUser=userRepository.findByUserCode(MapUtils.getString(params,"userCode"));
 		BaseClubInfoEntity entity=(BaseClubInfoEntity)MapTrunPojo.map2Object(params,BaseClubInfoEntity.class);
 		entity.setCreateTime(new Date());//设置时间
@@ -111,7 +105,6 @@ public class BaseClubInfoServiceImpl implements IBaseClubInfoService {
 		entity.setWorkflowCd(0);//初次添加时为 未提交  审核中 审核通过  审核不通过
 		entity.mapCoverToEntity(params);
 		//获取当前最大编码
-		//设置Id
 		String maxStCd=baseClubInfRepository.findMaxStCd();
 		String nowStCd=null;
 		//如果暂时不存在，则设置为默认的st-00001
@@ -166,17 +159,13 @@ public class BaseClubInfoServiceImpl implements IBaseClubInfoService {
 	
 	@Override
 	public Map<String, Object> updateBaseClubInfo(Map<String, Object> params) {
-		//update要先根据ID获取BO对象，然后在拷贝map里面的值
 		String uuid = MapUtils.getString(params, BaseClubInfoApiConstants.UUID);
 		if (uuid == null) {
 			throw ExceptionFactory.getBizException("campus-club-00002");
 		}
 		BaseClubInfoEntity entity = baseClubInfRepository.findByUuid(uuid);
 		entity.mapCoverToEntity(params);
-		//查找当前操作用户
 		SysUserEntity currentUser=userRepository.findByUserCode(MapUtils.getString(params,"userCode"));
-
-		//组装保存的entity
 		entity.setUpdateTime(new Date());
 		entity.setUpdateUser(currentUser.getLoginName());
 		//查找是否已经存在此名称的菜单
@@ -241,8 +230,6 @@ public class BaseClubInfoServiceImpl implements IBaseClubInfoService {
 	public List<Map<String, Object>> findBaseClubInfo(Map<String, Object> params) {
 		return baseClubInfoMapper.findBaseClubInfo(params);
 	}
-
-
 }
 
 
