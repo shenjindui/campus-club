@@ -5,7 +5,7 @@ package cn.fjut.gmxx.campusclub.baseclubmessage.api;
 * @类描述 <pre>请填写</pre>
 * @作者 shenjindui V10
 * @创建时间 2020-03-26
-* @版本 vV10
+* @版本 V10
 * @修改记录
 *
 * 版本 修改人 修改时间 修改内容描述
@@ -34,21 +34,10 @@ public interface BaseClubMessageApiConstants {
 	String message_psc_opin = "messagePscOpin";
 	String message_psccd = "messagePsccd";
 	String message_st_cd = "messageStCd";
-
-	String ID = "id";
 	/**
 	* 删除标识
 	*/
 	String DEL_IND = "delInd";
-	/**
-	* 租户ID
-	*/
-	String TENANT_ID = "tenantId";
-	/**
-	* 客户端ID
-	*/
-	String CLNTEND_ID = "clntendId";
-
 	/**
 	* 删除标志：0：已删除
 	*/

@@ -11,13 +11,12 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.Map;
 
-
 /**
 * @类名称 BaseClubNewsEntity
 * @类描述 <pre>请填写</pre>
 * @作者 shenjindui V
 * @创建时间 2020-02-24
-* @版本 vV
+* @版本 V
 * @修改记录
 *
 * 版本 修改人 修改时间 修改内容描述
@@ -211,5 +210,4 @@ public class BaseClubNewsEntity extends BaseEntity implements Serializable{
             }
         }
     }
-
 }

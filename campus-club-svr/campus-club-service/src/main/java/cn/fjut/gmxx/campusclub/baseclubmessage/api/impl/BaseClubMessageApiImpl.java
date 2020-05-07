@@ -51,12 +51,9 @@ public class BaseClubMessageApiImpl implements IBaseClubMessageApi {
 	@Override
 	public Map<String, Object> saveBaseClubMessageTrans(Map<String, Object> params) {
         String uuid = MapUtils.getString(params, BaseClubMessageApiConstants.uuid);
-
-		//新增
 		if (null == uuid) {
 			return baseClubMessageService.saveBaseClubMessage(params);
 		} else {
-			//修改
             return baseClubMessageService.updateBaseClubMessage(params);
 		}
 	}
@@ -77,6 +74,5 @@ public class BaseClubMessageApiImpl implements IBaseClubMessageApi {
         params.put("result",baseClubMessageEntity);
         return params;
 	}
-
 }
 

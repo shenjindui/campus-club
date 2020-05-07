@@ -25,11 +25,25 @@ import java.util.Map;
 @Repository
 public interface IBaseClubNewsMapper extends BaseMapper<BaseClubNewsEntity> {
 
+    /**
+     * 分页查询社团新闻信息
+     * @param params
+     * @return
+     */
     List<Map<String, Object>> findBaseClubNewsList(Map<String, Object> params);
 
+    /**
+     * 查询社团新闻信息（所有）
+     * @param params
+     * @return
+     */
     List<Map<String, Object>> findBaseClubNewsAll(Map<String, Object> params);
 
+    /**
+     * 根据参数计算社团信息的条数
+     * @param params
+     * @return
+     */
     List<BaseClubNewsVo> countBaseClubNews(Map<String, Object> params);
-
 }
 

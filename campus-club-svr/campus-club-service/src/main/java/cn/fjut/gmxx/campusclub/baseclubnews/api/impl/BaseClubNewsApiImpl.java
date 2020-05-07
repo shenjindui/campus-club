@@ -74,11 +74,9 @@ public class BaseClubNewsApiImpl implements IBaseClubNewsApi {
 	@Override
 	public Map<String, Object> saveBaseClubNewsTrans(Map<String, Object> params) {
 		String uuid = MapUtils.getString(params, BaseClubNewsApiConstants.UUID);
-		//新增
 		if (null == uuid) {
 			return baseClubNewsService.saveBaseClubNews(params);
 		} else {
-			//修改
 			return baseClubNewsService.updateBaseClubNews(params);
 		}
 	}
@@ -102,6 +100,5 @@ public class BaseClubNewsApiImpl implements IBaseClubNewsApi {
 		}
 		return resultList;
 	}
-
 }
 

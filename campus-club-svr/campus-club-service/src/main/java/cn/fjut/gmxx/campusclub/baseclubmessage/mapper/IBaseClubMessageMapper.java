@@ -25,8 +25,18 @@ import java.util.Map;
 @Repository
 public interface IBaseClubMessageMapper extends BaseMapper<BaseClubMessageEntity> {
 
+    /**
+     * 分页查询社团留言信息
+     * @param params
+     * @return
+     */
     List<Map<String, Object>> findBaseClubMessageList(Map<String, Object> params);
 
+    /**
+     * 查询社团留言信息（所有）
+     * @param params
+     * @return
+     */
     List<Map<String, Object>> findBaseClubMessageAll(Map<String, Object> params);
 
 }
