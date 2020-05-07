@@ -8,7 +8,6 @@ import cn.fjut.gmxx.campusclub.baseclubnotice.entity.BaseClubNoticeEntity;
 import cn.fjut.gmxx.campusclub.baseclubnotice.entity.BaseClubNoticeVo;
 import cn.fjut.gmxx.campusclub.baseclubnotice.service.IBaseClubNoticeService;
 import cn.fjut.gmxx.campusclub.pagehelper.PageInfo;
-import cn.fjut.gmxx.campusclub.utlis.DateUtils;
 import cn.fjut.gmxx.campusclub.utlis.QueryTimeParseUtils;
 import cn.hutool.core.bean.BeanUtil;
 import org.apache.commons.collections.MapUtils;
@@ -25,8 +24,10 @@ public class BaseClubNoticeApiImpl implements IBaseClubNoticeApi {
 
 	@Autowired
 	private IBaseClubNoticeService baseClubNoticeService;
+
 	@Autowired
     IBaseClubMemberService   baseClubMemberService;
+
     @Autowired
     IBaseClubInfoApi baseClubInfoApi;
 	@Override
@@ -56,13 +57,7 @@ public class BaseClubNoticeApiImpl implements IBaseClubNoticeApi {
 
 	@Override
 	public List<Map<String, Object>> findBaseClubNoticeAll(Map<String, Object> params) {
-		if(params!=null && params.get("paramsTime")!=null){
-			List<String> paramsTimeList=(List<String>)params.get("paramsTime");
-			String startTime= DateUtils.dealDateFormats(paramsTimeList.get(0));
-			String endTime=DateUtils.dealDateFormats(paramsTimeList.get(1));
-			params.put("startTime",startTime);
-			params.put("endTime",endTime);
-		}
+		QueryTimeParseUtils.parseQueryTime(params);
 		List<Map<String, Object>> list = baseClubNoticeService.findBaseClubNoticeAll(params);
 		return list;
 	}
@@ -76,12 +71,9 @@ public class BaseClubNoticeApiImpl implements IBaseClubNoticeApi {
 	@Override
 	public Map<String, Object> saveBaseClubNoticeTrans(Map<String, Object> params) {
 		String uuid = MapUtils.getString(params, BaseClubNoticeApiConstants.uuid);
-
-		//新增
 		if (null == uuid) {
 			return baseClubNoticeService.saveBaseClubNotice(params);
 		} else {
-			//修改
 			return baseClubNoticeService.updateBaseClubNotice(params);
 		}
 	}
@@ -106,6 +98,5 @@ public class BaseClubNoticeApiImpl implements IBaseClubNoticeApi {
 		}
 		return resultList;
 	}
-
 }
 

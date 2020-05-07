@@ -1,6 +1,4 @@
-package cn.fjut.gmxx.campusclub.baseclubscore.strategyUtils;/**
- * Created by admin on 2020/3/28.
- */
+package cn.fjut.gmxx.campusclub.baseclubscore.strategyUtils;
 
 import cn.fjut.gmxx.campusclub.baseclubinfo.service.IBaseClubInfoService;
 import cn.fjut.gmxx.campusclub.baseclubscore.entity.BaseClubScoreEntity;

@@ -25,11 +25,25 @@ import java.util.Map;
 @Repository
 public interface IBaseClubNoticeMapper extends BaseMapper<BaseClubNoticeEntity> {
 
+    /**
+     * 分页查询社团公告列表
+     * @param params
+     * @return
+     */
     List<Map<String, Object>> findBaseClubNoticeList(Map<String, Object> params);
 
+    /**
+     * 查询社团公告列表（所有）
+     * @param params
+     * @return
+     */
     List<Map<String, Object>> findBaseClubNoticeListAll(Map<String, Object> params);
 
+    /**
+     * 计算社团公告条数
+     * @param params
+     * @return
+     */
     List<BaseClubNoticeVo> countBaseClubNotice(Map<String, Object> params);
-
 }
 

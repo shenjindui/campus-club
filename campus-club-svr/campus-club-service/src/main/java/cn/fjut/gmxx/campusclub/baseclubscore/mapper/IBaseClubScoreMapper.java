@@ -7,7 +7,6 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Map;
 
-
 /**
 * @类名称 IBaseClubScoreDao
 * @类描述 <pre>请填写</pre>
@@ -25,9 +24,18 @@ import java.util.Map;
 @Repository
 public interface IBaseClubScoreMapper extends BaseMapper<BaseClubScoreEntity> {
 
+    /**
+     * 分页查询社团得分列表
+     * @param params
+     * @return
+     */
     List<Map<String, Object>> findBaseClubScoreList(Map<String, Object> params);
 
+    /**
+     * 查询社团得分列表（所有）
+     * @param params
+     * @return
+     */
     List<Map<String, Object>> findBaseClubScoreAll(Map<String, Object> params);
-
 }
 

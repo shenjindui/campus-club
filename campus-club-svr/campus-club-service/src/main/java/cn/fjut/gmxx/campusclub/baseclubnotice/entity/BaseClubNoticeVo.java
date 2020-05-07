@@ -1,7 +1,4 @@
-package cn.fjut.gmxx.campusclub.baseclubnotice.entity;/**
- * Created by admin on 2020/5/6.
- */
-
+package cn.fjut.gmxx.campusclub.baseclubnotice.entity;
 /**
  * @author : shenjindui
  * @date : 2020-05-06 14:05

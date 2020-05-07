@@ -23,19 +23,46 @@ import java.util.Map;
 */
 public interface IBaseClubScoreService {
 
+	/**
+	 * 分页查询得分信息
+	 * @param params
+	 * @return
+	 */
 	PageInfo<Map<String, Object>> findBaseClubScorePage(Map<String, Object> params);
 
+	/**
+	 * 根据参数获取社团得分信息
+	 * @param params
+	 * @return
+	 */
 	Map<String, Object> getBaseClubScoreMap(Map<String, Object> params);
 
+	/**
+	 * 保存社团得分信息
+	 * @param params
+	 * @return
+	 */
 	Map<String,Object> saveBaseClubScore(Map<String, Object> params);
 
+	/**
+	 * 更新社团得分信息
+	 * @param params
+	 * @return
+	 */
 	Map<String, Object> updateBaseClubScore(Map<String, Object> params);
 
+	/**
+	 * 删除社团得分信息
+	 * @param params
+	 * @return
+	 */
 	Map<String, Object> deleteBaseClubScore(Map<String, Object> params);
 
-
+	/**
+	 * 计算社团得分条数
+	 * @param params
+	 * @return
+	 */
 	long findBaseClubCount(Map<String, Object> params);
-
-
 }
 

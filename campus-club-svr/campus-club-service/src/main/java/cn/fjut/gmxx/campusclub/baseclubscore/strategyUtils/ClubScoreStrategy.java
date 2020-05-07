@@ -1,7 +1,4 @@
-package cn.fjut.gmxx.campusclub.baseclubscore.strategyUtils;/**
- * Created by admin on 2020/3/28.
- */
-
+package cn.fjut.gmxx.campusclub.baseclubscore.strategyUtils;
 import java.util.Map;
 
 /**
@@ -11,6 +8,11 @@ import java.util.Map;
 
 public interface  ClubScoreStrategy {
 
+    /**
+     * 保存社团得分信息
+     * @param params
+     * @return
+     */
     public Map<String,Object> doSaveSocore(Map<String,Object> params);
 
 }

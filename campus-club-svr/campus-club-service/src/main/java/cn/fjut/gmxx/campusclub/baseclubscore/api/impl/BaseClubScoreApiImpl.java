@@ -32,23 +32,24 @@ public class BaseClubScoreApiImpl implements IBaseClubScoreApi {
 	private IBaseClubScoreService baseClubScoreService;
 
     @Autowired
-    IBaseClubInfoApi baseClubInfoApi;
-    @Autowired
-    IBaseDdctService baseDdctService;
+    private IBaseClubInfoApi baseClubInfoApi;
 
     @Autowired
-    DdctUtils ddctUtils;
+    private IBaseDdctService baseDdctService;
 
     @Autowired
-    UserRepository userRepository;
+    private DdctUtils ddctUtils;
 
     @Autowired
-    UserRoleRelRepository userRoleRelRepository;
+    private UserRepository userRepository;
 
     @Autowired
-    RoleRepository roleRepository;
+    private UserRoleRelRepository userRoleRelRepository;
+
     @Autowired
-    IBaseClubInfoService baseClubInfoService;
+    private  RoleRepository roleRepository;
+    @Autowired
+    private  IBaseClubInfoService baseClubInfoService;
 
     @Override
 	public PageInfo<Map<String, Object>> findBaseClubScorePage(Map<String, Object> params) {
@@ -93,12 +94,9 @@ public class BaseClubScoreApiImpl implements IBaseClubScoreApi {
 	@Override
 	public Map<String, Object> saveBaseClubScoreTrans(Map<String, Object> params) {
 		String uuid = MapUtils.getString(params, BaseClubScoreApiConstants.uuid);
-
-		//新增
 		if (null == uuid) {
 			return baseClubScoreService.saveBaseClubScore(params);
 		} else {
-			//修改
             return baseClubScoreService.updateBaseClubScore(params);
 		}
 	}

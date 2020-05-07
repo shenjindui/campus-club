@@ -25,22 +25,11 @@ public interface BaseClubNoticeApiConstants {
 	String TRAFFIC_VOLUME = "trafficVolume";
 	String REMARK = "remark";
 	String UUID = "uuid";
-	String ID = "id";
-
 	String uuid = "uuid";
 	/**
 	* 删除标识
 	*/
 	String DEL_IND = "delInd";
-	/**
-	* 租户ID
-	*/
-	String TENANT_ID = "tenantId";
-	/**
-	* 客户端ID
-	*/
-	String CLNTEND_ID = "clntendId";
-
 	/**
 	* 删除标志：0：已删除
 	*/

@@ -55,22 +55,17 @@ public class BaseClubNoticeServiceImpl implements IBaseClubNoticeService{
 
 	@Override
 	public PageInfo<Map<String, Object>> findBaseClubNoticePage(Map<String, Object> params) {
-		// 判断当前参数params是否为空，则为默认查询
 		if (null == params) {
 			params = new HashMap<String, Object>();
 		}
-		//进行分页参数设置
 		Map<String, Object> queryParams=new HashMap<>();
 		MapTrunPojo.mapCopy(params,queryParams);
 		queryParams= PageHelp.setPageParms(params);
-		//查询总数
 		BaseClubNoticeEntity entity=new BaseClubNoticeEntity();
 		entity.setDelInd("0");
-		//查询匹配器
 		ExampleMatcher matcher=ExampleMatcher.matching().withIgnorePaths("statusCd").withIgnorePaths("version");
 		Example<BaseClubNoticeEntity> example = Example.of(entity,matcher);
 		queryParams.put("total",baseClubNoticeRepository.count(example));
-
 		queryParams.put(BaseClubNoticeApiConstants.DEL_IND, BaseClubNoticeApiConstants.DEL_IND_0);
 		List<Map<String, Object>> list=baseClubNoticeMapper.findBaseClubNoticeList(queryParams);
 		return new PageInfo<>(list,queryParams);
@@ -95,12 +90,9 @@ public class BaseClubNoticeServiceImpl implements IBaseClubNoticeService{
 
     @Override
 	public Map<String, Object> getBaseClubNoticeMap(Map<String, Object> params) {
-		//默认调用分页查询方法。
 		PageInfo<Map<String, Object>> baseClubNoticePage = this.findBaseClubNoticePage(params);
-		//判断是否存在数据
 		long total = baseClubNoticePage.getTotal();
 		if (0 < total) {
-			//获取查询结果列表
 			List<Map<String, Object>> list = baseClubNoticePage.getList();
 			if (CollectionUtils.isNotEmpty(list)) {
 				return list.get(0);
@@ -111,14 +103,12 @@ public class BaseClubNoticeServiceImpl implements IBaseClubNoticeService{
 	
 	@Override
 	public Map<String, Object> saveBaseClubNotice(Map<String, Object> params) {
-		// 组装方法要判空
 		if (params == null || params.isEmpty()) {
 			throw ExceptionFactory.getBizException("campus-club-00003", "params");
 		}
 
 		BaseClubNoticeEntity entity = new BaseClubNoticeEntity();
 		entity.mapCoverToEntity(params);
-		//查找当前操作用户的基本信息
 		SysUserEntity currentUser=userRepository.findByUserCode(MapUtils.getString(params,"userCode"));
 		entity.setNoticeStatus("1");
         entity.setPublisher(currentUser.getUserCode());
@@ -156,7 +146,6 @@ public class BaseClubNoticeServiceImpl implements IBaseClubNoticeService{
 			throw ExceptionFactory.getBizException("campus-club-00003", "findOne");
 		}
 		entity.mapCoverToEntity(params);
-		//查找当前操作用户
 		SysUserEntity currentUser=userRepository.findByUserCode(MapUtils.getString(params,"userCode"));
 		//组装保存的entity
 		entity.setUpdateTime(new Date());
@@ -176,7 +165,7 @@ public class BaseClubNoticeServiceImpl implements IBaseClubNoticeService{
         if (entity == null) {
             throw ExceptionFactory.getBizException("campus-club-00003", "findOne");
         }
-        entity.setDelInd(BaseClubFundsApiConstants.DEL_IND_1); // 逻辑删除标识
+        entity.setDelInd(BaseClubFundsApiConstants.DEL_IND_1);
         return baseClubNoticeRepository.save(entity);
     }
 

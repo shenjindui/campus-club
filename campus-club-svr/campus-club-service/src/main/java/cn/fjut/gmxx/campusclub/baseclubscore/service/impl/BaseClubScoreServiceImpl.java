@@ -35,7 +35,7 @@ import java.util.Map;
 * @类描述 <pre>请填写</pre>
 * @作者 shenjindui V1.0
 * @创建时间 2020-03-27
-* @版本 vV1.0
+* @版本 V1.0
 * @修改记录
 *
 * 版本 修改人 修改时间 修改内容描述
@@ -54,13 +54,13 @@ public class BaseClubScoreServiceImpl implements IBaseClubScoreService {
 	private BaseClubScoreRepository baseClubScoreRepository;
 
 	@Autowired
-	UserRepository userRepository;
+	private UserRepository userRepository;
 
     @Autowired
-    UserRoleRelRepository userRoleRelRepository;
+	private UserRoleRelRepository userRoleRelRepository;
 
     @Autowired
-    RoleRepository roleRepository;
+	private RoleRepository roleRepository;
 
     /*@Resource
     @Qualifier("autoTriggerIdExecStrategy")
@@ -68,20 +68,16 @@ public class BaseClubScoreServiceImpl implements IBaseClubScoreService {
     @Autowired
     private Map<String, ClubScoreStrategy> clubScoreContextMap;
 
-
     @Override
 	public PageInfo<Map<String, Object>> findBaseClubScorePage(Map<String, Object> params) {
 		if (null == params) {
 			params = new HashMap<String, Object>();
 		}
-		//进行分页参数设置
 		Map<String, Object> queryParams=new HashMap<>();
 		MapTrunPojo.mapCopy(params,queryParams);
 		queryParams= PageHelp.setPageParms(params);
-		//查询总数
 		BaseClubScoreEntity entity=new BaseClubScoreEntity();
 		entity.setDelInd("0");
-		//查询匹配器
 		ExampleMatcher matcher=ExampleMatcher.matching().withIgnorePaths("statusCd").withIgnorePaths("version");
 		Example<BaseClubScoreEntity> example = Example.of(entity,matcher);
 		queryParams.put("total",baseClubScoreRepository.count(example));
@@ -91,12 +87,9 @@ public class BaseClubScoreServiceImpl implements IBaseClubScoreService {
 	
 	@Override
 	public Map<String, Object> getBaseClubScoreMap(Map<String, Object> params) {
-		//默认调用分页查询方法。
 		PageInfo<Map<String, Object>> baseClubScorePage = this.findBaseClubScorePage(params);
-		//判断是否存在数据
 		long total = baseClubScorePage.getTotal();
 		if (0 < total) {
-			//获取查询结果列表
 			List<Map<String, Object>> list = baseClubScorePage.getList();
 			if (CollectionUtils.isNotEmpty(list)) {
 				return list.get(0);
@@ -111,7 +104,6 @@ public class BaseClubScoreServiceImpl implements IBaseClubScoreService {
 			throw ExceptionFactory.getBizException("campus-club-00003", "params");
 		}
         SysUserEntity currentUser=userRepository.findByUserCode(MapUtils.getString(params,"userCode"));
-        //根据用户编号查询当前用户的角色信息
         SysUserRoleRelEntity sysUserRoleRelEntity= userRoleRelRepository.findByUserCodeAndDefaultRole(
                 currentUser.getUserCode(),"1");
         SysRoleEntity sysRoleEntity=roleRepository.findByRoleCode(sysUserRoleRelEntity.getRoleCode());
@@ -204,8 +196,6 @@ public class BaseClubScoreServiceImpl implements IBaseClubScoreService {
 		Example<BaseClubScoreEntity> example = Example.of(entity,matcher);
 		return baseClubScoreRepository.count(example);
 	}
-
-
 }
 
 
