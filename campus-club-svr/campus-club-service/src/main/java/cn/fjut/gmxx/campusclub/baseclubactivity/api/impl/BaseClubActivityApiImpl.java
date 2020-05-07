@@ -25,12 +25,12 @@ public class BaseClubActivityApiImpl implements IBaseClubActivityApi {
 
 	@Autowired
 	private IBaseClubActivityService baseClubActivityService;
+
 	@Autowired
 	private IBaseFileRscService baseFileRscService;
 
 	@Autowired
     IBaseDdctService baseDdctService;
-
 
 	@Override
 	public PageInfo<Map<String, Object>> findBaseClubActivityPage(Map<String, Object> params) {
@@ -74,7 +74,7 @@ public class BaseClubActivityApiImpl implements IBaseClubActivityApi {
 
 	@Override
 	public Map<String, Object> saveBaseClubActivityTrans(Map<String, Object> params) {
-		String uuid = MapUtils.getString(params, BaseClubActivityApiConstants.uuid);
+		String uuid = MapUtils.getString(params, BaseClubActivityApiConstants.UUID);
 		if (null == uuid) {
 			return baseClubActivityService.saveBaseClubActivity(params);
 		} else {
@@ -94,6 +94,5 @@ public class BaseClubActivityApiImpl implements IBaseClubActivityApi {
         params.put("activityTypeList",list);
 		return params;
 	}
-
 }
 

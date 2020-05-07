@@ -1,13 +1,10 @@
 package cn.fjut.gmxx.campusclub.baseclubactivity.service;
 
-
 import cn.fjut.gmxx.campusclub.baseclubactivity.entity.BaseClubActivityEntity;
 import cn.fjut.gmxx.campusclub.pagehelper.PageInfo;
 
 import java.util.List;
 import java.util.Map;
-
-
 
 /**
 * @类名称 IBaseClubActivityService
@@ -25,19 +22,53 @@ import java.util.Map;
 */
 public interface IBaseClubActivityService {
 
+	/**
+	 * 分页查询社团活动信息
+	 * @param params
+	 * @return
+	 */
 	PageInfo<Map<String, Object>> findBaseClubActivityPage(Map<String, Object> params);
 
+	/**
+	 * 查询社团活动信息（所有）
+	 * @param params
+	 * @return
+	 */
 	List<Map<String, Object>> findBaseClubActivityAll(Map<String, Object> params);
 
+	/**
+	 * 根据参数获取社团活动信息
+	 * @param params
+	 * @return
+	 */
 	Map<String, Object> getBaseClubActivityMap(Map<String, Object> params);
 
+	/**
+	 * 保存社团活动信息
+	 * @param params
+	 * @return
+	 */
 	Map<String,Object> saveBaseClubActivity(Map<String, Object> params);
 
+	/**
+	 * 更新社团活动信息
+	 * @param params
+	 * @return
+	 */
 	Map<String,Object> updateBaseClubActivity(Map<String, Object> params);
 
+	/**
+	 * 删除社团活动信息
+	 * @param params
+	 * @return
+	 */
 	BaseClubActivityEntity deleteBaseClubActivity(Map<String, Object> params);
 
+	/**
+	 * 根据activityId获取社团活动信息
+	 * @param activityId
+	 * @return
+	 */
 	BaseClubActivityEntity findBaseClubActivityByActivityId(String activityId);
-
 }
 

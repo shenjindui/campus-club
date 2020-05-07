@@ -14,13 +14,12 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-
 /**
 * @类名称 BaseClubActivityEntity
 * @类描述 <pre>请填写</pre>
 * @作者 shenjindui V1.0
 * @创建时间 2020-02-08
-* @版本 vV1.0
+* @版本 V1.0
 * @修改记录
 *
 * 版本 修改人 修改时间 修改内容描述
@@ -323,5 +322,4 @@ public class BaseClubActivityEntity extends BaseEntity implements Serializable{
             }
         }
     }
-
 }

@@ -171,14 +171,14 @@ public class BaseClubActivityServiceImpl implements IBaseClubActivityService {
             //参数返回系统业务业务编号
             params.put("sysBusinessCode",resultsyBusinessEntity.getBusinessCode());
         }
-		params.put(BaseClubActivityApiConstants.uuid, result.getUuid());
+		params.put(BaseClubActivityApiConstants.UUID, result.getUuid());
 		return params;
 	}
 
     @Transactional(readOnly = false,rollbackFor = RuntimeException.class)
 	@Override
 	public Map<String,Object> updateBaseClubActivity(Map<String, Object> params) {
-		String uuid = MapUtils.getString(params, BaseClubActivityApiConstants.uuid);
+		String uuid = MapUtils.getString(params, BaseClubActivityApiConstants.UUID);
 		if (uuid == null) {
 			throw ExceptionFactory.getBizException("campus-club-00002");
 		}
@@ -209,7 +209,7 @@ public class BaseClubActivityServiceImpl implements IBaseClubActivityService {
 	
 	@Override
 	public BaseClubActivityEntity deleteBaseClubActivity(Map<String, Object> params) {
-		String uuid = MapUtils.getString(params, BaseClubActivityApiConstants.uuid);
+		String uuid = MapUtils.getString(params, BaseClubActivityApiConstants.UUID);
 		if (uuid == null) {
 			throw ExceptionFactory.getBizException("campus-club-00002");
 		}

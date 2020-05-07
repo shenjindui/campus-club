@@ -7,7 +7,6 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Map;
 
-
 /**
 * @类名称 IBaseClubActivityDao
 * @类描述 <pre>请填写</pre>
@@ -25,8 +24,18 @@ import java.util.Map;
 @Repository
 public interface IBaseClubActivityMapper extends BaseMapper<BaseClubActivityEntity> {
 
+    /**
+     * 分页查询社团活动信息
+     * @param params
+     * @return
+     */
     List<Map<String, Object>> findBaseClubActivityList(Map<String, Object> params);
 
+    /**
+     * 查询社团活动信息（所有）
+     * @param params
+     * @return
+     */
     List<Map<String, Object>> findBaseClubActivityAll(Map<String, Object> params);
 
 }
