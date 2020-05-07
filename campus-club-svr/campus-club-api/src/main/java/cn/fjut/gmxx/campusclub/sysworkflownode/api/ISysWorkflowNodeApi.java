@@ -3,8 +3,6 @@ package cn.fjut.gmxx.campusclub.sysworkflownode.api;
 import cn.fjut.gmxx.campusclub.pagehelper.PageInfo;
 
 import java.util.Map;
-
-
 /**
 * @类名称 ISysWorkflowNodeApi
 * @类描述 <pre></pre>
@@ -21,13 +19,38 @@ import java.util.Map;
 */
 public interface ISysWorkflowNodeApi {
 
+	/**
+	 * 分页查询工作流节点信息
+	 * @param params
+	 * @return
+	 */
 	PageInfo<Map<String, Object>> findSysWorkflowNodePage(Map<String, Object> params);
 
+	/**
+	 * 根据参数获取工作流节点信息
+	 * @param params
+	 * @return
+	 */
 	Map<String, Object> getSysWorkflowNodeMap(Map<String, Object> params);
 
+	/**
+	 * 保存工作流节点信息
+	 * @param params
+	 * @return
+	 */
 	Map<String, Object> saveSysWorkflowNodeTrans(Map<String, Object> params);
 
+	/**
+	 * 保存时初始化工作流节点信息
+	 * @param params
+	 * @return
+	 */
 	Map<String, Object> saveSysWorkflowNodeInitTrans(Map<String, Object> params);
 
+	/**
+	 * 删除工作流节点信息
+	 * @param params
+	 * @return
+	 */
 	Map<String, Object> deleteSysWorkflowNodeTrans(Map<String, Object> params);
 }

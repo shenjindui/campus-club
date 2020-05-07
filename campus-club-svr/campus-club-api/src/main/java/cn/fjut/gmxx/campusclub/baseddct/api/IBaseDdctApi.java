@@ -4,8 +4,6 @@ import cn.fjut.gmxx.campusclub.pagehelper.PageInfo;
 
 import java.util.List;
 import java.util.Map;
-
-
 /**
 * @类名称 IBaseDdctApi
 * @类描述 <pre></pre>
@@ -22,13 +20,38 @@ import java.util.Map;
 */
 public interface IBaseDdctApi {
 
+    /**
+     * 分页查询数据字典
+     * @param params
+     * @return
+     */
 	PageInfo<Map<String, Object>> findBaseDdctPage(Map<String, Object> params);
 
+    /**
+     * 查询数据字典（所有）
+     * @param params
+     * @return
+     */
 	List<Map<String, Object>> findBaseDdctNoPage(Map<String, Object> params);
 
+    /**
+     * 根据参数获取数据字典详情
+     * @param params
+     * @return
+     */
 	Map<String, Object> getBaseDdctMap(Map<String, Object> params);
 
+    /**
+     * 保存数据字典
+     * @param params
+     * @return
+     */
 	Map<String, Object> saveBaseDdctTrans(Map<String, Object> params);
 
+    /**
+     * 删除数据字典
+     * @param params
+     * @return
+     */
 	Map<String, Object> deleteBaseDdctTrans(Map<String, Object> params);
 }

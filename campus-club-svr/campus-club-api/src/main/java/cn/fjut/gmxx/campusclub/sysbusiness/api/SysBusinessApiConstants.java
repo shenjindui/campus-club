@@ -30,21 +30,10 @@ public interface SysBusinessApiConstants {
 	String business_code = "businessCode";
 	String business_desc = "businessDesc";
 	String business_state = "businessState";
-
-	String ID = "id";
 	/**
 	* 删除标识
 	*/
 	String DEL_IND = "delInd";
-	/**
-	* 租户ID
-	*/
-	String TENANT_ID = "tenantId";
-	/**
-	* 客户端ID
-	*/
-	String CLNTEND_ID = "clntendId";
-
 	/**
 	* 删除标志：0：已删除
 	*/

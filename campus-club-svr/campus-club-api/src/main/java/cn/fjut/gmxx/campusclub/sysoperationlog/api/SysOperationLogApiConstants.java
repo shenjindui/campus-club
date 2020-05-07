@@ -32,21 +32,11 @@ public interface SysOperationLogApiConstants {
 	String REQUEST = "request";
 	String RESPONSE = "response";
 	String RECORD_NO = "recordNo";
-
 	String UUID = "uuid";
 	/**
 	* 删除标识
 	*/
 	String DEL_IND = "delInd";
-	/**
-	* 租户ID
-	*/
-	String TENANT_ID = "tenantId";
-	/**
-	* 客户端ID
-	*/
-	String CLNTEND_ID = "clntendId";
-
 	/**
 	* 删除标志：0：已删除
 	*/

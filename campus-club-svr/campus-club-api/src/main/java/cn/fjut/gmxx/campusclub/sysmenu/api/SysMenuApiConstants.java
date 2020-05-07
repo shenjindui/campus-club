@@ -16,7 +16,6 @@ package cn.fjut.gmxx.campusclub.sysmenu.api;
 */
 public interface SysMenuApiConstants {
 
-	String id = "id";
 	String uuid = "uuid";
 	String create_time = "createTime";
 	String create_user = "createUser";
@@ -32,25 +31,12 @@ public interface SysMenuApiConstants {
 	String parent_menu_code = "parentMenuCode";
 	String sort = "sort";
 	String url = "url";
-
 	String role_code="roleCode";
-
 	String initRolcode="initRolcode";
-
-	String ID = "id";
 	/**
 	* 删除标识
 	*/
 	String DEL_IND = "delInd";
-	/**
-	* 租户ID
-	*/
-	String TENANT_ID = "tenantId";
-	/**
-	* 客户端ID
-	*/
-	String CLNTEND_ID = "clntendId";
-
 	/**
 	* 删除标志：0：已删除
 	*/
@@ -59,7 +45,6 @@ public interface SysMenuApiConstants {
 	* 删除标志：1：未删除
 	*/
 	String DEL_IND_1 = "1";
-
 
 	String SECOND_MENU_LIST="secondMenuList";
 }

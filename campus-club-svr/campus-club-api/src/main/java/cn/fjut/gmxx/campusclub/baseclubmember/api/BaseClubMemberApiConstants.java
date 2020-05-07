@@ -28,21 +28,10 @@ public interface BaseClubMemberApiConstants {
 	String PHONE = "phone";
 	String REMARK = "remark";
 	String STATUS_CD = "statusCd";
-
-	String ID = "id";
 	/**
 	* 删除标识
 	*/
 	String DEL_IND = "delInd";
-	/**
-	* 租户ID
-	*/
-	String TENANT_ID = "tenantId";
-	/**
-	* 客户端ID
-	*/
-	String CLNTEND_ID = "clntendId";
-
 	/**
 	* 删除标志：0：已删除
 	*/

@@ -4,8 +4,6 @@ import cn.fjut.gmxx.campusclub.pagehelper.PageInfo;
 
 import java.util.List;
 import java.util.Map;
-
-
 /**
 * @类名称 IBaseClubActivityApi
 * @类描述 <pre></pre>
@@ -22,15 +20,44 @@ import java.util.Map;
 */
 public interface IBaseClubActivityApi {
 
+	/**
+	 * 分页查询数据
+	 * @param params
+	 * @return
+	 */
 	PageInfo<Map<String, Object>> findBaseClubActivityPage(Map<String, Object> params);
 
+	/**
+	 * 查询数据所有的
+	 * @param params
+	 * @return
+	 */
 	List<Map<String, Object>> findBaseClubActivityAll(Map<String, Object> params);
 
+	/**
+	 * 根据参数获取活动详情
+	 * @param params
+	 * @return
+	 */
 	Map<String, Object> getBaseClubActivityMap(Map<String, Object> params);
 
+	/**
+	 * 保存活动详情
+	 * @param params
+	 * @return
+	 */
 	Map<String, Object> saveBaseClubActivityTrans(Map<String, Object> params);
 
+	/**
+	 * 删除活动
+	 * @param params
+	 */
 	void deleteBaseClubActivityTrans(Map<String, Object> params);
 
+	/**
+	 * 初始化保存的方法
+	 * @param params
+	 * @return
+	 */
 	Map<String, Object> saveBaseClubActivityInitTrans(Map<String, Object> params);
 }

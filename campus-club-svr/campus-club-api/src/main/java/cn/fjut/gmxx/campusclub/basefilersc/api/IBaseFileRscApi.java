@@ -1,10 +1,7 @@
 package cn.fjut.gmxx.campusclub.basefilersc.api;
-
-
 import cn.fjut.gmxx.campusclub.pagehelper.PageInfo;
 
 import java.util.Map;
-
 /**
 * @类名称 IBaseFileRscApi
 * @类描述 <pre></pre>
@@ -21,12 +18,31 @@ import java.util.Map;
 */
 public interface IBaseFileRscApi {
 
+	/**
+	 * 分页查询文件列表
+	 * @param params
+	 * @return
+	 */
 	PageInfo<Map<String, Object>> findBaseFileRscPage(Map<String, Object> params);
 
+	/**
+	 * 根据参数获取文件详情
+	 * @param params
+	 * @return
+	 */
 	Map<String, Object> getBaseFileRscMap(Map<String, Object> params);
 
+	/**
+	 * 保存文件详情
+	 * @param params
+	 * @return
+	 */
 	Map<String, Object> saveBaseFileRscTrans(Map<String, Object> params);
 
-
+	/**
+	 * 删除文件详情
+	 * @param params
+	 * @return
+	 */
 	Map<String, Object> deleteBaseFileRscTrans(Map<String, Object> params);
 }

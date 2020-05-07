@@ -155,7 +155,7 @@ public class SysUserServiceImpl implements ISysUserService{
         //MapToEntityUtils.map2Entity(params, entity);
 
  		SysUserEntity result = userRepository.save(entity);
-		params.put(SysUserApiConstants.ID, result.getUuid());
+		params.put(SysUserApiConstants.UUID, result.getUuid());
 		params.put(SysUserApiConstants.USER_CODE,result.getUserCode());
 		return params;
 	}

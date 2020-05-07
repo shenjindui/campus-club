@@ -3,9 +3,9 @@ package cn.fjut.gmxx.campusclub.sysuser.api;
 /**
 * @类名称 SysUserApiConstants
 * @类描述 <pre>请填写</pre>
-* @作者 shenjindui 1
+* @作者 shenjindui
 * @创建时间 2019-12-28
-* @版本 vV1.0
+* @版本 V1.0
 * @修改记录
 *
 * 版本 修改人 修改时间 修改内容描述
@@ -36,8 +36,6 @@ public interface SysUserApiConstants {
 	String REMARK = "remark";
 	String ADDRESS = "address";
 	String LAST_LOGIN_TIME = "lastLoginTime";
-
-	String ID = "id";
 
 	String UUID = "uuid";
 	/**

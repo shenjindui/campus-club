@@ -22,15 +22,44 @@ import java.util.Map;
 */
 public interface IBaseClubMemberApi {
 
+	/**
+	 * 分页查询社团成员列表
+	 * @param params
+	 * @return
+	 */
 	PageInfo<Map<String, Object>> findBaseClubMemberPage(Map<String, Object> params);
 
+	/**
+	 * 查询社团成员列表
+	 * @param params
+	 * @return
+	 */
 	List<Map<String, Object>> findBaseClubMember(Map<String, Object> params);
 
+	/**
+	 * 根据参数获取社团成员详情
+	 * @param params
+	 * @return
+	 */
 	Map<String, Object> getBaseClubMemberMap(Map<String, Object> params);
 
+	/**
+	 * 保存社团成员详情
+	 * @param params
+	 * @return
+	 */
 	Map<String, Object> saveBaseClubMemberTrans(Map<String, Object> params);
 
+	/**
+	 * 删除社团成员详情
+	 * @param params
+	 */
 	void deleteBaseClubMemberTrans(Map<String, Object> params);
 
+	/**
+	 * 查询社团成员列表（全部）
+	 * @param params
+	 * @return
+	 */
 	List<Map<String, Object>> findBaseClubMemberAll(Map<String, Object> params);
 }

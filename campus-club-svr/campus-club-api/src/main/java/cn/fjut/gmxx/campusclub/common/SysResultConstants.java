@@ -2,7 +2,7 @@ package cn.fjut.gmxx.campusclub.common;
 
 /**
 * @类名称 SysUserApiConstants
-* @类描述 <pre>请填写</pre>
+* @类描述 <pre>通用的常量类</pre>
 * @作者 shenjindui 1
 * @创建时间 2019-12-28
 * @版本 vV1.0
@@ -16,9 +16,10 @@ package cn.fjut.gmxx.campusclub.common;
 */
 public interface SysResultConstants {
 
-	String QUERY_RESULT = "result";//用户编号
-
-
+	/**
+	 * 查询结果
+	 */
+	String QUERY_RESULT = "result";
 }
 
 

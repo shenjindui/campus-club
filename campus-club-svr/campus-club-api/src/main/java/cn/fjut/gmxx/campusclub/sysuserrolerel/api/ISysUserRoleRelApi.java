@@ -21,11 +21,30 @@ import java.util.Map;
 */
 public interface ISysUserRoleRelApi {
 
+	/**
+	 * 分页查询用户关联角色信息
+	 * @param params
+	 * @return
+	 */
 	PageInfo<Map<String, Object>> findSysUserRoleRelPage(Map<String, Object> params);
 
+	/**
+	 * 根据参数获取用户关联角色信息
+	 * @param params
+	 * @return
+	 */
 	Map<String, Object> getSysUserRoleRelMap(Map<String, Object> params);
 
+	/**
+	 * 保存用户关联角色信息
+	 * @param params
+	 * @return
+	 */
 	Map<String, Object> saveSysUserRoleRelTrans(Map<String, Object> params);
 
+	/**
+	 * 删除用户关联角色信息
+	 * @param params
+	 */
 	void deleteSysUserRoleRelTrans(Map<String, Object> params);
 }

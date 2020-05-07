@@ -26,19 +26,24 @@ public class BaseClubInfoApiImpl implements IBaseClubInfoApi {
 
 	@Autowired
 	private IBaseClubInfoService baseClubInfoService;
+
 	@Autowired
 	private IBaseFileRscService baseFileRscService;
+
     @Autowired
     private IBaseClubMemberService baseClubMemberService;
+
     @Autowired
     private IBaseDdctService baseDdctService;
+
     @Autowired
     private ISysWorkflowBusinessService sysWorkflowBusinessService;
+
     @Autowired
     ISysBusinessService sysBusinessService;
+
     @Autowired
     ISysWorkflowApproverService sysWorkflowApproverService;
-
 
 	@Override
 	public PageInfo<Map<String, Object>> findBaseClubInfoPage(Map<String, Object> params) {
@@ -129,17 +134,14 @@ public class BaseClubInfoApiImpl implements IBaseClubInfoApi {
             baseClubInfoMap.put("collegeName",result2.getDctTpNm());
 			return baseClubInfoMap;
 		}
-
 	}
 
 	@Override
 	public Map<String, Object> saveBaseClubInfoTrans(Map<String, Object> params) {
 		String id = MapUtils.getString(params, BaseClubInfoApiConstants.UUID);
-		//新增
 		if (null == id) {
 			return baseClubInfoService.saveBaseClubInfo(params);
 		} else {
-			//修改
 			return baseClubInfoService.updateBaseClubInfo(params);
 		}
 	}
@@ -177,7 +179,6 @@ public class BaseClubInfoApiImpl implements IBaseClubInfoApi {
         params.put("userCode",MapUtils.getString(approverMap,"userCode"));
         params.put("businessCode",MapUtils.getString(resultMap,"businessCode"));
         params.put("isSt","N");//是否社团添加
-
         Map<String, Object> resMap=sysWorkflowBusinessService.saveSysWorkflowBusiness(params);
         return resMap;
     }
@@ -207,6 +208,5 @@ public class BaseClubInfoApiImpl implements IBaseClubInfoApi {
         }
         return lists;
     }
-
 }
 

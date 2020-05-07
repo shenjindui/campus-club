@@ -12,7 +12,6 @@ package cn.fjut.gmxx.campusclub.basefilersc.api;
 * ----------------------------------------------
 * V1.0 shenjindui 2020-01-21 新建
 * ----------------------------------------------
-*
 */
 public interface BaseFileRscApiConstants {
 
@@ -30,15 +29,6 @@ public interface BaseFileRscApiConstants {
 	* 删除标识
 	*/
 	String DEL_IND = "delInd";
-	/**
-	* 租户ID
-	*/
-	String TENANT_ID = "tenantId";
-	/**
-	* 客户端ID
-	*/
-	String CLNTEND_ID = "clntendId";
-
 	/**
 	* 删除标志：0：已删除
 	*/

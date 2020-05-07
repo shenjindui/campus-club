@@ -3,7 +3,7 @@ package cn.fjut.gmxx.campusclub.baseddct.api;
 /**
 * @类名称 BaseDdctApiConstants
 * @类描述 <pre>请填写</pre>
-* @作者 sjd V
+* @作者 shenjindui
 * @创建时间 2020-01-12
 * @版本 vV
 * @修改记录
@@ -24,21 +24,10 @@ public interface BaseDdctApiConstants {
 	String DCT_DSC = "dctDsc";
 	String DCT_SEQ = "dctSeq";
 	String ST_CD = "stCd";
-
-	String ID = "id";
 	/**
 	* 删除标识
 	*/
 	String DEL_IND = "delInd";
-	/**
-	* 租户ID
-	*/
-	String TENANT_ID = "tenantId";
-	/**
-	* 客户端ID
-	*/
-	String CLNTEND_ID = "clntendId";
-
 	/**
 	* 删除标志：0：已删除
 	*/

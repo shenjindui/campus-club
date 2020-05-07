@@ -3,8 +3,6 @@ package cn.fjut.gmxx.campusclub.baseclubscore.api;
 import cn.fjut.gmxx.campusclub.pagehelper.PageInfo;
 
 import java.util.Map;
-
-
 /**
 * @类名称 IBaseClubScoreApi
 * @类描述 <pre></pre>
@@ -21,13 +19,37 @@ import java.util.Map;
 */
 public interface IBaseClubScoreApi {
 
+	/**
+	 * 分页查询社团得分列表
+	 * @param params
+	 * @return
+	 */
 	PageInfo<Map<String, Object>> findBaseClubScorePage(Map<String, Object> params);
 
+	/**
+	 * 根据参数获取社团评分详情
+	 * @param params
+	 * @return
+	 */
 	Map<String, Object> getBaseClubScoreMap(Map<String, Object> params);
 
+	/**
+	 * 保存社团评分详情
+	 * @param params
+	 * @return
+	 */
 	Map<String, Object> saveBaseClubScoreTrans(Map<String, Object> params);
 
+	/**
+	 * 保存社团评分初始化
+	 * @param params
+	 * @return
+	 */
 	Map<String, Object> baseClubScoreInit(Map<String, Object> params);
 
+	/**
+	 * 删除社团评分
+	 * @param params
+	 */
 	void deleteBaseClubScoreTrans(Map<String, Object> params);
 }

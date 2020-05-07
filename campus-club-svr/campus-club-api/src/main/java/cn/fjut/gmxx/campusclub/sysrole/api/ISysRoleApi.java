@@ -3,9 +3,6 @@ import cn.fjut.gmxx.campusclub.pagehelper.PageInfo;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by shenjindui on 2020/1/11.
- */
 public interface ISysRoleApi {
     /**
      * 查询角色列表 带分页

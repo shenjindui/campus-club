@@ -28,23 +28,11 @@ public interface SysLoginLogApiConstants {
 	String OS_NAME = "osName";
 	String OS_VERSION = "osVersion";
 	String LOGIN_TIME = "loginTime";
-
 	String UUID = "uuid";
-
-	String ID = "id";
 	/**
 	* 删除标识
 	*/
 	String DEL_IND = "delInd";
-	/**
-	* 租户ID
-	*/
-	String TENANT_ID = "tenantId";
-	/**
-	* 客户端ID
-	*/
-	String CLNTEND_ID = "clntendId";
-
 	/**
 	* 删除标志：0：已删除
 	*/

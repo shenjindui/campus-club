@@ -3,8 +3,6 @@ package cn.fjut.gmxx.campusclub.sysbusiness.api;
 import cn.fjut.gmxx.campusclub.pagehelper.PageInfo;
 
 import java.util.Map;
-
-
 /**
 * @类名称 ISysBusinessApi
 * @类描述 <pre></pre>
@@ -21,11 +19,30 @@ import java.util.Map;
 */
 public interface ISysBusinessApi {
 
+	/**
+	 * 分页查询系统业务信息
+	 * @param params
+	 * @return
+	 */
 	PageInfo<Map<String, Object>> findSysBusinessPage(Map<String, Object> params);
 
+	/**
+	 * 根据参数获取系统业务信息
+	 * @param params
+	 * @return
+	 */
 	Map<String, Object> getSysBusinessMap(Map<String, Object> params);
 
+	/**
+	 * 保存系统业务信息
+	 * @param params
+	 * @return
+	 */
 	Map<String, Object> saveSysBusinessTrans(Map<String, Object> params);
 
+	/**
+	 * 删除系统业务信息
+	 * @param params
+	 */
 	void deleteSysBusinessTrans(Map<String, Object> params);
 }

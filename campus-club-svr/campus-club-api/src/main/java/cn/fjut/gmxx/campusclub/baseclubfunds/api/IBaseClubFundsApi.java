@@ -4,8 +4,6 @@ import cn.fjut.gmxx.campusclub.pagehelper.PageInfo;
 
 import java.util.List;
 import java.util.Map;
-
-
 /**
 * @类名称 IBaseClubFundsApi
 * @类描述 <pre></pre>
@@ -22,20 +20,59 @@ import java.util.Map;
 */
 public interface IBaseClubFundsApi {
 
+    /**
+     * 分页查询数据
+     * @param params
+     * @return
+     */
 	PageInfo<Map<String, Object>> findBaseClubFundsPage(Map<String, Object> params);
 
+    /**
+     * 根据参数获取详情
+     * @param params
+     * @return
+     */
 	Map<String, Object> getBaseClubFundsMap(Map<String, Object> params);
 
+    /**
+     * 保存财务信息
+     * @param params
+     * @return
+     */
 	Map<String, Object> saveBaseClubFundsTrans(Map<String, Object> params);
 
+    /**
+     * 保存时的初始化方法
+     * @param params
+     * @return
+     */
 	Map<String, Object> saveBaseClubFundsInit(Map<String, Object> params);
 
+    /**
+     * 删除财务信息
+     * @param params
+     * @return
+     */
 	Map<String, Object> deleteBaseClubFundsTrans(Map<String, Object> params);
 
-	//用户登陆时发送的消息到前台
+    /**
+     * 用户登陆时发送的消息到前台的财务信息
+     * @param params
+     * @return
+     */
 	List<Map<String, Object>> findBaseClubFunds(Map<String, Object> params);
 
+    /**
+     * 根据OrderId查询信息
+     * @param params
+     * @return
+     */
 	Map<String, Object> saveBaseClubFundsByOrderId(Map<String, Object> params);
 
+    /**
+     * 根据参数计算财务的条数
+     * @param params
+     * @return
+     */
 	Double  countBaseClubFunds(Map<String, Object> params);
 }

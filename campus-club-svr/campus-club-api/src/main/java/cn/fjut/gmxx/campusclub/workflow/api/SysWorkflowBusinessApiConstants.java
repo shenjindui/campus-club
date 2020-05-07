@@ -32,21 +32,10 @@ public interface SysWorkflowBusinessApiConstants {
 	String work_flow_business_code = "workFlowBusinessCode";
 	String approver_code = "approverCode";
 	String suggestion = "suggestion";
-
-	String ID = "id";
 	/**
 	* 删除标识
 	*/
 	String DEL_IND = "delInd";
-	/**
-	* 租户ID
-	*/
-	String TENANT_ID = "tenantId";
-	/**
-	* 客户端ID
-	*/
-	String CLNTEND_ID = "clntendId";
-
 	/**
 	* 删除标志：0：已删除
 	*/
