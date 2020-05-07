@@ -5,15 +5,13 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
 
-/**
- * Created by WJ on 2019/3/27 0027
- */
 @Repository
 public interface SysLoginLogRepository extends JpaRepository<SysLoginLogEntity,String>, JpaSpecificationExecutor<SysLoginLogEntity> {
 
-
+    /**
+     * 根据uuid获取登陆日志信息
+     * @param uuid
+     * @return
+     */
     SysLoginLogEntity  findByUuid(String uuid);
-
-
-
 }

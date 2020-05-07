@@ -198,8 +198,6 @@ public class SysMenuServiceImpl extends AbstractCampusClubServer implements ISys
 	public List<Map<String, Object>> findSysMenuNoPage(Map<String, Object> params) {
 		return sysMenuMapper.findSysMenuListAll(params);
 	}
-
-
 }
 
 

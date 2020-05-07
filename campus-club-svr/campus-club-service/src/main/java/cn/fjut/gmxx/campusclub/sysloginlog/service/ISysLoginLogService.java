@@ -55,6 +55,5 @@ public interface ISysLoginLogService {
 	 * @return
 	 */
 	Map<String,Object>  updateSysLoginLog(Map<String, Object> params);
-
 }
 

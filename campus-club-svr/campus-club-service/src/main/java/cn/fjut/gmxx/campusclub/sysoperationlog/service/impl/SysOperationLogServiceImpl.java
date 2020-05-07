@@ -44,11 +44,12 @@ public class SysOperationLogServiceImpl implements ISysOperationLogService {
 	
 	@Autowired
 	private ISysOperationLogMapper sysOperationLogMapper;
+
     @Autowired
     private SysOperationLogRepository sysOperationLogRepository;
+
     @Autowired
     private ExcetionMsg excetionMsg;
-
 
 	@Override
 	public PageInfo<Map<String, Object>> findSysOperationLogPage(Map<String, Object> params) {

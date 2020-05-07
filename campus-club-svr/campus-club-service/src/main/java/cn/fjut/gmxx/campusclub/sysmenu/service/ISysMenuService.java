@@ -7,7 +7,6 @@ import cn.fjut.gmxx.campusclub.sysmenu.entity.SysMenuEntity;
 import java.util.List;
 import java.util.Map;
 
-
 /**
 * @类名称 ISysMenuService
 * @类描述 <pre>请填写</pre>
@@ -72,6 +71,5 @@ public interface ISysMenuService {
 	 * @return
 	 */
     List<Map<String, Object>> findSysMenuNoPage(Map<String, Object> params);
-
 }
 

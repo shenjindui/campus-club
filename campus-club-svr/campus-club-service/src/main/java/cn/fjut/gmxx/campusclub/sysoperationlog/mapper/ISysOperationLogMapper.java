@@ -25,7 +25,11 @@ import java.util.Map;
 @Repository
 public interface ISysOperationLogMapper extends BaseMapper<SysOperationLogEntity> {
 
+    /**
+     * 分页查询操作日志列表
+     * @param params
+     * @return
+     */
     List<Map<String, Object>> findSysOperationLogList(Map<String, Object> params);
-
 }
 

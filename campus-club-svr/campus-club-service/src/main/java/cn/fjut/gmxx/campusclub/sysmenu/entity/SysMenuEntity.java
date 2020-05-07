@@ -1,7 +1,4 @@
-package cn.fjut.gmxx.campusclub.sysmenu.entity;/**
- * Created by admin on 2020/1/10.
- */
-
+package cn.fjut.gmxx.campusclub.sysmenu.entity;
 import cn.fjut.gmxx.campusclub.data.BaseEntity;
 import lombok.*;
 import org.apache.commons.collections.MapUtils;

@@ -47,11 +47,9 @@ public class SysMenuApiImpl extends AbstractCampusClubApi implements ISysMenuApi
 	public Map<String, Object> saveSysMenuTrans(Map<String, Object> params) {
         super.validateNull(params);
         String uuid = MapUtils.getString(params,SysMenuApiConstants.uuid);
-		//新增
 		if (null == uuid) {
 			return sysMenuService.saveSysMenu(params);
 		} else {
-			//修改
             return sysMenuService.updateSysMenu(params);
 		}
 	}
@@ -68,6 +66,5 @@ public class SysMenuApiImpl extends AbstractCampusClubApi implements ISysMenuApi
 	public Map<String, Object> SysMenuToRoleTrans(Map<String, Object> params) {
 		return sysMenuService.SysMenuToRole(params);
 	}
-
 }
 

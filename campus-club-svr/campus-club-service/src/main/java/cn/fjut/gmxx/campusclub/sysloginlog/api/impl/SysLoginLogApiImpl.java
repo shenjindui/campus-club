@@ -37,11 +37,9 @@ public class SysLoginLogApiImpl implements ISysLoginLogApi {
 	@Override
 	public Map<String, Object> saveSysLoginLogTrans(Map<String, Object> params) {
 		String uuid  = MapUtils.getString(params, SysLoginLogApiConstants.UUID);
-		//新增
 		if (null == uuid) {
 			return sysLoginLogService.saveSysLoginLog(params);
 		} else {
-			//修改
 			return sysLoginLogService.updateSysLoginLog(params);
 		}
 	}
@@ -53,6 +51,5 @@ public class SysLoginLogApiImpl implements ISysLoginLogApi {
         params.put("result",sysMenuEntity);
         return params;
     }
-
 }
 

@@ -1,6 +1,4 @@
-package cn.fjut.gmxx.campusclub.sysdepartment.entity;/**
- * Created by admin on 2020/1/10.
- */
+package cn.fjut.gmxx.campusclub.sysdepartment.entity;
 
 import cn.fjut.gmxx.campusclub.data.BaseEntity;
 import lombok.*;
@@ -66,5 +64,43 @@ import java.io.Serializable;
     @Column(name = "SORT", columnDefinition = "varchar(32) COMMENT '排序'")
     private String sort;
 
+    public String getDeptCode() {
+        return deptCode;
+    }
 
+    public void setDeptCode(String deptCode) {
+        this.deptCode = deptCode;
+    }
+
+    public String getDeptName() {
+        return deptName;
+    }
+
+    public void setDeptName(String deptName) {
+        this.deptName = deptName;
+    }
+
+    public String getParentDeptCode() {
+        return parentDeptCode;
+    }
+
+    public void setParentDeptCode(String parentDeptCode) {
+        this.parentDeptCode = parentDeptCode;
+    }
+
+    public String getDeptLevelCd() {
+        return deptLevelCd;
+    }
+
+    public void setDeptLevelCd(String deptLevelCd) {
+        this.deptLevelCd = deptLevelCd;
+    }
+
+    public String getSort() {
+        return sort;
+    }
+
+    public void setSort(String sort) {
+        this.sort = sort;
+    }
 }
