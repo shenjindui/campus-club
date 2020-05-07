@@ -1,6 +1,4 @@
-package cn.fjut.gmxx.campusclub.baseddct.service;/**
- * Created by admin on 2020/3/22.
- */
+package cn.fjut.gmxx.campusclub.baseddct.service;
 
 import cn.fjut.gmxx.campusclub.baseddct.mapper.IBaseDdctMapper;
 import cn.fjut.gmxx.campusclub.baseddct.repository.BaseDdctRepository;
@@ -48,5 +46,4 @@ public class CacheDictService {
         }
         System.out.println("字典数据大小：  "+dictMap.size());
     }
-
 }

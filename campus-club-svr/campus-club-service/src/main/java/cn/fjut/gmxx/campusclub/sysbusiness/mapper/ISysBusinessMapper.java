@@ -7,7 +7,6 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Map;
 
-
 /**
 * @类名称 ISysBusinessDao
 * @类描述 <pre>请填写</pre>
@@ -25,8 +24,18 @@ import java.util.Map;
 @Repository
 public interface ISysBusinessMapper extends BaseMapper<SysBusinessEntity> {
 
+    /**
+     * 分页查询系统业务信息
+     * @param params
+     * @return
+     */
     List<Map<String, Object>> findSysBusinessList(Map<String, Object> params);
 
+    /**
+     *  查询系统业务信息（所有）
+     * @param params
+     * @return
+     */
     List<Map<String, Object>> findSysBusinessAll(Map<String, Object> params);
 
 }

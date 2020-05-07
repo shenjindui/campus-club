@@ -1,11 +1,4 @@
-package cn.fjut.gmxx.campusclub.sysbusiness.entity;/**
- * Created by admin on 2020/1/31.
- */
-
-/**
- * @author : shenjindui
- * @date : 2020-01-31 18:28
- **/
+package cn.fjut.gmxx.campusclub.sysbusiness.entity;
 
 import cn.fjut.gmxx.campusclub.data.BaseEntity;
 import lombok.*;
@@ -19,6 +12,8 @@ import java.util.Map;
 
 /**
  * 系统业务表  审批 活动申请等等业务
+ * @author : shenjindui
+ * @date : 2020-01-31 18:28
  */
 @Entity
 @GenericGenerator(name = "jpa-uuid", strategy = "uuid")

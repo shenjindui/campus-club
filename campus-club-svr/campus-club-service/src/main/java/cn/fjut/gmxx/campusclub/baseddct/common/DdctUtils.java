@@ -1,6 +1,4 @@
-package cn.fjut.gmxx.campusclub.baseddct.common;/**
- * Created by admin on 2020/3/22.
- */
+package cn.fjut.gmxx.campusclub.baseddct.common;
 
 import cn.fjut.gmxx.campusclub.baseddct.entity.BaseDdctEntity;
 import cn.fjut.gmxx.campusclub.baseddct.service.IBaseDdctService;

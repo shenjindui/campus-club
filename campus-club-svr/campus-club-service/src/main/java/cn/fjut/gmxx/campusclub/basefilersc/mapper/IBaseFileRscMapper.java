@@ -25,7 +25,11 @@ import java.util.Map;
 @Repository
 public interface IBaseFileRscMapper extends BaseMapper<BaseFileRscEntity> {
 
+    /**
+     * 分页查询文件列表
+     * @param params
+     * @return
+     */
     List<Map<String, Object>> findBaseFileRscList(Map<String, Object> params);
-
 }
 

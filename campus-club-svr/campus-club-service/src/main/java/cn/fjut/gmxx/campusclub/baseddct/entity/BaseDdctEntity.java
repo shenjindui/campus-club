@@ -187,5 +187,4 @@ public class BaseDdctEntity extends BaseEntity implements Serializable{
             }
         }
     }
-
 }

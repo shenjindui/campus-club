@@ -29,7 +29,7 @@ import java.util.Map;
 * @类描述 <pre>请填写</pre>
 * @作者 shenjindui V1.0
 * @创建时间 2020-01-31
-* @版本 vV1.0
+* @版本 V1.0
 * @修改记录
 *
 * 版本 修改人 修改时间 修改内容描述
@@ -50,21 +50,16 @@ public class SysBusinessServiceImpl implements ISysBusinessService {
 	@Autowired
 	UserRepository userRepository;
 
-
 	@Override
 	public PageInfo<Map<String, Object>> findSysBusinessPage(Map<String, Object> params) {
-		// 判断当前参数params是否为空，则为默认查询
 		if (null == params) {
 			params = new HashMap<String, Object>();
 		}
-        //进行分页参数设置
         Map<String, Object> queryParams=new HashMap<>();
         MapTrunPojo.mapCopy(params,queryParams);
         queryParams= PageHelp.setPageParms(params);
-        //查询总数
         SysBusinessEntity entity=new SysBusinessEntity();
         entity.setDelInd("0");
-        //查询匹配器
         ExampleMatcher matcher=ExampleMatcher.matching().withIgnorePaths("statusCd").withIgnorePaths("version");
         Example<SysBusinessEntity> example = Example.of(entity,matcher);
         queryParams.put("total",sysBusinessRepository.count(example));
@@ -79,12 +74,9 @@ public class SysBusinessServiceImpl implements ISysBusinessService {
 
 	@Override
 	public Map<String, Object> getSysBusinessMap(Map<String, Object> params) {
-		//默认调用分页查询方法。
 		PageInfo<Map<String, Object>> sysBusinessPage = this.findSysBusinessPage(params);
-		//判断是否存在数据
 		long total = sysBusinessPage.getTotal();
 		if (0 < total) {
-			//获取查询结果列表
 			List<Map<String, Object>> list = sysBusinessPage.getList();
 			if (CollectionUtils.isNotEmpty(list)) {
 				return list.get(0);
@@ -95,7 +87,6 @@ public class SysBusinessServiceImpl implements ISysBusinessService {
 	
 	@Override
 	public Map<String, Object> saveSysBusiness(Map<String, Object> params) {
-		// 组装方法要判空
 		if (params == null || params.isEmpty()) {
 			throw ExceptionFactory.getBizException("campus-club-00003", "params");
 		}
@@ -121,7 +112,7 @@ public class SysBusinessServiceImpl implements ISysBusinessService {
         entity.setStatusCd(1);//设置为生效
         entity.setVersion(1);
 		SysBusinessEntity result = sysBusinessRepository.saveAndFlush(entity);
-		params.put(SysBusinessApiConstants.uuid, result.getUuid());
+		params.put(SysBusinessApiConstants.UUID, result.getUuid());
         params.put(SysBusinessApiConstants.business_code,nowSysBusiness);
 		return params;
 	}
@@ -129,7 +120,7 @@ public class SysBusinessServiceImpl implements ISysBusinessService {
 	@Override
 	public Map<String,Object> updateSysBusiness(Map<String, Object> params) {
 		//update要先根据ID获取BO对象，然后在拷贝map里面的值
-		String uuid = MapUtils.getString(params, SysBusinessApiConstants.uuid);
+		String uuid = MapUtils.getString(params, SysBusinessApiConstants.UUID);
 		if (uuid == null) {
 			throw ExceptionFactory.getBizException("获取数据异常");
 		}
@@ -140,19 +131,18 @@ public class SysBusinessServiceImpl implements ISysBusinessService {
 		entity.mapCoverToEntity(params);
 		//查找当前操作用户
 		SysUserEntity currentUser=userRepository.findByUserCode(MapUtils.getString(params,"userCode"));
-
 		//组装保存的entity
 		entity.setUpdateTime(new Date());
 		entity.setUpdateUser(currentUser.getLoginName());
 		SysBusinessEntity result=sysBusinessRepository.saveAndFlush(entity);
-		params.put(SysBusinessApiConstants.uuid, result.getUuid());
+		params.put(SysBusinessApiConstants.UUID, result.getUuid());
 		params.put(SysBusinessApiConstants.business_association_code, result.getBusinessAssociationCode());
 		return params;
 	}
 	
 	@Override
 	public void deleteSysBusiness(Map<String, Object> params) {
-		String uuid = MapUtils.getString(params, SysBusinessApiConstants.uuid);
+		String uuid = MapUtils.getString(params, SysBusinessApiConstants.UUID);
 		if (uuid == null) {
 			throw ExceptionFactory.getBizException("campus-club-00002");
 		}
@@ -170,8 +160,6 @@ public class SysBusinessServiceImpl implements ISysBusinessService {
 	public SysBusinessEntity findByBussinessCode(String bussinessCode) {
 		return sysBusinessRepository.findByBusinessCode(bussinessCode);
 	}
-
-
 }
 
 

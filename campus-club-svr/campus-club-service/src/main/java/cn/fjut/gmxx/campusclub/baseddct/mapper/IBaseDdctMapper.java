@@ -26,8 +26,18 @@ import java.util.Map;
 @Mapper
 public interface IBaseDdctMapper extends BaseMapper<BaseDdctEntity> {
 
+    /**
+     * 分页查询字典列表
+     * @param params
+     * @return
+     */
     List<Map<String, Object>> findBaseDdctList(Map<String, Object> params);
 
+    /**
+     * 查询字典列表（所有）
+     * @param params
+     * @return
+     */
     List<Map<String, Object>> findBaseDdctListAll(Map<String, Object> params);
 }
 

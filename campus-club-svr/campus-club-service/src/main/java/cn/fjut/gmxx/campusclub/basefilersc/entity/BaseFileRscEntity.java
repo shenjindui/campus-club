@@ -8,7 +8,6 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
-
 /**
 * @类名称 BaseFileRscEntity
 * @类描述 <pre>请填写</pre>
@@ -26,7 +25,6 @@ import java.math.BigDecimal;
 @Entity
 @GenericGenerator(name = "jpa-uuid", strategy = "uuid")
 @Table(name = "base_file_rsc")
-//@Data
 @JsonIgnoreProperties(value = { "hibernateLazyInitializer", "handler" })
 public class BaseFileRscEntity extends BaseEntity implements Serializable{
 

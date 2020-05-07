@@ -30,13 +30,10 @@ public class SysBusinessApiImpl implements ISysBusinessApi {
 
 	@Override
 	public Map<String, Object> saveSysBusinessTrans(Map<String, Object> params) {
-		Integer id = MapUtils.getInteger(params, SysBusinessApiConstants.ID);
-
-		//新增
-		if (null == id) {
+		String uuid = MapUtils.getString(params, SysBusinessApiConstants.UUID);
+		if (null == uuid) {
 			return sysBusinessService.saveSysBusiness(params);
 		} else {
-			//修改
 			sysBusinessService.updateSysBusiness(params);
 		}
 		return null;

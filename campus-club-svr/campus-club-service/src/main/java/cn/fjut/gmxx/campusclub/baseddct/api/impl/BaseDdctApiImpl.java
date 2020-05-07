@@ -38,12 +38,9 @@ public class BaseDdctApiImpl implements IBaseDdctApi {
 	@Override
 	public Map<String, Object> saveBaseDdctTrans(Map<String, Object> params) {
 		String uuid = MapUtils.getString(params, BaseDdctApiConstants.UUID);
-
-		//新增
 		if (null == uuid) {
 			return baseDdctService.saveBaseDdct(params);
 		} else {
-			//修改
 			return baseDdctService.updateBaseDdct(params);
 		}
 	}
@@ -55,6 +52,5 @@ public class BaseDdctApiImpl implements IBaseDdctApi {
 		params.put("result",sysDdctEntity);
 		return params;
 	}
-
 }
 

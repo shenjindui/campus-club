@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.Map;
 
-
 @Service("baseFileRscApi")
 public class BaseFileRscApiImpl implements IBaseFileRscApi {
 
@@ -34,18 +33,14 @@ public class BaseFileRscApiImpl implements IBaseFileRscApi {
 
 	@Override
 	public Map<String, Object> saveBaseFileRscTrans(Map<String, Object> params) {
-		String id = MapUtils.getString(params, BaseFileRscApiConstants.UUID);
-
-		//新增
-		if (null == id) {
+		String uuid = MapUtils.getString(params, BaseFileRscApiConstants.UUID);
+		if (null == uuid) {
 			return baseFileRscService.saveBaseFileRsc(params);
 		} else {
-			//修改
 			baseFileRscService.updateBaseFileRsc(params);
 		}
 		return null;
 	}
-
 
     @Override
 	public Map<String, Object> deleteBaseFileRscTrans(Map<String, Object> params) {
@@ -54,6 +49,5 @@ public class BaseFileRscApiImpl implements IBaseFileRscApi {
 		params.put("result",baseFileRscEntity);
 		return params;
 	}
-
 }
 
