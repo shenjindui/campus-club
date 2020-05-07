@@ -28,7 +28,6 @@ public class BaseClubMailServiceImpl implements IBaseClubMailService {
 
     @Override
     public void sendSimpleMail(String to, String subject, String content) {
-
     }
 
     @Override
@@ -42,7 +41,6 @@ public class BaseClubMailServiceImpl implements IBaseClubMailService {
             helper.setTo(to);
             helper.setText(content, true);
             mailSender.send(message);
-            //日志信息
             logger.info("邮件已经发送。");
         } catch (MessagingException e) {
             logger.error("发送邮件时发生异常！", e);

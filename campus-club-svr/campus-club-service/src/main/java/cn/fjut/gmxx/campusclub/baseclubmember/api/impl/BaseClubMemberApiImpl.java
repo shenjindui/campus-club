@@ -74,13 +74,10 @@ public class BaseClubMemberApiImpl implements IBaseClubMemberApi {
 
 	@Override
 	public Map<String, Object> saveBaseClubMemberTrans(Map<String, Object> params) {
-		Integer id = MapUtils.getInteger(params, BaseClubMemberApiConstants.ID);
-
-		//新增
-		if (null == id) {
+		String uuid = MapUtils.getString(params, BaseClubMemberApiConstants.UUID);
+		if (null == uuid) {
 			return baseClubMemberService.saveBaseClubMember(params);
 		} else {
-			//修改
 			baseClubMemberService.updateBaseClubMember(params);
 		}
 		return null;
@@ -96,6 +93,5 @@ public class BaseClubMemberApiImpl implements IBaseClubMemberApi {
 		List<Map<String, Object>> reusltList=baseClubMemberService.findBaseClubMemberAll(params);
 		return reusltList;
 	}
-
 }
 

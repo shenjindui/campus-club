@@ -1,6 +1,4 @@
-package cn.fjut.gmxx.campusclub.baseclubMail.api;/**
- * Created by admin on 2020/4/25.
- */
+package cn.fjut.gmxx.campusclub.baseclubMail.api;
 
 import cn.fjut.gmxx.campusclub.baseclubMail.service.IBaseClubMailService;
 import org.apache.commons.collections.MapUtils;

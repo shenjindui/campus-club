@@ -1,8 +1,5 @@
 package cn.fjut.gmxx.campusclub.baseclubMail.service;
 
-/**
- * Created by admin on 2020/4/25.
- */
 public interface IBaseClubMailService {
     /**
      * 发送文本邮件

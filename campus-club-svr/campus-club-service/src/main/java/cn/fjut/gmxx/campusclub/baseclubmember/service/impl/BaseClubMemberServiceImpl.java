@@ -27,7 +27,7 @@ import java.util.Map;
 * @类描述 <pre>请填写</pre>
 * @作者 shenjindui V1
 * @创建时间 2020-02-22
-* @版本 vV1.0
+* @版本 V1.0
 * @修改记录
 *
 * 版本 修改人 修改时间 修改内容描述
@@ -47,20 +47,16 @@ public class BaseClubMemberServiceImpl implements IBaseClubMemberService {
 
 	@Override
 	public PageInfo<Map<String, Object>> findBaseClubMemberPage(Map<String, Object> params) {
-		// 判断当前参数params是否为空，则为默认查询
 		if (null == params) {
 			params = new HashMap<String, Object>();
 		}
-		//进行分页参数设置
 		Map<String, Object> queryParams=new HashMap<>();
 		MapTrunPojo.mapCopy(params,queryParams);
 		if(MapUtils.getString(params,"init")==null){
             queryParams= PageHelp.setPageParms(params);
         }
-		//查询总数
 		BaseClubMemberEntity entity=new BaseClubMemberEntity();
 		entity.setDelInd("0");
-		//查询匹配器
 		ExampleMatcher matcher=ExampleMatcher.matching().withIgnorePaths("statusCd").withIgnorePaths("version");
 		Example<BaseClubMemberEntity> example = Example.of(entity,matcher);
 		queryParams.put("total",baseClubMemberRepository.count(example));
@@ -75,12 +71,9 @@ public class BaseClubMemberServiceImpl implements IBaseClubMemberService {
 
 	@Override
 	public Map<String, Object> getBaseClubMemberMap(Map<String, Object> params) {
-		//默认调用分页查询方法。
 		PageInfo<Map<String, Object>> baseClubMemberPage = this.findBaseClubMemberPage(params);
-		//判断是否存在数据
 		long total = baseClubMemberPage.getTotal();
 		if (0 < total) {
-			//获取查询结果列表
 			List<Map<String, Object>> list = baseClubMemberPage.getList();
 			if (CollectionUtils.isNotEmpty(list)) {
 				return list.get(0);
@@ -91,14 +84,11 @@ public class BaseClubMemberServiceImpl implements IBaseClubMemberService {
 	
 	@Override
 	public Map<String, Object> saveBaseClubMember(Map<String, Object> params) {
-		// 组装方法要判空
 		if (params == null || params.isEmpty()) {
 			throw ExceptionFactory.getBizException("campus-club-00003", "params");
 		}
-
 		BaseClubMemberEntity entity = new BaseClubMemberEntity();
 		entity.mapCoverToEntity(params);
-		//设置Code
 		String maxClubMemberCode=baseClubMemberRepository.findMaxMemberCd();
 		String nowClubMemberCode=null;
 		if(maxClubMemberCode==null){
@@ -116,7 +106,6 @@ public class BaseClubMemberServiceImpl implements IBaseClubMemberService {
         entity.setVersion(1);
 		BaseClubMemberEntity result = baseClubMemberRepository.save(entity);
 		params.put(BaseClubMemberApiConstants.UUID, result.getUuid());
-
 		return params;
 	}
 	
@@ -133,7 +122,6 @@ public class BaseClubMemberServiceImpl implements IBaseClubMemberService {
 			throw ExceptionFactory.getBizException("campus-club-00003", "findOne");
 		}
 		//MapToEntityUtils.map2Entity(params, entity);
-
 		baseClubMemberRepository.save(entity);
 	}
 	
@@ -149,12 +137,9 @@ public class BaseClubMemberServiceImpl implements IBaseClubMemberService {
 		if (entity == null) {
 			throw ExceptionFactory.getBizException("campus-club-00003", "findOne");
 		}
-		entity.setDelInd(BaseClubMemberApiConstants.DEL_IND_1); // 逻辑删除标识
+		entity.setDelInd(BaseClubMemberApiConstants.DEL_IND_1);
 		baseClubMemberRepository.save(entity);
 	}
-	
-	
-	
 }
 
 
