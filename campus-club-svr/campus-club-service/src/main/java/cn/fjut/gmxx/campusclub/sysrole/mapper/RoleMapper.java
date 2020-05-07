@@ -6,9 +6,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by ushenjindui on 2020/1/7.
- */
+
 @Repository
 public interface RoleMapper extends BaseMapper<SysRoleEntity> {
 
@@ -39,5 +37,4 @@ public interface RoleMapper extends BaseMapper<SysRoleEntity> {
      * @return
      */
     int updateSysRoleByUuid(String uuid);
-
 }

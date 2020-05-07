@@ -10,7 +10,7 @@ import java.util.Map;
 /**
  * @类名称 SysRoleEntity
  * @类描述 <pre>系统角色</pre>
- * @作者 shenjindui 1
+ * @作者 shenjindui
  * @创建时间 2019-12-28
  * @版本 V1.0
  * @修改记录

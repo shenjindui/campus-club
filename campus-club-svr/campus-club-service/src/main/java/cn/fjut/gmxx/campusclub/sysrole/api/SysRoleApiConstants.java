@@ -19,7 +19,6 @@ public interface SysRoleApiConstants {
 	String uuid = "uuid";
 	String create_time = "createTime";
 	String create_user = "createUser";
-
 	String remark = "remark";
 	String STATUS_CD = "statusCd";
 	String update_time = "updateTime";
@@ -27,13 +26,10 @@ public interface SysRoleApiConstants {
 	String version = "version";
 	String role_code = "roleCode";
 	String role_name = "roleName";
-
 	/**
 	* 删除标识
 	*/
 	String DEL_IND = "delInd";
-
-
 	/**
 	* 删除标志：0：未删除
 	*/

@@ -1,7 +1,4 @@
-package cn.fjut.gmxx.campusclub.workflow.entity;/**
- * Created by admin on 2020/1/31.
- */
-
+package cn.fjut.gmxx.campusclub.workflow.entity;
 /**
  * @author : shenjindui
  * @date : 2020-01-31 16:10
@@ -15,7 +12,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 /**
- * \流程线表
+ * 流程线表
  */
 @Entity
 @GenericGenerator(name = "jpa-uuid", strategy = "uuid")

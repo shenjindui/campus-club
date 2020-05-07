@@ -30,13 +30,10 @@ public class SysUserRoleRelApiImpl implements ISysUserRoleRelApi {
 
 	@Override
 	public Map<String, Object> saveSysUserRoleRelTrans(Map<String, Object> params) {
-		Integer id = MapUtils.getInteger(params, SysUserRoleRelApiConstants.id);
-
-		//新增
+		String id = MapUtils.getString(params, SysUserRoleRelApiConstants.uuid);
 		if (null == id) {
 			return sysUserRoleRelService.saveSysUserRoleRel(params);
 		} else {
-			//修改
 			sysUserRoleRelService.updateSysUserRoleRel(params);
 		}
 		return null;
@@ -46,6 +43,5 @@ public class SysUserRoleRelApiImpl implements ISysUserRoleRelApi {
 	public void deleteSysUserRoleRelTrans(Map<String, Object> params) {
 		sysUserRoleRelService.deleteSysUserRoleRel(params);
 	}
-
 }
 

@@ -32,7 +32,7 @@ import java.util.Map;
 * @类描述 <pre>请填写</pre>
 * @作者 shenjindui V1.0
 * @创建时间 2020-03-31
-* @版本 vV1.0
+* @版本 V1.0
 * @修改记录
 *
 * 版本 修改人 修改时间 修改内容描述
@@ -55,7 +55,6 @@ public class SysWorkflowNodeServiceImpl implements ISysWorkflowNodeService {
 
 	@Override
 	public PageInfo<Map<String, Object>> findSysWorkflowNodePage(Map<String, Object> params) {
-		// 判断当前参数params是否为空，则为默认查询
 		if (null == params) {
 			params = new HashMap<String, Object>();
 		}
@@ -73,12 +72,9 @@ public class SysWorkflowNodeServiceImpl implements ISysWorkflowNodeService {
 	
 	@Override
 	public Map<String, Object> getSysWorkflowNodeMap(Map<String, Object> params) {
-		//默认调用分页查询方法。
 		PageInfo<Map<String, Object>> sysWorkflowNodePage = this.findSysWorkflowNodePage(params);
-		//判断是否存在数据
 		long total = sysWorkflowNodePage.getTotal();
 		if (0 < total) {
-			//获取查询结果列表
 			List<Map<String, Object>> list = sysWorkflowNodePage.getList();
 			if (CollectionUtils.isNotEmpty(list)) {
 				return list.get(0);
@@ -234,8 +230,6 @@ public class SysWorkflowNodeServiceImpl implements ISysWorkflowNodeService {
         }
         return isExit;
     }*/
-	
-	
 }
 
 

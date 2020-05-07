@@ -1,6 +1,4 @@
-package cn.fjut.gmxx.campusclub.workflow.entity;/**
- * Created by admin on 2020/1/31.
- */
+package cn.fjut.gmxx.campusclub.workflow.entity;
 
 import cn.fjut.gmxx.campusclub.data.BaseEntity;
 import lombok.*;

@@ -27,7 +27,7 @@ import java.util.Map;
 * @类描述 <pre>请填写</pre>
 * @作者 shenjindui 1
 * @创建时间 2019-12-28
-* @版本 vV1.0
+* @版本 V1.0
 * @修改记录
 *
 * 版本 修改人 修改时间 修改内容描述
@@ -99,16 +99,12 @@ public class SysUserServiceImpl implements ISysUserService{
 
 	@Override
 	public PageInfo<Map<String, Object>> findSysUserPage(Map<String, Object> params) {
-		// 判断当前参数params是否为空，则为默认查询
 		if (null == params) {
 			params = new HashMap<String, Object>();
 		}
-		//进行分页参数设置
 		Map<String, Object> queryParams= PageHelp.setPageParms(params);
-		//查询总数
 		SysUserEntity entity=new SysUserEntity();
 		entity.setDelInd("0");
-		//查询匹配器
 		ExampleMatcher matcher=ExampleMatcher.matching().withIgnorePaths("statusCd").withIgnorePaths("version");
 		Example<SysUserEntity> example = Example.of(entity,matcher);
 		queryParams.put("total",userRepository.count(example));
@@ -118,13 +114,9 @@ public class SysUserServiceImpl implements ISysUserService{
 
 	@Override
 	public Map<String, Object> getSysUserMap(Map<String, Object> params) {
-
-		//默认调用分页查询方法。
 		PageInfo<Map<String, Object>> sysMenuPage = this.findSysUserPage(params);
-		//判断是否存在数据
 		long total = sysMenuPage.getTotal();
 		if (0 < total) {
-			//获取查询结果列表
 			List<Map<String, Object>> list = sysMenuPage.getList();
 			if (CollectionUtils.isNotEmpty(list)) {
 				return list.get(0);
@@ -135,14 +127,13 @@ public class SysUserServiceImpl implements ISysUserService{
 
 	@Override
 	public Map<String, Object> saveSysUser(Map<String, Object> params) {
-		// 组装方法要判空
 		if (params == null || params.isEmpty()) {
 			throw ExceptionFactory.getBizException("campus_club-00003", "params");
 		}
 
 		SysUserEntity entity = (SysUserEntity) MapTrunPojo.map2Object(params,SysUserEntity.class);
 		entity.mapCoverToEntity(params);
-        //获取当前菜单的最大编码
+        //获取当前用户的最大编码
         String maxUserCode=userRepository.findSysUserMaxUserCode();
         String nowUserCode=null;
         if(maxUserCode==null){
@@ -151,9 +142,7 @@ public class SysUserServiceImpl implements ISysUserService{
             nowUserCode= EncodeUtils.getConteactNo("user-",Integer.parseInt(maxUserCode.split("-")[1]));
         }
         entity.setUserCode(nowUserCode);
-
         //MapToEntityUtils.map2Entity(params, entity);
-
  		SysUserEntity result = userRepository.save(entity);
 		params.put(SysUserApiConstants.UUID, result.getUuid());
 		params.put(SysUserApiConstants.USER_CODE,result.getUserCode());
@@ -201,7 +190,6 @@ public class SysUserServiceImpl implements ISysUserService{
             entity.setStatusCd(0);//设置为失效
         }
 		//entity.setDelInd(SysMenuApiConstants.DEL_IND_1); // 逻辑删除标识
-
 		return userRepository.save(entity);
 	}
 
@@ -217,7 +205,6 @@ public class SysUserServiceImpl implements ISysUserService{
 		}else{
 			return userRepository.sysUserLoginFail(loginName);
 		}
-
 	}
 
     @Override
@@ -230,7 +217,6 @@ public class SysUserServiceImpl implements ISysUserService{
         Example<SysUserEntity> example = Example.of(entity,matcher);
         return userRepository.count(example);
     }
-
 }
 
 

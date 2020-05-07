@@ -22,7 +22,7 @@ import java.util.Map;
 * @类描述 <pre>请填写</pre>
 * @作者 shenjindui V
 * @创建时间 2020-02-05
-* @版本 vV
+* @版本 v1.0
 * @修改记录
 *
 * 版本 修改人 修改时间 修改内容描述
@@ -41,7 +41,6 @@ public class SysWorkflowLinkServiceImpl implements ISysWorkflowLinkService {
 
 	@Override
 	public PageInfo<Map<String, Object>> findSysWorkflowLinkPage(Map<String, Object> params) {
-		// 判断当前参数params是否为空，则为默认查询
 		if (null == params) {
 			params = new HashMap<String, Object>();
 		}
@@ -52,12 +51,9 @@ public class SysWorkflowLinkServiceImpl implements ISysWorkflowLinkService {
 	
 	@Override
 	public Map<String, Object> getSysWorkflowLinkMap(Map<String, Object> params) {
-		//默认调用分页查询方法。
 		PageInfo<Map<String, Object>> sysWorkflowLinkPage = this.findSysWorkflowLinkPage(params);
-		//判断是否存在数据
 		long total = sysWorkflowLinkPage.getTotal();
 		if (0 < total) {
-			//获取查询结果列表
 			List<Map<String, Object>> list = sysWorkflowLinkPage.getList();
 			if (CollectionUtils.isNotEmpty(list)) {
 				return list.get(0);
@@ -68,17 +64,13 @@ public class SysWorkflowLinkServiceImpl implements ISysWorkflowLinkService {
 	
 	@Override
 	public Map<String, Object> saveSysWorkflowLink(Map<String, Object> params) {
-		// 组装方法要判空
 		if (params == null || params.isEmpty()) {
 			throw ExceptionFactory.getBizException("campus-club-00003", "params");
 		}
-
 		WorkflowLinkEntity entity = new WorkflowLinkEntity();
 		//MapToEntityUtils.map2Entity(params, entity);
-
 		WorkflowLinkEntity result = sysWorkflowLinkRepository.save(entity);
 		params.put(SysWorkflowLinkApiConstants.uuid, result.getUuid());
-
 		return params;
 	}
 	
@@ -95,7 +87,6 @@ public class SysWorkflowLinkServiceImpl implements ISysWorkflowLinkService {
 			throw ExceptionFactory.getBizException("campus-club-00003", "findOne");
 		}
 		//MapToEntityUtils.map2Entity(params, entity);
-
 		sysWorkflowLinkRepository.save(entity);
 	}
 	
@@ -120,7 +111,6 @@ public class SysWorkflowLinkServiceImpl implements ISysWorkflowLinkService {
 		return sysWorkflowLinkRepository.findByWorkFlowCodeAndWorkflowLinkNextNode(
 				workFlowCode,workFlowLinkNextCode);
 	}
-
 }
 
 

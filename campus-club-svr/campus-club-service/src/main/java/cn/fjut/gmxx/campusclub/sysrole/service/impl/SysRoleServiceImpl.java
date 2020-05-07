@@ -30,8 +30,10 @@ import java.util.Map;
 public class SysRoleServiceImpl implements ISysRoleService {
     @Autowired
     RoleMapper roleMapper;
+
     @Autowired
     RoleRepository roleRepository;
+
     @Autowired
     UserRepository userRepository;
 

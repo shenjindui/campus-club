@@ -31,20 +31,10 @@ public interface SysWorkflowLinkApiConstants {
 	String workflow_link_next_node = "workflowLinkNextNode";
 	String workflow_link_pre_node = "workflowLinkPreNode";
 
-	String ID = "id";
 	/**
 	* 删除标识
 	*/
 	String DEL_IND = "delInd";
-	/**
-	* 租户ID
-	*/
-	String TENANT_ID = "tenantId";
-	/**
-	* 客户端ID
-	*/
-	String CLNTEND_ID = "clntendId";
-
 	/**
 	* 删除标志：0：已删除
 	*/

@@ -7,9 +7,6 @@ import cn.fjut.gmxx.campusclub.sysrole.entity.SysRoleEntity;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by shenjindui on 2020/1/11.
- */
 public interface ISysRoleService {
 
     /**
@@ -53,5 +50,4 @@ public interface ISysRoleService {
      * @return
      */
     List<Map<String, Object>> findSysRoleNoPage(Map<String, Object> params);
-
 }

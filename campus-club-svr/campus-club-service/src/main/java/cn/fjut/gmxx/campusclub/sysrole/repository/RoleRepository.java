@@ -6,9 +6,6 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-/**
- * Created by shenjindui  on  2020/1/11.
- */
 @Repository
 public interface RoleRepository extends JpaRepository<SysRoleEntity,String>, JpaSpecificationExecutor<SysRoleEntity> {
     /**

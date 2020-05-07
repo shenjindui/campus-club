@@ -1,6 +1,4 @@
-package cn.fjut.gmxx.campusclub.sysuserrolerel.entity;/**
- * Created by admin on 2020/1/10.
- */
+package cn.fjut.gmxx.campusclub.sysuserrolerel.entity;
 
 import cn.fjut.gmxx.campusclub.data.BaseEntity;
 import lombok.*;
