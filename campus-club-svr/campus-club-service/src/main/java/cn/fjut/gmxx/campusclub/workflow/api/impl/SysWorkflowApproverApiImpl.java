@@ -30,13 +30,10 @@ public class SysWorkflowApproverApiImpl implements ISysWorkflowApproverApi {
 
 	@Override
 	public Map<String, Object> saveSysWorkflowApproverTrans(Map<String, Object> params) {
-		Integer id = MapUtils.getInteger(params, SysWorkflowApproverApiConstants.ID);
-
-		//新增
-		if (null == id) {
+		String uuid = MapUtils.getString(params, SysWorkflowApproverApiConstants.uuid);
+		if (null == uuid) {
 			return sysWorkflowApproverService.saveSysWorkflowApprover(params);
 		} else {
-			//修改
 			sysWorkflowApproverService.updateSysWorkflowApprover(params);
 		}
 		return null;
@@ -46,6 +43,5 @@ public class SysWorkflowApproverApiImpl implements ISysWorkflowApproverApi {
 	public void deleteSysWorkflowApproverTrans(Map<String, Object> params) {
 		sysWorkflowApproverService.deleteSysWorkflowApprover(params);
 	}
-
 }
 

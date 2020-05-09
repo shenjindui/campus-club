@@ -62,12 +62,9 @@ public class SysWorkflowNodeApiImpl implements ISysWorkflowNodeApi {
 	@Override
 	public Map<String, Object> saveSysWorkflowNodeTrans(Map<String, Object> params) {
 		String uuid = MapUtils.getString(params, SysWorkflowNodeApiConstants.uuid);
-
-		//新增
 		if (null == uuid) {
 			return sysWorkflowNodeService.saveSysWorkflowNode(params);
 		} else {
-			//修改
             return sysWorkflowNodeService.updateSysWorkflowNode(params);
 		}
 	}
@@ -89,6 +86,5 @@ public class SysWorkflowNodeApiImpl implements ISysWorkflowNodeApi {
 		sysWorkflowNodeService.deleteSysWorkflowNode(params);
 		return params;
 	}
-
 }
 

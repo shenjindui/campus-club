@@ -42,11 +42,9 @@ public class SysWorkflowApiImpl implements ISysWorkflowApi {
 	@Override
 	public Map<String, Object> saveSysWorkflowTrans(Map<String, Object> params) {
 		String id = MapUtils.getString(params, SysWorkflowApiConstants.uuid);
-		//新增
 		if (null == id) {
 			return sysWorkflowService.saveSysWorkflow(params);
 		} else {
-			//修改
             return sysWorkflowService.updateSysWorkflow(params);
 		}
 	}
@@ -58,6 +56,5 @@ public class SysWorkflowApiImpl implements ISysWorkflowApi {
         params.put("result",workflowEntity);
         return params;
 	}
-
 }
 

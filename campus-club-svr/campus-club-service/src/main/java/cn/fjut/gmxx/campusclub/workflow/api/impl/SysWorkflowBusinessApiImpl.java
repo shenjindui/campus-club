@@ -89,11 +89,9 @@ public class SysWorkflowBusinessApiImpl implements ISysWorkflowBusinessApi {
 	@Override
 	public Map<String, Object> saveSysWorkflowBusinessTrans(Map<String, Object> params) {
 		String uuid = MapUtils.getString(params, SysWorkflowBusinessApiConstants.uuid);
-		//新增
 		if (null == uuid) {
 			return sysWorkflowBusinessService.saveSysWorkflowBusiness(params);
 		} else {
-			//修改
             return sysWorkflowBusinessService.updateSysWorkflowBusiness(params);
 		}
 	}
@@ -160,6 +158,5 @@ public class SysWorkflowBusinessApiImpl implements ISysWorkflowBusinessApi {
     public Map<String, Object> saveNextSysWorkflowBusinessTrans(Map<String, Object> params) {
         return sysWorkflowBusinessService.saveNextSysWorkflowBusiness(params);
     }
-
 }
 
