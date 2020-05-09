@@ -187,8 +187,8 @@ public class SysUserApiImpl implements ISysUserApi {
 			//设置Token值
 			resultMap.put("token",token);
 			//设置地址
-            Map<String,Object> addressResult= AddressUtils.getAddressMap(params);
-            resultMap.put("addressResult",addressResult);
+            //Map<String,Object> addressResult= AddressUtils.getAddressMap(params);
+            //resultMap.put("addressResult",addressResult);
 
             resultMap.put("userInfo",oneUser);
 

@@ -89,8 +89,10 @@ public class BaseClubFundsApiImpl implements IBaseClubFundsApi {
             List<Map<String, Object>> result=baseDdctApi.findBaseDdctPage(queryParams).getList();
             resultMap.put("fundstypeList",result);
         }
+		queryParams.clear();
+		queryParams.put("stChargeSno",MapUtils.getString(params,"jobNum"));
         //社团列表
-        List<Map<String, Object> > stList = baseClubInfoApi.findBaseClubInfo(null);
+        List<Map<String, Object> > stList = baseClubInfoApi.findBaseClubInfo(queryParams);
         resultMap.put("stList",stList);
 		return resultMap;
 	}

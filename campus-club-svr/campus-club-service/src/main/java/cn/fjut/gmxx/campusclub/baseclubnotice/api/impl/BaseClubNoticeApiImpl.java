@@ -65,6 +65,14 @@ public class BaseClubNoticeApiImpl implements IBaseClubNoticeApi {
 	@Override
 	public Map<String, Object> getBaseClubNoticeMap(Map<String, Object> params) {
 		Map<String, Object> baseClubNoticeMap = baseClubNoticeService.getBaseClubNoticeMap(params);
+		//这里设置为如果此接口就设置为访问量加1
+		Map<String, Object> updateParams = new HashMap<>();
+		updateParams.put("uuid",MapUtils.getString(baseClubNoticeMap,"uuid"));
+		String trafficVolume=
+				String.valueOf(Integer.parseInt(MapUtils.getString(baseClubNoticeMap,"trafficVolume"))+1);
+		updateParams.put("trafficVolume",trafficVolume);
+		updateParams.put("userCode",MapUtils.getString(params,"userCode"));
+        baseClubNoticeService.updateBaseClubNotice(updateParams);
 		return baseClubNoticeMap;
 	}
 

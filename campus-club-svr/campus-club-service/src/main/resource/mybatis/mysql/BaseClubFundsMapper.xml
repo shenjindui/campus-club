@@ -65,6 +65,9 @@
             <if test="stCd!=null and stCd!=''">AND base_club_funds.st_cd = #{stCd}</if>
             <if test="type!=null and type!=''">AND base_club_funds.type = #{type}</if>
             <if test="fundsAssociationCode!=null and fundsAssociationCode!=''">AND base_club_funds.funds_association_code = #{fundsAssociationCode}</if>
+            <!--使用&gt;=(>=) &lt;=(<=)方式-->
+            <if test="startTime!=null and startTime!=''">AND base_club_funds.create_time &gt;= #{startTime}</if>
+            <if test="endTime!=null and endTime!=''">AND base_club_funds.create_time &lt;= #{endTime}</if>
         </where>
     </sql>
     <sql id="pagination">

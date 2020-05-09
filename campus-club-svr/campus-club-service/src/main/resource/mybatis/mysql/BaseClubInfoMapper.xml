@@ -98,7 +98,7 @@
     <select id="findBaseClubInfo" parameterType="map" resultMap="baseClubInfoMap">
         SELECT
         <include refid="column_list"/>
-        FROM base_club_info base_club_info WHERE 1=1
+        FROM base_club_info base_club_info
         <include refid="where_filters"/>
         ORDER BY base_club_info.CREATE_TIME DESC
     </select>

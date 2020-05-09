@@ -24,7 +24,7 @@ import java.util.Map;
 @Api(tags = "社团新闻接口")
 @Controller
 @RequestMapping(value = "/api")
-public class BaseClubNewsAction extends BaseAppAction {
+public class BaseClubNewsController extends BaseAppAction {
 
     @Autowired
     private IBaseClubNewsApi baseClubNewsApi;

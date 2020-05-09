@@ -22,7 +22,7 @@ import java.util.Map;
 @Api(tags = "社团公告接口")
 @Controller
 @RequestMapping(value = "/api")
-public class BaseClubNoticeAction extends BaseAppAction {
+public class BaseClubNoticeController extends BaseAppAction {
 
     @Autowired
     private IBaseClubNoticeApi baseClubNoticeApi;
