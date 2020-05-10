@@ -6,6 +6,8 @@ import cn.fjut.gmxx.campusclub.baseclubinfo.entity.BaseClubInfoEntity;
 import cn.fjut.gmxx.campusclub.baseclubinfo.mapper.IBaseClubInfoMapper;
 import cn.fjut.gmxx.campusclub.baseclubinfo.repository.BaseClubInfRepository;
 import cn.fjut.gmxx.campusclub.baseclubinfo.service.IBaseClubInfoService;
+import cn.fjut.gmxx.campusclub.baseddct.entity.BaseDdctEntity;
+import cn.fjut.gmxx.campusclub.baseddct.service.IBaseDdctService;
 import cn.fjut.gmxx.campusclub.exception.ExceptionFactory;
 import cn.fjut.gmxx.campusclub.pagehelper.PageHelp;
 import cn.fjut.gmxx.campusclub.pagehelper.PageInfo;
@@ -52,11 +54,14 @@ public class BaseClubInfoServiceImpl implements IBaseClubInfoService {
 	private BaseClubInfRepository baseClubInfRepository;
 
 	@Autowired
-	UserRepository userRepository;
+	private UserRepository userRepository;
+
+	@Autowired
+	private IBaseDdctService baseDdctService;
 
 	//系统业务表
 	@Autowired
-	SysBusinessRepository sysBusinessRepository;
+	private SysBusinessRepository sysBusinessRepository;
 
 	@Override
 	public PageInfo<Map<String, Object>> findBaseClubInfoPage(Map<String, Object> params) {
@@ -68,7 +73,8 @@ public class BaseClubInfoServiceImpl implements IBaseClubInfoService {
 		queryParams= PageHelp.setPageParms(params);
 		BaseClubInfoEntity entity=new BaseClubInfoEntity();
 		entity.setDelInd("0");
-		ExampleMatcher matcher=ExampleMatcher.matching().withIgnorePaths("statusCd").withIgnorePaths("version");
+		ExampleMatcher matcher=ExampleMatcher.matching().withIgnorePaths("statusCd").withIgnorePaths("version")
+                .withMatcher("stChargeSno", ExampleMatcher.GenericPropertyMatchers.contains());
 		Example<BaseClubInfoEntity> example = Example.of(entity,matcher);
 		queryParams.put("total",baseClubInfRepository.count(example));
 		queryParams.put(BaseClubInfoApiConstants.DEL_IND, BaseClubInfoApiConstants.DEL_IND_0);
@@ -93,6 +99,7 @@ public class BaseClubInfoServiceImpl implements IBaseClubInfoService {
 		if (params == null || params.isEmpty()) {
 			throw ExceptionFactory.getBizException("campus-club-00003", "params");
 		}
+		this.saveBaseClubPreCheck(params);//保存时的预校验，用户是否创建两个社团及以上
 		SysUserEntity currentUser=userRepository.findByUserCode(MapUtils.getString(params,"userCode"));
 		BaseClubInfoEntity entity=(BaseClubInfoEntity)MapTrunPojo.map2Object(params,BaseClubInfoEntity.class);
 		entity.setCreateTime(new Date());//设置时间
@@ -229,6 +236,17 @@ public class BaseClubInfoServiceImpl implements IBaseClubInfoService {
 	@Override
 	public List<Map<String, Object>> findBaseClubInfo(Map<String, Object> params) {
 		return baseClubInfoMapper.findBaseClubInfo(params);
+	}
+
+	@Override
+	public Map<String, Object> saveBaseClubPreCheck(Map<String, Object> params) {
+		BaseDdctEntity entity = baseDdctService.getBaseDetail("canCreateSecondClub",
+				"canCreateSecondClub1");
+		if(entity!=null && entity.getDctVal()!=null&& !"".equals(entity.getDctVal())){
+			params.clear();
+			params.put("canCreateSecondClub",entity);
+		}
+		return null;
 	}
 }
 

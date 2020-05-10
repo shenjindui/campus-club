@@ -73,7 +73,7 @@ public class ClubInfoController extends BaseAppAction {
     }
 
     @SysOperationLog("社团添加")
-    @TokenCheck  //此注解使用开启token验证，对于访问后台数据的方法，请打开此注解
+    @TokenCheck
     @ApiOperation(value = "社团添加", notes = "社团添加方法", httpMethod = "POST")
     @RequestMapping(value = "/clubAdd", method = RequestMethod.POST, produces = "application/json; charset=UTF-8")
     @ResponseBody
@@ -97,7 +97,7 @@ public class ClubInfoController extends BaseAppAction {
     }
 
     @SysOperationLog("社团详情方法")
-    @TokenCheck  //此注解使用开启token验证，对于访问后台数据的方法，请打开此注解
+    @TokenCheck
     @ApiOperation(value = "社团详情方法", notes = "社团详情法", httpMethod = "POST")
     @RequestMapping(value = "/clubdetail", method = RequestMethod.POST, produces = "application/json; charset=UTF-8")
     @ResponseBody
@@ -121,7 +121,7 @@ public class ClubInfoController extends BaseAppAction {
     }
 
     @SysOperationLog("申请理由保存方法")
-    @TokenCheck  //此注解使用开启token验证，对于访问后台数据的方法，请打开此注解
+    @TokenCheck
     @ApiOperation(value = "申请理由保存方法", notes = "申请理由法", httpMethod = "POST")
     @RequestMapping(value = "/clubSetOpinion", method = RequestMethod.POST, produces = "application/json; charset=UTF-8")
     @ResponseBody
@@ -192,7 +192,7 @@ public class ClubInfoController extends BaseAppAction {
     }
 
     @SysOperationLog("人员申请加入社团方法")
-    @TokenCheck  //此注解使用开启token验证，对于访问后台数据的方法，请打开此注解
+    @TokenCheck
     @ApiOperation(value = "人员申请加入社团方法", notes = "人员申请加入神团方法", httpMethod = "POST")
     @RequestMapping(value = "/joinclub", method = RequestMethod.POST, produces = "application/json; charset=UTF-8")
     @ResponseBody
@@ -216,7 +216,7 @@ public class ClubInfoController extends BaseAppAction {
     }
 
     @SysOperationLog("停启用社团的方法")
-    @TokenCheck  //此注解使用开启token验证，对于访问后台数据的方法，请打开此注解
+    @TokenCheck
     @ApiOperation(value = "停启用社团的方法", notes = "停启用社团的方法", httpMethod = "POST")
     @RequestMapping(value = "/uodateStatus", method = RequestMethod.POST, produces = "application/json; charset=UTF-8")
     @ResponseBody
@@ -330,6 +330,23 @@ public class ClubInfoController extends BaseAppAction {
     public ResponseVO clublistByStsy(@RequestBody  Map<String, Object> params) {
         try {
             List<Map<String, Object>> resultMaps=baseClubInfoApi.getBaseClubInfoByStsy(params);
+            if(resultMaps!=null){
+                return successResponse(resultMaps, Constant.SUCCESS);
+            }else{
+                return errorResponse(Constant.FAIL);
+            }
+        } catch (Exception e) {
+            return errorResponse(e.getMessage());
+        }
+    }
+    @SysOperationLog("社团添加初始化")
+    @TokenCheck
+    @ApiOperation(value = "社团添加初始化", notes = "社团添加初始化", httpMethod = "POST")
+    @RequestMapping(value = "/clubAddInit", method = RequestMethod.POST, produces = "application/json; charset=UTF-8")
+    @ResponseBody
+    public ResponseVO clubAddInit(@RequestBody  Map<String, Object> params) {
+        try {
+            Map<String, Object> resultMaps=baseClubInfoApi.addInitBaseClubInfoMap(params);
             if(resultMaps!=null){
                 return successResponse(resultMaps, Constant.SUCCESS);
             }else{

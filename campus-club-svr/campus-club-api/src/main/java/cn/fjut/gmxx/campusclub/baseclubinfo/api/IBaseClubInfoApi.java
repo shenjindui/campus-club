@@ -81,4 +81,11 @@ public interface IBaseClubInfoApi {
 	 * @return
 	 */
 	List<Map<String, Object>> getBaseClubInfoByStsy(Map<String, Object> params);
+
+	/**
+	 * 社团添加初始化信息
+	 * @param params
+	 * @return
+	 */
+	Map<String, Object> addInitBaseClubInfoMap(Map<String, Object> params);
 }

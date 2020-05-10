@@ -40,10 +40,10 @@ public class BaseClubInfoApiImpl implements IBaseClubInfoApi {
     private ISysWorkflowBusinessService sysWorkflowBusinessService;
 
     @Autowired
-    ISysBusinessService sysBusinessService;
+    private ISysBusinessService sysBusinessService;
 
     @Autowired
-    ISysWorkflowApproverService sysWorkflowApproverService;
+    private ISysWorkflowApproverService sysWorkflowApproverService;
 
 	@Override
 	public PageInfo<Map<String, Object>> findBaseClubInfoPage(Map<String, Object> params) {
@@ -138,8 +138,8 @@ public class BaseClubInfoApiImpl implements IBaseClubInfoApi {
 
 	@Override
 	public Map<String, Object> saveBaseClubInfoTrans(Map<String, Object> params) {
-		String id = MapUtils.getString(params, BaseClubInfoApiConstants.UUID);
-		if (null == id) {
+		String uuid = MapUtils.getString(params, BaseClubInfoApiConstants.UUID);
+		if (null == uuid) {
 			return baseClubInfoService.saveBaseClubInfo(params);
 		} else {
 			return baseClubInfoService.updateBaseClubInfo(params);
@@ -207,6 +207,21 @@ public class BaseClubInfoApiImpl implements IBaseClubInfoApi {
             lists.add(resultMaps);
         }
         return lists;
+    }
+
+    @Override
+    public Map<String, Object> addInitBaseClubInfoMap(Map<String, Object> params) {
+        Map<String, Object> reusltMap = new HashMap<>();
+        params.put("dctKey","collegeCd");
+        List<BaseDdctEntity> collegeCdList = baseDdctService.getBaseDctListByKey(params);
+        params.put("dctKey","schoolCd");
+        List<BaseDdctEntity> schoolCdList = baseDdctService.getBaseDctListByKey(params);
+        params.put("dctKey","stNature");
+        List<BaseDdctEntity> stNatureList = baseDdctService.getBaseDctListByKey(params);
+        reusltMap.put("collegeCdList",collegeCdList);
+        reusltMap.put("schoolCdList",schoolCdList);
+        reusltMap.put("stNatureList",stNatureList);
+        return reusltMap;
     }
 }
 

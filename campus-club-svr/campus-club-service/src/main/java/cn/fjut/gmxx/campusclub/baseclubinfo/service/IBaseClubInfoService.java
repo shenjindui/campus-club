@@ -84,5 +84,12 @@ public interface IBaseClubInfoService {
 	 * @return
 	 */
 	List<Map<String, Object>> findBaseClubInfo(Map<String, Object> params);
+
+	/**
+	 * 保存社团信息预校验
+	 * @param params
+	 * @return
+	 */
+	Map<String, Object> saveBaseClubPreCheck(Map<String, Object> params);
 }
 
