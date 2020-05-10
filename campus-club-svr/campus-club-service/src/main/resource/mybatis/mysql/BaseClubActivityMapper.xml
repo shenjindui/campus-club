@@ -69,8 +69,11 @@
 
             <if test="startsTime!=null and startsTime!=''">AND base_club_activity.START_TIME <![CDATA[>=]]> #{startsTime}</if>
             <if test="endsTime!=null and endsTime!=''">AND base_club_activity.END_TIME <![CDATA[<=]]> #{endsTime}</if>
-            <if test="startTime!=null and startTime!=''">AND base_club_activity.START_TIME = #{startTime}</if>
-            <if test="endTime!=null and endTime!=''">AND base_club_activity.END_TIME = #{endTime}</if>
+
+            <!--使用&gt;=(>=) &lt;=(<=)方式-->
+            <if test="startTime!=null and startTime!=''">AND base_club_activity.create_time &gt;= #{startTime}</if>
+            <if test="endTime!=null and endTime!=''">AND base_club_activity.create_time &lt;= #{endTime}</if>
+
             <if test="activitySpace!=null and activitySpace!=''">AND base_club_activity.ACTIVITY_SPACE = #{activitySpace}</if>
             <if test="foundsNum!=null and foundsNum!=''">AND base_club_activity.FOUNDS_NUM = #{foundsNum}</if>
             <if test="proposaAgree!=null and proposaAgree!=''">AND base_club_activity.PROPOSA_AGREE = #{proposaAgree}</if>
