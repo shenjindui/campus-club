@@ -104,6 +104,7 @@ public class BaseClubInfoServiceImpl implements IBaseClubInfoService {
 		BaseClubInfoEntity entity=(BaseClubInfoEntity)MapTrunPojo.map2Object(params,BaseClubInfoEntity.class);
 		entity.setCreateTime(new Date());//设置时间
         entity.setCreateUser(currentUser.getLoginName());
+        entity.setStFounder(currentUser.getRealname());
         entity.setUpdateTime(new Date());
         entity.setUpdateUser(currentUser.getLoginName());
         entity.setDelInd("0");//设置默认不删除
