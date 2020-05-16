@@ -1,6 +1,7 @@
 package cn.fjut.gmxx.campusclub.sysuserrolerel.service.impl;
 
 import cn.fjut.gmxx.campusclub.exception.ExceptionFactory;
+import cn.fjut.gmxx.campusclub.exception.ExcetionMsg;
 import cn.fjut.gmxx.campusclub.pagehelper.PageHelp;
 import cn.fjut.gmxx.campusclub.pagehelper.PageInfo;
 import cn.fjut.gmxx.campusclub.sysuserrolerel.api.SysUserRoleRelApiConstants;
@@ -14,6 +15,7 @@ import org.apache.commons.collections.MapUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -39,7 +41,10 @@ public class SysUserRoleRelServiceImpl implements ISysUserRoleRelService {
 	private ISysUserRoleRelMapper sysUserRoleRelMapper;
 
 	@Autowired
-	UserRoleRelRepository userRoleRelRepository;
+	private UserRoleRelRepository userRoleRelRepository;
+
+	@Autowired
+	private ExcetionMsg excetionMsg;
 
 	@Override
 	public PageInfo<Map<String, Object>> findSysUserRoleRelPage(Map<String, Object> params) {
@@ -100,19 +105,55 @@ public class SysUserRoleRelServiceImpl implements ISysUserRoleRelService {
 	
 	@Override
 	public void deleteSysUserRoleRel(Map<String, Object> params) {
-        String id = MapUtils.getString(params, SysUserRoleRelApiConstants.uuid);
-		if (id == null) {
+        String uuid = MapUtils.getString(params, SysUserRoleRelApiConstants.uuid);
+		if (uuid == null) {
 			throw ExceptionFactory.getBizException("campus_club-00002");
 		}
-        SysUserRoleRelEntity entity = new SysUserRoleRelEntity();
-        entity.setUuid(id);
-        entity=	sysUserRoleRelMapper.selectById(entity);
+        SysUserRoleRelEntity entity = userRoleRelRepository.findByUuid(uuid);
 		if (entity == null) {
 			throw ExceptionFactory.getBizException("campus_club-00003", "findOne");
 		}
 		entity.setDelInd(SysUserRoleRelApiConstants.DEL_IND_1); // 逻辑删除标识
 		userRoleRelRepository.save(entity);
 	}
+
+	@Override
+	public Map<String, Object> updateChangeSysUserRoleRel(Map<String, Object> params) {
+		String msg = null;
+        String uuid = MapUtils.getString(params,"uuid");
+		String roleType=MapUtils.getString(params,"roleType");
+		if(roleType==null||"".equals(roleType)){
+			msg = excetionMsg.getProperty("campus-club-00003",MapUtils.getString(params,"roleType"));
+			throw ExceptionFactory.getBizException(msg);
+		}
+		switch (roleType){
+            case "1":this.changeUserRoleRelByStyk(uuid);break;//role-00007系统注册，但未加入社团
+            case "2":this.changeUserRoleRelByStsy(uuid);break;//role-00003--->role-00005
+		};
+		return params;
+	}
+
+    /**
+     * 社团社员角色转变为社长role-00003--->role-00005
+     * @param uuid
+     */
+	private void changeUserRoleRelByStsy(String uuid){
+        SysUserRoleRelEntity sysUserRoleRelEntity = userRoleRelRepository.findByUuid(uuid);
+        sysUserRoleRelEntity.setRoleCode("role-00005");
+        sysUserRoleRelEntity.setUpdateTime(new Date());
+        sysUserRoleRelEntity.setRemark("用户角色转变");
+        userRoleRelRepository.save(sysUserRoleRelEntity);
+    }
+    /**
+     *role-00007-->role-00003
+     */
+    private void changeUserRoleRelByStyk(String uuid){
+        SysUserRoleRelEntity sysUserRoleRelEntity = userRoleRelRepository.findByUuid(uuid);
+        sysUserRoleRelEntity.setRoleCode("role-00003");
+        sysUserRoleRelEntity.setUpdateTime(new Date());
+        sysUserRoleRelEntity.setRemark("用户角色转变");
+        userRoleRelRepository.save(sysUserRoleRelEntity);
+    }
 }
 
 

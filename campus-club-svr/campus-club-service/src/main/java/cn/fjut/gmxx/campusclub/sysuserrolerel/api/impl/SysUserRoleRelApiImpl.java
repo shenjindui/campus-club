@@ -1,5 +1,7 @@
 package cn.fjut.gmxx.campusclub.sysuserrolerel.api.impl;
 
+import cn.fjut.gmxx.campusclub.exception.ExceptionFactory;
+import cn.fjut.gmxx.campusclub.exception.ExcetionMsg;
 import cn.fjut.gmxx.campusclub.pagehelper.PageInfo;
 import cn.fjut.gmxx.campusclub.sysuserrolerel.api.ISysUserRoleRelApi;
 import cn.fjut.gmxx.campusclub.sysuserrolerel.api.SysUserRoleRelApiConstants;
@@ -16,6 +18,9 @@ public class SysUserRoleRelApiImpl implements ISysUserRoleRelApi {
 	@Autowired
 	private ISysUserRoleRelService sysUserRoleRelService;
 
+    @Autowired
+    private ExcetionMsg excetionMsg;
+
 	@Override
 	public PageInfo<Map<String, Object>> findSysUserRoleRelPage(Map<String, Object> params) {
 		PageInfo<Map<String, Object>> page = sysUserRoleRelService.findSysUserRoleRelPage(params);
@@ -30,8 +35,8 @@ public class SysUserRoleRelApiImpl implements ISysUserRoleRelApi {
 
 	@Override
 	public Map<String, Object> saveSysUserRoleRelTrans(Map<String, Object> params) {
-		String id = MapUtils.getString(params, SysUserRoleRelApiConstants.uuid);
-		if (null == id) {
+		String uuid = MapUtils.getString(params, SysUserRoleRelApiConstants.uuid);
+		if (null == uuid) {
 			return sysUserRoleRelService.saveSysUserRoleRel(params);
 		} else {
 			sysUserRoleRelService.updateSysUserRoleRel(params);
@@ -42,6 +47,16 @@ public class SysUserRoleRelApiImpl implements ISysUserRoleRelApi {
 	@Override
 	public void deleteSysUserRoleRelTrans(Map<String, Object> params) {
 		sysUserRoleRelService.deleteSysUserRoleRel(params);
+	}
+
+	@Override
+	public Map<String, Object> updateSysUserRoleRelTrans(Map<String, Object> params) {
+		String uuid = MapUtils.getString(params, SysUserRoleRelApiConstants.uuid);
+		if(uuid==null||"".equals(uuid)){
+            String msg = excetionMsg.getProperty("campus-club-00003",uuid);
+            throw ExceptionFactory.getBizException(msg);
+		}
+        return sysUserRoleRelService.updateChangeSysUserRoleRel(params);
 	}
 }
 

@@ -136,7 +136,8 @@ public class SysUserApiImpl implements ISysUserApi {
             PageInfo<Map<String, Object>> fileMaps=baseFileRscService.findBaseFileRscPage(queryMap);
             //前端文件格式转换
             if(fileMaps!=null&&fileMaps.getSize()>0){
-                map.put("headPortrait",UrlUtils.getTrueUrl(fileMaps.getList()));
+                //map.put("headPortrait",UrlUtils.getTrueUrl(fileMaps.getList()));
+				map.put("headPortrait",fileMaps.getList());
             }
         }
 		page.setTotal(sysUserService.findBaseUserCount(params));

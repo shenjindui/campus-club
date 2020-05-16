@@ -12,6 +12,7 @@ import cn.fjut.gmxx.campusclub.sysbusiness.entity.SysBusinessEntity;
 import cn.fjut.gmxx.campusclub.sysbusiness.repository.SysBusinessRepository;
 import cn.fjut.gmxx.campusclub.sysuser.entity.SysUserEntity;
 import cn.fjut.gmxx.campusclub.sysuser.repository.UserRepository;
+import cn.fjut.gmxx.campusclub.sysuserrolerel.api.ISysUserRoleRelApi;
 import cn.fjut.gmxx.campusclub.utlis.EncodeUtils;
 import cn.fjut.gmxx.campusclub.utlis.MapTrunPojo;
 import cn.fjut.gmxx.campusclub.workflow.api.SysWorkflowApproverApiConstants;
@@ -54,20 +55,22 @@ public class SysWorkflowBusinessServiceImpl implements ISysWorkflowBusinessServi
 	private SysWorkflowBusinessRepository sysWorkflowBusinessRepository;
 
 	@Autowired
-	BaseClubInfRepository baseClubInfRepository;
+    private BaseClubInfRepository baseClubInfRepository;
 
 	@Autowired
-	SysBusinessRepository sysBusinessRepository;
+    private SysBusinessRepository sysBusinessRepository;
 
     @Autowired
-    UserRepository userRepository;
+    private UserRepository userRepository;
 
     @Autowired
-    IBaseClubMemberService baseClubMemberService;
+    private IBaseClubMemberService baseClubMemberService;
 
 	@Autowired
-	IBaseClubActivityService baseClubActivityService;
+    private IBaseClubActivityService baseClubActivityService;
 
+	@Autowired
+    private ISysUserRoleRelApi sysUserRoleRelApi;
 
 	@Override
 	public PageInfo<Map<String, Object>> findSysWorkflowBusinessPage(Map<String, Object> params) {
@@ -210,7 +213,7 @@ public class SysWorkflowBusinessServiceImpl implements ISysWorkflowBusinessServi
 		}
 		else{
             Map<String, Object> saveMaps=new HashMap<>();
-            SysUserEntity sysUserEntity=userRepository.findByUserCode(MapUtils.getString(params,"userCode"));
+            SysUserEntity sysUserEntity=userRepository.findByUserCode(businessEntity.getApproverUserCode());
             if(sysUserEntity!=null){
                 saveMaps.put("memberName",sysUserEntity.getRealname());
                 saveMaps.put("memberSno",sysUserEntity.getJobNum());
@@ -220,6 +223,12 @@ public class SysWorkflowBusinessServiceImpl implements ISysWorkflowBusinessServi
                 saveMaps.put("approverUserCode",businessEntity.getApproverUserCode());
             }
             baseClubMemberService.saveBaseClubMember(saveMaps);
+            Map<String,Object> relParms = new HashMap<>();
+            relParms.put("userCode",businessEntity.getApproverUserCode());
+            relParms.put("defaultRole","1");
+            Map<String, Object> reusltMap = sysUserRoleRelApi.getSysUserRoleRelMap(relParms);
+            reusltMap.put("roleType","1");
+            sysUserRoleRelApi.updateSysUserRoleRelTrans(reusltMap);
         }
 
         return params;

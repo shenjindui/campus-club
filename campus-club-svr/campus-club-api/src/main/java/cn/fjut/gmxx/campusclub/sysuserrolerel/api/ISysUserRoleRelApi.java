@@ -47,4 +47,11 @@ public interface ISysUserRoleRelApi {
 	 * @param params
 	 */
 	void deleteSysUserRoleRelTrans(Map<String, Object> params);
+
+	/**
+	 * 更新用户角色，比如游客转为社团社员、社团社员转为社团负责人（社长）
+	 * @param params
+	 * @return
+	 */
+	Map<String, Object> updateSysUserRoleRelTrans(Map<String, Object> params);
 }

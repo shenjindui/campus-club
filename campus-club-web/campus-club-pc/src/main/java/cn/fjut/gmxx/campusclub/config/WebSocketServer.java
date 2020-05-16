@@ -77,7 +77,9 @@ public class WebSocketServer {
                     params.put("type",1);//财务操作类型
                     params.put("amountType","+");//收入
                     List<Map<String, Object>> messageList= baseClubFundsApi.findBaseClubFunds(params);
-                    result.put(userCode,messageList);
+                    if(messageList!=null&&messageList.size()>1){
+                        result.put(userCode,messageList);
+                    }
                 }
                 sendMessage(JSON.toJSONString(result));
             }else{

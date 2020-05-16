@@ -16,6 +16,7 @@ import cn.fjut.gmxx.campusclub.sysuser.entity.SysUserEntity;
 import cn.fjut.gmxx.campusclub.sysuser.repository.UserRepository;
 import cn.fjut.gmxx.campusclub.sysuserrolerel.entity.SysUserRoleRelEntity;
 import cn.fjut.gmxx.campusclub.sysuserrolerel.repository.UserRoleRelRepository;
+import cn.fjut.gmxx.campusclub.utlis.QueryTimeParseUtils;
 import org.apache.commons.collections.MapUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -53,6 +54,7 @@ public class BaseClubScoreApiImpl implements IBaseClubScoreApi {
 
     @Override
 	public PageInfo<Map<String, Object>> findBaseClubScorePage(Map<String, Object> params) {
+        QueryTimeParseUtils.parseQueryTime(params);
         if(MapUtils.getString(params,"ratersTypes")!=null){
             String[] list=MapUtils.getString(params,"ratersTypes").split(",");
             params.put("ratersTypes",list);

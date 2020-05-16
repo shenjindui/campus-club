@@ -8,6 +8,7 @@ import cn.fjut.gmxx.campusclub.baseclubactivity.repository.BaseClubActivityMappe
 import cn.fjut.gmxx.campusclub.baseclubactivity.service.IBaseClubActivityService;
 import cn.fjut.gmxx.campusclub.baseclubinfo.service.IBaseClubInfoService;
 import cn.fjut.gmxx.campusclub.exception.ExceptionFactory;
+import cn.fjut.gmxx.campusclub.exception.ExcetionMsg;
 import cn.fjut.gmxx.campusclub.pagehelper.PageHelp;
 import cn.fjut.gmxx.campusclub.pagehelper.PageInfo;
 import cn.fjut.gmxx.campusclub.sysbusiness.entity.SysBusinessEntity;
@@ -54,18 +55,20 @@ public class BaseClubActivityServiceImpl implements IBaseClubActivityService {
 	private BaseClubActivityMapperRepository baseClubActivityMapperRepository;
 
     @Autowired
-    UserRepository userRepository;
+    private UserRepository userRepository;
 
     @Autowired
-    IBaseClubInfoService baseClubInfoService;
+    private IBaseClubInfoService baseClubInfoService;
 
     //系统业务表
     @Autowired
-    SysBusinessRepository sysBusinessRepository;
+    private SysBusinessRepository sysBusinessRepository;
+
+    @Autowired
+    private ExcetionMsg excetionMsg;
 
 	@Override
 	public PageInfo<Map<String, Object>> findBaseClubActivityPage(Map<String, Object> params) {
-		// 判断当前参数params是否为空，则为默认查询
 		if (null == params) {
 			params = new HashMap<String, Object>();
 		}
@@ -80,7 +83,6 @@ public class BaseClubActivityServiceImpl implements IBaseClubActivityService {
 		ExampleMatcher matcher=ExampleMatcher.matching().withIgnorePaths("statusCd").withIgnorePaths("version");
 		Example<BaseClubActivityEntity> example = Example.of(entity,matcher);
 		queryParams.put("total",baseClubActivityMapperRepository.count(example));
-		//
         queryParams.put(BaseClubActivityApiConstants.DEL_IND, BaseClubActivityApiConstants.DEL_IND_0);
 		return new PageInfo<>(baseClubActivityMapper.findBaseClubActivityList(queryParams),queryParams);
 	}
@@ -106,13 +108,17 @@ public class BaseClubActivityServiceImpl implements IBaseClubActivityService {
     @Transactional(readOnly = false,rollbackFor = RuntimeException.class)
 	@Override
 	public Map<String, Object> saveBaseClubActivity(Map<String, Object> params) {
+	    String msg = null;
 		if (params == null || params.isEmpty()) {
-			throw ExceptionFactory.getBizException("campus-club-00003", "params");
+            msg = excetionMsg.getProperty("campus-club-00003","params");
+			throw ExceptionFactory.getBizException(msg);
 		}
         BaseClubActivityEntity sysActivityEntity=baseClubActivityMapperRepository
                 .findByActivityName(params.get("activityName").toString());
         if(sysActivityEntity!=null){
-            throw ExceptionFactory.getBizException(params.get("activityName")+"此活动名称已存在");
+            msg = excetionMsg.getProperty("campus-club-00006",MapUtils.getString(params,"activityName"));
+            //throw ExceptionFactory.getBizException(params.get("activityName")+"此活动名称已存在");
+            throw ExceptionFactory.getBizException(msg);
         }
 		BaseClubActivityEntity entity = new BaseClubActivityEntity();
         SysUserEntity currentUser=userRepository.findByUserCode(MapUtils.getString(params,"userCode"));
@@ -178,14 +184,18 @@ public class BaseClubActivityServiceImpl implements IBaseClubActivityService {
     @Transactional(readOnly = false,rollbackFor = RuntimeException.class)
 	@Override
 	public Map<String,Object> updateBaseClubActivity(Map<String, Object> params) {
+	    String msg = null;
 		String uuid = MapUtils.getString(params, BaseClubActivityApiConstants.UUID);
 		if (uuid == null) {
-			throw ExceptionFactory.getBizException("campus-club-00002");
+            msg = excetionMsg.getProperty("campus-club-00003",uuid);
+			throw ExceptionFactory.getBizException(msg);
 		}
         BaseClubActivityEntity baseClubActivityEntity=baseClubActivityMapperRepository.findByActivityName(
                 params.get("activityName").toString());
         if(baseClubActivityEntity!=null&&!(baseClubActivityEntity.getUuid().equals(MapUtils.getString(params,"uuid")))){
-            throw ExceptionFactory.getBizException(params.get("activityName")+"此活动名称已存在");
+            msg = excetionMsg.getProperty("campus-club-00006",MapUtils.getString(params,"activityName"));
+            //throw ExceptionFactory.getBizException(params.get("activityName")+"此活动名称已存在");
+            throw ExceptionFactory.getBizException(msg);
         }
         BaseClubActivityEntity entity = baseClubActivityMapperRepository.findByUuid(uuid);
         if(entity==null){
@@ -209,13 +219,17 @@ public class BaseClubActivityServiceImpl implements IBaseClubActivityService {
 	
 	@Override
 	public BaseClubActivityEntity deleteBaseClubActivity(Map<String, Object> params) {
+        String msg = null;
 		String uuid = MapUtils.getString(params, BaseClubActivityApiConstants.UUID);
 		if (uuid == null) {
-			throw ExceptionFactory.getBizException("campus-club-00002");
+            msg = excetionMsg.getProperty("campus-club-00003",uuid);
+            throw ExceptionFactory.getBizException(msg);
 		}
         BaseClubActivityEntity entity = baseClubActivityMapperRepository.findByUuid(uuid);
         if (entity == null) {
-            throw ExceptionFactory.getBizException("campus_club-00003", "findOne");
+            msg = excetionMsg.getProperty("campus-club-00003","entity");
+            throw ExceptionFactory.getBizException(msg);
+            //throw ExceptionFactory.getBizException("campus_club-00003", "findOne");
         }
 		entity.setDelInd(BaseClubActivityApiConstants.DEL_IND_1);
         return baseClubActivityMapperRepository.save(entity);

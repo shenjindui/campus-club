@@ -67,6 +67,8 @@
                 base_club_news.create_time
                 )
             </if>
+            <if test="startTime!=null and startTime!=''">AND base_club_news.create_time &gt;= #{startTime}</if>
+            <if test="endTime!=null and endTime!=''">AND base_club_news.create_time &lt;= #{endTime}</if>
         </where>
     </sql>
 

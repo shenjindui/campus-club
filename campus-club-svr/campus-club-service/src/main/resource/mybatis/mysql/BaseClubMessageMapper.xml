@@ -61,6 +61,9 @@
             <if test="messagePscOpin!=null and messagePscOpin!=''">AND base_club_message.message_psc_opin = #{messagePscOpin}</if>
             <if test="messagePsccd!=null and messagePsccd!=''">AND base_club_message.message_psccd = #{messagePsccd}</if>
             <if test="messageStCd!=null and messageStCd!=''">AND base_club_message.message_st_cd = #{messageStCd}</if>
+            <!--使用&gt;=(>=) &lt;=(<=)方式-->
+            <if test="startTime!=null and startTime!=''">AND base_club_message.create_time &gt;= #{startTime}</if>
+            <if test="endTime!=null and endTime!=''">AND base_club_message.create_time &lt;= #{endTime}</if>
         </where>
     </sql>
     <sql id="pagination">

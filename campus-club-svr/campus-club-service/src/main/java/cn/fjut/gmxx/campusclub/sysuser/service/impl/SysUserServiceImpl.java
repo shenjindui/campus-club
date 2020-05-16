@@ -18,6 +18,7 @@ import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -160,6 +161,7 @@ public class SysUserServiceImpl implements ISysUserService{
 			throw ExceptionFactory.getBizException("campus_club-00003", "findOne");
 		}
 		entity.mapCoverToEntity(params);
+		entity.setUpdateTime(new Date());
 		//entity= (SysUserEntity) MapTrunPojo.map2Object(params,SysUserEntity.class);
 		//MapToEntityUtils.map2Entity(params, entity);
 		SysUserEntity result = userRepository.save(entity);

@@ -7,6 +7,7 @@ import cn.fjut.gmxx.campusclub.baseddct.entity.BaseDdctEntity;
 import cn.fjut.gmxx.campusclub.baseddct.service.IBaseDdctService;
 import cn.fjut.gmxx.campusclub.basefilersc.entity.BaseFileRscEntity;
 import cn.fjut.gmxx.campusclub.basefilersc.service.IBaseFileRscService;
+import cn.fjut.gmxx.campusclub.exception.ExcetionMsg;
 import cn.fjut.gmxx.campusclub.pagehelper.PageInfo;
 import cn.fjut.gmxx.campusclub.utlis.GsonUtils;
 import cn.fjut.gmxx.campusclub.utlis.ListUtils;
@@ -30,7 +31,10 @@ public class BaseClubActivityApiImpl implements IBaseClubActivityApi {
 	private IBaseFileRscService baseFileRscService;
 
 	@Autowired
-    IBaseDdctService baseDdctService;
+	private IBaseDdctService baseDdctService;
+
+	@Autowired
+	private ExcetionMsg excetionMsg;
 
 	@Override
 	public PageInfo<Map<String, Object>> findBaseClubActivityPage(Map<String, Object> params) {

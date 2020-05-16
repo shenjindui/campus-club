@@ -15,4 +15,12 @@ public interface UserRoleRelRepository extends JpaRepository<SysUserRoleRelEntit
      * @return
      */
     SysUserRoleRelEntity findByUserCodeAndDefaultRole(String userCode,String defaultRole);
+
+    /**
+     * 根据uuid获取用户关联角色信息
+     * @param uuid
+     * @return
+     */
+    SysUserRoleRelEntity findByUuid(String uuid);
+
 }

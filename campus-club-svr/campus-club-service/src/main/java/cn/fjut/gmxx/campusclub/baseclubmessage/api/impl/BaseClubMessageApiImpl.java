@@ -1,6 +1,7 @@
 package cn.fjut.gmxx.campusclub.baseclubmessage.api.impl;
 
 import cn.fjut.gmxx.campusclub.baseclubinfo.api.IBaseClubInfoApi;
+import cn.fjut.gmxx.campusclub.baseclubmember.api.IBaseClubMemberApi;
 import cn.fjut.gmxx.campusclub.baseclubmessage.api.BaseClubMessageApiConstants;
 import cn.fjut.gmxx.campusclub.baseclubmessage.api.IBaseClubMessageApi;
 import cn.fjut.gmxx.campusclub.baseclubmessage.entity.BaseClubMessageEntity;
@@ -11,6 +12,7 @@ import org.apache.commons.collections.MapUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,6 +25,8 @@ public class BaseClubMessageApiImpl implements IBaseClubMessageApi {
 	private IBaseClubMessageService baseClubMessageService;
 	@Autowired
 	IBaseClubInfoApi baseClubInfoApi;
+	@Autowired
+	IBaseClubMemberApi baseClubMemberApi;
 	@Override
 	public PageInfo<Map<String, Object>> findBaseClubMessagePage(Map<String, Object> params) {
         QueryTimeParseUtils.parseQueryTime(params);
@@ -62,7 +66,15 @@ public class BaseClubMessageApiImpl implements IBaseClubMessageApi {
 	public Map<String, Object> clubMessagesInit(Map<String, Object> params) {
 		Map<String, Object> resultMap=new HashMap<>();
 		//社团列表
-		List<Map<String, Object> > stList = baseClubInfoApi.findBaseClubInfo(null);
+		Map<String, Object> queryParams = new HashMap<>();
+		queryParams.put("memberSno",MapUtils.getString(params,"jobNum"));
+		List<Map<String, Object>> resultMaps = baseClubMemberApi.findBaseClubMemberAll(queryParams);
+		List<String> stCds = new ArrayList<>();
+		for (Map<String, Object> map:resultMaps) {
+			stCds.add(MapUtils.getString(map,"stCd"));
+		}
+		params.put("stCds",stCds);
+		List<Map<String, Object> > stList = baseClubInfoApi.findBaseClubInfo(params);
 		resultMap.put("stList",stList);
 		return resultMap;
 	}
