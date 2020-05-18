@@ -221,7 +221,9 @@ public class SysUserServiceImpl implements ISysUserService{
     public long findBaseUserCount(Map<String, Object> params) {
         SysUserEntity entity = new SysUserEntity();
         String userCode= MapUtils.getString(params,"userCode");
-        entity.setUserCode(userCode);
+        if(userCode!=null&&!"".equals(userCode)){
+            entity.setUserCode(userCode);
+        }
         ExampleMatcher matcher=ExampleMatcher.matching()
                 .withIgnorePaths("statusCd").withIgnorePaths("version");
         Example<SysUserEntity> example = Example.of(entity,matcher);

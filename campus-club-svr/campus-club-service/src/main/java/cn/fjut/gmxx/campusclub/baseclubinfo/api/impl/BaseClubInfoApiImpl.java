@@ -64,7 +64,8 @@ public class BaseClubInfoApiImpl implements IBaseClubInfoApi {
         List<Map<String, Object>> list=page.getList();
         if(reqsultMap!=null){
             for (Map<String, Object> map:list){
-                map.put("fileRte", UrlUtils.getTrueUrlByString(MapUtils.getString(reqsultMap,"fileRte")));
+               // map.put("fileRte", UrlUtils.getTrueUrlByString(MapUtils.getString(reqsultMap,"fileRte")));
+                map.put("fileRte", MapUtils.getString(reqsultMap,"fileRte"));
             }
         }
         //设置人员是否已加入某个社团
@@ -111,7 +112,8 @@ public class BaseClubInfoApiImpl implements IBaseClubInfoApi {
                 queryMap.put("stCd",MapUtils.getString(params,"stCd"));
                 Map<String, Object> reqsultMap=baseFileRscService.getBaseFileRscMap(queryMap);
                 if(reqsultMap!=null){
-                    baseClubInfoMap.put("fileRte", UrlUtils.getTrueUrlByString(MapUtils.getString(reqsultMap,"fileRte")));
+                   // baseClubInfoMap.put("fileRte", UrlUtils.getTrueUrlByString(MapUtils.getString(reqsultMap,"fileRte")));
+                    baseClubInfoMap.put("fileRte", MapUtils.getString(reqsultMap,"fileRte"));
                 }
                 //获取最佳前5社员
                 queryMap.clear();

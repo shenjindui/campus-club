@@ -248,7 +248,7 @@ public class BaseClubInfoServiceImpl implements IBaseClubInfoService {
 		BaseDdctEntity entity = baseDdctService.getBaseDetail("canCreateSecondClub",
 				"canCreateSecondClub1");
 		if(entity!=null && entity.getDctVal()!=null&& !"".equals(entity.getDctVal())){
-			params.clear();
+			//params.clear();
 			params.put("canCreateSecondClub",entity);
 		}
 		return null;

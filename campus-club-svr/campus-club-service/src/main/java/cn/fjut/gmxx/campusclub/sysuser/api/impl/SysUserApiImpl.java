@@ -188,8 +188,8 @@ public class SysUserApiImpl implements ISysUserApi {
 			//设置Token值
 			resultMap.put("token",token);
 			//设置地址
-            //Map<String,Object> addressResult= AddressUtils.getAddressMap(params);
-            //resultMap.put("addressResult",addressResult);
+            /*Map<String,Object> addressResult= AddressUtils.getAddressMap(params);
+            resultMap.put("addressResult",addressResult);*/
 
             resultMap.put("userInfo",oneUser);
 
@@ -437,6 +437,11 @@ public class SysUserApiImpl implements ISysUserApi {
         List<Map<String, Object>> sysBusinessList = sysBusinessService.findSysBusinessNoPage(sysBusinessParams);
         resultMap.put("sysBusinessList",sysBusinessList);
         resultMap.put("sysBusinessListLength",sysBusinessList==null?0:sysBusinessList.size());
+
+        //系统用户的数量
+        long sysUserList = sysUserService.findBaseUserCount(null);
+        //resultMap.put("stNoticeList",stNoticeList);
+        resultMap.put("sysUserListLength",sysUserList==0?0:sysUserList);
 		return resultMap;
 	}
 
