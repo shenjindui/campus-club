@@ -1,6 +1,7 @@
 package cn.fjut.gmxx.campusclub.sysloginlog.api.impl;
 
 import cn.fjut.gmxx.campusclub.exception.ExceptionFactory;
+import cn.fjut.gmxx.campusclub.exception.ExcetionMsg;
 import cn.fjut.gmxx.campusclub.pagehelper.PageInfo;
 import cn.fjut.gmxx.campusclub.sysloginlog.api.ISysLoginLogApi;
 import cn.fjut.gmxx.campusclub.sysloginlog.api.SysLoginLogApiConstants;
@@ -17,6 +18,9 @@ public class SysLoginLogApiImpl implements ISysLoginLogApi {
 
 	@Autowired
 	private ISysLoginLogService sysLoginLogService;
+
+	@Autowired
+	private ExcetionMsg excetionMsg;
 
 	@Override
 	public PageInfo<Map<String, Object>> findSysLoginLogPage(Map<String, Object> params) {

@@ -1,5 +1,6 @@
 package cn.fjut.gmxx.campusclub.workflow.api.impl;
 
+import cn.fjut.gmxx.campusclub.exception.ExcetionMsg;
 import cn.fjut.gmxx.campusclub.pagehelper.PageInfo;
 import cn.fjut.gmxx.campusclub.workflow.api.ISysWorkflowApproverApi;
 import cn.fjut.gmxx.campusclub.workflow.api.SysWorkflowApproverApiConstants;
@@ -15,6 +16,9 @@ public class SysWorkflowApproverApiImpl implements ISysWorkflowApproverApi {
 
 	@Autowired
 	private ISysWorkflowApproverService sysWorkflowApproverService;
+
+	@Autowired
+	private ExcetionMsg excetionMsg;
 
 	@Override
 	public PageInfo<Map<String, Object>> findSysWorkflowApproverPage(Map<String, Object> params) {

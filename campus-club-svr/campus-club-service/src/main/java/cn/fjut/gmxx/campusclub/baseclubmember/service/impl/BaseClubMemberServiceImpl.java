@@ -6,6 +6,7 @@ import cn.fjut.gmxx.campusclub.baseclubmember.mapper.IBaseClubMemberMapper;
 import cn.fjut.gmxx.campusclub.baseclubmember.repository.BaseClubMemberRepository;
 import cn.fjut.gmxx.campusclub.baseclubmember.service.IBaseClubMemberService;
 import cn.fjut.gmxx.campusclub.exception.ExceptionFactory;
+import cn.fjut.gmxx.campusclub.exception.ExcetionMsg;
 import cn.fjut.gmxx.campusclub.pagehelper.PageHelp;
 import cn.fjut.gmxx.campusclub.pagehelper.PageInfo;
 import cn.fjut.gmxx.campusclub.utlis.EncodeUtils;
@@ -44,6 +45,9 @@ public class BaseClubMemberServiceImpl implements IBaseClubMemberService {
 
 	@Autowired
 	private BaseClubMemberRepository baseClubMemberRepository;
+
+	@Autowired
+	private ExcetionMsg excetionMsg;
 
 	@Override
 	public PageInfo<Map<String, Object>> findBaseClubMemberPage(Map<String, Object> params) {

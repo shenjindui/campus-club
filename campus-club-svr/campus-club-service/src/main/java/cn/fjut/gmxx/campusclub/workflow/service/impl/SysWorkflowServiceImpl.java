@@ -2,6 +2,7 @@ package cn.fjut.gmxx.campusclub.workflow.service.impl;
 
 
 import cn.fjut.gmxx.campusclub.exception.ExceptionFactory;
+import cn.fjut.gmxx.campusclub.exception.ExcetionMsg;
 import cn.fjut.gmxx.campusclub.pagehelper.PageHelp;
 import cn.fjut.gmxx.campusclub.pagehelper.PageInfo;
 import cn.fjut.gmxx.campusclub.sysmenu.api.SysMenuApiConstants;
@@ -51,6 +52,9 @@ public class SysWorkflowServiceImpl implements ISysWorkflowService {
 
     @Autowired
     UserRepository userRepository;
+
+    @Autowired
+    private ExcetionMsg excetionMsg;
 
     @Override
     public PageInfo<Map<String, Object>> findSysWorkflowPage(Map<String, Object> params) {

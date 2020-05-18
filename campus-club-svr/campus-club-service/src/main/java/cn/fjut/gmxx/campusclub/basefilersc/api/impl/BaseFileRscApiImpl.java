@@ -4,6 +4,7 @@ import cn.fjut.gmxx.campusclub.basefilersc.api.BaseFileRscApiConstants;
 import cn.fjut.gmxx.campusclub.basefilersc.api.IBaseFileRscApi;
 import cn.fjut.gmxx.campusclub.basefilersc.entity.BaseFileRscEntity;
 import cn.fjut.gmxx.campusclub.basefilersc.service.IBaseFileRscService;
+import cn.fjut.gmxx.campusclub.exception.ExcetionMsg;
 import cn.fjut.gmxx.campusclub.pagehelper.PageInfo;
 import org.apache.commons.collections.MapUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,9 @@ public class BaseFileRscApiImpl implements IBaseFileRscApi {
 
 	@Autowired
 	private IBaseFileRscService baseFileRscService;
+
+	@Autowired
+	private ExcetionMsg excetionMsg;
 
 	@Override
 	public PageInfo<Map<String, Object>> findBaseFileRscPage(Map<String, Object> params) {

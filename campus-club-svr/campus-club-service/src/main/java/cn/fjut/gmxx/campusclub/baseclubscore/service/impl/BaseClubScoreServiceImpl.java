@@ -9,6 +9,7 @@ import cn.fjut.gmxx.campusclub.baseclubscore.repository.BaseClubScoreRepository;
 import cn.fjut.gmxx.campusclub.baseclubscore.service.IBaseClubScoreService;
 import cn.fjut.gmxx.campusclub.baseclubscore.strategyUtils.ClubScoreStrategy;
 import cn.fjut.gmxx.campusclub.exception.ExceptionFactory;
+import cn.fjut.gmxx.campusclub.exception.ExcetionMsg;
 import cn.fjut.gmxx.campusclub.pagehelper.PageHelp;
 import cn.fjut.gmxx.campusclub.pagehelper.PageInfo;
 import cn.fjut.gmxx.campusclub.sysrole.entity.SysRoleEntity;
@@ -61,6 +62,9 @@ public class BaseClubScoreServiceImpl implements IBaseClubScoreService {
 
     @Autowired
 	private RoleRepository roleRepository;
+
+	@Autowired
+	private ExcetionMsg excetionMsg;
 
     /*@Resource
     @Qualifier("autoTriggerIdExecStrategy")

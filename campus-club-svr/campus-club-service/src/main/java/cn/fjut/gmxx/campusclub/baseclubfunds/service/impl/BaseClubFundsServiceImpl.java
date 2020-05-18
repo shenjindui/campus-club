@@ -10,6 +10,7 @@ import cn.fjut.gmxx.campusclub.baseclubinfo.entity.BaseClubInfoEntity;
 import cn.fjut.gmxx.campusclub.baseclubinfo.service.IBaseClubInfoService;
 import cn.fjut.gmxx.campusclub.baseclubmember.service.IBaseClubMemberService;
 import cn.fjut.gmxx.campusclub.exception.ExceptionFactory;
+import cn.fjut.gmxx.campusclub.exception.ExcetionMsg;
 import cn.fjut.gmxx.campusclub.pagehelper.PageHelp;
 import cn.fjut.gmxx.campusclub.pagehelper.PageInfo;
 import cn.fjut.gmxx.campusclub.sysmenu.api.SysMenuApiConstants;
@@ -54,13 +55,16 @@ public class BaseClubFundsServiceImpl implements IBaseClubFundsService {
 	private BaseClubFundsRepository baseClubFundsRepository;
 
     @Autowired
-    UserRepository userRepository;
+	private UserRepository userRepository;
 
     @Autowired
-	IBaseClubInfoService baseClubInfoService;
+	private IBaseClubInfoService baseClubInfoService;
 
     @Autowired
-    IBaseClubMemberService baseClubMemberService;
+	private IBaseClubMemberService baseClubMemberService;
+
+	@Autowired
+	private ExcetionMsg excetionMsg;
 
 	@Override
 	public PageInfo<Map<String, Object>> findBaseClubFundsPage(Map<String, Object> params) {

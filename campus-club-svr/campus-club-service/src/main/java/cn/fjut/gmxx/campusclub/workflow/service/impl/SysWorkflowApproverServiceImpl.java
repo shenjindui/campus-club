@@ -2,6 +2,7 @@ package cn.fjut.gmxx.campusclub.workflow.service.impl;
 
 
 import cn.fjut.gmxx.campusclub.exception.ExceptionFactory;
+import cn.fjut.gmxx.campusclub.exception.ExcetionMsg;
 import cn.fjut.gmxx.campusclub.pagehelper.PageHelp;
 import cn.fjut.gmxx.campusclub.pagehelper.PageInfo;
 import cn.fjut.gmxx.campusclub.sysuser.entity.SysUserEntity;
@@ -48,6 +49,9 @@ public class SysWorkflowApproverServiceImpl implements ISysWorkflowApproverServi
 
 	@Autowired
 	UserRepository userRepository;
+
+	@Autowired
+	private ExcetionMsg excetionMsg;
 
 	@Override
 	public PageInfo<Map<String, Object>> findSysWorkflowApproverPage(Map<String, Object> params) {

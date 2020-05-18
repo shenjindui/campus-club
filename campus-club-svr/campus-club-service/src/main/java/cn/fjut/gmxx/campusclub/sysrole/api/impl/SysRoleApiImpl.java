@@ -1,5 +1,6 @@
 package cn.fjut.gmxx.campusclub.sysrole.api.impl;
 import cn.fjut.gmxx.campusclub.exception.ExceptionFactory;
+import cn.fjut.gmxx.campusclub.exception.ExcetionMsg;
 import cn.fjut.gmxx.campusclub.pagehelper.PageInfo;
 import cn.fjut.gmxx.campusclub.sysmenu.api.SysMenuApiConstants;
 import cn.fjut.gmxx.campusclub.sysrole.api.ISysRoleApi;
@@ -20,7 +21,10 @@ import java.util.Map;
 public class SysRoleApiImpl implements ISysRoleApi {
 
     @Autowired
-    ISysRoleService iSysRoleService;
+    private ISysRoleService iSysRoleService;
+
+    @Autowired
+    private ExcetionMsg excetionMsg;
 
     @Override
     public PageInfo<Map<String, Object>> findSysRolePage(Map<String, Object> params) {

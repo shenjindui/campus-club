@@ -1,5 +1,6 @@
 package cn.fjut.gmxx.campusclub.workflow.api.impl;
 
+import cn.fjut.gmxx.campusclub.exception.ExcetionMsg;
 import cn.fjut.gmxx.campusclub.pagehelper.PageInfo;
 import cn.fjut.gmxx.campusclub.utlis.DateUtils;
 import cn.fjut.gmxx.campusclub.workflow.api.ISysWorkflowApi;
@@ -19,6 +20,9 @@ public class SysWorkflowApiImpl implements ISysWorkflowApi {
 
 	@Autowired
 	private ISysWorkflowService sysWorkflowService;
+
+	@Autowired
+	private ExcetionMsg excetionMsg;
 
 	@Override
 	public PageInfo<Map<String, Object>> findSysWorkflowPage(Map<String, Object> params) {

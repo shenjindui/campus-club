@@ -9,6 +9,7 @@ import cn.fjut.gmxx.campusclub.baseclubscore.service.IBaseClubScoreService;
 import cn.fjut.gmxx.campusclub.baseddct.common.DdctUtils;
 import cn.fjut.gmxx.campusclub.baseddct.entity.BaseDdctEntity;
 import cn.fjut.gmxx.campusclub.baseddct.service.IBaseDdctService;
+import cn.fjut.gmxx.campusclub.exception.ExcetionMsg;
 import cn.fjut.gmxx.campusclub.pagehelper.PageInfo;
 import cn.fjut.gmxx.campusclub.sysrole.entity.SysRoleEntity;
 import cn.fjut.gmxx.campusclub.sysrole.repository.RoleRepository;
@@ -49,8 +50,12 @@ public class BaseClubScoreApiImpl implements IBaseClubScoreApi {
 
     @Autowired
     private  RoleRepository roleRepository;
+
     @Autowired
     private  IBaseClubInfoService baseClubInfoService;
+
+    @Autowired
+    private ExcetionMsg excetionMsg;
 
     @Override
 	public PageInfo<Map<String, Object>> findBaseClubScorePage(Map<String, Object> params) {

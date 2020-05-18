@@ -1,5 +1,6 @@
 package cn.fjut.gmxx.campusclub.baseclubMail.service.impl;
 import cn.fjut.gmxx.campusclub.baseclubMail.service.IBaseClubMailService;
+import cn.fjut.gmxx.campusclub.exception.ExcetionMsg;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +19,13 @@ import javax.mail.MessagingException;
 @Service("clubMailService")
 public class BaseClubMailServiceImpl implements IBaseClubMailService {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
+
     @Autowired
     private JavaMailSender mailSender;
+
+    @Autowired
+    private ExcetionMsg excetionMsg;
+
     /**
      * 配置文件中我的qq邮箱
      */

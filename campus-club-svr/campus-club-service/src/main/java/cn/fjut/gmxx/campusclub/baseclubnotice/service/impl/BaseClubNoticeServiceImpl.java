@@ -9,6 +9,7 @@ import cn.fjut.gmxx.campusclub.baseclubnotice.mapper.IBaseClubNoticeMapper;
 import cn.fjut.gmxx.campusclub.baseclubnotice.repository.BaseClubNoticeRepository;
 import cn.fjut.gmxx.campusclub.baseclubnotice.service.IBaseClubNoticeService;
 import cn.fjut.gmxx.campusclub.exception.ExceptionFactory;
+import cn.fjut.gmxx.campusclub.exception.ExcetionMsg;
 import cn.fjut.gmxx.campusclub.pagehelper.PageHelp;
 import cn.fjut.gmxx.campusclub.pagehelper.PageInfo;
 import cn.fjut.gmxx.campusclub.sysmenu.api.SysMenuApiConstants;
@@ -50,8 +51,13 @@ public class BaseClubNoticeServiceImpl implements IBaseClubNoticeService{
 
 	@Autowired
 	private BaseClubNoticeRepository baseClubNoticeRepository;
+
 	@Autowired
 	UserRepository userRepository;
+
+	@Autowired
+	private ExcetionMsg excetionMsg;
+
 
 	@Override
 	public PageInfo<Map<String, Object>> findBaseClubNoticePage(Map<String, Object> params) {

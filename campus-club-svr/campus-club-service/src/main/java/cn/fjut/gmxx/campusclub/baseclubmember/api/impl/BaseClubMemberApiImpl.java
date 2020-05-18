@@ -6,6 +6,7 @@ import cn.fjut.gmxx.campusclub.baseclubmember.api.IBaseClubMemberApi;
 import cn.fjut.gmxx.campusclub.baseclubmember.service.IBaseClubMemberService;
 import cn.fjut.gmxx.campusclub.baseddct.common.DdctUtils;
 import cn.fjut.gmxx.campusclub.basefilersc.service.IBaseFileRscService;
+import cn.fjut.gmxx.campusclub.exception.ExcetionMsg;
 import cn.fjut.gmxx.campusclub.pagehelper.PageInfo;
 import cn.fjut.gmxx.campusclub.utlis.UrlUtils;
 import org.apache.commons.collections.MapUtils;
@@ -21,6 +22,7 @@ public class BaseClubMemberApiImpl implements IBaseClubMemberApi {
 
 	@Autowired
 	private IBaseClubMemberService baseClubMemberService;
+
 	@Autowired
 	private IBaseClubInfoService baseClubInfoService;
 
@@ -28,7 +30,10 @@ public class BaseClubMemberApiImpl implements IBaseClubMemberApi {
 	private IBaseFileRscService baseFileRscService;
 
 	@Autowired
-	DdctUtils dctUtils;
+	private DdctUtils dctUtils;
+
+	@Autowired
+	private ExcetionMsg excetionMsg;
 
 	@Override
 	public PageInfo<Map<String, Object>> findBaseClubMemberPage(Map<String, Object> params) {

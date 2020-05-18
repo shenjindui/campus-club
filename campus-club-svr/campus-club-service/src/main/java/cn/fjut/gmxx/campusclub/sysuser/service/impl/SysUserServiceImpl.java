@@ -1,6 +1,7 @@
 package cn.fjut.gmxx.campusclub.sysuser.service.impl;
 
 import cn.fjut.gmxx.campusclub.exception.ExceptionFactory;
+import cn.fjut.gmxx.campusclub.exception.ExcetionMsg;
 import cn.fjut.gmxx.campusclub.pagehelper.PageHelp;
 import cn.fjut.gmxx.campusclub.pagehelper.PageInfo;
 import cn.fjut.gmxx.campusclub.sysmenu.api.SysMenuApiConstants;
@@ -43,8 +44,13 @@ public class SysUserServiceImpl implements ISysUserService{
 	
 	@Autowired
 	private UserRepository userRepository;
+
 	@Autowired
 	UserMapper userMapper;
+
+    @Autowired
+    private ExcetionMsg excetionMsg;
+
 	@Override
 	public SysUserEntity getSysUserByMapWithJpa(Map<String, Object> params) {
 		String loginName=MapUtils.getString(params, SysUserApiConstants.LOGIN_NAME);

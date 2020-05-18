@@ -1,6 +1,7 @@
 package cn.fjut.gmxx.campusclub.sysbusiness.service.impl;
 
 import cn.fjut.gmxx.campusclub.exception.ExceptionFactory;
+import cn.fjut.gmxx.campusclub.exception.ExcetionMsg;
 import cn.fjut.gmxx.campusclub.pagehelper.PageHelp;
 import cn.fjut.gmxx.campusclub.pagehelper.PageInfo;
 import cn.fjut.gmxx.campusclub.sysbusiness.api.SysBusinessApiConstants;
@@ -48,7 +49,10 @@ public class SysBusinessServiceImpl implements ISysBusinessService {
 	private SysBusinessRepository sysBusinessRepository;
 
 	@Autowired
-	UserRepository userRepository;
+	private UserRepository userRepository;
+
+	@Autowired
+	private ExcetionMsg excetionMsg;
 
 	@Override
 	public PageInfo<Map<String, Object>> findSysBusinessPage(Map<String, Object> params) {

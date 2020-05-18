@@ -9,6 +9,7 @@ import cn.fjut.gmxx.campusclub.baseclubinfo.service.IBaseClubInfoService;
 import cn.fjut.gmxx.campusclub.baseddct.entity.BaseDdctEntity;
 import cn.fjut.gmxx.campusclub.baseddct.service.IBaseDdctService;
 import cn.fjut.gmxx.campusclub.exception.ExceptionFactory;
+import cn.fjut.gmxx.campusclub.exception.ExcetionMsg;
 import cn.fjut.gmxx.campusclub.pagehelper.PageHelp;
 import cn.fjut.gmxx.campusclub.pagehelper.PageInfo;
 import cn.fjut.gmxx.campusclub.sysbusiness.entity.SysBusinessEntity;
@@ -62,6 +63,9 @@ public class BaseClubInfoServiceImpl implements IBaseClubInfoService {
 	//系统业务表
 	@Autowired
 	private SysBusinessRepository sysBusinessRepository;
+
+	@Autowired
+	private ExcetionMsg excetionMsg;
 
 	@Override
 	public PageInfo<Map<String, Object>> findBaseClubInfoPage(Map<String, Object> params) {

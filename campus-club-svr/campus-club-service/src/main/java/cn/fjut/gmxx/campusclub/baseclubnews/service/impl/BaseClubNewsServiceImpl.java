@@ -8,6 +8,7 @@ import cn.fjut.gmxx.campusclub.baseclubnews.mapper.IBaseClubNewsMapper;
 import cn.fjut.gmxx.campusclub.baseclubnews.repository.BaseClubNewsRepository;
 import cn.fjut.gmxx.campusclub.baseclubnews.service.IBaseClubNewsService;
 import cn.fjut.gmxx.campusclub.exception.ExceptionFactory;
+import cn.fjut.gmxx.campusclub.exception.ExcetionMsg;
 import cn.fjut.gmxx.campusclub.pagehelper.PageHelp;
 import cn.fjut.gmxx.campusclub.pagehelper.PageInfo;
 import cn.fjut.gmxx.campusclub.sysmenu.api.SysMenuApiConstants;
@@ -49,10 +50,13 @@ public class BaseClubNewsServiceImpl implements IBaseClubNewsService{
 	private IBaseClubNewsMapper baseClubNewsMapper;
 
 	@Autowired
-	BaseClubNewsRepository baseClubNewsRepository;
+	private BaseClubNewsRepository baseClubNewsRepository;
 
     @Autowired
-    UserRepository userRepository;
+	private UserRepository userRepository;
+
+	@Autowired
+	private ExcetionMsg excetionMsg;
 
 	@Override
 	public PageInfo<Map<String, Object>> findBaseClubNewsPage(Map<String, Object> params) {

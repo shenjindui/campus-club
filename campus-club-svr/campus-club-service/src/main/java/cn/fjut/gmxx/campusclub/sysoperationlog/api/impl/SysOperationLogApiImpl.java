@@ -1,5 +1,6 @@
 package cn.fjut.gmxx.campusclub.sysoperationlog.api.impl;
 
+import cn.fjut.gmxx.campusclub.exception.ExcetionMsg;
 import cn.fjut.gmxx.campusclub.pagehelper.PageInfo;
 import cn.fjut.gmxx.campusclub.sysoperationlog.api.ISysOperationLogApi;
 import cn.fjut.gmxx.campusclub.sysoperationlog.api.SysOperationLogApiConstants;
@@ -17,6 +18,9 @@ public class SysOperationLogApiImpl implements ISysOperationLogApi {
 
 	@Autowired
 	private ISysOperationLogService sysOperationLogService;
+
+	@Autowired
+	private ExcetionMsg excetionMsg;
 
 	@Override
 	public PageInfo<Map<String, Object>> findSysOperationLogPage(Map<String, Object> params) {

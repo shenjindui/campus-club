@@ -2,6 +2,7 @@ package cn.fjut.gmxx.campusclub.sysmenu.service.impl;
 
 import cn.fjut.gmxx.campusclub.baseddct.repository.BaseDdctRepository;
 import cn.fjut.gmxx.campusclub.exception.ExceptionFactory;
+import cn.fjut.gmxx.campusclub.exception.ExcetionMsg;
 import cn.fjut.gmxx.campusclub.manager.AbstractCampusClubServer;
 import cn.fjut.gmxx.campusclub.pagehelper.PageHelp;
 import cn.fjut.gmxx.campusclub.pagehelper.PageInfo;
@@ -49,13 +50,16 @@ public class SysMenuServiceImpl extends AbstractCampusClubServer implements ISys
 	private ISysMenuMapper sysMenuMapper;
 
 	@Autowired
-	MenuRepository menuRepository;
+	private MenuRepository menuRepository;
 
 	@Autowired
-	UserRepository userRepository;
+	private UserRepository userRepository;
 
 	@Autowired
-	BaseDdctRepository baseDdctRepository;
+	private BaseDdctRepository baseDdctRepository;
+
+	@Autowired
+	private ExcetionMsg excetionMsg;
 
 	@Override
 	public PageInfo<Map<String, Object>> findSysMenuPage(Map<String, Object> params) {

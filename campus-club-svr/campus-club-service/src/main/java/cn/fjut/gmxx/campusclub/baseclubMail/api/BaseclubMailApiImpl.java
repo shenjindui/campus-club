@@ -1,6 +1,7 @@
 package cn.fjut.gmxx.campusclub.baseclubMail.api;
 
 import cn.fjut.gmxx.campusclub.baseclubMail.service.IBaseClubMailService;
+import cn.fjut.gmxx.campusclub.exception.ExcetionMsg;
 import org.apache.commons.collections.MapUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,8 +14,13 @@ import java.util.Map;
  **/
 @Service("baseclubMailApi")
 public class BaseclubMailApiImpl implements BaseclubMailApi {
+
     @Autowired
-    IBaseClubMailService baseClubMailService;
+    private IBaseClubMailService baseClubMailService;
+
+    @Autowired
+    private ExcetionMsg excetionMsg;
+
     @Override
     public void sendHtmlMail(Map<String, Object> params) {
         String to= MapUtils.getString(params,"to");//发送给谁

@@ -5,6 +5,7 @@ import cn.fjut.gmxx.campusclub.baseclubactivity.service.IBaseClubActivityService
 import cn.fjut.gmxx.campusclub.baseclubinfo.entity.BaseClubInfoEntity;
 import cn.fjut.gmxx.campusclub.baseclubinfo.service.IBaseClubInfoService;
 import cn.fjut.gmxx.campusclub.exception.ExceptionFactory;
+import cn.fjut.gmxx.campusclub.exception.ExcetionMsg;
 import cn.fjut.gmxx.campusclub.pagehelper.PageInfo;
 import cn.fjut.gmxx.campusclub.sysbusiness.api.SysBusinessApiConstants;
 import cn.fjut.gmxx.campusclub.sysbusiness.entity.SysBusinessEntity;
@@ -47,6 +48,9 @@ public class SysWorkflowBusinessApiImpl implements ISysWorkflowBusinessApi {
 
     @Autowired
     IBaseClubActivityService baseClubActivityService;
+
+    @Autowired
+    private ExcetionMsg excetionMsg;
 
 	@Override
 	public PageInfo<Map<String, Object>> findSysWorkflowBusinessPage(Map<String, Object> params) {

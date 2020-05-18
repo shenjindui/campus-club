@@ -6,6 +6,7 @@ import cn.fjut.gmxx.campusclub.baseclubmessage.api.BaseClubMessageApiConstants;
 import cn.fjut.gmxx.campusclub.baseclubmessage.api.IBaseClubMessageApi;
 import cn.fjut.gmxx.campusclub.baseclubmessage.entity.BaseClubMessageEntity;
 import cn.fjut.gmxx.campusclub.baseclubmessage.service.IBaseClubMessageService;
+import cn.fjut.gmxx.campusclub.exception.ExcetionMsg;
 import cn.fjut.gmxx.campusclub.pagehelper.PageInfo;
 import cn.fjut.gmxx.campusclub.utlis.QueryTimeParseUtils;
 import org.apache.commons.collections.MapUtils;
@@ -23,10 +24,16 @@ public class BaseClubMessageApiImpl implements IBaseClubMessageApi {
 
 	@Autowired
 	private IBaseClubMessageService baseClubMessageService;
+
 	@Autowired
-	IBaseClubInfoApi baseClubInfoApi;
+	private IBaseClubInfoApi baseClubInfoApi;
+
 	@Autowired
-	IBaseClubMemberApi baseClubMemberApi;
+	private IBaseClubMemberApi baseClubMemberApi;
+
+	@Autowired
+	private ExcetionMsg excetionMsg;
+
 	@Override
 	public PageInfo<Map<String, Object>> findBaseClubMessagePage(Map<String, Object> params) {
         QueryTimeParseUtils.parseQueryTime(params);

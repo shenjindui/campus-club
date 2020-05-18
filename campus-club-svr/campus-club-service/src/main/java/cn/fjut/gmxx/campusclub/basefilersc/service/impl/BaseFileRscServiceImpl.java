@@ -7,6 +7,7 @@ import cn.fjut.gmxx.campusclub.basefilersc.mapper.IBaseFileRscMapper;
 import cn.fjut.gmxx.campusclub.basefilersc.repository.FileSrcRepository;
 import cn.fjut.gmxx.campusclub.basefilersc.service.IBaseFileRscService;
 import cn.fjut.gmxx.campusclub.exception.ExceptionFactory;
+import cn.fjut.gmxx.campusclub.exception.ExcetionMsg;
 import cn.fjut.gmxx.campusclub.pagehelper.PageHelp;
 import cn.fjut.gmxx.campusclub.pagehelper.PageInfo;
 import cn.fjut.gmxx.campusclub.sysmenu.api.SysMenuApiConstants;
@@ -52,10 +53,13 @@ public class BaseFileRscServiceImpl implements IBaseFileRscService {
 	private IBaseFileRscMapper baseFileRscMapper;
 
 	@Autowired
-	FileSrcRepository fileSrcRepository;
+	private FileSrcRepository fileSrcRepository;
 
 	@Autowired
-	UserRepository userRepository;
+	private UserRepository userRepository;
+
+	@Autowired
+	private ExcetionMsg excetionMsg;
 
 	@Override
 	public PageInfo<Map<String, Object>> findBaseFileRscPage(Map<String, Object> params) {

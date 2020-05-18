@@ -2,6 +2,7 @@ package cn.fjut.gmxx.campusclub.workflow.api.impl;
 
 import cn.fjut.gmxx.campusclub.baseddct.api.IBaseDdctApi;
 import cn.fjut.gmxx.campusclub.baseddct.common.DdctUtils;
+import cn.fjut.gmxx.campusclub.exception.ExcetionMsg;
 import cn.fjut.gmxx.campusclub.pagehelper.PageInfo;
 import cn.fjut.gmxx.campusclub.sysworkflownode.api.ISysWorkflowNodeApi;
 import cn.fjut.gmxx.campusclub.utlis.QueryTimeParseUtils;
@@ -23,12 +24,18 @@ public class SysWorkflowNodeApiImpl implements ISysWorkflowNodeApi {
 
 	@Autowired
 	private ISysWorkflowNodeService sysWorkflowNodeService;
+
     @Autowired
     private ISysWorkflowService sysWorkflowService;
+
 	@Autowired
     private DdctUtils dctUtils;
+
     @Autowired
     private IBaseDdctApi baseDdctApi;
+
+    @Autowired
+    private ExcetionMsg excetionMsg;
 
 	@Override
 	public PageInfo<Map<String, Object>> findSysWorkflowNodePage(Map<String, Object> params) {

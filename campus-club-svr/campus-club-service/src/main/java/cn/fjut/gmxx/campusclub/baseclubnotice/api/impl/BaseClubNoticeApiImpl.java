@@ -7,6 +7,7 @@ import cn.fjut.gmxx.campusclub.baseclubnotice.api.IBaseClubNoticeApi;
 import cn.fjut.gmxx.campusclub.baseclubnotice.entity.BaseClubNoticeEntity;
 import cn.fjut.gmxx.campusclub.baseclubnotice.entity.BaseClubNoticeVo;
 import cn.fjut.gmxx.campusclub.baseclubnotice.service.IBaseClubNoticeService;
+import cn.fjut.gmxx.campusclub.exception.ExcetionMsg;
 import cn.fjut.gmxx.campusclub.pagehelper.PageInfo;
 import cn.fjut.gmxx.campusclub.utlis.QueryTimeParseUtils;
 import cn.hutool.core.bean.BeanUtil;
@@ -26,10 +27,14 @@ public class BaseClubNoticeApiImpl implements IBaseClubNoticeApi {
 	private IBaseClubNoticeService baseClubNoticeService;
 
 	@Autowired
-    IBaseClubMemberService   baseClubMemberService;
+	private IBaseClubMemberService   baseClubMemberService;
 
     @Autowired
-    IBaseClubInfoApi baseClubInfoApi;
+	private IBaseClubInfoApi baseClubInfoApi;
+
+	@Autowired
+	private ExcetionMsg excetionMsg;
+
 	@Override
 	public PageInfo<Map<String, Object>> findBaseClubNoticePage(Map<String, Object> params) {
 		QueryTimeParseUtils.parseQueryTime(params);

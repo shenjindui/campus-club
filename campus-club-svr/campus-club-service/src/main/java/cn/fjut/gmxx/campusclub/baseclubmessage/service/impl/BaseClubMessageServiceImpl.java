@@ -8,6 +8,7 @@ import cn.fjut.gmxx.campusclub.baseclubmessage.repository.BaseClubMessageReposit
 import cn.fjut.gmxx.campusclub.baseclubmessage.service.IBaseClubMessageService;
 import cn.fjut.gmxx.campusclub.baseclubnews.api.BaseClubNewsApiConstants;
 import cn.fjut.gmxx.campusclub.exception.ExceptionFactory;
+import cn.fjut.gmxx.campusclub.exception.ExcetionMsg;
 import cn.fjut.gmxx.campusclub.pagehelper.PageHelp;
 import cn.fjut.gmxx.campusclub.pagehelper.PageInfo;
 import cn.fjut.gmxx.campusclub.sysmenu.api.SysMenuApiConstants;
@@ -50,8 +51,12 @@ public class BaseClubMessageServiceImpl implements IBaseClubMessageService {
 	@Autowired
 	private BaseClubMessageRepository baseClubMessageRepository;
 
-    @Autowired
+	@Autowired
+    private ExcetionMsg excetionMsg;
+
+	@Autowired
     UserRepository userRepository;
+
 	@Override
 	public PageInfo<Map<String, Object>> findBaseClubMessagePage(Map<String, Object> params) {
         if (null == params) {

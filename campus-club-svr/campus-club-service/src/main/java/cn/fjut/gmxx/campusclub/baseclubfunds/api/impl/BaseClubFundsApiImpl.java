@@ -7,6 +7,7 @@ import cn.fjut.gmxx.campusclub.baseclubfunds.service.IBaseClubFundsService;
 import cn.fjut.gmxx.campusclub.baseclubinfo.api.IBaseClubInfoApi;
 import cn.fjut.gmxx.campusclub.baseddct.api.IBaseDdctApi;
 import cn.fjut.gmxx.campusclub.baseddct.common.DdctUtils;
+import cn.fjut.gmxx.campusclub.exception.ExcetionMsg;
 import cn.fjut.gmxx.campusclub.pagehelper.PageInfo;
 import cn.fjut.gmxx.campusclub.utlis.QueryTimeParseUtils;
 import org.apache.commons.collections.MapUtils;
@@ -32,6 +33,9 @@ public class BaseClubFundsApiImpl implements IBaseClubFundsApi {
 
     @Autowired
 	private DdctUtils dctUtils;
+
+	@Autowired
+	private ExcetionMsg excetionMsg;
 
 	@Override
 	public PageInfo<Map<String, Object>> findBaseClubFundsPage(Map<String, Object> params) {

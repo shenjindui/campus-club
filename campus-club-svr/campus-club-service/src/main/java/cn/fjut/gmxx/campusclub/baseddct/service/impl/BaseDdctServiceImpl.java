@@ -9,6 +9,7 @@ import cn.fjut.gmxx.campusclub.baseddct.repository.BaseDdctRepository;
 import cn.fjut.gmxx.campusclub.baseddct.repository.DictCacheRepository;
 import cn.fjut.gmxx.campusclub.baseddct.service.IBaseDdctService;
 import cn.fjut.gmxx.campusclub.exception.ExceptionFactory;
+import cn.fjut.gmxx.campusclub.exception.ExcetionMsg;
 import cn.fjut.gmxx.campusclub.pagehelper.PageHelp;
 import cn.fjut.gmxx.campusclub.pagehelper.PageInfo;
 import cn.fjut.gmxx.campusclub.sysmenu.api.SysMenuApiConstants;
@@ -46,15 +47,19 @@ public class BaseDdctServiceImpl implements IBaseDdctService{
 	private IBaseDdctMapper baseDdctDao;
 
 	@Autowired
-	BaseDdctRepository baseDdctRepository;
-    @Autowired
-    UserRepository userRepository;
+	private BaseDdctRepository baseDdctRepository;
 
     @Autowired
-	DictCacheRepository dictCacheRepository;
+	private UserRepository userRepository;
 
     @Autowired
-    DdctUtils ddctUtils;
+	private DictCacheRepository dictCacheRepository;
+
+    @Autowired
+	private DdctUtils ddctUtils;
+
+	@Autowired
+	private ExcetionMsg excetionMsg;
 
 	@Override
 	public PageInfo<Map<String, Object>> findBaseDdctPage(Map<String, Object> params) {

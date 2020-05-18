@@ -1,5 +1,6 @@
 package cn.fjut.gmxx.campusclub.sysbusiness.api.impl;
 
+import cn.fjut.gmxx.campusclub.exception.ExcetionMsg;
 import cn.fjut.gmxx.campusclub.pagehelper.PageInfo;
 import cn.fjut.gmxx.campusclub.sysbusiness.api.ISysBusinessApi;
 import cn.fjut.gmxx.campusclub.sysbusiness.api.SysBusinessApiConstants;
@@ -15,6 +16,9 @@ public class SysBusinessApiImpl implements ISysBusinessApi {
 
 	@Autowired
 	private ISysBusinessService sysBusinessService;
+
+	@Autowired
+	private ExcetionMsg excetionMsg;
 
 	@Override
 	public PageInfo<Map<String, Object>> findSysBusinessPage(Map<String, Object> params) {

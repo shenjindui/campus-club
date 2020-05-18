@@ -1,5 +1,6 @@
 package cn.fjut.gmxx.campusclub.sysrole.service.impl;
 import cn.fjut.gmxx.campusclub.exception.ExceptionFactory;
+import cn.fjut.gmxx.campusclub.exception.ExcetionMsg;
 import cn.fjut.gmxx.campusclub.pagehelper.PageHelp;
 import cn.fjut.gmxx.campusclub.pagehelper.PageInfo;
 import cn.fjut.gmxx.campusclub.sysmenu.api.SysMenuApiConstants;
@@ -28,6 +29,7 @@ import java.util.Map;
  **/
 @Service("sysRoleService")
 public class SysRoleServiceImpl implements ISysRoleService {
+
     @Autowired
     RoleMapper roleMapper;
 
@@ -36,6 +38,9 @@ public class SysRoleServiceImpl implements ISysRoleService {
 
     @Autowired
     UserRepository userRepository;
+
+    @Autowired
+    private ExcetionMsg excetionMsg;
 
     @Override
     public PageInfo<Map<String, Object>> findSysRolePage(Map<String, Object> params) {

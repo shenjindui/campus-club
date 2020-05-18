@@ -7,6 +7,7 @@ import cn.fjut.gmxx.campusclub.baseclubmember.service.IBaseClubMemberService;
 import cn.fjut.gmxx.campusclub.baseddct.entity.BaseDdctEntity;
 import cn.fjut.gmxx.campusclub.baseddct.service.IBaseDdctService;
 import cn.fjut.gmxx.campusclub.basefilersc.service.IBaseFileRscService;
+import cn.fjut.gmxx.campusclub.exception.ExcetionMsg;
 import cn.fjut.gmxx.campusclub.pagehelper.PageInfo;
 import cn.fjut.gmxx.campusclub.sysbusiness.service.ISysBusinessService;
 import cn.fjut.gmxx.campusclub.utlis.UrlUtils;
@@ -44,6 +45,9 @@ public class BaseClubInfoApiImpl implements IBaseClubInfoApi {
 
     @Autowired
     private ISysWorkflowApproverService sysWorkflowApproverService;
+
+    @Autowired
+    private ExcetionMsg excetionMsg;
 
 	@Override
 	public PageInfo<Map<String, Object>> findBaseClubInfoPage(Map<String, Object> params) {

@@ -1,5 +1,6 @@
 package cn.fjut.gmxx.campusclub.sysmenu.api.impl;
 
+import cn.fjut.gmxx.campusclub.exception.ExcetionMsg;
 import cn.fjut.gmxx.campusclub.manager.AbstractCampusClubApi;
 import cn.fjut.gmxx.campusclub.pagehelper.PageInfo;
 import cn.fjut.gmxx.campusclub.sysmenu.api.ISysMenuApi;
@@ -20,8 +21,12 @@ public class SysMenuApiImpl extends AbstractCampusClubApi implements ISysMenuApi
 
 	@Autowired
 	private ISysMenuService sysMenuService;
+
 	@Autowired
-	RedisUtils redisUtils;
+	private RedisUtils redisUtils;
+
+	@Autowired
+	private ExcetionMsg excetionMsg;
 
 	@Override
 	public PageInfo<Map<String, Object>> findSysMenuPage(Map<String, Object> params) {
