@@ -1,6 +1,7 @@
 package cn.fjut.gmxx.campusclub.sysuser.entity;
 
 import cn.fjut.gmxx.campusclub.data.BaseEntity;
+import cn.fjut.gmxx.campusclub.utlis.MD5Utils;
 import com.alibaba.fastjson.annotation.JSONField;
 import lombok.*;
 import org.apache.commons.collections.MapUtils;
@@ -342,7 +343,7 @@ public class SysUserEntity extends BaseEntity implements Serializable{
                 this.uuid = MapUtils.getString(entityMap, "uuid");
             }
             if (entityMap.containsKey("password")) {
-                this.password = MapUtils.getString(entityMap, "password");
+                this.password = MD5Utils.stringToMD5(MapUtils.getString(entityMap, "password"));
             }
             if (entityMap.containsKey("statusCd")) {
                 this.statusCd = MapUtils.getInteger(entityMap, "statusCd");

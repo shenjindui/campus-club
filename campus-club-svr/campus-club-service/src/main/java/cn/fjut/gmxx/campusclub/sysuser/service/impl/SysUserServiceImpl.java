@@ -10,6 +10,7 @@ import cn.fjut.gmxx.campusclub.sysuser.mapper.UserMapper;
 import cn.fjut.gmxx.campusclub.sysuser.repository.UserRepository;
 import cn.fjut.gmxx.campusclub.sysuser.service.ISysUserService;
 import cn.fjut.gmxx.campusclub.utlis.EncodeUtils;
+import cn.fjut.gmxx.campusclub.utlis.MD5Utils;
 import cn.fjut.gmxx.campusclub.utlis.MapTrunPojo;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.MapUtils;
@@ -48,7 +49,8 @@ public class SysUserServiceImpl implements ISysUserService{
 	public SysUserEntity getSysUserByMapWithJpa(Map<String, Object> params) {
 		String loginName=MapUtils.getString(params, SysUserApiConstants.LOGIN_NAME);
 		String passWord=MapUtils.getString(params,SysUserApiConstants.PASSWORD);
-		SysUserEntity oneUser = userRepository.findByLoginNameAndPassword(loginName,passWord);
+		String md5PpassWord = MD5Utils.stringToMD5(passWord);
+        SysUserEntity oneUser = userRepository.findByLoginNameAndPassword(loginName,md5PpassWord);
 		//throw ExceptionFactory.getBizException(ExcetionType.SYS00002.getErrorMessage(), "params");
 		return oneUser;
 	}
