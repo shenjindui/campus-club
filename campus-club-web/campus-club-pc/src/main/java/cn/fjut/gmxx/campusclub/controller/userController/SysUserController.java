@@ -121,6 +121,7 @@ public class SysUserController extends BaseAppAction {
         Map<String, Object> resultMaps=sysUserApi.updateSysUserByOneMap(params);
         return successResponse(resultMaps,Constant.GET_SUCCESS);
     }
+
     @SysOperationLog("用户列表")
     @TokenCheck  //此注解使用开启token验证，对于访问后台数据的方法，请打开此注解
     @ApiOperation(value = "用户列表", notes = "用户列表方法", httpMethod = "POST")

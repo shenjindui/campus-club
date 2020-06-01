@@ -8,7 +8,8 @@ import cn.fjut.gmxx.campusclub.baseddct.common.DdctUtils;
 import cn.fjut.gmxx.campusclub.basefilersc.service.IBaseFileRscService;
 import cn.fjut.gmxx.campusclub.exception.ExcetionMsg;
 import cn.fjut.gmxx.campusclub.pagehelper.PageInfo;
-import cn.fjut.gmxx.campusclub.utlis.UrlUtils;
+import cn.fjut.gmxx.campusclub.sysuser.entity.SysUserEntity;
+import cn.fjut.gmxx.campusclub.sysuser.service.ISysUserService;
 import org.apache.commons.collections.MapUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,6 +32,9 @@ public class BaseClubMemberApiImpl implements IBaseClubMemberApi {
 
 	@Autowired
 	private DdctUtils dctUtils;
+
+    @Autowired
+    private ISysUserService sysUserService;
 
 	@Autowired
 	private ExcetionMsg excetionMsg;
@@ -55,12 +59,14 @@ public class BaseClubMemberApiImpl implements IBaseClubMemberApi {
 		for (Map<String, Object> map:list) {
 			Map<String, Object> queryMap=new HashMap<>();
 			queryMap.put("filePurpose",4);
-			queryMap.put("stCd",MapUtils.getString(map,"memberSno"));
+            SysUserEntity sysUserEntity = sysUserService.findByJobNum(MapUtils.getString(map,"memberSno"));
+			queryMap.put("stCd",sysUserEntity.getUserCode());
 			List<Map<String, Object>> resultmap=baseFileRscService.findBaseFileRscPage(queryMap).getList();
 			Map<String, Object> fileMap=new HashMap<>();
 			if(resultmap!=null&&resultmap.size()>0){
 				fileMap=resultmap.get(0);
-				map.put("fileRte", UrlUtils.getTrueUrlByString(MapUtils.getString(fileMap,"fileRte")));
+				/*map.put("fileRte", UrlUtils.getTrueUrlByString(MapUtils.getString(fileMap,"fileRte")));*/
+				map.put("fileRte", MapUtils.getString(fileMap,"fileRte"));
 			}
 		}
 		return page;

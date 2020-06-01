@@ -215,6 +215,7 @@ public class BaseClubFundsServiceImpl implements IBaseClubFundsService {
                 MapUtils.getString(params,"orderId"));
         baseClubFundsEntity.setThirdOrderId(MapUtils.getString(params,"thirdOrderId"));//第三方交易号
         baseClubFundsEntity.setFundsPsccd("1");//已支付
+		baseClubFundsEntity.setUpdateTime(new Date());
         //params.clear();
         params.put("result",baseClubFundsRepository.save(baseClubFundsEntity));
         return params;

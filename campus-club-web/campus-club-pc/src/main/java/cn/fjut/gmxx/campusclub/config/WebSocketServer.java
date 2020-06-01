@@ -97,7 +97,6 @@ public class WebSocketServer {
     public void onClose() {
         webSocketSet.remove(this);  //从set中删除
         subOnlineCount();           //在线数减1
-       // log.info("有一连接关闭！当前在线人数为" + getOnlineCount());
     }
     /**
      * 收到客户端消息后调用的方法
@@ -105,7 +104,6 @@ public class WebSocketServer {
      * @param message 客户端发送过来的消息*/
     @OnMessage
     public void onMessage(String message, Session session) {
-        //log.info("收到来自窗口"+sid+"的信息:"+message);
         if("heart".equals(message)){
             try {
                 sendMessage("heartOk");

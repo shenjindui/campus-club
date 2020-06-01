@@ -102,7 +102,7 @@ public class SysUserServiceImpl implements ISysUserService{
 	@Override
 	public int updateSysUserByMapWithJap(Map<String, Object> params) {
 		String loginName=MapUtils.getString(params,SysUserApiConstants.LOGIN_NAME);
-		String password=MapUtils.getString(params,SysUserApiConstants.PASSWORD);
+		String password=MD5Utils.stringToMD5(MapUtils.getString(params,SysUserApiConstants.PASSWORD));
 		return userRepository.resetSysUserPass(loginName,password);
 	}
 
@@ -229,6 +229,11 @@ public class SysUserServiceImpl implements ISysUserService{
         Example<SysUserEntity> example = Example.of(entity,matcher);
         return userRepository.count(example);
     }
+
+	@Override
+	public SysUserEntity findByJobNum(String jobNum) {
+		return userRepository.findByJobNum(jobNum);
+	}
 }
 
 

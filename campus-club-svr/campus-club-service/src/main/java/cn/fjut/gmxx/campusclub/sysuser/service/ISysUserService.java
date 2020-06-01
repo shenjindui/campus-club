@@ -55,5 +55,7 @@ public interface ISysUserService {
     int updateSysUserLoginSuccessOrFailCount(String loginName,int flag,String time);
 
     long findBaseUserCount(Map<String, Object> params);
+
+    SysUserEntity findByJobNum(String jobNum);
 }
 

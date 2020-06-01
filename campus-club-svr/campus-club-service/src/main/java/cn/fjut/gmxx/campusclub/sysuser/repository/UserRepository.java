@@ -87,4 +87,7 @@ public interface UserRepository extends JpaRepository<SysUserEntity,Integer>, Jp
     @Modifying
     @Query(value = "update sys_user set  pass_error_count=pass_error_count+1 where login_name=?1",nativeQuery = true)
     int sysUserLoginFail(String loginName);
+
+
+    SysUserEntity findByJobNum(String jobNum);
 }
